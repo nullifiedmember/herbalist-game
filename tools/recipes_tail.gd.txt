@@ -1,0 +1,295 @@
+## Жители и их беды. Жители не называют зелье — говорят, что болит.
+const VILLAGERS: Array = [
+	{"id": "marta", "name": "Марта, пекарша", "tex": "res://art/villager_marta.png"},
+	{"id": "lina", "name": "Лина, ткачиха", "tex": "res://art/villager_lina.png"},
+	{"id": "tina", "name": "Тина, дочь кузнеца", "tex": "res://art/villager_tim.png"},
+]
+const ASKS: Dictionary = {
+	"sleep_tea": "Третью ночь не сплю — ворочаюсь до самых петухов.",
+	"vigor_tea": "После жатвы руки как ватные. Мне бы сил прибавить.",
+	"calm_tea": "На душе неспокойно, всё из рук валится.",
+	"mint_tea": "Вчера был пир... теперь мутит и жар в голове.",
+	"warm_tea": "Простыла у реки — знобит, нос заложило.",
+	"heal_salve": "Братишка разбил коленки, ссадины никак не заживают.",
+	"bruise_salve": "Ударилась о наковальню — синяк на пол-руки.",
+	"cool_salve": "Обожглась у печи, кожа так и горит.",
+	"strength_tinct": "После зимней хвори всё никак не окрепну.",
+	"head_tinct": "Голова раскалывается с самого утра.",
+	"cough_tea": "Кашляю так, что куры разбегаются.",
+	"colic_tea": "Малыш плачет ночами, животик болит.",
+	"bite_salve": "Комары у реки съели меня живьём.",
+	"joint_salve": "Колени скрипят громче калитки.",
+	"heat_cure": "Весь день в поле на солнцепёке — голова кругом.",
+	"throat_syrup": "Голос сорвала на ярмарке, хриплю, как ворона.",
+	"sleep_syrup": "Дочка не засыпает без сказки, а сказки кончились.",
+	"frost_salve": "Пальцы отморозила, пока стирала в ручье.",
+}
+
+## Цвет жидкости (по зелью или основе)
+static func color(id: String) -> Color:
+	if PRODUCTS.has(id):
+		return PRODUCTS[id]["col"]
+	match id:
+		"water":
+			return Color("7ab4d0")
+		"wax":
+			return Color("e8c070")
+		"spirit":
+			return Color("cfe2c6")
+		"honey":
+			return Color("e8a830")
+		"moon_dew":
+			return Color("b8c8f8")
+	return Color("6e6650")
+
+
+## Можно ли положить в котёл: трава или гриб
+static func is_ingredient(id: String) -> bool:
+	return HERBS.DATA.has(id) or SHROOM_PROPS.has(id) or preload("res://tree_db.gd").is_ingredient(id)
+
+
+## Свойства ингредиента без обработки
+static func herb_props(id: String) -> Dictionary:
+	var out: Dictionary = {}
+	if HERBS.DATA.has(id):
+		for p in HERBS.DATA[id]["props"]:
+			out[String(p[0])] = int(out.get(String(p[0]), 0)) + int(LEVEL.get(String(p[1]), 1))
+		var ex: Dictionary = HERB_EXTRA.get(id, {})
+		for k in ex.keys():
+			out[k] = int(out.get(k, 0)) + int(ex[k])
+	elif SHROOM_PROPS.has(id):
+		out = (SHROOM_PROPS[id] as Dictionary).duplicate()
+	else:
+		out = preload("res://tree_db.gd").ing_props(id)   # v17: листья деревьев и насекомые
+	return out
+
+
+static func _g(v: Dictionary, k: String) -> int:
+	return int(v.get(k, 0))
+
+
+static func _clean(v: Dictionary) -> Dictionary:
+	var out: Dictionary = {}
+	for k in PROPS:
+		if int(v.get(k, 0)) > 0:
+			out[k] = int(v[k])
+	return out
+
+
+## Самое сильное свойство (при равенстве — первое по порядку PROPS)
+static func strongest(v: Dictionary) -> String:
+	var best: String = ""
+	var bv: int = 0
+	for k in PROPS:
+		if int(v.get(k, 0)) > bv:
+			bv = int(v[k])
+			best = String(k)
+	return best
+
+
+## Обработка на столе меняет свойства травы
+static func apply_proc(v0: Dictionary, p: String) -> Dictionary:
+	var v: Dictionary = v0.duplicate()
+	match p:
+		"grind":
+			var s: String = strongest(v)
+			if s != "":
+				v[s] = _g(v, s) + 1
+		"cut":
+			v["Жгучесть"] = 0
+			v["Свежесть"] = _g(v, "Свежесть") + 1
+		"dry":
+			v["Тепло"] = _g(v, "Тепло") + _g(v, "Свежесть")
+			v["Свежесть"] = 0
+			v["Холод"] = 0
+		"burn":
+			v["Огонь"] = _g(v, "Огонь") + (_g(v, "Тепло") + _g(v, "Жгучесть") + 1) / 2
+			v["Тьма"] = _g(v, "Тьма") + (_g(v, "Покой") + _g(v, "Сон") + 1) / 2
+			v["Тепло"] = 0
+			v["Жгучесть"] = 0
+			v["Покой"] = 0
+			v["Сон"] = 0
+			v["Свежесть"] = 0
+			v["Исцеление"] = _g(v, "Исцеление") / 2
+		"soak":
+			v["Холод"] = _g(v, "Холод") + _g(v, "Тепло")
+			v["Тепло"] = 0
+			v["Покой"] = _g(v, "Покой") + _g(v, "Жгучесть")
+			v["Жгучесть"] = 0
+			v["Свет"] = _g(v, "Свет") + _g(v, "Огонь") / 2
+			v["Огонь"] = 0
+		"ash":   # пережгла — остался пепел
+			v = {"Тьма": 1}
+	return _clean(v)
+
+
+## Ингредиент {id, procs: [..]} -> свойства
+static func ing_props(ing: Dictionary) -> Dictionary:
+	var v: Dictionary = herb_props(String(ing["id"]))
+	for p in ing.get("procs", []):
+		v = apply_proc(v, String(p))
+	return v
+
+
+static func mix_list(ings: Array) -> Dictionary:
+	var out: Dictionary = {}
+	for ing in ings:
+		var v: Dictionary = ing_props(ing)
+		for k in v.keys():
+			out[k] = int(out.get(k, 0)) + int(v[k])
+	return _clean(out)
+
+
+## Вода в котле: холодная добавляет Холод и гасит Тепло, горячая усиливает главное свойство и выпаривает Свежесть
+static func finish(m0: Dictionary, base: String, temp: String) -> Dictionary:
+	var m: Dictionary = m0.duplicate()
+	if base == "water":
+		if temp == "cold":
+			m["Холод"] = _g(m, "Холод") + 1
+			m["Тепло"] = maxi(0, _g(m, "Тепло") - 1)
+		elif temp == "hot":
+			var s: String = strongest(m)
+			if s != "":
+				m[s] = _g(m, s) + 1
+			m["Свежесть"] = maxi(0, _g(m, "Свежесть") - 1)
+	elif base == "moon_dew":
+		m["Чары"] = _g(m, "Чары") + 1
+	return _clean(m)
+
+
+static func _keys_ok(id: String, ids: Dictionary) -> bool:
+	for grp in PRODUCTS[id].get("keys", []):
+		var ok: bool = false
+		for g in grp:
+			if ids.has(String(g)):
+				ok = true
+				break
+		if not ok:
+			return false
+	return true
+
+
+## Что выйдет: самое «точное» подходящее зелье (сумма нужных свойств больше — значит точнее)
+static func brew_mix(base: String, temp: String, ings: Array) -> String:
+	if ings.is_empty():
+		return "murky"
+	var m: Dictionary = finish(mix_list(ings), base, temp)
+	var ids: Dictionary = {}
+	for ing in ings:
+		ids[String(ing["id"])] = true
+	var best: String = "murky"
+	var bs: float = -1.0
+	for id in PRODUCTS.keys():
+		var d: Dictionary = PRODUCTS[id]
+		if String(d["base"]) != base:
+			continue
+		var tp: String = String(d["temp"])
+		if tp != "any" and tp != temp:
+			continue
+		var need: Dictionary = d["need"]
+		var ok: bool = true
+		var sc: float = 0.0
+		for k in need.keys():
+			sc += float(need[k])
+			if _g(m, String(k)) < int(need[k]):
+				ok = false
+				break
+		if not ok or not _keys_ok(String(id), ids):
+			continue
+		if tp != "any":
+			sc += 0.5
+		if sc > bs:
+			bs = sc
+			best = String(id)
+	return best
+
+
+## Совместимость со старым кодом: две травы, тёплая вода
+static func brew(base: String, a: String, b: String) -> String:
+	return brew_mix(base, "warm", [{"id": a}, {"id": b}])
+
+
+static func mix(a: String, b: String) -> Dictionary:
+	return mix_list([{"id": a}, {"id": b}])
+
+
+static func props_text(m: Dictionary) -> String:
+	var parts: Array = []
+	for k in PROPS:
+		if int(m.get(k, 0)) > 0:
+			parts.append("%s %d" % [k, int(m[k])])
+	return " · ".join(parts)
+
+
+static func mix_text(a: String, b: String) -> String:
+	return props_text(mix(a, b))
+
+
+## Подсказка после неудачи: самое близкое зелье этой основы и чего не хватает
+static func hint_mix(base: String, temp: String, ings: Array) -> String:
+	var m: Dictionary = finish(mix_list(ings), base, temp)
+	var best_have: float = -1.0
+	var best_missing: String = ""
+	for id in PRODUCTS.keys():
+		var d: Dictionary = PRODUCTS[id]
+		if String(d["base"]) != base or int(d["rarity"]) >= 2:
+			continue
+		var need: Dictionary = d["need"]
+		var have: float = 0.0
+		var missing: String = ""
+		for k in need.keys():
+			if _g(m, String(k)) >= int(need[k]):
+				have += 1.0
+			elif missing == "":
+				missing = String(k)
+		have /= float(maxi(1, need.size()))
+		if have > best_have and missing != "":
+			best_have = have
+			best_missing = missing
+	if best_have >= 0.5:
+		return "Почти получилось! Не хватает свойства «%s»." % best_missing
+	return "С этой основой такие травы не дружат. Попробуй другие свойства."
+
+
+static func hint(base: String, a: String, b: String) -> String:
+	return hint_mix(base, "warm", [{"id": a}, {"id": b}])
+
+
+static func name(id: String) -> String:
+	return String(PRODUCTS[id]["name"]) if PRODUCTS.has(id) else id
+
+
+static func icon(id: String) -> Texture2D:
+	var p: String = "res://art/potion_%s.png" % id
+	if ResourceLoader.exists(p):
+		return load(p)
+	return load("res://art/potion_murky.png")
+
+
+static func is_product(id: String) -> bool:
+	return PRODUCTS.has(id)
+
+
+static func rarity(id: String) -> int:
+	return int(PRODUCTS[id]["rarity"]) if PRODUCTS.has(id) else 0
+
+
+## Цена у торговок: от силы зелья и редкости
+static func price(id: String) -> int:
+	if not PRODUCTS.has(id) or id == "murky":
+		return 1
+	var sum: int = 0
+	for k in (PRODUCTS[id]["need"] as Dictionary).keys():
+		sum += int(PRODUCTS[id]["need"][k])
+	return int(round(6.0 + sum * 3.0) * [1.0, 2.5, 6.0, 25.0][rarity(id)])
+
+## v25: свойства новых грибов (shrooms25_db.gd)
+static var SHROOM_PROPS: Dictionary = _shroom_props()
+
+
+static func _shroom_props() -> Dictionary:
+	var r: Dictionary = SHROOM_PROPS_BASE.duplicate()
+	var s25: Dictionary = preload("res://shrooms25_db.gd").PROPS
+	for k in s25.keys():
+		r[k] = s25[k]
+	return r

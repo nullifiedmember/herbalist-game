@@ -1,0 +1,740 @@
+{
+"sleep_tea": {
+"base": "water",
+"col": "8a78d0",
+"rarity": 0,
+"temp": "any"
+},
+"vigor_tea": {
+"base": "water",
+"col": "c86a32",
+"rarity": 0,
+"temp": "any"
+},
+"calm_tea": {
+"base": "water",
+"col": "7cc0a0",
+"rarity": 0,
+"temp": "any"
+},
+"mint_tea": {
+"base": "water",
+"col": "5cc08a",
+"rarity": 0,
+"temp": "any"
+},
+"warm_tea": {
+"base": "water",
+"col": "e0a040",
+"rarity": 0,
+"temp": "any"
+},
+"morning_tea": {
+"base": "water",
+"col": "a2b466",
+"rarity": 0,
+"temp": "warm"
+},
+"colic_tea": {
+"base": "water",
+"col": "b4b995",
+"rarity": 0,
+"temp": "warm"
+},
+"clear_tea": {
+"base": "water",
+"col": "6cc0aa",
+"rarity": 0,
+"temp": "warm"
+},
+"wander_tea": {
+"base": "water",
+"col": "ab9b3e",
+"rarity": 0,
+"temp": "warm"
+},
+"meadow_tea": {
+"base": "water",
+"col": "afcb97",
+"rarity": 0,
+"temp": "warm"
+},
+"dream_tea": {
+"base": "water",
+"col": "8491cc",
+"rarity": 0,
+"temp": "warm"
+},
+"cough_tea": {
+"base": "water",
+"col": "edbb62",
+"rarity": 0,
+"temp": "warm"
+},
+"chatter_tea": {
+"base": "water",
+"col": "bd9652",
+"rarity": 0,
+"temp": "warm"
+},
+"memory_tea": {
+"base": "water",
+"col": "74aca2",
+"rarity": 1,
+"temp": "warm"
+},
+"firefly_tea": {
+"base": "water",
+"col": "c8e2a0",
+"rarity": 1,
+"temp": "warm"
+},
+"purr_tea": {
+"base": "water",
+"col": "9090d1",
+"rarity": 1,
+"temp": "warm"
+},
+"solace_tea": {
+"base": "water",
+"col": "a7cabe",
+"rarity": 1,
+"temp": "warm"
+},
+"voice_tea": {
+"base": "water",
+"col": "a4c177",
+"rarity": 0,
+"temp": "warm"
+},
+"fairy_tea": {
+"base": "water",
+"col": "7ca8b1",
+"rarity": 1,
+"temp": "warm"
+},
+"knight_tea": {
+"base": "water",
+"col": "b0b660",
+"rarity": 0,
+"temp": "warm"
+},
+"strong_brew": {
+"base": "water",
+"col": "6e963c",
+"rarity": 0,
+"temp": "hot"
+},
+"fire_brew": {
+"base": "water",
+"col": "f1872f",
+"rarity": 1,
+"temp": "hot"
+},
+"bath_brew": {
+"base": "water",
+"col": "eaad51",
+"rarity": 0,
+"temp": "hot"
+},
+"flu_brew": {
+"base": "water",
+"col": "edbb62",
+"rarity": 0,
+"temp": "hot"
+},
+"sweat_brew": {
+"base": "water",
+"col": "e08c3f",
+"rarity": 0,
+"temp": "hot"
+},
+"smith_brew": {
+"base": "water",
+"col": "9e9a3d",
+"rarity": 0,
+"temp": "hot"
+},
+"bitter_brew": {
+"base": "water",
+"col": "d67c54",
+"rarity": 0,
+"temp": "hot"
+},
+"brave_brew": {
+"base": "water",
+"col": "9b733c",
+"rarity": 0,
+"temp": "hot"
+},
+"ache_brew": {
+"base": "water",
+"col": "b0b660",
+"rarity": 0,
+"temp": "hot"
+},
+"hunter_brew": {
+"base": "water",
+"col": "5d6e46",
+"rarity": 1,
+"temp": "hot"
+},
+"dragon_blood": {
+"base": "water",
+"col": "be7f2a",
+"rarity": 2,
+"temp": "hot"
+},
+"sun_brew": {
+"base": "water",
+"col": "f3c875",
+"rarity": 2,
+"temp": "hot"
+},
+"phoenix_brew": {
+"base": "water",
+"col": "f8af60",
+"rarity": 3,
+"temp": "hot"
+},
+"ice_inf": {
+"base": "water",
+"col": "82ced2",
+"rarity": 1,
+"temp": "cold"
+},
+"cold_mors": {
+"base": "water",
+"col": "6acaa6",
+"rarity": 1,
+"temp": "cold"
+},
+"heat_cure": {
+"base": "water",
+"col": "8dc9e6",
+"rarity": 1,
+"temp": "cold"
+},
+"burn_inf": {
+"base": "water",
+"col": "c4d4bc",
+"rarity": 1,
+"temp": "cold"
+},
+"hush_inf": {
+"base": "water",
+"col": "82bed3",
+"rarity": 1,
+"temp": "cold"
+},
+"dew_inf": {
+"base": "water",
+"col": "79cdc0",
+"rarity": 1,
+"temp": "cold"
+},
+"night_eye": {
+"base": "water",
+"col": "4c7373",
+"rarity": 1,
+"temp": "cold"
+},
+"fog_inf": {
+"base": "water",
+"col": "6978a7",
+"rarity": 1,
+"temp": "cold"
+},
+"mermaid_inf": {
+"base": "water",
+"col": "79cdc0",
+"rarity": 1,
+"temp": "cold"
+},
+"winter_sleep": {
+"base": "water",
+"col": "90a5e2",
+"rarity": 2,
+"temp": "cold"
+},
+"moon_tear": {
+"base": "water",
+"col": "c7bfd5",
+"rarity": 2,
+"temp": "cold"
+},
+"glacier_heart": {
+"base": "water",
+"col": "99ade6",
+"rarity": 3,
+"temp": "cold"
+},
+"heal_salve": {
+"base": "wax",
+"col": "f2d684",
+"rarity": 0,
+"temp": "any"
+},
+"bruise_salve": {
+"base": "wax",
+"col": "a8b85a",
+"rarity": 0,
+"temp": "any"
+},
+"cool_salve": {
+"base": "wax",
+"col": "9ccce6",
+"rarity": 0,
+"temp": "any"
+},
+"bite_salve": {
+"base": "wax",
+"col": "80a071",
+"rarity": 0,
+"temp": "any"
+},
+"warm_salve": {
+"base": "wax",
+"col": "e08c3f",
+"rarity": 0,
+"temp": "any"
+},
+"joint_salve": {
+"base": "wax",
+"col": "ab9b3e",
+"rarity": 0,
+"temp": "any"
+},
+"callus_salve": {
+"base": "wax",
+"col": "f2d684",
+"rarity": 0,
+"temp": "any"
+},
+"frost_salve": {
+"base": "wax",
+"col": "edbb62",
+"rarity": 0,
+"temp": "any"
+},
+"burn_salve": {
+"base": "wax",
+"col": "c4d4bc",
+"rarity": 1,
+"temp": "any"
+},
+"glow_salve": {
+"base": "wax",
+"col": "fae79d",
+"rarity": 1,
+"temp": "any"
+},
+"stride_salve": {
+"base": "wax",
+"col": "65af64",
+"rarity": 0,
+"temp": "any"
+},
+"paw_salve": {
+"base": "wax",
+"col": "b7c7a6",
+"rarity": 0,
+"temp": "any"
+},
+"blade_salve": {
+"base": "wax",
+"col": "927a3c",
+"rarity": 0,
+"temp": "any"
+},
+"fireproof": {
+"base": "wax",
+"col": "86baab",
+"rarity": 1,
+"temp": "any"
+},
+"shadow_salve": {
+"base": "wax",
+"col": "4c4475",
+"rarity": 1,
+"temp": "any"
+},
+"curse_salve": {
+"base": "wax",
+"col": "e5b4c2",
+"rarity": 2,
+"temp": "any"
+},
+"dragonscale": {
+"base": "wax",
+"col": "b4822d",
+"rarity": 2,
+"temp": "any"
+},
+"scar_salve": {
+"base": "wax",
+"col": "d4d385",
+"rarity": 0,
+"temp": "any"
+},
+"spider_salve": {
+"base": "wax",
+"col": "555a4b",
+"rarity": 1,
+"temp": "any"
+},
+"itch_salve": {
+"base": "wax",
+"col": "84c0d7",
+"rarity": 1,
+"temp": "any"
+},
+"web_salve": {
+"base": "wax",
+"col": "ae726a",
+"rarity": 0,
+"temp": "any"
+},
+"youth_salve": {
+"base": "wax",
+"col": "e8bda6",
+"rarity": 3,
+"temp": "any"
+},
+"strength_tinct": {
+"base": "spirit",
+"col": "5e9a3a",
+"rarity": 0,
+"temp": "any"
+},
+"head_tinct": {
+"base": "spirit",
+"col": "b0589a",
+"rarity": 0,
+"temp": "any"
+},
+"pepper_tinct": {
+"base": "spirit",
+"col": "d0643d",
+"rarity": 0,
+"temp": "any"
+},
+"insomnia_tinct": {
+"base": "spirit",
+"col": "8a78d0",
+"rarity": 0,
+"temp": "any"
+},
+"heart_drops": {
+"base": "spirit",
+"col": "b7c7a6",
+"rarity": 0,
+"temp": "any"
+},
+"battle_tinct": {
+"base": "spirit",
+"col": "927a3c",
+"rarity": 0,
+"temp": "any"
+},
+"alert_tinct": {
+"base": "spirit",
+"col": "60bb78",
+"rarity": 0,
+"temp": "any"
+},
+"cough_drops": {
+"base": "spirit",
+"col": "a7cf88",
+"rarity": 0,
+"temp": "any"
+},
+"sight_tinct": {
+"base": "spirit",
+"col": "d38cd2",
+"rarity": 1,
+"temp": "any"
+},
+"witch_tinct": {
+"base": "spirit",
+"col": "7d3ca0",
+"rarity": 1,
+"temp": "any"
+},
+"firewater": {
+"base": "spirit",
+"col": "e6622a",
+"rarity": 1,
+"temp": "any"
+},
+"night_tinct": {
+"base": "spirit",
+"col": "5b4289",
+"rarity": 1,
+"temp": "any"
+},
+"luck_tinct": {
+"base": "spirit",
+"col": "c6c0b1",
+"rarity": 1,
+"temp": "any"
+},
+"berserk": {
+"base": "spirit",
+"col": "968a33",
+"rarity": 2,
+"temp": "any"
+},
+"crimson_tinct": {
+"base": "spirit",
+"col": "6b6457",
+"rarity": 2,
+"temp": "any"
+},
+"star_tinct": {
+"base": "spirit",
+"col": "dea5c8",
+"rarity": 2,
+"temp": "any"
+},
+"invis_tinct": {
+"base": "spirit",
+"col": "733796",
+"rarity": 2,
+"temp": "any"
+},
+"mandrake_tears": {
+"base": "spirit",
+"col": "72787f",
+"rarity": 1,
+"temp": "any"
+},
+"north_tinct": {
+"base": "spirit",
+"col": "86baab",
+"rarity": 1,
+"temp": "any"
+},
+"balsam": {
+"base": "spirit",
+"col": "bfb762",
+"rarity": 1,
+"temp": "any"
+},
+"pine_tinct": {
+"base": "spirit",
+"col": "65af64",
+"rarity": 0,
+"temp": "any"
+},
+"wind_tinct": {
+"base": "spirit",
+"col": "6fb29e",
+"rarity": 1,
+"temp": "any"
+},
+"void_tinct": {
+"base": "spirit",
+"col": "773999",
+"rarity": 3,
+"temp": "any"
+},
+"throat_syrup": {
+"base": "honey",
+"col": "eec46d",
+"rarity": 0,
+"temp": "any"
+},
+"kids_syrup": {
+"base": "honey",
+"col": "98c79d",
+"rarity": 0,
+"temp": "any"
+},
+"sleep_syrup": {
+"base": "honey",
+"col": "858dcd",
+"rarity": 0,
+"temp": "any"
+},
+"berry_syrup": {
+"base": "honey",
+"col": "62b771",
+"rarity": 0,
+"temp": "any"
+},
+"spice_syrup": {
+"base": "honey",
+"col": "dd853e",
+"rarity": 0,
+"temp": "any"
+},
+"love_syrup": {
+"base": "honey",
+"col": "e3a284",
+"rarity": 1,
+"temp": "any"
+},
+"laugh_syrup": {
+"base": "honey",
+"col": "7ca3aa",
+"rarity": 1,
+"temp": "any"
+},
+"might_syrup": {
+"base": "honey",
+"col": "8c983d",
+"rarity": 0,
+"temp": "any"
+},
+"golden_syrup": {
+"base": "honey",
+"col": "f9e59a",
+"rarity": 2,
+"temp": "any"
+},
+"courage_syrup": {
+"base": "honey",
+"col": "9c8832",
+"rarity": 1,
+"temp": "any"
+},
+"peace_syrup": {
+"base": "honey",
+"col": "99bfb7",
+"rarity": 0,
+"temp": "any"
+},
+"fairy_syrup": {
+"base": "honey",
+"col": "a3a4b6",
+"rarity": 1,
+"temp": "any"
+},
+"joy_syrup": {
+"base": "honey",
+"col": "d2ba7c",
+"rarity": 1,
+"temp": "any"
+},
+"hag_syrup": {
+"base": "honey",
+"col": "925f4d",
+"rarity": 1,
+"temp": "any"
+},
+"ambrosia": {
+"base": "honey",
+"col": "e7bbad",
+"rarity": 3,
+"temp": "any"
+},
+"moonlight": {
+"base": "moon_dew",
+"col": "dea5c8",
+"rarity": 1,
+"temp": "any"
+},
+"lucid": {
+"base": "moon_dew",
+"col": "9e6cd8",
+"rarity": 1,
+"temp": "any"
+},
+"flight": {
+"base": "moon_dew",
+"col": "8d91b9",
+"rarity": 2,
+"temp": "any"
+},
+"beast_talk": {
+"base": "moon_dew",
+"col": "9d89d7",
+"rarity": 1,
+"temp": "any"
+},
+"cat_form": {
+"base": "moon_dew",
+"col": "9f7ed8",
+"rarity": 1,
+"temp": "any"
+},
+"night_elixir": {
+"base": "moon_dew",
+"col": "703692",
+"rarity": 1,
+"temp": "any"
+},
+"fire_elixir": {
+"base": "moon_dew",
+"col": "e2666e",
+"rarity": 1,
+"temp": "any"
+},
+"ice_elixir": {
+"base": "moon_dew",
+"col": "a6a2ef",
+"rarity": 1,
+"temp": "any"
+},
+"life_elixir": {
+"base": "moon_dew",
+"col": "e5b6a9",
+"rarity": 2,
+"temp": "any"
+},
+"truth": {
+"base": "moon_dew",
+"col": "c8c4be",
+"rarity": 1,
+"temp": "any"
+},
+"fortune": {
+"base": "moon_dew",
+"col": "c39ec3",
+"rarity": 2,
+"temp": "any"
+},
+"dragon_elixir": {
+"base": "moon_dew",
+"col": "bc784d",
+"rarity": 3,
+"temp": "any"
+},
+"unicorn_elixir": {
+"base": "moon_dew",
+"col": "dfdaa0",
+"rarity": 2,
+"temp": "any"
+},
+"sea_elixir": {
+"base": "moon_dew",
+"col": "88abc3",
+"rarity": 1,
+"temp": "any"
+},
+"time_elixir": {
+"base": "moon_dew",
+"col": "ac72af",
+"rarity": 3,
+"temp": "any"
+},
+"philosopher": {
+"base": "moon_dew",
+"col": "af8097",
+"rarity": 3,
+"temp": "any"
+},
+"murky": {
+"base": "water",
+"col": "6e6650",
+"rarity": 0,
+"temp": "any"
+},
+"mermaid_tail": {
+"base": "moon_dew",
+"col": "56d2d6",
+"rarity": 2,
+"temp": "any"
+}
+}
