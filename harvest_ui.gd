@@ -9,6 +9,8 @@ const DB = preload("res://herbs_db.gd")
 const HDB = preload("res://harvest_db.gd")
 const IT = preload("res://items_db.gd")
 const PH = preload("res://phys2d.gd")
+const PG27 = preload("res://plant_ground27.gd")
+const WD = preload("res://world_data.gd")
 
 const WIN: Rect2 = Rect2(300, 130, 1320, 780)
 const GROUND_Y: float = 760.0
@@ -45,6 +47,10 @@ var kitten_x: float = -200.0
 var tex: Dictionary = {}
 var fx: Array = []                    # [позиция, скорость, цвет, жизнь]
 var trail: Array = []                 # v19: последние положения мыши [позиция, время] — для броска
+var base_back: Color = Color.WHITE    # v27: лунка и травинки под травой — цвет земли биома (как в мире)
+var base_front: Color = Color.WHITE
+var base_blades: bool = true
+var plant_tone: Color = Color.WHITE
 const FLOOR_Y: float = GROUND_Y + 8.0
 
 
@@ -78,6 +84,50 @@ func _ready() -> void:
 	root.visible = false
 
 
+## v27: трава в земле — как в мире (herbw_* без кочки), иначе значок
+func _wicon(id: String) -> Texture2D:
+	if not tex.has("w_" + id):
+		var wp: String = "res://art/herbw_%s.png" % id
+		var wt: Texture2D = load(wp) if ResourceLoader.exists(wp) else null
+		tex["w_" + id] = wt if wt != null and wt.get_size() == Vector2(32, 48) else _icon(id)
+	return tex["w_" + id]
+
+
+## v27: цвета лунки/травинок/оттенка травы — те же, что даёт plant_ground27.gd в мире
+func _base_colors(src: Node) -> void:
+	var b: int = 1
+	if src is Node2D and WD.in_world((src as Node2D).global_position):
+		b = WD.biome_at((src as Node2D).global_position)
+	var c: Color = PG27.COL.get(b, PG27.COL[1])
+	base_back = Color(c.r * 0.5, c.g * 0.55, c.b * 0.5, 1.0)
+	var gt: Color = PG27.GRASS_BASE * (PG27.GRASS_TINT.get(b, Color.WHITE) as Color)
+	var fc: Color = c.lerp(gt, 0.45)
+	base_front = Color(fc.r, fc.g, fc.b, 1.0)
+	base_blades = not b in PG27.NO_BLADES
+	var lum: float = (c.r + c.g + c.b) / 3.0
+	var tone: Color = Color(c.r / maxf(lum, 0.01), c.g / maxf(lum, 0.01), c.b / maxf(lum, 0.01)) * clampf(0.75 + lum * 0.45, 0.8, 1.05)
+	plant_tone = Color.WHITE.lerp(Color(tone.r, tone.g, tone.b, 1.0), 0.12)
+
+
+## v27c: нижняя непрозрачная строка картинки (где у травы начинается стебель)
+func _low_row(t2: Texture2D) -> int:
+	var key: String = "low_%d" % t2.get_instance_id()
+	if not tex.has(key):
+		var im: Image = t2.get_image()
+		var low: int = t2.get_height() - 1
+		if im != null:
+			if im.is_compressed():
+				im.decompress()
+			low = 0
+			for y in range(im.get_height()):
+				for x in range(im.get_width()):
+					if im.get_pixel(x, y).a > 0.5:
+						low = y
+						break
+		tex[key] = low
+	return int(tex[key])
+
+
 func _icon(id: String) -> Texture2D:
 	if not tex.has("h_" + id):
 		tex["h_" + id] = DB.icon(id)
@@ -94,6 +144,7 @@ func open(src: Node, ids: Array) -> void:
 		return
 	source = src
 	is_open = true
+	_base_colors(src)
 	Game.ui_open = true
 	basket.clear()
 	plants.clear()
@@ -117,7 +168,7 @@ func open(src: Node, ids: Array) -> void:
 	root.visible = true
 	root.modulate.a = 0.0
 	var tw: Tween = create_tween()
-	tw.tween_property(root, "modulate:a", 1.0, 0.25)
+	tw.tween_property(root, "modulate:a", 1.0, 0.12)
 	# v24: без рывка скорости в первый кадр (иначе травы пугались/лопались от простого наведения)
 	mouse = get_viewport().get_mouse_position()
 	prev_mouse = mouse
@@ -150,7 +201,7 @@ func close() -> void:
 		source.call("harvest_done", got, left)
 	source = null
 	var tw: Tween = create_tween()
-	tw.tween_property(root, "modulate:a", 0.0, 0.18)
+	tw.tween_property(root, "modulate:a", 0.0, 0.08)
 	tw.tween_callback(func() -> void:
 		root.visible = false
 		Game.ui_open = false)
@@ -402,7 +453,7 @@ func _process(delta: float) -> void:
 		done_t = 0.0
 	else:
 		done_t += delta
-		if done_t > 0.7:
+		if done_t > 0.2:
 			done_t = 0.0
 			close()
 			return
@@ -739,7 +790,25 @@ func _draw_plant(p: Dictionary, i: int) -> void:
 			scene.draw_line(Vector2(rx, GROUND_Y - lift + 8.0), Vector2(rx + sin(float(k) * 1.7) * 10.0, GROUND_Y + 10.0), Color("e8dcc0"), 3.0)
 	if st == "held" and HDB.has(id, "sticky") and float(p.get("stick", 0.0)) > 0.0:
 		scene.draw_line(_hand(), Vector2(r.get_center().x, r.position.y + 40), Color(1, 1, 0.8, 0.7), 2.0)
-	scene.draw_texture_rect(ic, dst, false, mod)
+	if st == "ground":
+		# v27c: стебель начинается прямо из бурой земли (без лунки): самый низ травы — на кромке почвы,
+		# чуть утоплен; спереди — травинки той же травы, что в окне (остаются на месте, даже когда тянут)
+		var wic: Texture2D = _wicon(id)
+		var low: int = _low_row(wic)
+		var soil_y: float = GROUND_Y - 2.0 + 4.0      # кромка почвы + утопить на ~1 пиксель арта
+		var sh: float = (soil_y - float(p["lift"])) - (dst.position.y + (float(low) + 1.0) / float(wic.get_height()) * dst.size.y)
+		scene.draw_texture_rect(wic, Rect2(dst.position + Vector2(0, sh), dst.size), false, mod * plant_tone)
+		var g1: Color = Color("6aaa52").lerp(Color("1a2a1a"), night * 0.7)
+		var g2: Color = Color("4a8a3e").lerp(Color("142014"), night * 0.7)
+		var x0: float = float(p["x"])
+		for k in range(9):
+			var hs: float = fmod(float(k) * 0.618 + float(i) * 0.37, 1.0)
+			var bx: float = x0 - 44.0 + float(k) * 11.0 + hs * 4.0
+			var bh: float = 10.0 + hs * 14.0 - absf(float(k) - 4.0) * 1.5
+			scene.draw_rect(Rect2(bx, GROUND_Y - 2.0 - bh, 4, bh + 2.0), g1 if k % 2 == 0 else g2)
+		scene.draw_rect(Rect2(x0 - 46.0, GROUND_Y - 4.0, 92.0, 4.0), Color("3e6e34").lerp(Color("141e14"), night * 0.7))
+	else:
+		scene.draw_texture_rect(ic, dst, false, mod)
 	# огненные искры, свечение
 	if HDB.has(id, "hot"):
 		for k in range(4):
