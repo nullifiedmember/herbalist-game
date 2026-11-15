@@ -5949,9 +5949,9 @@
 							"voice": "snd/av_lynx_0.wav",
 							"voice_pet": "snd/av_lynx_pet.wav",
 							"walk": "img/walk_animal_lynx.png",
-							"walk_h": 76,
+							"walk_h": 74,
 							"walk_n": 4,
-							"walk_w": 72
+							"walk_w": 86
 						},
 						{
 							"id": "wildcat",
