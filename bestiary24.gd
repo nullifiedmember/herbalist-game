@@ -61,6 +61,7 @@ func dump(dir: String) -> int:
 	secs.append(_weapons())
 	secs.append(_spells())
 	secs.append(_furniture())
+	secs.append(_nature27())
 	var f: FileAccess = FileAccess.open(out + "/data.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify({"title": "Бестиарий «Лесного травника»", "sections": secs}, "\t"))
 	f.close()
@@ -138,6 +139,10 @@ func _herbs() -> Dictionary:
 		var e: Dictionary = _e(id, String(d["name"]), _img("herb_" + id, DB.icon(id)), String(d.get("latin", "")),
 			[String(d.get("desc", "")), "Свойства: " + _props(d.get("props", [])), "Где растёт: " + String(d.get("where", "")),
 			"Цена: %d мон." % int(d.get("price", 0))], ["семена есть"] if DB.SEEDS.has(id) else [])
+		var wp27: String = "res://art/herbw_%s.png" % id
+		if ResourceLoader.exists(wp27):   # v27: как трава растёт в мире (стиль яблока)
+			e["img2"] = _img("herbw_" + id, load(wp27))
+			e["img2_t"] = "так растёт в мире"
 		if (d.get("biomes", []) as Array).has(19):
 			sea.append(e)
 		else:
@@ -484,3 +489,46 @@ func _furniture() -> Dictionary:
 func _fcat(c: String) -> String:
 	return String({"bed": "Кровати", "table": "Столы", "chair": "Стулья и лавки", "wardrobe": "Шкафы", "bookcase": "Книжные полки",
 		"lamp": "Свет", "rug": "Ковры", "dresser": "Комоды", "plant": "Цветы и растения", "cabinet": "Шкафчики", "misc": "Разное"}.get(c, c))
+
+
+# ------------------------------------------------------------------ v27: деревья и луговые цветы (стиль яблока)
+
+const TREES27: Array = [
+	["tree_a", "Дуб", "Quercus robur", "Луга у дома, светлые рощи, земли рыцарей.", "Крепкая кора, широкая крона. Даёт брёвна, кору и листья для котла."],
+	["tree_b", "Клён", "Acer platanoides", "Луга и светлые рощи.", "Светлая пышная крона. Брёвна, кора, листья."],
+	["tree_c", "Липа", "Tilia cordata", "Сумрачные леса, луга, болота.", "Тёмная густая крона, в тени под ней прохладно."],
+	["tree_d", "Вяз", "Ulmus glabra", "Луга, рощи, осенний лес.", "Самое высокое лиственное дерево мира."],
+	["tree_apple", "Яблоня", "Malus domestica", "Двор травницы, деревня кошкодевочек.", "Даёт яблоки. Можно посадить саженец у дома."],
+	["tree_autumn", "Осенний клён", "Acer (осень)", "Осенний лес, луга.", "Золотая листва круглый год."],
+	["tree_autumn2", "Рыжий клён", "Acer rubrum", "Осенний лес.", "Огненно-рыжая крона."],
+	["tree_blossom", "Сакура", "Prunus serrulata", "Цветущие рощи, земли Восходящего Солнца, луга.", "Розовые лепестки падают на траву."],
+	["tree_unicorn", "Единорожье дерево", "Arbor unicornis", "Земли единорогов.", "Сказочная розово-сиреневая крона."],
+	["tree_birch", "Берёза", "Betula pendula", "Берёзовые рощи, земли единорогов.", "Белая кора с чёрными полосками."],
+]
+const FLOWERS27: Array = [
+	["flowers_pink", "Розовая гвоздичка", "Dianthus deltoides", "Луга, цветущие рощи, поля."],
+	["flowers_white", "Нивяник (луговая ромашка)", "Leucanthemum vulgare", "Луга и поля у дома."],
+	["flowers_blue", "Василёк луговой", "Centaurea jacea", "Луга, поля, берёзовые рощи."],
+	["flowers_yellow", "Лютик едкий", "Ranunculus acris", "Луга и поля."],
+]
+
+
+func _nature27() -> Dictionary:
+	var trees: Array = []
+	for t in TREES27:
+		var p: String = "res://art/%s.png" % String(t[0])
+		if not ResourceLoader.exists(p):
+			continue
+		trees.append(_e(String(t[0]), String(t[1]), _img("nat_" + String(t[0]), load(p)), String(t[2]),
+			[String(t[4]), "Где растёт: " + String(t[3]), "Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."]))
+	var fl: Array = []
+	for t in FLOWERS27:
+		var p2: String = "res://art/%s.png" % String(t[0])
+		if not ResourceLoader.exists(p2):
+			continue
+		fl.append(_e(String(t[0]), String(t[1]), _img("nat_" + String(t[0]), load(p2)), String(t[2]),
+			["Украшение луга, собрать нельзя.", "Где растёт: " + String(t[3]),
+			"Растёт прямо из земли: под кустиком тень-лунка и травинки в цвет травы своего края."]))
+	return {"id": "nature27", "title": "Деревья и луговые цветы", "icon": trees[0]["img"] if not trees.is_empty() else "",
+		"intro": "Деревья и цветы мира в стиле яблока. Травы, которые можно собрать, — в разделе «Травы» (маленькая картинка — как трава растёт в мире).",
+		"groups": [{"title": "Деревья", "entries": trees}, {"title": "Луговые цветы", "entries": fl}]}
