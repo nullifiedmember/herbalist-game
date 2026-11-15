@@ -72,7 +72,7 @@ const MAP_COL: Dictionary = {
 # проходит через точку, поэтому развилки сходятся без швов. Первое число — полуширина.
 const ROADS: Array = [
 	# тропинки из двора (узкие): на юг к кошкам и на запад к паучихам
-	[14.0, Vector2(960, 1150), Vector2(1150, 1900), Vector2(760, 2800), Vector2(120, 3500), Vector2(-940, 4300)],
+	[14.0, Vector2(960, 1640), Vector2(960, 1780), Vector2(1150, 1900), Vector2(760, 2800), Vector2(120, 3500), Vector2(-940, 4300)],
 	[14.0, Vector2(150, 596), Vector2(-700, 420), Vector2(-1700, -60), Vector2(-2720, -380)],
 	# кошки: деревня ↔ городок
 	[20.0, Vector2(-940, 4300), Vector2(-200, 4500), Vector2(630, 4260)],
@@ -111,7 +111,14 @@ const ROADS: Array = [
 	# к японским землям и к морю
 	[20.0, Vector2(10500, 800), Vector2(13600, 1100), Vector2(16320, 640)],
 	[18.0, Vector2(630, 4260), Vector2(760, 5400), Vector2(960, 6400), Vector2(960, 7400)],
+	# выход со двора: прямая дорожка как во дворе (ширина 30), потом плавно сужается до тропинки
+	[30.0, Vector2(960, 1100), Vector2(960, 1400)],
+	[26.0, Vector2(960, 1400), Vector2(960, 1500)],
+	[21.0, Vector2(960, 1500), Vector2(960, 1580)],
+	[17.0, Vector2(960, 1580), Vector2(960, 1650)],
 ]
+## Дороги с этого номера идут строго прямо, без изгибов
+const STRAIGHT_FROM: int = 25
 const ROAD_HW: float = 22.0   # полуширина большой дороги
 # центры городов (площади). Внутри TOWN_R дорога не рисуется — там свои улицы города
 const TOWN_C: Dictionary = {
@@ -172,6 +179,8 @@ static func road_curves() -> Array:
 			var n: int = maxi(2, int(ln / 40.0))
 			var hs: int = (i * 7919 + j * 104729) % 1000
 			var amp: float = clampf(ln * 0.07, 24.0, 150.0) * (1.0 if hs % 2 == 0 else -1.0)
+			if i >= STRAIGHT_FROM:
+				amp = 0.0
 			var k: float = 1.0 if hs % 3 != 0 else 2.0
 			for s in range(n + (1 if j == cp.size() - 2 else 0)):
 				var t: float = float(s) / float(n)

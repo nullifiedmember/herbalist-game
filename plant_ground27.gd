@@ -36,17 +36,20 @@ static func attach(s: Sprite2D, p: Vector2, tint_plant: float = 0.12) -> void:
 	var bk: Sprite2D = Sprite2D.new()
 	bk.name = "PlantBaseBack"
 	bk.texture = BACK
-	bk.position = Vector2(0, -3)
+	bk.position = Vector2(0, -2)
 	bk.show_behind_parent = true
 	var gt: Color = GRASS_BASE * (GRASS_TINT.get(b, Color.WHITE) as Color)
-	bk.modulate = Color(c.r * 0.85, c.g * 0.85, c.b * 0.85, 1.0).lerp(Color(gt.r, gt.g, gt.b, 1.0), 0.35)
+	# v27b: тень — та же земля, только темнее (не серая), края тают в картинке
+	bk.modulate = Color(c.r * 0.5, c.g * 0.55, c.b * 0.5, 1.0)
 	s.add_child(bk)
 	if not b in NO_BLADES:
 		var fr: Sprite2D = Sprite2D.new()
 		fr.name = "PlantBaseFront"
 		fr.texture = FRONT
 		fr.position = Vector2(0, -2)
-		fr.modulate = Color(gt.r * 1.12, gt.g * 1.12, gt.b * 1.12, 1.0)
+		# v27b: край травы — между землёй и травой биома, чтобы сливался с землёй вокруг
+		var fc: Color = c.lerp(gt, 0.45)
+		fr.modulate = Color(fc.r, fc.g, fc.b, 1.0)
 		s.add_child(fr)
 	# само растение — чуть в тон земли (тёплая земля — теплее, сумрачная — темнее)
 	var lum: float = (c.r + c.g + c.b) / 3.0

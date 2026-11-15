@@ -596,7 +596,8 @@ func spr(tex: String, pos: Vector2, wind: float = 0.0, flip: bool = false, paren
 	if wind > 0.0:
 		s.material = wind_mat(wind)
 	(parent if parent != null else objects).add_child(s)
-	if cast:
+	# v27b: низкие луговые цветы и грибы — без падающей тени-силуэта (торчала серыми пятнами по бокам), им хватает лунки
+	if cast and not (tex.begins_with("flowers_") or tex == "mushrooms"):
 		add_caster(s)
 	# v24: постройки и высокие вещи — в сетку крон/крыш мира, чтобы травы на них не росли
 	if cast and world != null and t.get_height() >= 80:
@@ -713,7 +714,7 @@ func is_blocked(p: Vector2) -> bool:
 
 ## Выходы со двора в большой мир: на юг (к кошкодевочкам) и на запад (к паутинному лесу)
 func _in_exit(p: Vector2) -> bool:
-	return Rect2(930, 1170, 60, 120).has_point(p) or Rect2(-10, 578, 160, 38).has_point(p)
+	return Rect2(140, 1170, 1640, 120).has_point(p) or Rect2(-10, 578, 160, 38).has_point(p)
 
 
 func _world_limits() -> void:
@@ -1815,8 +1816,7 @@ func _spawn_herbs() -> void:
 		herb.set_script(load("res://herb.gd"))
 		herb.set("herb_id", id)
 		herb.position = p.round()
-		objects.add_child(herb)
-		add_caster(herb.get_child(0) as Sprite2D, true)
+		objects.add_child(herb)   # v27b: без тени-силуэта — травы стоят на мягкой лунке (plant_ground27.gd)
 		count += 1
 
 
