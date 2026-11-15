@@ -122,7 +122,7 @@ func _build_hint() -> void:
 	var items: Array = [
 		["book", "icon_potionbook", "Книга травника"], ["craft", "icon_bottle", "Крафт"], ["build", "icon_log", "Мебель и комнаты"],
 		["map", "icon_scroll", "Карта"], ["quests", "icon_book_lore", "Задания"], ["chronicle", "icon_book_recipe", "Летопись"],
-		["skills", "icon_star_blade", "Навыки"], ["grimoire", "icon_spellbook25", "Гримуар"], ["kingdom", "icon_crown23", "Королевство"],
+		["skills", "icon_star_blade", "Навыки"],["kingdom", "icon_crown23", "Королевство"],
 	]
 	var cw: float = 74.0
 	var root: Control = Control.new()
@@ -135,7 +135,13 @@ func _build_hint() -> void:
 		c.position = Vector2(i * cw, 0)
 		c.size = Vector2(cw - 6, 72)
 		c.tooltip_text = String(it[2])
-		c.mouse_filter = Control.MOUSE_FILTER_PASS
+		c.mouse_filter = Control.MOUSE_FILTER_STOP     # кнопка нажимается и не пропускает клик в мир
+		c.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		var act: String = String(it[0])
+		c.gui_input.connect(func(ev: InputEvent) -> void:
+			if ev is InputEventMouseButton and (ev as InputEventMouseButton).pressed and (ev as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+				_press_action(act)
+				c.accept_event())
 		root.add_child(c)
 		panel(c, Vector2.ZERO, Vector2(cw - 6, 72))
 		var ic: TextureRect = TextureRect.new()
@@ -151,6 +157,18 @@ func _build_hint() -> void:
 		key_labels.append([k, String(it[0]), 22])
 		k.size = Vector2(cw - 6, 26)
 		k.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+
+## Нажатие значка мышью = нажатие клавиши этого действия (все окна открываются как с клавиатуры)
+func _press_action(action: String) -> void:
+	Sound.play("ui_click", -8.0)
+	var kc: int = KB.code(action)
+	for down in [true, false]:
+		var ev: InputEventKey = InputEventKey.new()
+		ev.physical_keycode = kc as Key
+		ev.keycode = kc as Key
+		ev.pressed = down
+		Input.parse_input_event(ev)
 
 
 var key_labels: Array = []          # v24: [Label, действие] — подпись меняется вместе с клавишей

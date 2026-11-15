@@ -280,7 +280,8 @@ static func _all_builds() -> Dictionary:
 	for k in MT.BUILD.keys():
 		var b: Array = MT.BUILD[k]
 		var r: Array = b[3]
-		out[k] = [String(b[0]), String(b[1]), 0, 0, float(b[2]), Rect2(float(r[0]), float(r[1]), float(r[2]), float(r[3]))]
+		var kk2: float = float(MT.SHRINK.get(String(b[1]), 1.0))     # v28: уменьшенные столы — и преграда меньше
+		out[k] = [String(b[0]), String(b[1]), 0, 0, float(b[2]), Rect2(float(r[0]) * kk2, float(r[1]) * kk2, float(r[2]) * kk2, float(r[3]) * kk2)]
 	for k2 in V24.BUILD.keys():
 		var b2: Array = V24.BUILD[k2]
 		var r2: Array = b2[3]

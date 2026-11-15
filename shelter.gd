@@ -94,10 +94,11 @@ func _process(_delta: float) -> void:
 		return
 	var pp: Vector2 = pl.global_position
 	for i in range(pets.size() - 1, -1, -1):
-		var n: Node2D = pets[i]
-		if not is_instance_valid(n):
+		var nv: Variant = pets[i]
+		if not is_instance_valid(nv):
 			pets.remove_at(i)
 			continue
+		var n: Node2D = nv
 		if n.get("follow") != null and not bool(n.get("follow")):
 			continue    # поселился в загоне
 		n.visible = pp.y < 90000.0 or pp.y > 120000.0

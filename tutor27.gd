@@ -33,6 +33,11 @@ static func menu(d: Node) -> void:
 
 static func options() -> Array:
 	var o: Array = []
+	# v28: обучение как задание
+	if Game.tut_step == 0:
+		o.append(["Научи меня! (задание)", "tut:quest"])
+	elif Game.tut_step < 99:
+		o.append(["Напомни, что делать", "tut:quest"])
 	for t in topics():
 		o.append([String(t[1]), "tut:" + String(t[0])])
 	o.append(["Пока!", "bye"])
@@ -45,6 +50,16 @@ static func handles(act: String) -> bool:
 
 static func handle(d: Node, act: String) -> void:
 	var id: String = act.substr(4)
+	if id == "quest":
+		if Game.tut_step == 0:
+			Game.tut_step = 1
+			Sound.play("page", -6.0)
+			Game.toast.emit("Задание получено: Дровосек", null)
+			d.call("_say", "Первое дело — дрова! Из брёвен выйдут верстак и всё остальное. Задание появилось слева на экране: я подсвечиваю, что делать, и стрелкой показываю дерево. Топор не забудь взять в руку!")
+		else:
+			d.call("_say", "Смотри на задание слева: жёлтая строчка — то, что делать сейчас. Дерево, которое нужно рубить, отмечено стрелкой.")
+		d.call("_set_options", options())
+		return
 	for t in topics():
 		if String(t[0]) == id:
 			d.call("_say", String(t[2]))

@@ -117,12 +117,12 @@ func _update_step() -> void:
 			bubble_tex = load("res://art/workbench.png")
 		3:
 			bubble_tex = load("res://art/cauldron.png")
-			var wb: Node2D = _nearest("interactables", p, 1400.0, func(n: Node2D) -> bool: return String(n.get("kind")) == "workbench")
+			var wb: Node2D = _nearest("interactables", p, 1400.0, func(n: Node2D) -> bool: return str(n.get("kind")) == "workbench")
 			if wb != null:
 				target = wb.global_position
 		4:
 			bubble_tex = load("res://art/icon_water_cold.png")
-			var wl: Node2D = _nearest("consumables", p, 1400.0, func(n: Node2D) -> bool: return String(n.get("kind")) == "well")
+			var wl: Node2D = _nearest("consumables", p, 1400.0, func(n: Node2D) -> bool: return str(n.get("kind")) == "well")
 			if wl != null:
 				target = wl.global_position
 		5:

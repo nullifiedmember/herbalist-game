@@ -30,6 +30,7 @@ const ACTIONS: Array = [
 	["grimoire", "Гримуар: стихии и заклинания", KEY_H, KEY_NONE],
 	["ride", "Сесть на скакуна / слезть", KEY_N, KEY_NONE],
 	["move_home", "Переезд в другой край", KEY_P, KEY_NONE],
+	["demolish", "Убрать свою постройку (зажать и кликнуть по ней)", KEY_T, KEY_NONE],
 ]
 
 static var run_latched: bool = false      # бег «переключением»: нажал — бежишь, нажал ещё — идёшь

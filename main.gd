@@ -563,6 +563,8 @@ func add_caster(src: Sprite2D, dynamic: bool = false) -> void:
 
 func _copy_look(src: Sprite2D, sh: Sprite2D) -> void:
 	sh.texture = src.texture
+	if sh.hframes != src.hframes:
+		sh.frame = 0      # лист сменился (зверь пошёл вниз/вверх) — сначала сброс кадра
 	sh.hframes = src.hframes
 	sh.vframes = src.vframes
 	sh.frame = src.frame
@@ -593,6 +595,8 @@ func spr(tex: String, pos: Vector2, wind: float = 0.0, flip: bool = false, paren
 	s.offset = Vector2(-floorf(t.get_width() / 2.0), -float(FOOT.get(tex, t.get_height())))
 	s.position = pos.round()
 	s.flip_h = flip
+	if preload("res://mats_db.gd").SHRINK.has(tex):
+		s.scale = Vector2.ONE * float(preload("res://mats_db.gd").SHRINK[tex])
 	if wind > 0.0:
 		s.material = wind_mat(wind)
 	(parent if parent != null else objects).add_child(s)
@@ -718,6 +722,11 @@ func _in_exit(p: Vector2) -> bool:
 
 
 func _world_limits() -> void:
+	# v28: в Аду и Раю после выхода из дома камера должна вернуться в границы города-мира, а не большого мира (иначе картинка сходила с ума)
+	var rl28: Node = get_node_or_null("Realm24")
+	if rl28 != null and String(rl28.get("active")) != "":
+		rl28.call("_cam")
+		return
 	cam.limit_left = int(WD.ORIGIN.x)
 	cam.limit_top = int(WD.ORIGIN.y)
 	cam.limit_right = int(WD.ORIGIN.x + WD.SIZE.x)
@@ -2831,6 +2840,12 @@ func _run_tests() -> void:
 	var fails: Array = []
 	await get_tree().process_frame
 	print("TEST: начало")
+	if OS.get_cmdline_user_args().has("--only28"):
+		await get_tree().create_timer(0.5).timeout
+		await preload("res://test28.gd").new().run(self, fails)
+		print("TEST: итого ошибок %d" % fails.size())
+		get_tree().quit(1 if fails.size() > 0 else 0)
+		return
 	if OS.get_cmdline_user_args().has("--only26cats"):
 		await get_tree().create_timer(0.5).timeout
 		await preload("res://test26cats.gd").new().run(self, fails)
@@ -3730,6 +3745,7 @@ func _run_tests() -> void:
 	await preload("res://test26.gd").new().run(self, fails)
 	await preload("res://test26ui.gd").new().run(self, fails)
 	await preload("res://test26cats.gd").new().run(self, fails)
+	await preload("res://test28.gd").new().run(self, fails)
 	print("TEST: итого ошибок %d" % fails.size())
 	get_tree().quit(1 if fails.size() > 0 else 0)
 
@@ -5883,6 +5899,8 @@ func _screenshot_mode(path: String) -> void:
 			await preload("res://test25.gd").new().shot(self, String(a23).substr(6))
 		if String(a23).begins_with("--v26ui="):
 			await preload("res://test26ui.gd").new().shot(self, String(a23).substr(8))
+		if String(a23).begins_with("--v28="):
+			await preload("res://test28.gd").new().shot(self, String(a23).substr(6))
 		if String(a23).begins_with("--v26cats="):
 			await preload("res://test26cats.gd").new().shot(self, String(a23).substr(10))
 	await get_tree().create_timer(1.6).timeout

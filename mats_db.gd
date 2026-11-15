@@ -512,6 +512,10 @@ const BUILD: Dictionary = {
 	"path_marble": ["Мраморная плитка", "w20_path_marble", 2.0, [0, 0, 0, 0], "wall", {"marble_block": 1}],
 }
 const TABS: Array = ["home", "work", "trap", "bird", "deco", "wall"]
+## v28: столы и станки были огромными рядом с героиней (кадр 27x53 в мире) — рисуются уменьшенными (коэффициент)
+const SHRINK: Dictionary = {"workbench": 0.58, "research_table": 0.58, "forge": 0.68, "tinker_bench": 0.68, "loom": 0.78, "ale_table": 0.72,
+	"dessert_table": 0.72, "tea_table": 0.72, "bench": 0.8, "st20_sawmill": 0.78, "st20_smelter": 0.78, "st20_kiln": 0.78, "st20_mason": 0.72,
+	"st20_press": 0.78, "st20_dye_vat": 0.82, "st20_jeweler": 0.78, "st20_spinning": 0.82, "st20_anvil": 0.88}
 const FLAT: Array = ["path_stone", "path_brick", "path_wood", "path_gravel", "path_marble", "flower_bed"]
 ## Расширение участка — материалами (колышки, верёвка, камни), а не деньгами
 const PLOT_NEED: Array = [{"stick": 8, "twine": 2}, {"stick": 12, "rope": 1, "stone_s": 6}, {"log": 6, "rope": 2, "stone_m": 6}, {"@plank": 8, "rope": 3, "stone_block": 4}, {"beam": 4, "chain": 1, "stone_block": 8}, {"beam": 6, "chain": 2, "brick": 12, "mortar": 4}]

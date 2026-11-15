@@ -196,7 +196,8 @@ func _process(delta: float) -> void:
 	check_t -= delta
 	if check_t <= 0.0:
 		check_t = 0.25
-		_update_active(pl.global_position)
+		_update_active(pl.global_position, false)
+	_load_step()
 	_update_fade(pl.global_position, delta)
 	fog_t -= delta
 	if fog_t <= 0.0:
@@ -204,21 +205,50 @@ func _process(delta: float) -> void:
 		reveal(pl.global_position, 5.5 * (1.0 + Game.stat("reveal") / 100.0))
 
 
-func _update_active(p: Vector2) -> void:
-	var want: Array = []
+## v28: загрузка областей «как в Майнкрафте»: дальняя зона подгрузки строится заранее, по одной области за раз и по кусочкам
+## (по одному шагу на кадр), ближайшие — первыми; видимыми области становятся только когда достроены
+const LOAD_MARGIN: float = 1300.0         # подгрузка: дальше, чем показ (ACTIVE_MARGIN)
+var ready_regions: Dictionary = {}        # Vector2i -> true: область достроена
+var load_queue: Array = []                # Vector2i: очередь на постройку (ближние впереди)
+var loading: Vector2i = Vector2i(-99999, -99999)
+var rng_state: Dictionary = {}            # Vector2i -> состояние генератора между шагами (мир один и тот же, как при цельной постройке)
+var hooks_snap: Dictionary = {}
+
+
+func _regions_near(p: Vector2, margin: float) -> Array:
+	var out: Array = []
 	var r0: Vector2i = WD.region_of(p)
 	for dy in range(-1, 2):
 		for dx in range(-1, 2):
 			var r: Vector2i = r0 + Vector2i(dx, dy)
 			if r == Vector2i.ZERO or WD.biome_of_region(r) < 0:
 				continue
-			if WD.region_rect(r).grow(ACTIVE_MARGIN).has_point(p):
-				want.append(r)
-	for r in want:
-		if not built.has(r):
-			_build_region(r)
+			if WD.region_rect(r).grow(margin).has_point(p):
+				out.append(r)
+	return out
+
+
+func _update_active(p: Vector2, sync: bool = true) -> void:
+	var want: Array = _regions_near(p, ACTIVE_MARGIN)
+	if sync:
+		for r in want:
+			if not ready_regions.has(r):
+				_build_region(r)
+	else:
+		# область, в которой стоит героиня, достраиваем сразу (чтобы не стоять посреди пустоты)
+		for r in want:
+			if not ready_regions.has(r) and WD.region_rect(r).has_point(p):
+				_build_region(r)
+		# остальные — в очередь, ближайшие первыми (зона подгрузки шире зоны показа)
+		for r in _regions_near(p, LOAD_MARGIN):
+			if not ready_regions.has(r) and r != loading and not load_queue.has(r):
+				load_queue.append(r)
+		load_queue.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
+			return WD.region_rect(a).get_center().distance_squared_to(p) < WD.region_rect(b).get_center().distance_squared_to(p))
 	var changed: bool = false
 	for r in built.keys():
+		if not ready_regions.has(r):
+			continue
 		var on: bool = want.has(r)
 		var node: Node2D = built[r]
 		if node.visible != on:
@@ -226,36 +256,98 @@ func _update_active(p: Vector2) -> void:
 			# спрятанные области не тратят время: жители и звери в них «замирают»
 			node.process_mode = Node.PROCESS_MODE_INHERIT if on else Node.PROCESS_MODE_DISABLED
 			changed = true
-	if changed or want.size() != active.size():
-		active = want
-		for r in built.keys():
-			for pair in casters.get(r, []):
-				if is_instance_valid(pair[0]):
-					_place_shadow(pair[0], pair[1])
+			# тени пересчитываем только у тех областей, что включились
+			if on:
+				for pair in casters.get(r, []):
+					if is_instance_valid(pair[0]):
+						_place_shadow(pair[0], pair[1])
 	active = want
+	if sync:
+		load_queue.clear()
 
 
-## Построить регион все сразу (для проверок и скриншотов)
+## Один шаг фоновой подгрузки (вызывается каждый кадр): строится максимум один кусочек одной области
+func _load_step() -> void:
+	if loading != Vector2i(-99999, -99999) or load_queue.is_empty():
+		return
+	var r: Vector2i = load_queue.pop_front()
+	if ready_regions.has(r):
+		return
+	loading = r
+	var node: Node2D = _region_begin(r)
+	var total: int = 4 + (hooks_snap[r] as Array).size()
+	for i in range(total):
+		if ready_regions.has(r):
+			break           # её уже достроили вручную (героиня вошла)
+		_region_stage(r, node, i)
+		await get_tree().process_frame
+	_region_end(r)
+	loading = Vector2i(-99999, -99999)
+
+
+## Построить область сразу целиком (для проверок, телепортов и скриншотов)
 func build_around(p: Vector2) -> void:
-	_update_active(p)
+	_update_active(p, true)
 
 
 func _build_region(r: Vector2i) -> void:
+	if ready_regions.has(r):
+		return
+	var node: Node2D = _region_begin(r) if not built.has(r) else (built[r] as Node2D)
+	var first: int = int(stage_done.get(r, 0))
+	var total: int = 4 + (hooks_snap[r] as Array).size()
+	for i in range(first, total):
+		_region_stage(r, node, i)
+	_region_end(r)
+
+
+var stage_done: Dictionary = {}           # Vector2i -> сколько шагов области уже сделано
+
+
+func _region_begin(r: Vector2i) -> Node2D:
 	var node: Node2D = Node2D.new()
 	node.y_sort_enabled = true
+	node.visible = false
+	node.process_mode = Node.PROCESS_MODE_DISABLED
 	(main.get("objects") as Node).add_child(node)
 	built[r] = node
+	stage_done[r] = 0
+	hooks_snap[r] = region_hooks.duplicate()
 	rng.seed = hash(r) + 777
-	if builders.has(r):
-		(builders[r] as Callable).call(node, r)
-	if town_builders.has(r):
-		(town_builders[r] as Callable).call(node, r)
-	_flora(node, r)
-	_grass(node, r)
-	if post_builders.has(r):
-		(post_builders[r] as Callable).call(node, r)
-	for hk in region_hooks:
-		(hk as Callable).call(node, r)
+	rng_state[r] = rng.state
+	return node
+
+
+## Шаги: 0 — особые постройки и города, 1 — деревья и цветы, 2 — трава, 3 — украшения, дальше — по одному хуку (звери, грибы, камни...)
+func _region_stage(r: Vector2i, node: Node2D, i: int) -> void:
+	if int(stage_done.get(r, 0)) > i:
+		return
+	rng.state = int(rng_state[r])
+	match i:
+		0:
+			if builders.has(r):
+				(builders[r] as Callable).call(node, r)
+			if town_builders.has(r):
+				(town_builders[r] as Callable).call(node, r)
+		1:
+			_flora(node, r)
+		2:
+			_grass(node, r)
+		3:
+			if post_builders.has(r):
+				(post_builders[r] as Callable).call(node, r)
+		_:
+			var hk: Callable = (hooks_snap[r] as Array)[i - 4]
+			hk.call(node, r)
+	rng_state[r] = rng.state
+	stage_done[r] = i + 1
+
+
+func _region_end(r: Vector2i) -> void:
+	ready_regions[r] = true
+	rng_state.erase(r)
+	hooks_snap.erase(r)
+	stage_done.erase(r)
 
 
 ## Спрайт предмета в регионе: с тенью, препятствием и оттенком биома

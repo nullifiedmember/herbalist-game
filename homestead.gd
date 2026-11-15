@@ -46,6 +46,7 @@ var stumps: Array = []               # v17: пеньки [спрайт, когд
 const STUMP_DAYS: float = 5.0
 var _stump_t: float = 0.0
 var placed: Array = []               # [вид, точка]
+var placed_rt: Array = []            # параллельно placed: {"nodes", "glows", "rect"} — что создала постройка (для сноса)
 var pens: Array = []                 # [центр, сколько зверей]
 var cool: float = 0.0
 var swing_t: float = 0.0
@@ -108,6 +109,11 @@ func setup(m: Node2D, h: CanvasLayer, w: Node2D) -> void:
 	Game.inventory_changed.connect(_refresh)
 	Game.inventory_changed.connect(func() -> void: _pool_frame = -1)
 	_refresh()
+	# v28: обучение-задание от гида (tutq28.gd)
+	var tq: Node = Node.new()
+	tq.set_script(load("res://tutq28.gd"))
+	add_child(tq)
+	tq.call("setup", m, self, ui, h)
 	# проверка картинкой: --inv (сумка с перегрузом), --bench (меню верстака)
 	var args: PackedStringArray = OS.get_cmdline_user_args()
 	if args.has("--inv") or args.has("--bench"):
@@ -184,6 +190,8 @@ func _build_ui() -> void:
 	# панель быстрого доступа — внизу слева
 	var hb_bg: Control = Control.new()
 	hb_bg.position = Vector2(24, 990)
+	hb_bg.size = Vector2(9 * 70 + 20, 76)
+	hb_bg.mouse_filter = Control.MOUSE_FILTER_STOP     # клики по панели не уходят в мир
 	ui.add_child(hb_bg)
 	hud.call("panel", hb_bg, Vector2.ZERO, Vector2(9 * 70 + 20, 76))
 	hot_box = HBoxContainer.new()
@@ -194,6 +202,8 @@ func _build_ui() -> void:
 	inv_panel = Control.new()
 	inv_panel.position = Vector2(540, 170)
 	inv_panel.visible = false
+	inv_panel.size = Vector2(840, 660)
+	inv_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	ui.add_child(inv_panel)
 	hud.call("panel", inv_panel, Vector2.ZERO, Vector2(840, 660))
 	var pack: TextureRect = _icon(load("res://art/icon_pack.png"), Vector2(72, 72))
@@ -375,6 +385,12 @@ func _refresh() -> void:
 		var num: Label = _num(str(i + 1), 14)
 		num.position = Vector2(6, 2)
 		s.add_child(num)
+		s.mouse_filter = Control.MOUSE_FILTER_STOP
+		s.gui_input.connect(func(ev: InputEvent) -> void:
+			if ev is InputEventMouseButton and (ev as InputEventMouseButton).pressed and (ev as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+				Game.hot_sel = i
+				Sound.play("ui_click", -10.0)
+				_refresh())
 		hot_box.add_child(s)
 	weight_bar.queue_redraw()
 	if inv_panel.visible:
@@ -455,7 +471,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and (event as InputEventMouseButton).pressed and not Game.ui_open:
 		var mb: InputEventMouseButton = event
-		if mb.button_index == MOUSE_BUTTON_LEFT:
+		if mb.button_index == MOUSE_BUTTON_LEFT and KB.down("demolish") and not bool(main.get("inside")):
+			_demolish_click()
+		elif mb.button_index == MOUSE_BUTTON_LEFT:
 			_use(true)
 		elif mb.button_index == MOUSE_BUTTON_RIGHT and ghost.visible:
 			Game.hot_sel = Game.hotbar.find("") if Game.hotbar.find("") >= 0 else Game.hot_sel
@@ -506,9 +524,23 @@ func _process(delta: float) -> void:
 		var p: Vector2 = _place_point(true)
 		var tex: String = String(IT.BUILD[kind][1])
 		ghost.texture = load("res://art/%s.png" % (tex if tex != "" else "sapling_0"))
+		ghost.scale = Vector2.ONE * float(MT.SHRINK.get(tex, 1.0))
 		ghost.offset = Vector2(-floorf(ghost.texture.get_width() / 2.0), -float(ghost.texture.get_height()))
 		ghost.position = p
 		ghost.modulate = Color(0.7, 1.0, 0.7, 0.65 + sin(t * 5.0) * 0.1) if _can_place(kind, p) == "" else Color(1.0, 0.4, 0.4, 0.55)
+	# T зажата: постройка под курсором краснеет — клик уберёт её
+	if not placing and not Game.ui_open and not bool(main.get("inside")) and KB.down("demolish"):
+		var di: int = placed_at((main as Node2D).get_global_mouse_position())
+		if di >= 0 and (placed[di][1] as Vector2).distance_to(pl.global_position) <= DEMOLISH_REACH:
+			var dk: String = String(placed[di][0])
+			var dtex: String = String(IT.BUILD[dk][1])
+			if dtex != "" and ResourceLoader.exists("res://art/%s.png" % dtex):
+				ghost.texture = load("res://art/%s.png" % dtex)
+				ghost.scale = Vector2.ONE * float(MT.SHRINK.get(dtex, 1.0))
+				ghost.offset = Vector2(-floorf(ghost.texture.get_width() / 2.0), -float(ghost.texture.get_height())) if not (dk in MT.FLAT) else Vector2(-floorf(ghost.texture.get_width() / 2.0), -floorf(ghost.texture.get_height() / 2.0))
+				ghost.position = placed[di][1]
+				ghost.modulate = Color(1.0, 0.3, 0.3, 0.55 + sin(t * 8.0) * 0.15)
+				ghost.visible = true
 	_follow_animals(delta)
 	# топор в руке: дерево под курсором подсвечивается (если до него можно дотянуться)
 	var want_hl: Sprite2D = null
@@ -535,6 +567,20 @@ func _place_point(mouse: bool) -> Vector2:
 
 
 ## Нельзя: героиня дуется, глухой звук — без надписей
+func _demolish_click() -> void:
+	if cool > 0.0 or Game.busy:
+		return
+	var pl: Node2D = main.get("player") as Node2D
+	var i: int = placed_at((main as Node2D).get_global_mouse_position())
+	if i < 0 or (placed[i][1] as Vector2).distance_to(pl.global_position) > DEMOLISH_REACH:
+		_nope()
+		return
+	if demolish(i):
+		cool = 0.3
+	else:
+		_nope()
+
+
 func _nope() -> void:
 	var pl: Node2D = main.get("player") as Node2D
 	pl.call("react", "pout", 0.8)
@@ -602,6 +648,8 @@ func try_tree(mouse: bool) -> bool:
 
 
 const CHOP_REACH: float = 70.0
+const DEMOLISH_REACH: float = 130.0
+const AXE_NEED: Dictionary = {"stick": 2, "stone_s": 2}     # топор руками: палки с веток и камушки с земли
 var hl_tree: Sprite2D = null
 
 
@@ -886,6 +934,86 @@ func LAY_POND(p: Vector2) -> bool:
 	return preload("res://world_layout.gd").pond_value(p) < 1.0
 
 
+## Индекс своей постройки под точкой мира (или -1): по картинке постройки
+func placed_at(wp: Vector2) -> int:
+	var best: int = -1
+	var bd: float = 1e9
+	for i in range(placed.size()):
+		var kind: String = String(placed[i][0])
+		var p: Vector2 = placed[i][1]
+		if not IT.BUILD.has(kind):
+			continue
+		var r: Rect2
+		var tex: String = String(IT.BUILD[kind][1])
+		if tex != "" and ResourceLoader.exists("res://art/%s.png" % tex):
+			var t: Texture2D = load("res://art/%s.png" % tex)
+			var sk: float = float(MT.SHRINK.get(tex, 1.0))
+			var w: float = float(t.get_width()) * sk
+			var h: float = float(t.get_height()) * sk
+			if kind in MT.FLAT:
+				r = Rect2(p.x - w / 2.0, p.y - h / 2.0, w, h)
+			else:
+				r = Rect2(p.x - w / 2.0, p.y - h, w, h + 4.0)
+		else:
+			r = Rect2(p - Vector2(24, 24), Vector2(48, 28))
+		if r.grow(6.0).has_point(wp):
+			var d: float = wp.distance_to(p)
+			if d < bd:
+				bd = d
+				best = i
+	return best
+
+
+## Убрать свою постройку: вещь возвращается в сумку (вещи из сундука — тоже), всё, что она создала, исчезает
+func demolish(i: int) -> bool:
+	if i < 0 or i >= placed.size() or i >= placed_rt.size():
+		return false
+	var kind: String = String(placed[i][0])
+	var p: Vector2 = placed[i][1]
+	var key: String = "%d,%d" % [int(p.x), int(p.y)]
+	# лавку с товаром или выручкой сначала опустошить
+	if Game.shops.has(key) and (preload("res://shops26.gd").goods_count(key) > 0 or int(Game.shops[key]["cash"]) > 0):
+		Game.toast.emit("Сначала забери товар и выручку", IT.icon("kit:" + kind))
+		return false
+	var rt: Dictionary = placed_rt[i]
+	for nd in (rt["nodes"] as Array):
+		if is_instance_valid(nd):
+			(nd as Node).queue_free()
+	var gl: Array = main.get("glows")
+	for g in (rt["glows"] as Array):
+		var gi: int = gl.find(g)
+		if gi >= 0:
+			if is_instance_valid(g[0]):
+				(g[0] as Node).queue_free()
+			gl.remove_at(gi)
+	var br: Rect2 = rt["rect"]
+	if br.size != Vector2.ZERO:
+		(main.get("block_rects") as Array).erase(br)
+		var wbr: Variant = world.get("block_rects")
+		if wbr is Array:
+			(wbr as Array).erase(br)
+	if kind == "pen":
+		for pi in range(pens.size() - 1, -1, -1):
+			if (pens[pi][0] as Vector2).distance_to(p) < 4.0:
+				pens.remove_at(pi)
+	if preload("res://storage_db.gd").is_chest(kind):
+		var cu: Node = get_tree().get_first_node_in_group("chest_ui")
+		if cu != null:
+			cu.call("forget", key)
+	if Game.shops.has(key):
+		Game.shops.erase(key)
+	var v24n: Node = get_tree().get_first_node_in_group("v24")
+	if v24n != null:
+		var dd: Dictionary = v24n.get("doors")
+		dd.erase(key)
+	placed.remove_at(i)
+	placed_rt.remove_at(i)
+	Game.add_item("kit:" + kind)
+	Sound.play("chop", -6.0, 0.1, p)
+	Game.fx.emit(p, "dust")
+	return true
+
+
 func has_built(kind: String) -> bool:
 	for pl in placed:
 		if String(pl[0]) == kind:
@@ -898,8 +1026,12 @@ func build(kind: String, p: Vector2) -> void:
 	var tex: String = info[1]
 	var objs: Node = main.get("objects")
 	var b: Rect2 = info[5]
+	var n0: int = objs.get_child_count()
+	var g0: int = (main.get("glows") as Array).size()
+	var brect: Rect2 = Rect2()
 	if b.size != Vector2.ZERO:
-		_block_rect(Rect2(p + b.position, b.size))
+		brect = Rect2(p + b.position, b.size)
+		_block_rect(brect)
 	match kind:
 		"plot":
 			var pl: Node2D = Node2D.new()
@@ -1024,6 +1156,15 @@ func build(kind: String, p: Vector2) -> void:
 	var v24n: Node = get_tree().get_first_node_in_group("v24")
 	if v24n != null:
 		v24n.call("on_built", kind, p)
+	# что именно создала постройка — нужно, чтобы её можно было убрать (demolish)
+	var made: Array = []
+	for ci in range(n0, objs.get_child_count()):
+		made.append(objs.get_child(ci))
+	var made_glows: Array = []
+	var all_g: Array = main.get("glows")
+	for gi in range(g0, all_g.size()):
+		made_glows.append(all_g[gi])
+	placed_rt.append({"nodes": made, "glows": made_glows, "rect": brect})
 
 
 # ------------------------------------------------------------------ меню построек (карточки)
@@ -1060,6 +1201,7 @@ func open_menu(kind: String, who: Node2D) -> void:
 			# окно крафта (клавиша KB "craft"): верстак из брёвен, остальное делается уже на верстаке
 			var wb_need: Dictionary = IT.build_need("workbench")
 			opts.append([IT.icon("kit:workbench"), _need_costs(wb_need), "Верстак\n" + _need_text(wb_need), "make:workbench", not _can_pay(wb_need)])
+			opts.append([IT.icon("axe"), _need_costs(AXE_NEED), "Топор\n" + _need_text(AXE_NEED), "tool:axe", not _can_pay(AXE_NEED)])
 		"workbench":
 			# вкладки: хозяйство, мастерские, ловушки, для птиц, украшения, ограды и дорожки
 			var v23n: Node = get_tree().get_first_node_in_group("v23")
@@ -1330,6 +1472,19 @@ func _menu_choose(i: int) -> void:
 			return
 		Sound.play("anvil", -10.0)
 		swing_t = 0.32
+		open_menu(menu_kind, menu_target)
+		return
+	if act == "tool:axe":
+		if not _pay(AXE_NEED):
+			_nope()
+			return
+		Game.add_item("axe")
+		Sound.play("anvil", -10.0)
+		Game.skill_xp("craft", 2.0)
+		# сразу в панель быстрого доступа, если есть свободная ячейка
+		if not Game.hotbar.has("axe") and Game.hotbar.has(""):
+			Game.hotbar[Game.hotbar.find("")] = "axe"
+		_refresh()
 		open_menu(menu_kind, menu_target)
 		return
 	if act.begins_with("make:"):
