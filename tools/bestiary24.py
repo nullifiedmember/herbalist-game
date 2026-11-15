@@ -32,13 +32,13 @@ h3 { font-size:26px; margin:26px 0 4px; border-bottom:1px solid var(--faint); pa
 .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; margin-top:12px; }
 .grid.small { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px; }
 .card { display:flex; gap:12px; background:rgba(255,250,235,.55); border:1px solid var(--faint); border-radius:6px; padding:10px; }
-.card .pic { flex:0 0 96px; height:96px; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle,#fff6dc 30%,#ead7a8 100%); border:1px solid var(--faint); border-radius:50%; position:relative; }
+.card .pic { flex:0 0 96px; height:96px; overflow:visible; box-sizing:border-box; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle,#fff6dc 30%,#ead7a8 100%); border:1px solid var(--faint); border-radius:50%; position:relative; }
 .card .pic img { max-width:80px; max-height:80px; image-rendering:pixelated; }
-.card .pic img.big { width:80px; height:80px; object-fit:contain; }
+.card .pic img.big { width:62px; height:62px; object-fit:contain; padding:2px; }   /* v27: картинка целиком внутри круга, с отступами */
 .card .pic img.f2 { position:absolute; right:-6px; bottom:-6px; width:30px; height:30px; object-fit:contain; background:var(--paper); border-radius:50%; border:1px solid var(--faint); }
 .small .card .pic { flex-basis:56px; height:56px; border-radius:8px; }
 .small .card .pic img { max-width:48px; max-height:48px; }
-.small .card .pic img.big { width:44px; height:44px; }
+.small .card .pic img.big { width:40px; height:40px; }
 .card h4 { margin:0; font-size:19px; }
 .card .sub { font-style:italic; color:var(--soft); font-size:14px; }
 .card p { margin:3px 0 0; font-size:14.5px; line-height:1.3; }

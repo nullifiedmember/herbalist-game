@@ -38,12 +38,12 @@ func _ready() -> void:
 	spr.texture = load(preload("res://cats26_db.gd").tex_path(skin))   # v26: пушистые окрасы и котята
 	if skin == "black":
 		spr.modulate = Color(0.85, 0.85, 0.95)
-		spr.scale = Vector2(0.8, 0.8)   # чиби-лист: пиксель 1:1
+		spr.scale = Vector2(CAT_K, CAT_K) * 0.8
 	spr.hframes = 10
 	spr.centered = false
-	spr.offset = Vector2(-spr.texture.get_width() / 20.0, -spr.texture.get_height() + 2.0)
+	spr.offset = Vector2(-21, -33)
 	if spr.scale == Vector2.ONE:
-		spr.scale = Vector2.ONE
+		spr.scale = Vector2(CAT_K, CAT_K)
 	add_child(spr)
 
 
@@ -136,7 +136,7 @@ func _animate(pp: Vector2, dist: float) -> void:
 	else:
 		spr.frame = 1 if fmod(t, 3.2) < 0.45 else 0
 	var napping: bool = state == "nap" and not moving
-	spr.offset = Vector2(-spr.texture.get_width() / 20.0, -spr.texture.get_height() + 2.0)   # чиби: лёжа кадр уже на земле
+	spr.offset = Vector2(-21, -29) if napping else Vector2(-21, -33)
 	if not moving and pet_t <= 0.0 and state != "nap":
 		# сидя смотрит на героиню
 		spr.flip_h = pp.x > global_position.x

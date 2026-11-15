@@ -34,8 +34,8 @@ func _ready() -> void:
 	spr.texture = load(DB.tex_path(skin))
 	spr.hframes = 10
 	spr.centered = false
-	spr.offset = Vector2(-spr.texture.get_width() / 20.0, -spr.texture.get_height() + 2.0)
-	spr.scale = Vector2.ONE   # чиби-лист: пиксель 1:1
+	spr.offset = Vector2(-21, -33)
+	spr.scale = Vector2(CAT_K, CAT_K)
 	spr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	add_child(spr)
 	if DB.is_kit(skin):
@@ -138,7 +138,7 @@ func _animate(pl: Node2D) -> void:
 		spr.frame = 1 if fmod(t, 3.2) < 0.45 else 0
 		if pl != null and pl.global_position.distance_to(global_position) < 140.0:
 			spr.flip_h = pl.global_position.x > global_position.x
-	spr.offset = Vector2(-spr.texture.get_width() / 20.0, -spr.texture.get_height() + 2.0)
+	spr.offset = Vector2(-21, -29) if (state == "nap" and not moving and pet_t <= 0.0) else Vector2(-21, -33)
 
 
 func _step(dir: Vector2, speed: float, delta: float) -> void:

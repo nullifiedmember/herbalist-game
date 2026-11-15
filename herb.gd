@@ -24,6 +24,7 @@ func _ready() -> void:
 	m.set_shader_parameter("strength", 1.0)
 	s.material = m
 	add_child(s)
+	preload("res://plant_ground27.gd").attach(s, global_position)   # v27: растёт из земли биома
 	# искорка: эту траву можно собрать
 	sparkle = Sprite2D.new()
 	sparkle.texture = load("res://art/fx_firefly.png")

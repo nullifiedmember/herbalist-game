@@ -604,6 +604,9 @@ func spr(tex: String, pos: Vector2, wind: float = 0.0, flip: bool = false, paren
 	# v25: заборы и плетни — насесты для птиц
 	if tex.contains("fence") or tex.contains("wicker") or tex.contains("palisade") or tex.contains("railing"):
 		s.add_to_group("perch_fence")
+	# v27: луговые цветы и грибы растут из земли биома (тень-лунка, травинки в цвет земли)
+	if tex.begins_with("flowers_") or tex == "mushrooms":
+		preload("res://plant_ground27.gd").attach(s, s.position, 0.08)
 	return s
 
 
@@ -5883,6 +5886,9 @@ func _screenshot_mode(path: String) -> void:
 		if String(a23).begins_with("--v26cats="):
 			await preload("res://test26cats.gd").new().shot(self, String(a23).substr(10))
 	await get_tree().create_timer(1.6).timeout
+	for a27 in OS.get_cmdline_user_args():
+		if String(a27).begins_with("--shotwait="):   # v27: подождать, пока травы мира проверят время и покажутся
+			await get_tree().create_timer(float(String(a27).substr(11))).timeout
 	var img: Image = get_viewport().get_texture().get_image()
 	img.save_png(path)
 	get_tree().quit()

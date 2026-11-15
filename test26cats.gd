@@ -25,7 +25,7 @@ func run(main: Node2D, f: Array) -> void:
 	for s in DB.ORDER:
 		for sk in [s, "kit_" + s]:
 			var tex: Texture2D = load(DB.tex_path(sk))
-			if tex == null or tex.get_width() % 10 != 0 or tex.get_height() < 16:   # чиби-листы: 10 кадров, размер у каждого свой
+			if tex == null or tex.get_width() != 480 or tex.get_height() != 36:
 				bad.append(sk)
 	ck(bad.is_empty(), "листы %d окрасов и котят на месте %s" % [DB.ORDER.size(), str(bad)])
 	var rares: int = 0

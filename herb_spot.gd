@@ -1,4 +1,5 @@
 extends Node2D
+const PG27 = preload("res://plant_ground27.gd")
 ## Место, где растут дикие травы своего биома (v16). Каждый день решается, выросло ли здесь что-то:
 ## всегда кучка (v20: минимум 2 растения, часто 3), а иногда — СКОПЛЕНИЕ (4–8 растений, одного-двух видов).
 ## Некоторые видны только в свои часы (лунноцвет, светомох — ночью). E — окно сбора (harvest_ui.gd).
@@ -137,6 +138,8 @@ func _make_sprites() -> void:
 		s.visible = false
 		add_child(s)
 		sprs.append(s)
+		if is_inside_tree():
+			PG27.attach(s, global_position + s.position)   # v27: растёт из земли биома
 
 
 func _process(delta: float) -> void:
@@ -182,6 +185,8 @@ func _process(delta: float) -> void:
 				glow = true
 			var base_c: Color = Color(0.80, 0.96, 1.06, 0.93) if sea_spot else Color.WHITE
 			for s2 in sprs:
+				if not sea_spot and not (s2 as Node).has_node("PlantBaseBack"):
+					PG27.attach(s2 as Sprite2D, global_position + (s2 as Node2D).position)   # v27: растёт из земли биома
 				(s2 as Sprite2D).modulate = (Color(1.3, 1.4, 1.3) if sea_spot else Color(1.35, 1.25, 1.2)) if glow else base_c
 	if sparkle.visible:
 		phase += delta * 1.7
