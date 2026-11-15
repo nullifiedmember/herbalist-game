@@ -1053,7 +1053,7 @@ func call_mount() -> void:
 		companion.global_position = _pp() + Vector2(-40, 20)
 	else:
 		_spawn_companion(_pp() + Vector2(-40, 20))
-	Sound.play(String((W.ANIMALS.get(Game.mount_kind, {}) as Dictionary).get("sound", "magic")), -4.0)
+	Sound.play(_mount_voice("magic"), -4.0)
 
 
 func toggle_ride() -> void:
@@ -1096,7 +1096,7 @@ func mount() -> void:
 	mount_spr.scale = Vector2(RIDE_SCALE, RIDE_SCALE)
 	pl.add_child(mount_spr)
 	pl.set("form_hook", Callable(self, "_ride_hook"))
-	Sound.play(String((W.ANIMALS.get(Game.mount_kind, {}) as Dictionary).get("sound", "neigh")), -4.0)
+	Sound.play(_mount_voice("neigh"), -4.0)
 
 
 func dismount(spawn: bool) -> void:
@@ -1434,3 +1434,10 @@ func relocate(key: String) -> bool:
 	Saves.loaded = true
 	get_tree().reload_current_scene()
 	return true
+
+
+## Голос скакуна: свой голос зверя (audio/av_<id>_0/1), иначе старый общий звук.
+func _mount_voice(fallback: String) -> String:
+	if preload("res://animal_voices_db.gd").VOICE.has(Game.mount_kind):
+		return "av_%s_%d" % [Game.mount_kind, randi() % 2]
+	return String((W.ANIMALS.get(Game.mount_kind, {}) as Dictionary).get("sound", fallback))

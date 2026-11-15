@@ -506,6 +506,11 @@ FOOD_KIND = {"veg": "овощи", "berry": "ягоды", "meat": "мясо", "fi
 
 
 def sec_animals():
+    global VOICES
+    try:   # свой голос каждого зверя (tools/animal_voices.py)
+        VOICES = g.load("animal_voices_db.gd", "VOICE")
+    except Exception:
+        VOICES = {}
     names, zoo, order = _animals_data()
     out = []
     for k in order:
@@ -517,6 +522,7 @@ def sec_animals():
         baby = BABY_LOOK.get(k, "маленький, с большой головой и короткими лапками" + (", без рогов" if k in ("cow", "goat", "ram", "ibex", "yak", "bison", "kirin", "unicorn", "forest_stag", "golden_deer", "jackalope") else ""))
         rows = [("Какой", z[0]), ("Где живёт", z[1]), ("Как приманить", f"взять в руку угощение ({likes}) и подойти — зверь пойдёт за тобой в загон"),
                 ("В загоне даёт", f"{nm(pr[0])} ×{pr[1]} в день" if pr else ""),
+                ("Голос", VOICES.get(k, "")),
                 ("Малыши", f"если в загоне двое взрослых, ночью с шансом {int(float(z[4]) * 100)}% рождается малыш: {baby}. Через несколько дней вырастает.")]
         # картинка зверя — из бестиария (там кадры уже вырезаны из листа)
         bimg = GAME.parent / "Бестиарий" / "img" / ("animal_%s.png" % k)

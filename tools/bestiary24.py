@@ -36,6 +36,8 @@ h3 { font-size:26px; margin:26px 0 4px; border-bottom:1px solid var(--faint); pa
 .card .pic img { max-width:80px; max-height:80px; image-rendering:pixelated; }
 .card .pic img.big { width:62px; height:62px; object-fit:contain; padding:2px; }   /* v27: картинка целиком внутри круга, с отступами */
 .card .pic img.f2 { position:absolute; right:-6px; bottom:-6px; width:30px; height:30px; object-fit:contain; background:var(--paper); border-radius:50%; border:1px solid var(--faint); }
+.card .pic .walk { display:block; background-repeat:no-repeat; image-rendering:pixelated; animation:walk var(--d,.6s) steps(var(--n)) infinite; }
+@keyframes walk { to { background-position-x:calc(var(--w) * var(--n) * -1); } }
 .small .card .pic { flex-basis:56px; height:56px; border-radius:8px; }
 .small .card .pic img { max-width:48px; max-height:48px; }
 .small .card .pic img.big { width:40px; height:40px; }
@@ -46,11 +48,19 @@ h3 { font-size:26px; margin:26px 0 4px; border-bottom:1px solid var(--faint); pa
 .tag { display:inline-block; font-size:12px; padding:1px 7px; border-radius:9px; background:#5a7a4a; color:#fff; margin-left:4px; vertical-align:middle; }
 .rar1 { box-shadow:inset 3px 0 0 #7ab0f0; } .rar2 { box-shadow:inset 3px 0 0 #c890f0; } .rar3 { box-shadow:inset 3px 0 0 #f8c040; background:rgba(255,240,190,.7); }
 .hide { display:none !important; }
+.snd { display:inline-block; margin:5px 6px 0 0; padding:2px 10px; font-size:14px; font-family:inherit; border-radius:12px; border:1px solid #8a6a3a; background:#fff3d4; color:var(--ink); cursor:pointer; }
+.snd:hover { background:#f8e2a8; }
 footer { color:#b8a07a; text-align:center; padding:20px; font-style:italic; }
 .top { position:fixed; right:18px; bottom:18px; background:var(--paper); border:2px solid #8a6a3a; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; text-decoration:none; color:var(--ink); font-size:24px; }
 """
 
 JS = """
+let au = null;
+document.addEventListener('click', ev => {
+  const b = ev.target.closest('.snd'); if (!b) return;
+  if (au) au.pause();
+  au = new Audio(b.dataset.a); au.play();
+});
 const q = document.getElementById('q');
 q.addEventListener('input', () => {
   const t = q.value.trim().toLowerCase();
@@ -78,9 +88,21 @@ def card(e):
         else:
             tag_html += f'<span class="tag">{esc(t)}</span>'
     img = f'<img class="big" src="{esc(e["img"])}" alt="" loading="lazy">' if e.get("img") else ""
+    if e.get("walk"):   # v28: анимация ходьбы из полоски кадров
+        w, h, n = int(e["walk_w"]), int(e["walk_h"]), int(e["walk_n"])
+        k = min(66 / w, 66 / h)
+        k = max(1, int(k)) if k >= 1 else k   # целый масштаб, чтобы пиксели были чёткими
+        dw, dh = round(w * k), round(h * k)
+        img = (f'<div class="walk" title="идёт" style="width:{dw}px;height:{dh}px;background-image:url({esc(e["walk"])});'
+               f'background-size:{dw * n}px {dh}px;--n:{n};--w:{dw}px"></div>')
     if e.get("img2"):
         img += f'<img class="f2" src="{esc(e["img2"])}" alt="" loading="lazy" title="{esc(e.get("img2_t", "перо"))}">'
     lines = "".join(f"<p>{esc(t)}</p>" for t in e.get("text", []))
+    if e.get("voice"):   # голос зверя: послушать крик и довольный звук
+        lines += f'<button class="snd" data-a="{esc(e["voice"])}">🔊 голос</button>'
+        if e.get("voice_pet"):
+            lines += f'<button class="snd" data-a="{esc(e["voice_pet"])}">♥ гладят</button>'
+
     sub = f'<div class="sub">{esc(e["sub"])}</div>' if e.get("sub") else ""
     search = " ".join([e.get("name", ""), e.get("sub", "")] + e.get("text", [])).lower()
     return (f'<div class="{cls}" data-s="{esc(search)}"><div class="pic">{img}</div>'

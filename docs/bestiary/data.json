@@ -5667,8 +5667,15 @@
 								"Где живёт: Болота, луга, побережье",
 								"Любит: bread, veg",
 								"В загоне даёт: Утиное яйцо ×1 в день",
-								"Малыши: 45%"
-							]
+								"Малыши: 45%",
+								"Голос: крякает «кря-кря»; довольная — тихо бормочет"
+							],
+							"voice": "snd/av_duck_0.wav",
+							"voice_pet": "snd/av_duck_pet.wav",
+							"walk": "img/walk_animal_duck.png",
+							"walk_h": 50,
+							"walk_n": 4,
+							"walk_w": 52
 						},
 						{
 							"id": "rabbit",
@@ -5683,8 +5690,15 @@
 								"Где живёт: Луга, поля, эльфийский лес",
 								"Любит: veg, berry",
 								"В загоне даёт: Кроличий пух ×2 в день",
-								"Малыши: 50%"
-							]
+								"Малыши: 50%",
+								"Голос: стучит лапкой по земле «тук-тук», тихо фыркает; когда гладят — скрежещет зубками"
+							],
+							"voice": "snd/av_rabbit_0.wav",
+							"voice_pet": "snd/av_rabbit_pet.wav",
+							"walk": "img/walk_animal_rabbit.png",
+							"walk_h": 86,
+							"walk_n": 4,
+							"walk_w": 54
 						},
 						{
 							"id": "hedgehog",
@@ -5699,8 +5713,15 @@
 								"Где живёт: Луга, леса, паучий край",
 								"Любит: fruit, berry, mushroom",
 								"В загоне даёт: Иголки ежа ×2 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: пыхтит и сопит «пф-пф-пф», иногда пискнет"
+							],
+							"voice": "snd/av_hedgehog_0.wav",
+							"voice_pet": "snd/av_hedgehog_pet.wav",
+							"walk": "img/walk_animal_hedgehog.png",
+							"walk_h": 40,
+							"walk_n": 4,
+							"walk_w": 72
 						},
 						{
 							"id": "squirrel",
@@ -5715,8 +5736,15 @@
 								"Где живёт: Берёзовые и сосновые леса",
 								"Любит: nut, berry",
 								"В загоне даёт: Беличий пух ×1 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: цокает «цок-цок-цок» и стрекочет трелью"
+							],
+							"voice": "snd/av_squirrel_0.wav",
+							"voice_pet": "snd/av_squirrel_pet.wav",
+							"walk": "img/walk_animal_squirrel.png",
+							"walk_h": 54,
+							"walk_n": 4,
+							"walk_w": 70
 						},
 						{
 							"id": "fox",
@@ -5731,8 +5759,15 @@
 								"Где живёт: Берёзовые и сосновые леса, Сакураяма",
 								"Любит: meat, fish",
 								"В загоне даёт: Лисья шерсть ×1 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: звонко кричит «ва-а-ау» и тявкает; довольная — часто «гекает»"
+							],
+							"voice": "snd/av_fox_0.wav",
+							"voice_pet": "snd/av_fox_pet.wav",
+							"walk": "img/walk_animal_fox.png",
+							"walk_h": 60,
+							"walk_n": 4,
+							"walk_w": 84
 						},
 						{
 							"id": "deer",
@@ -5747,8 +5782,15 @@
 								"Где живёт: Леса и поляны",
 								"Любит: veg, fruit",
 								"В загоне даёт: Оленья шерсть ×1 в день",
-								"Малыши: 25%"
-							]
+								"Малыши: 25%",
+								"Голос: хрипло лает «бах!», когда насторожится; тихо блеет"
+							],
+							"voice": "snd/av_deer_0.wav",
+							"voice_pet": "snd/av_deer_pet.wav",
+							"walk": "img/walk_animal_deer.png",
+							"walk_h": 88,
+							"walk_n": 4,
+							"walk_w": 74
 						},
 						{
 							"id": "boar",
@@ -5763,8 +5805,15 @@
 								"Где живёт: Сосновые и осенние леса, орочьи земли",
 								"Любит: veg, mushroom, nut",
 								"В загоне даёт: Трюфель ×1 в день",
-								"Малыши: 35%"
-							]
+								"Малыши: 35%",
+								"Голос: низко хрюкает и громко фыркает пятачком"
+							],
+							"voice": "snd/av_boar_0.wav",
+							"voice_pet": "snd/av_boar_pet.wav",
+							"walk": "img/walk_animal_boar.png",
+							"walk_h": 62,
+							"walk_n": 4,
+							"walk_w": 76
 						},
 						{
 							"id": "flat_boar",
@@ -5779,8 +5828,15 @@
 								"Где живёт: Поля, гроты, болота",
 								"Любит: veg, bread",
 								"В загоне даёт: Кабанья щетина ×2 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: сплющенно хрюкает и смешно пружинит «буэнь»"
+							],
+							"voice": "snd/av_flat_boar_0.wav",
+							"voice_pet": "snd/av_flat_boar_pet.wav",
+							"walk": "img/walk_animal_flat_boar.png",
+							"walk_h": 68,
+							"walk_n": 4,
+							"walk_w": 58
 						},
 						{
 							"id": "wolf",
@@ -5795,8 +5851,15 @@
 								"Где живёт: Тайга, Сумеречье",
 								"Любит: meat, fish",
 								"В загоне даёт: Оленья шерсть ×2 в день",
-								"Малыши: 20%"
-							]
+								"Малыши: 20%",
+								"Голос: протяжно воет «у-у-у-о-у»; когда гладят — поскуливает"
+							],
+							"voice": "snd/av_wolf_0.wav",
+							"voice_pet": "snd/av_wolf_pet.wav",
+							"walk": "img/walk_animal_wolf.png",
+							"walk_h": 64,
+							"walk_n": 4,
+							"walk_w": 90
 						},
 						{
 							"id": "snow_fox",
@@ -5811,8 +5874,15 @@
 								"Где живёт: Тайга",
 								"Любит: meat, fish",
 								"В загоне даёт: Лисья шерсть ×2 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: лает высоко и коротко «тяв-тяв», по-песцовому"
+							],
+							"voice": "snd/av_snow_fox_0.wav",
+							"voice_pet": "snd/av_snow_fox_pet.wav",
+							"walk": "img/walk_animal_snow_fox.png",
+							"walk_h": 60,
+							"walk_n": 4,
+							"walk_w": 86
 						},
 						{
 							"id": "raccoon",
@@ -5827,8 +5897,15 @@
 								"Где живёт: Берёзы, деревня кошек, осенний лес",
 								"Любит: fruit, fish, bread",
 								"В загоне даёт: Беличий пух ×2 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: чирикает и курлычет трелью; довольный — мурлычет"
+							],
+							"voice": "snd/av_raccoon_0.wav",
+							"voice_pet": "snd/av_raccoon_pet.wav",
+							"walk": "img/walk_animal_raccoon.png",
+							"walk_h": 56,
+							"walk_n": 4,
+							"walk_w": 78
 						},
 						{
 							"id": "badger",
@@ -5843,8 +5920,15 @@
 								"Где живёт: Осенний лес, берёзы, луга",
 								"Любит: mushroom, berry, veg",
 								"В загоне даёт: Кабанья щетина ×2 в день",
-								"Малыши: 35%"
-							]
+								"Малыши: 35%",
+								"Голос: ворчит и сопит носом; довольный — урчит"
+							],
+							"voice": "snd/av_badger_0.wav",
+							"voice_pet": "snd/av_badger_pet.wav",
+							"walk": "img/walk_animal_badger.png",
+							"walk_h": 52,
+							"walk_n": 4,
+							"walk_w": 68
 						},
 						{
 							"id": "lynx",
@@ -5859,8 +5943,15 @@
 								"Где живёт: Тайга, горы дворфов",
 								"Любит: meat, fish",
 								"В загоне даёт: Лисья шерсть ×2 в день",
-								"Малыши: 15%"
-							]
+								"Малыши: 15%",
+								"Голос: протяжно и хрипло мяучит «мя-а-ау»; гладят — мурлычет"
+							],
+							"voice": "snd/av_lynx_0.wav",
+							"voice_pet": "snd/av_lynx_pet.wav",
+							"walk": "img/walk_animal_lynx.png",
+							"walk_h": 76,
+							"walk_n": 4,
+							"walk_w": 72
 						},
 						{
 							"id": "wildcat",
@@ -5875,8 +5966,15 @@
 								"Где живёт: Осенний и берёзовый лес",
 								"Любит: meat, fish",
 								"В загоне даёт: Кошачья шерсть ×2 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: мяукает «мяу»; довольный — мурлычет"
+							],
+							"voice": "snd/av_wildcat_0.wav",
+							"voice_pet": "snd/av_wildcat_pet.wav",
+							"walk": "img/walk_animal_wildcat.png",
+							"walk_h": 58,
+							"walk_n": 4,
+							"walk_w": 78
 						},
 						{
 							"id": "bear",
@@ -5891,8 +5989,15 @@
 								"Где живёт: Тайга, осенний лес",
 								"Любит: sweet, berry, fish",
 								"В загоне даёт: Соты ×1 в день",
-								"Малыши: 10%"
-							]
+								"Малыши: 10%",
+								"Голос: рычит «р-р-ро-о-ар»; довольный — пыхтит «ух-ух»"
+							],
+							"voice": "snd/av_bear_0.wav",
+							"voice_pet": "snd/av_bear_pet.wav",
+							"walk": "img/walk_animal_bear.png",
+							"walk_h": 102,
+							"walk_n": 4,
+							"walk_w": 118
 						},
 						{
 							"id": "elk",
@@ -5907,8 +6012,15 @@
 								"Где живёт: Болота, тайга",
 								"Любит: veg, fruit",
 								"В загоне даёт: Оленья шерсть ×3 в день",
-								"Малыши: 15%"
-							]
+								"Малыши: 15%",
+								"Голос: стонет низким «о-ах» и коротко ухает"
+							],
+							"voice": "snd/av_elk_0.wav",
+							"voice_pet": "snd/av_elk_pet.wav",
+							"walk": "img/walk_animal_elk.png",
+							"walk_h": 112,
+							"walk_n": 4,
+							"walk_w": 104
 						},
 						{
 							"id": "roe_deer",
@@ -5923,8 +6035,15 @@
 								"Где живёт: Берёзовые рощи, луга, эльфийский лес",
 								"Любит: veg, fruit, berry",
 								"В загоне даёт: Оленья шерсть ×1 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: резко лает «бяу!», как маленькая собачка"
+							],
+							"voice": "snd/av_roe_deer_0.wav",
+							"voice_pet": "snd/av_roe_deer_pet.wav",
+							"walk": "img/walk_animal_roe_deer.png",
+							"walk_h": 70,
+							"walk_n": 4,
+							"walk_w": 70
 						},
 						{
 							"id": "marten",
@@ -5939,8 +6058,15 @@
 								"Где живёт: Тайга",
 								"Любит: meat, berry, nut",
 								"В загоне даёт: Беличий пух ×2 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: стрекочет «кхе-кхе-кхе»"
+							],
+							"voice": "snd/av_marten_0.wav",
+							"voice_pet": "snd/av_marten_pet.wav",
+							"walk": "img/walk_animal_marten.png",
+							"walk_h": 44,
+							"walk_n": 4,
+							"walk_w": 70
 						},
 						{
 							"id": "ermine",
@@ -5955,8 +6081,15 @@
 								"Где живёт: Берёзы, тайга",
 								"Любит: meat, nut",
 								"В загоне даёт: Кроличий пух ×2 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: тихо стрекочет и пищит"
+							],
+							"voice": "snd/av_ermine_0.wav",
+							"voice_pet": "snd/av_ermine_pet.wav",
+							"walk": "img/walk_animal_ermine.png",
+							"walk_h": 34,
+							"walk_n": 4,
+							"walk_w": 52
 						},
 						{
 							"id": "chipmunk",
@@ -5971,8 +6104,15 @@
 								"Где живёт: Тайга, берёзы",
 								"Любит: nut, berry",
 								"В загоне даёт: Беличий пух ×1 в день",
-								"Малыши: 50%"
-							]
+								"Малыши: 50%",
+								"Голос: часто и мерно пищит «чип-чип-чип»"
+							],
+							"voice": "snd/av_chipmunk_0.wav",
+							"voice_pet": "snd/av_chipmunk_pet.wav",
+							"walk": "img/walk_animal_chipmunk.png",
+							"walk_h": 42,
+							"walk_n": 4,
+							"walk_w": 54
 						},
 						{
 							"id": "flying_squirrel",
@@ -5987,8 +6127,15 @@
 								"Где живёт: Берёзы, эльфийский лес",
 								"Любит: nut, berry",
 								"В загоне даёт: Беличий пух ×1 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: пищит так тонко, что еле слышно"
+							],
+							"voice": "snd/av_flying_squirrel_0.wav",
+							"voice_pet": "snd/av_flying_squirrel_pet.wav",
+							"walk": "img/walk_animal_flying_squirrel.png",
+							"walk_h": 40,
+							"walk_n": 4,
+							"walk_w": 54
 						},
 						{
 							"id": "horse",
@@ -6003,8 +6150,15 @@
 								"Где живёт: Поля, Кронхольм",
 								"Любит: veg, fruit, sweet",
 								"В загоне даёт: Волос из гривы единорога ×1 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: громко ржёт «и-го-го» и фыркает; гладят — тихо «ху-ху-ху»"
+							],
+							"voice": "snd/av_horse_0.wav",
+							"voice_pet": "snd/av_horse_pet.wav",
+							"walk": "img/walk_animal_horse.png",
+							"walk_h": 102,
+							"walk_n": 4,
+							"walk_w": 116
 						},
 						{
 							"id": "pony",
@@ -6019,8 +6173,15 @@
 								"Где живёт: Луга, Мурлыкино",
 								"Любит: fruit, sweet, veg",
 								"В загоне даёт: Волос из гривы единорога ×1 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: звонко ржёт тонким голоском"
+							],
+							"voice": "snd/av_pony_0.wav",
+							"voice_pet": "snd/av_pony_pet.wav",
+							"walk": "img/walk_animal_pony.png",
+							"walk_h": 70,
+							"walk_n": 4,
+							"walk_w": 88
 						},
 						{
 							"id": "donkey",
@@ -6035,8 +6196,15 @@
 								"Где живёт: Поля, степь орков",
 								"Любит: veg, fruit",
 								"В загоне даёт: Оленья шерсть ×1 в день",
-								"Малыши: 35%"
-							]
+								"Малыши: 35%",
+								"Голос: кричит «иа-иа!»"
+							],
+							"voice": "snd/av_donkey_0.wav",
+							"voice_pet": "snd/av_donkey_pet.wav",
+							"walk": "img/walk_animal_donkey.png",
+							"walk_h": 78,
+							"walk_n": 4,
+							"walk_w": 74
 						},
 						{
 							"id": "bison",
@@ -6051,8 +6219,15 @@
 								"Где живёт: Поля, степь",
 								"Любит: veg, bread",
 								"В загоне даёт: Оленья шерсть ×3 в день",
-								"Малыши: 15%"
-							]
+								"Малыши: 15%",
+								"Голос: глухо ревёт и тяжело хрюкает"
+							],
+							"voice": "snd/av_bison_0.wav",
+							"voice_pet": "snd/av_bison_pet.wav",
+							"walk": "img/walk_animal_bison.png",
+							"walk_h": 84,
+							"walk_n": 4,
+							"walk_w": 102
 						},
 						{
 							"id": "brown_hare",
@@ -6067,8 +6242,15 @@
 								"Где живёт: Поля, луга",
 								"Любит: veg, berry",
 								"В загоне даёт: Кроличий пух ×2 в день",
-								"Малыши: 50%"
-							]
+								"Малыши: 50%",
+								"Голос: стучит лапами, а испугавшись — пищит"
+							],
+							"voice": "snd/av_brown_hare_0.wav",
+							"voice_pet": "snd/av_brown_hare_pet.wav",
+							"walk": "img/walk_animal_brown_hare.png",
+							"walk_h": 66,
+							"walk_n": 4,
+							"walk_w": 58
 						},
 						{
 							"id": "mole",
@@ -6083,8 +6265,15 @@
 								"Где живёт: Луга, поля",
 								"Любит: veg, mushroom",
 								"В загоне даёт: Кроличий пух ×1 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: тоненько пищит и шуршит коготками"
+							],
+							"voice": "snd/av_mole_0.wav",
+							"voice_pet": "snd/av_mole_pet.wav",
+							"walk": "img/walk_animal_mole.png",
+							"walk_h": 38,
+							"walk_n": 4,
+							"walk_w": 56
 						},
 						{
 							"id": "vole",
@@ -6099,8 +6288,15 @@
 								"Где живёт: Поля, луга",
 								"Любит: bread, nut, veg",
 								"В загоне даёт: Кроличий пух ×1 в день",
-								"Малыши: 60%"
-							]
+								"Малыши: 60%",
+								"Голос: часто пищит «пи-пи-пи»"
+							],
+							"voice": "snd/av_vole_0.wav",
+							"voice_pet": "snd/av_vole_pet.wav",
+							"walk": "img/walk_animal_vole.png",
+							"walk_h": 32,
+							"walk_n": 4,
+							"walk_w": 42
 						},
 						{
 							"id": "hamster",
@@ -6115,8 +6311,15 @@
 								"Где живёт: Поля, Мурлыкино",
 								"Любит: nut, bread, berry",
 								"В загоне даёт: Кроличий пух ×1 в день",
-								"Малыши: 60%"
-							]
+								"Малыши: 60%",
+								"Голос: пищит и щёлкает зубками"
+							],
+							"voice": "snd/av_hamster_0.wav",
+							"voice_pet": "snd/av_hamster_pet.wav",
+							"walk": "img/walk_animal_hamster.png",
+							"walk_h": 34,
+							"walk_n": 4,
+							"walk_w": 42
 						},
 						{
 							"id": "lop_rabbit",
@@ -6131,8 +6334,15 @@
 								"Где живёт: Мурлыкино, луга",
 								"Любит: veg, berry",
 								"В загоне даёт: Кроличий пух ×3 в день",
-								"Малыши: 50%"
-							]
+								"Малыши: 50%",
+								"Голос: тихонько фыркает и стучит лапкой"
+							],
+							"voice": "snd/av_lop_rabbit_0.wav",
+							"voice_pet": "snd/av_lop_rabbit_pet.wav",
+							"walk": "img/walk_animal_lop_rabbit.png",
+							"walk_h": 46,
+							"walk_n": 4,
+							"walk_w": 60
 						},
 						{
 							"id": "dog",
@@ -6147,8 +6357,15 @@
 								"Где живёт: Кронхольм, Мурлыкино",
 								"Любит: meat, bread",
 								"В загоне даёт: Лисья шерсть ×1 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: лает «гав-гав!»; когда гладят — поскуливает и дышит"
+							],
+							"voice": "snd/av_dog_0.wav",
+							"voice_pet": "snd/av_dog_pet.wav",
+							"walk": "img/walk_animal_dog.png",
+							"walk_h": 56,
+							"walk_n": 4,
+							"walk_w": 70
 						},
 						{
 							"id": "snail",
@@ -6163,8 +6380,15 @@
 								"Где живёт: Луга, болота, эльфийский лес",
 								"Любит: veg, berry",
 								"В загоне даёт: Ракушка ×1 в день",
-								"Малыши: 60%"
-							]
+								"Малыши: 60%",
+								"Голос: тихо чмокает и пускает пузырьки"
+							],
+							"voice": "snd/av_snail_0.wav",
+							"voice_pet": "snd/av_snail_pet.wav",
+							"walk": "img/walk_animal_snail.png",
+							"walk_h": 30,
+							"walk_n": 4,
+							"walk_w": 40
 						},
 						{
 							"id": "alpaca",
@@ -6179,8 +6403,15 @@
 								"Где живёт: Горы дворфов",
 								"Любит: veg, fruit",
 								"В загоне даёт: Овечья шерсть ×3 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: мурлычет-напевает «мм-м»; встревожится — визжит «ви-ви»"
+							],
+							"voice": "snd/av_alpaca_0.wav",
+							"voice_pet": "snd/av_alpaca_pet.wav",
+							"walk": "img/walk_animal_alpaca.png",
+							"walk_h": 82,
+							"walk_n": 4,
+							"walk_w": 78
 						},
 						{
 							"id": "ibex",
@@ -6195,8 +6426,15 @@
 								"Где живёт: Горы дворфов",
 								"Любит: veg, bread",
 								"В загоне даёт: Оленья шерсть ×2 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: низко и отрывисто блеет"
+							],
+							"voice": "snd/av_ibex_0.wav",
+							"voice_pet": "snd/av_ibex_pet.wav",
+							"walk": "img/walk_animal_ibex.png",
+							"walk_h": 74,
+							"walk_n": 4,
+							"walk_w": 76
 						},
 						{
 							"id": "ram",
@@ -6211,8 +6449,15 @@
 								"Где живёт: Горы, Кронхольм",
 								"Любит: veg, bread",
 								"В загоне даёт: Овечья шерсть ×2 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: басовито блеет «бэ-э»"
+							],
+							"voice": "snd/av_ram_0.wav",
+							"voice_pet": "snd/av_ram_pet.wav",
+							"walk": "img/walk_animal_ram.png",
+							"walk_h": 58,
+							"walk_n": 4,
+							"walk_w": 74
 						},
 						{
 							"id": "yak",
@@ -6227,8 +6472,15 @@
 								"Где живёт: Горы дворфов",
 								"Любит: veg, bread",
 								"В загоне даёт: Кувшин молока ×1 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: хрюкает, как огромная свинья (его зовут «хрюкающий бык»)"
+							],
+							"voice": "snd/av_yak_0.wav",
+							"voice_pet": "snd/av_yak_pet.wav",
+							"walk": "img/walk_animal_yak.png",
+							"walk_h": 78,
+							"walk_n": 4,
+							"walk_w": 96
 						},
 						{
 							"id": "marmot",
@@ -6243,8 +6495,15 @@
 								"Где живёт: Горы, поля",
 								"Любит: veg, nut",
 								"В загоне даёт: Беличий пух ×2 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: пронзительно свистит «фьить!»"
+							],
+							"voice": "snd/av_marmot_0.wav",
+							"voice_pet": "snd/av_marmot_pet.wav",
+							"walk": "img/walk_animal_marmot.png",
+							"walk_h": 40,
+							"walk_n": 4,
+							"walk_w": 52
 						},
 						{
 							"id": "beaver",
@@ -6259,8 +6518,15 @@
 								"Где живёт: Болота, берёзы",
 								"Любит: veg, nut",
 								"В загоне даёт: Кабанья щетина ×2 в день",
-								"Малыши: 35%"
-							]
+								"Малыши: 35%",
+								"Голос: шлёпает хвостом по воде и тихо хнычет"
+							],
+							"voice": "snd/av_beaver_0.wav",
+							"voice_pet": "snd/av_beaver_pet.wav",
+							"walk": "img/walk_animal_beaver.png",
+							"walk_h": 46,
+							"walk_n": 4,
+							"walk_w": 68
 						},
 						{
 							"id": "otter",
@@ -6275,8 +6541,15 @@
 								"Где живёт: Болота, побережье",
 								"Любит: fish, meat",
 								"В загоне даёт: Лисья шерсть ×1 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: щебечет и посвистывает"
+							],
+							"voice": "snd/av_otter_0.wav",
+							"voice_pet": "snd/av_otter_pet.wav",
+							"walk": "img/walk_animal_otter.png",
+							"walk_h": 42,
+							"walk_n": 4,
+							"walk_w": 72
 						},
 						{
 							"id": "capybara",
@@ -6291,8 +6564,15 @@
 								"Где живёт: Болота, Мурлыкино",
 								"Любит: veg, fruit",
 								"В загоне даёт: Кабанья щетина ×1 в день",
-								"Малыши: 35%"
-							]
+								"Малыши: 35%",
+								"Голос: щёлкает и тихо мурлычет-гудит"
+							],
+							"voice": "snd/av_capybara_0.wav",
+							"voice_pet": "snd/av_capybara_pet.wav",
+							"walk": "img/walk_animal_capybara.png",
+							"walk_h": 52,
+							"walk_n": 4,
+							"walk_w": 80
 						},
 						{
 							"id": "turtle",
@@ -6307,8 +6587,15 @@
 								"Где живёт: Болота, побережье",
 								"Любит: veg, berry, fish",
 								"В загоне даёт: Ракушка ×1 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: сердито шипит «хсс»"
+							],
+							"voice": "snd/av_turtle_0.wav",
+							"voice_pet": "snd/av_turtle_pet.wav",
+							"walk": "img/walk_animal_turtle.png",
+							"walk_h": 26,
+							"walk_n": 4,
+							"walk_w": 54
 						},
 						{
 							"id": "tortoise",
@@ -6323,8 +6610,15 @@
 								"Где живёт: Степь орков",
 								"Любит: veg, fruit",
 								"В загоне даёт: Ракушка ×1 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: шипит и тихо кряхтит"
+							],
+							"voice": "snd/av_tortoise_0.wav",
+							"voice_pet": "snd/av_tortoise_pet.wav",
+							"walk": "img/walk_animal_tortoise.png",
+							"walk_h": 34,
+							"walk_n": 4,
+							"walk_w": 56
 						},
 						{
 							"id": "frog",
@@ -6339,8 +6633,15 @@
 								"Где живёт: Болота, луга, эльфийский лес",
 								"Любит: meat, berry",
 								"В загоне даёт: Рыбья чешуя ×1 в день",
-								"Малыши: 60%"
-							]
+								"Малыши: 60%",
+								"Голос: квакает «ква-ква»"
+							],
+							"voice": "snd/av_frog_0.wav",
+							"voice_pet": "snd/av_frog_pet.wav",
+							"walk": "img/walk_animal_frog.png",
+							"walk_h": 38,
+							"walk_n": 4,
+							"walk_w": 38
 						},
 						{
 							"id": "toad",
@@ -6355,8 +6656,15 @@
 								"Где живёт: Сумеречье, болота",
 								"Любит: meat, mushroom",
 								"В загоне даёт: Рыбья чешуя ×1 в день",
-								"Малыши: 50%"
-							]
+								"Малыши: 50%",
+								"Голос: долго звенит трелью «урр-р-р»"
+							],
+							"voice": "snd/av_toad_0.wav",
+							"voice_pet": "snd/av_toad_pet.wav",
+							"walk": "img/walk_animal_toad.png",
+							"walk_h": 42,
+							"walk_n": 4,
+							"walk_w": 40
 						},
 						{
 							"id": "newt",
@@ -6371,8 +6679,15 @@
 								"Где живёт: Болота",
 								"Любит: meat",
 								"В загоне даёт: Рыбья чешуя ×1 в день",
-								"Малыши: 50%"
-							]
+								"Малыши: 50%",
+								"Голос: почти беззвучно попискивает"
+							],
+							"voice": "snd/av_newt_0.wav",
+							"voice_pet": "snd/av_newt_pet.wav",
+							"walk": "img/walk_animal_newt.png",
+							"walk_h": 26,
+							"walk_n": 4,
+							"walk_w": 66
 						},
 						{
 							"id": "grass_snake",
@@ -6387,8 +6702,15 @@
 								"Где живёт: Болота, луга",
 								"Любит: fish, meat",
 								"В загоне даёт: Рыбья чешуя ×2 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: коротко шипит «пш-пш»"
+							],
+							"voice": "snd/av_grass_snake_0.wav",
+							"voice_pet": "snd/av_grass_snake_pet.wav",
+							"walk": "img/walk_animal_grass_snake.png",
+							"walk_h": 36,
+							"walk_n": 4,
+							"walk_w": 68
 						},
 						{
 							"id": "adder",
@@ -6403,8 +6725,15 @@
 								"Где живёт: Гроты, осенний лес",
 								"Любит: meat",
 								"В загоне даёт: Рыбья чешуя ×2 в день",
-								"Малыши: 20%"
-							]
+								"Малыши: 20%",
+								"Голос: громко и долго шипит"
+							],
+							"voice": "snd/av_adder_0.wav",
+							"voice_pet": "snd/av_adder_pet.wav",
+							"walk": "img/walk_animal_adder.png",
+							"walk_h": 36,
+							"walk_n": 4,
+							"walk_w": 68
 						},
 						{
 							"id": "lizard",
@@ -6419,8 +6748,15 @@
 								"Где живёт: Степь, гроты, луга",
 								"Любит: meat, berry",
 								"В загоне даёт: Рыбья чешуя ×1 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: шуршит коготками и чуть шипит"
+							],
+							"voice": "snd/av_lizard_0.wav",
+							"voice_pet": "snd/av_lizard_pet.wav",
+							"walk": "img/walk_animal_lizard.png",
+							"walk_h": 30,
+							"walk_n": 4,
+							"walk_w": 72
 						},
 						{
 							"id": "crab",
@@ -6435,8 +6771,15 @@
 								"Где живёт: Побережье",
 								"Любит: fish, meat",
 								"В загоне даёт: Ракушка ×1 в день",
-								"Малыши: 50%"
-							]
+								"Малыши: 50%",
+								"Голос: щёлкает клешнями «клац-клац» и пускает пузыри"
+							],
+							"voice": "snd/av_crab_0.wav",
+							"voice_pet": "snd/av_crab_pet.wav",
+							"walk": "img/walk_animal_crab.png",
+							"walk_h": 36,
+							"walk_n": 4,
+							"walk_w": 52
 						},
 						{
 							"id": "seal",
@@ -6451,8 +6794,15 @@
 								"Где живёт: Побережье",
 								"Любит: fish",
 								"В загоне даёт: Рыбья чешуя ×2 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: гавкает «арф-арф» и протяжно стонет"
+							],
+							"voice": "snd/av_seal_0.wav",
+							"voice_pet": "snd/av_seal_pet.wav",
+							"walk": "img/walk_animal_seal.png",
+							"walk_h": 40,
+							"walk_n": 4,
+							"walk_w": 74
 						},
 						{
 							"id": "porcupine",
@@ -6467,8 +6817,15 @@
 								"Где живёт: Степь орков",
 								"Любит: veg, fruit",
 								"В загоне даёт: Иголки ежа ×3 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: стучит зубами и трещит иглами; довольный — тихо напевает"
+							],
+							"voice": "snd/av_porcupine_0.wav",
+							"voice_pet": "snd/av_porcupine_pet.wav",
+							"walk": "img/walk_animal_porcupine.png",
+							"walk_h": 48,
+							"walk_n": 4,
+							"walk_w": 76
 						},
 						{
 							"id": "red_panda",
@@ -6483,8 +6840,15 @@
 								"Где живёт: Сакураяма",
 								"Любит: berry, fruit, sweet",
 								"В загоне даёт: Лисья шерсть ×2 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: фыркает «хаф» и щебечет, как птичка"
+							],
+							"voice": "snd/av_red_panda_0.wav",
+							"voice_pet": "snd/av_red_panda_pet.wav",
+							"walk": "img/walk_animal_red_panda.png",
+							"walk_h": 54,
+							"walk_n": 4,
+							"walk_w": 72
 						},
 						{
 							"id": "tanuki",
@@ -6499,8 +6863,15 @@
 								"Где живёт: Сакураяма",
 								"Любит: fruit, fish, bread",
 								"В загоне даёт: Лисья шерсть ×2 в день",
-								"Малыши: 40%"
-							]
+								"Малыши: 40%",
+								"Голос: поскуливает и тихо ворчит"
+							],
+							"voice": "snd/av_tanuki_0.wav",
+							"voice_pet": "snd/av_tanuki_pet.wav",
+							"walk": "img/walk_animal_tanuki.png",
+							"walk_h": 54,
+							"walk_n": 4,
+							"walk_w": 78
 						}
 					],
 					"title": "Дикие звери"
@@ -6520,8 +6891,15 @@
 								"Где живёт: Луга, деревни кошек, Сакураяма",
 								"Любит: bread, veg, nut",
 								"В загоне даёт: Яйцо ×1 в день",
-								"Малыши: 60%"
-							]
+								"Малыши: 60%",
+								"Голос: квохчет «ко-ко-ко-кудах!»; на руках — тихо урчит"
+							],
+							"voice": "snd/av_chicken_0.wav",
+							"voice_pet": "snd/av_chicken_pet.wav",
+							"walk": "img/walk_animal_chicken.png",
+							"walk_h": 54,
+							"walk_n": 4,
+							"walk_w": 54
 						},
 						{
 							"id": "goose",
@@ -6536,8 +6914,15 @@
 								"Где живёт: Поля, болота",
 								"Любит: bread, veg",
 								"В загоне даёт: Гусиное яйцо ×1 в день",
-								"Малыши: 45%"
-							]
+								"Малыши: 45%",
+								"Голос: громко гогочет «га-га-га»"
+							],
+							"voice": "snd/av_goose_0.wav",
+							"voice_pet": "snd/av_goose_pet.wav",
+							"walk": "img/walk_animal_goose.png",
+							"walk_h": 78,
+							"walk_n": 4,
+							"walk_w": 68
 						},
 						{
 							"id": "cow",
@@ -6552,8 +6937,15 @@
 								"Где живёт: Поля и рыцарские земли",
 								"Любит: veg, bread",
 								"В загоне даёт: Кувшин молока ×1 в день",
-								"Малыши: 30%"
-							]
+								"Малыши: 30%",
+								"Голос: протяжно мычит «му-у-у»; когда гладят — тихо «мм-м»"
+							],
+							"voice": "snd/av_cow_0.wav",
+							"voice_pet": "snd/av_cow_pet.wav",
+							"walk": "img/walk_animal_cow.png",
+							"walk_h": 74,
+							"walk_n": 4,
+							"walk_w": 94
 						},
 						{
 							"id": "sheep",
@@ -6568,8 +6960,15 @@
 								"Где живёт: Луга, рыцарские земли",
 								"Любит: veg, bread",
 								"В загоне даёт: Овечья шерсть ×2 в день",
-								"Малыши: 45%"
-							]
+								"Малыши: 45%",
+								"Голос: блеет дрожащим «бе-е-е»"
+							],
+							"voice": "snd/av_sheep_0.wav",
+							"voice_pet": "snd/av_sheep_pet.wav",
+							"walk": "img/walk_animal_sheep.png",
+							"walk_h": 48,
+							"walk_n": 4,
+							"walk_w": 64
 						},
 						{
 							"id": "goat",
@@ -6584,8 +6983,15 @@
 								"Где живёт: Поля, эльфийские холмы",
 								"Любит: veg, fruit, bread",
 								"В загоне даёт: Козье молоко ×1 в день",
-								"Малыши: 45%"
-							]
+								"Малыши: 45%",
+								"Голос: высоко и дерзко блеет «ме-е-е»"
+							],
+							"voice": "snd/av_goat_0.wav",
+							"voice_pet": "snd/av_goat_pet.wav",
+							"walk": "img/walk_animal_goat.png",
+							"walk_h": 58,
+							"walk_n": 4,
+							"walk_w": 64
 						},
 						{
 							"id": "pig",
@@ -6600,8 +7006,15 @@
 								"Где живёт: Поля",
 								"Любит: veg, bread, fruit, soup",
 								"В загоне даёт: Трюфель ×1 в день",
-								"Малыши: 50%"
-							]
+								"Малыши: 50%",
+								"Голос: хрюкает «хрю-хрю», иногда визжит"
+							],
+							"voice": "snd/av_pig_0.wav",
+							"voice_pet": "snd/av_pig_pet.wav",
+							"walk": "img/walk_animal_pig.png",
+							"walk_h": 52,
+							"walk_n": 4,
+							"walk_w": 70
 						}
 					],
 					"title": "Домашние"
@@ -6621,8 +7034,15 @@
 								"Где живёт: Поляны единорогов, долина магов",
 								"Любит: sweet, berry",
 								"В загоне даёт: Сапфировый пух ×1 в день",
-								"Малыши: 15%"
-							]
+								"Малыши: 15%",
+								"Голос: стучит лапкой, и в воздухе звенят хрустальные колокольчики"
+							],
+							"voice": "snd/av_sapphire_hare_0.wav",
+							"voice_pet": "snd/av_sapphire_hare_pet.wav",
+							"walk": "img/walk_animal_sapphire_hare.png",
+							"walk_h": 68,
+							"walk_n": 4,
+							"walk_w": 60
 						},
 						{
 							"id": "golden_deer",
@@ -6637,8 +7057,15 @@
 								"Где живёт: Эльфийский и берёзовый лес",
 								"Любит: fruit, sweet",
 								"В загоне даёт: Золотая шерсть ×1 в день",
-								"Малыши: 10%"
-							]
+								"Малыши: 10%",
+								"Голос: трубит, и ему отвечает тихий золотой колокол"
+							],
+							"voice": "snd/av_golden_deer_0.wav",
+							"voice_pet": "snd/av_golden_deer_pet.wav",
+							"walk": "img/walk_animal_golden_deer.png",
+							"walk_h": 102,
+							"walk_n": 4,
+							"walk_w": 78
 						},
 						{
 							"id": "ember_fox",
@@ -6653,8 +7080,15 @@
 								"Где живёт: Гроты, осенний лес",
 								"Любит: meat, fish",
 								"В загоне даёт: Угольная шерсть ×1 в день",
-								"Малыши: 15%"
-							]
+								"Малыши: 15%",
+								"Голос: тявкает, а шерсть потрескивает искрами, как костёр"
+							],
+							"voice": "snd/av_ember_fox_0.wav",
+							"voice_pet": "snd/av_ember_fox_pet.wav",
+							"walk": "img/walk_animal_ember_fox.png",
+							"walk_h": 60,
+							"walk_n": 4,
+							"walk_w": 84
 						},
 						{
 							"id": "unicorn",
@@ -6669,8 +7103,15 @@
 								"Где живёт: Поляны единорогов",
 								"Любит: sweet, fruit",
 								"В загоне даёт: Радужное молоко ×1 в день",
-								"Малыши: 10%"
-							]
+								"Малыши: 10%",
+								"Голос: звонко ржёт, а вокруг рассыпается звон колокольчиков"
+							],
+							"voice": "snd/av_unicorn_0.wav",
+							"voice_pet": "snd/av_unicorn_pet.wav",
+							"walk": "img/walk_animal_unicorn.png",
+							"walk_h": 96,
+							"walk_n": 4,
+							"walk_w": 104
 						},
 						{
 							"id": "pegasus",
@@ -6685,8 +7126,15 @@
 								"Где живёт: Розовый лес, долина магов",
 								"Любит: sweet, fruit",
 								"В загоне даёт: Волос из гривы единорога ×2 в день",
-								"Малыши: 8%"
-							]
+								"Малыши: 8%",
+								"Голос: ржёт и хлопает крыльями"
+							],
+							"voice": "snd/av_pegasus_0.wav",
+							"voice_pet": "snd/av_pegasus_pet.wav",
+							"walk": "img/walk_animal_pegasus.png",
+							"walk_h": 90,
+							"walk_n": 4,
+							"walk_w": 104
 						},
 						{
 							"id": "kirin",
@@ -6701,8 +7149,15 @@
 								"Где живёт: Сакураяма",
 								"Любит: sweet, fruit",
 								"В загоне даёт: Звёздная пыль ×1 в день",
-								"Малыши: 6%"
-							]
+								"Малыши: 6%",
+								"Голос: ржёт глубоко, и звенят храмовые колокольчики"
+							],
+							"voice": "snd/av_kirin_0.wav",
+							"voice_pet": "snd/av_kirin_pet.wav",
+							"walk": "img/walk_animal_kirin.png",
+							"walk_h": 88,
+							"walk_n": 4,
+							"walk_w": 98
 						},
 						{
 							"id": "nightmare",
@@ -6717,8 +7172,15 @@
 								"Где живёт: Сумеречье, по ночам",
 								"Любит: sweet, meat",
 								"В загоне даёт: Пыль бездны ×1 в день",
-								"Малыши: 5%"
-							]
+								"Малыши: 5%",
+								"Голос: ржёт низко и гулко, будто из-под земли"
+							],
+							"voice": "snd/av_nightmare_0.wav",
+							"voice_pet": "snd/av_nightmare_pet.wav",
+							"walk": "img/walk_animal_nightmare.png",
+							"walk_h": 96,
+							"walk_n": 4,
+							"walk_w": 110
 						},
 						{
 							"id": "moon_wolf",
@@ -6733,8 +7195,15 @@
 								"Где живёт: Долина магов, тайга ночью",
 								"Любит: meat, sweet",
 								"В загоне даёт: Звёздная пыль ×1 в день",
-								"Малыши: 6%"
-							]
+								"Малыши: 6%",
+								"Голос: воет на луну, и вой звенит серебром"
+							],
+							"voice": "snd/av_moon_wolf_0.wav",
+							"voice_pet": "snd/av_moon_wolf_pet.wav",
+							"walk": "img/walk_animal_moon_wolf.png",
+							"walk_h": 68,
+							"walk_n": 4,
+							"walk_w": 94
 						},
 						{
 							"id": "forest_stag",
@@ -6749,8 +7218,15 @@
 								"Где живёт: Эльфийский лес",
 								"Любит: fruit, berry",
 								"В загоне даёт: Пыльца фей ×1 в день",
-								"Малыши: 6%"
-							]
+								"Малыши: 6%",
+								"Голос: трубит, а вокруг шелестит листва и гудят деревянные колокола"
+							],
+							"voice": "snd/av_forest_stag_0.wav",
+							"voice_pet": "snd/av_forest_stag_pet.wav",
+							"walk": "img/walk_animal_forest_stag.png",
+							"walk_h": 108,
+							"walk_n": 4,
+							"walk_w": 86
 						},
 						{
 							"id": "jackalope",
@@ -6765,8 +7241,15 @@
 								"Где живёт: Поля, луга",
 								"Любит: veg, sweet",
 								"В загоне даёт: Золотая шерсть ×1 в день",
-								"Малыши: 10%"
-							]
+								"Малыши: 10%",
+								"Голос: стучит лапкой, пищит и звенит рожками"
+							],
+							"voice": "snd/av_jackalope_0.wav",
+							"voice_pet": "snd/av_jackalope_pet.wav",
+							"walk": "img/walk_animal_jackalope.png",
+							"walk_h": 66,
+							"walk_n": 4,
+							"walk_w": 60
 						},
 						{
 							"id": "griffin",
@@ -6781,8 +7264,15 @@
 								"Где живёт: Горы дворфов, Кронхольм",
 								"Любит: meat, fish",
 								"В загоне даёт: Золотая шерсть ×1 в день",
-								"Малыши: 5%"
-							]
+								"Малыши: 5%",
+								"Голос: клекочет, как орёл, с рыком льва; довольный — урчит"
+							],
+							"voice": "snd/av_griffin_0.wav",
+							"voice_pet": "snd/av_griffin_pet.wav",
+							"walk": "img/walk_animal_griffin.png",
+							"walk_h": 82,
+							"walk_n": 4,
+							"walk_w": 94
 						},
 						{
 							"id": "dragonling",
@@ -6797,8 +7287,15 @@
 								"Где живёт: Горы дворфов, гроты",
 								"Любит: meat, sweet",
 								"В загоне даёт: Тлеющая пыль ×1 в день",
-								"Малыши: 5%"
-							]
+								"Малыши: 5%",
+								"Голос: рычит тоненько и пыхает огнём; довольный — урчит и дымит"
+							],
+							"voice": "snd/av_dragonling_0.wav",
+							"voice_pet": "snd/av_dragonling_pet.wav",
+							"walk": "img/walk_animal_dragonling.png",
+							"walk_h": 60,
+							"walk_n": 4,
+							"walk_w": 92
 						},
 						{
 							"id": "salamander",
@@ -6813,8 +7310,15 @@
 								"Где живёт: Гроты, Сумеречье",
 								"Любит: meat",
 								"В загоне даёт: Тлеющая пыль ×1 в день",
-								"Малыши: 10%"
-							]
+								"Малыши: 10%",
+								"Голос: шипит и потрескивает пламенем"
+							],
+							"voice": "snd/av_salamander_0.wav",
+							"voice_pet": "snd/av_salamander_pet.wav",
+							"walk": "img/walk_animal_salamander.png",
+							"walk_h": 36,
+							"walk_n": 4,
+							"walk_w": 78
 						},
 						{
 							"id": "crystal_tortoise",
@@ -6829,8 +7333,15 @@
 								"Где живёт: Гроты",
 								"Любит: veg, mushroom",
 								"В загоне даёт: Осколок кристалла ×1 в день",
-								"Малыши: 8%"
-							]
+								"Малыши: 8%",
+								"Голос: вздыхает, и звенят хрустальные пластинки панциря"
+							],
+							"voice": "snd/av_crystal_tortoise_0.wav",
+							"voice_pet": "snd/av_crystal_tortoise_pet.wav",
+							"walk": "img/walk_animal_crystal_tortoise.png",
+							"walk_h": 42,
+							"walk_n": 4,
+							"walk_w": 60
 						},
 						{
 							"id": "white_tiger",
@@ -6845,8 +7356,15 @@
 								"Где живёт: Сакураяма",
 								"Любит: meat, fish",
 								"В загоне даёт: Золотая шерсть ×1 в день",
-								"Малыши: 4%"
-							]
+								"Малыши: 4%",
+								"Голос: рычит «р-р-а-а-ар» и фыркает «пф-пф»; гладят — мурлычет"
+							],
+							"voice": "snd/av_white_tiger_0.wav",
+							"voice_pet": "snd/av_white_tiger_pet.wav",
+							"walk": "img/walk_animal_white_tiger.png",
+							"walk_h": 70,
+							"walk_n": 4,
+							"walk_w": 94
 						}
 					],
 					"title": "Волшебные"
@@ -6874,7 +7392,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_black.png",
+							"walk_h": 28,
+							"walk_n": 4,
+							"walk_w": 40
 						},
 						{
 							"id": "cat26_ginger",
@@ -6889,7 +7411,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_ginger.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_white",
@@ -6904,7 +7430,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_white.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_gray",
@@ -6919,7 +7449,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_gray.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_tabby_ginger",
@@ -6934,7 +7468,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_tabby_ginger.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_tabby_gray",
@@ -6949,7 +7487,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_tabby_gray.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_tabby_brown",
@@ -6964,7 +7506,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_tabby_brown.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_cream",
@@ -6979,7 +7525,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_cream.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_cream_tabby",
@@ -6994,7 +7544,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_cream_tabby.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_choco",
@@ -7009,7 +7563,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_choco.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_tuxedo",
@@ -7024,7 +7582,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_tuxedo.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_gray_white",
@@ -7039,7 +7601,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_gray_white.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_ginger_white",
@@ -7054,7 +7620,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается часто.",
 								"Погладь 3 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_ginger_white.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						}
 					],
 					"title": "Обычные окрасы"
@@ -7077,7 +7647,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается нечасто.",
 								"Погладь 5 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_calico.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_smoke",
@@ -7095,7 +7669,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается нечасто.",
 								"Погладь 5 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_smoke.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_blue",
@@ -7113,7 +7691,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается нечасто.",
 								"Погладь 5 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_blue.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_siamese",
@@ -7131,7 +7713,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается нечасто.",
 								"Погладь 5 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_siamese.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_tortie",
@@ -7149,7 +7735,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Встречается нечасто.",
 								"Погладь 5 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_tortie.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						}
 					],
 					"title": "Необычные"
@@ -7172,7 +7762,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Редкий окрас: примерно 1 кот из 20 в деревне кошкодевочек, в городах и лесу ещё реже.",
 								"Погладь 7 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_golden.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_lavender",
@@ -7190,7 +7784,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Редкий окрас: примерно 1 кот из 20 в деревне кошкодевочек, в городах и лесу ещё реже.",
 								"Погладь 7 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_lavender.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_sakura",
@@ -7208,7 +7806,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Редкий окрас: примерно 1 кот из 20 в деревне кошкодевочек, в городах и лесу ещё реже.",
 								"Погладь 7 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_sakura.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						}
 					],
 					"title": "Редкие"
@@ -7231,7 +7833,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Сказочный окрас: в 4 раза реже редких — большая удача!",
 								"Погладь 9 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_moonsilver.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_starry",
@@ -7249,7 +7855,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Сказочный окрас: в 4 раза реже редких — большая удача!",
 								"Погладь 9 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_starry.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cat26_aurora",
@@ -7267,7 +7877,11 @@
 								"Деревня кошкодевочек, города, изредка лес. Сказочный окрас: в 4 раза реже редких — большая удача!",
 								"Погладь 9 раз — пойдёт жить к тебе и будет ходить следом.",
 								"При поглаживании иногда остаётся кошачья шерсть."
-							]
+							],
+							"walk": "img/walk_cat26_aurora.png",
+							"walk_h": 29,
+							"walk_n": 4,
+							"walk_w": 41
 						}
 					],
 					"title": "Сказочные"
@@ -7586,7 +8200,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Сила 1",
 								"Перо стоит 2 мон."
-							]
+							],
+							"walk": "img/walk_bird_sparrow.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 22
 						},
 						{
 							"id": "great_tit",
@@ -7601,7 +8219,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Свежесть 1, Сила 1",
 								"Перо стоит 3 мон."
-							]
+							],
+							"walk": "img/walk_bird_great_tit.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 24
 						},
 						{
 							"id": "blue_tit",
@@ -7616,7 +8238,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Холод 1, Свежесть 1",
 								"Перо стоит 3 мон."
-							]
+							],
+							"walk": "img/walk_bird_blue_tit.png",
+							"walk_h": 21,
+							"walk_n": 4,
+							"walk_w": 22
 						},
 						{
 							"id": "robin",
@@ -7631,7 +8257,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Тепло 1, Исцеление 1",
 								"Перо стоит 3 мон."
-							]
+							],
+							"walk": "img/walk_bird_robin.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 23
 						},
 						{
 							"id": "chaffinch",
@@ -7646,7 +8276,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Свежесть 1, Тепло 1",
 								"Перо стоит 3 мон."
-							]
+							],
+							"walk": "img/walk_bird_chaffinch.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 23
 						},
 						{
 							"id": "goldfinch",
@@ -7661,7 +8295,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Свет 1, Чары 1",
 								"Перо стоит 6 мон."
-							]
+							],
+							"walk": "img/walk_bird_goldfinch.png",
+							"walk_h": 21,
+							"walk_n": 4,
+							"walk_w": 21
 						},
 						{
 							"id": "bullfinch",
@@ -7676,7 +8314,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Холод 1, Тепло 1",
 								"Перо стоит 5 мон."
-							]
+							],
+							"walk": "img/walk_bird_bullfinch.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 26
 						},
 						{
 							"id": "wren",
@@ -7691,7 +8333,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Сила 2",
 								"Перо стоит 4 мон."
-							]
+							],
+							"walk": "img/walk_bird_wren.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 23
 						},
 						{
 							"id": "nightingale",
@@ -7706,7 +8352,11 @@
 								"Когда: в сумерках, на деревьях",
 								"Перо в котле: Покой 1, Сон 1",
 								"Перо стоит 8 мон."
-							]
+							],
+							"walk": "img/walk_bird_nightingale.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 26
 						},
 						{
 							"id": "lark",
@@ -7721,7 +8371,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Свет 1, Свежесть 1",
 								"Перо стоит 4 мон."
-							]
+							],
+							"walk": "img/walk_bird_lark.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 23
 						},
 						{
 							"id": "swallow",
@@ -7736,7 +8390,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Свежесть 1, Свет 1",
 								"Перо стоит 4 мон."
-							]
+							],
+							"walk": "img/walk_bird_swallow.png",
+							"walk_h": 20,
+							"walk_n": 4,
+							"walk_w": 27
 						},
 						{
 							"id": "starling",
@@ -7751,7 +8409,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Чары 1, Тьма 1",
 								"Перо стоит 3 мон."
-							]
+							],
+							"walk": "img/walk_bird_starling.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 25
 						},
 						{
 							"id": "thrush",
@@ -7766,7 +8428,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Исцеление 1, Покой 1",
 								"Перо стоит 4 мон."
-							]
+							],
+							"walk": "img/walk_bird_thrush.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 27
 						},
 						{
 							"id": "blackbird",
@@ -7781,7 +8447,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Тьма 1, Покой 1",
 								"Перо стоит 4 мон."
-							]
+							],
+							"walk": "img/walk_bird_blackbird.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 30
 						},
 						{
 							"id": "wagtail",
@@ -7796,7 +8466,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Свежесть 2",
 								"Перо стоит 3 мон."
-							]
+							],
+							"walk": "img/walk_bird_wagtail.png",
+							"walk_h": 21,
+							"walk_n": 4,
+							"walk_w": 26
 						},
 						{
 							"id": "oriole",
@@ -7811,7 +8485,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Свет 2, Тепло 1",
 								"Перо стоит 10 мон."
-							]
+							],
+							"walk": "img/walk_bird_oriole.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 27
 						},
 						{
 							"id": "waxwing",
@@ -7826,7 +8504,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Холод 1, Чары 1",
 								"Перо стоит 7 мон."
-							]
+							],
+							"walk": "img/walk_bird_waxwing.png",
+							"walk_h": 24,
+							"walk_n": 4,
+							"walk_w": 26
 						},
 						{
 							"id": "kingfisher",
@@ -7841,7 +8523,11 @@
 								"Когда: днём, у воды",
 								"Перо в котле: Холод 1, Свет 1, Свежесть 1",
 								"Перо стоит 12 мон."
-							]
+							],
+							"walk": "img/walk_bird_kingfisher.png",
+							"walk_h": 20,
+							"walk_n": 4,
+							"walk_w": 23
 						},
 						{
 							"id": "hoopoe",
@@ -7856,7 +8542,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Огонь 1, Сила 1",
 								"Перо стоит 9 мон."
-							]
+							],
+							"walk": "img/walk_bird_hoopoe.png",
+							"walk_h": 33,
+							"walk_n": 4,
+							"walk_w": 32
 						},
 						{
 							"id": "jay",
@@ -7871,7 +8561,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Чары 1, Холод 1",
 								"Перо стоит 6 мон."
-							]
+							],
+							"walk": "img/walk_bird_jay.png",
+							"walk_h": 26,
+							"walk_n": 4,
+							"walk_w": 32
 						},
 						{
 							"id": "magpie",
@@ -7886,7 +8580,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Чары 1, Тьма 1",
 								"Перо стоит 4 мон."
-							]
+							],
+							"walk": "img/walk_bird_magpie.png",
+							"walk_h": 25,
+							"walk_n": 4,
+							"walk_w": 37
 						},
 						{
 							"id": "crow",
@@ -7901,7 +8599,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Тьма 1, Сила 1",
 								"Перо стоит 2 мон."
-							]
+							],
+							"walk": "img/walk_bird_crow.png",
+							"walk_h": 26,
+							"walk_n": 4,
+							"walk_w": 36
 						},
 						{
 							"id": "raven",
@@ -7916,7 +8618,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Тьма 2, Чары 1",
 								"Перо стоит 8 мон."
-							]
+							],
+							"walk": "img/walk_bird_raven.png",
+							"walk_h": 28,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "cuckoo",
@@ -7931,7 +8637,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Сон 1, Чары 1",
 								"Перо стоит 7 мон."
-							]
+							],
+							"walk": "img/walk_bird_cuckoo.png",
+							"walk_h": 24,
+							"walk_n": 4,
+							"walk_w": 32
 						},
 						{
 							"id": "woodpecker",
@@ -7946,7 +8656,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Сила 2",
 								"Перо стоит 5 мон."
-							]
+							],
+							"walk": "img/walk_bird_woodpecker.png",
+							"walk_h": 26,
+							"walk_n": 4,
+							"walk_w": 26
 						},
 						{
 							"id": "dove",
@@ -7961,7 +8675,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Покой 2",
 								"Перо стоит 3 мон."
-							]
+							],
+							"walk": "img/walk_bird_dove.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 27
 						},
 						{
 							"id": "pheasant",
@@ -7976,7 +8694,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Огонь 1, Тепло 1, Сила 1",
 								"Перо стоит 9 мон."
-							]
+							],
+							"walk": "img/walk_bird_pheasant.png",
+							"walk_h": 28,
+							"walk_n": 4,
+							"walk_w": 39
 						},
 						{
 							"id": "quail",
@@ -7991,7 +8713,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Сила 1, Тепло 1",
 								"Перо стоит 4 мон."
-							]
+							],
+							"walk": "img/walk_bird_quail.png",
+							"walk_h": 24,
+							"walk_n": 4,
+							"walk_w": 24
 						},
 						{
 							"id": "partridge",
@@ -8006,7 +8732,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Тепло 1, Сила 1",
 								"Перо стоит 5 мон."
-							]
+							],
+							"walk": "img/walk_bird_partridge.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 22
 						},
 						{
 							"id": "heron",
@@ -8021,7 +8751,11 @@
 								"Когда: днём, у воды",
 								"Перо в котле: Холод 1, Покой 1, Свежесть 1",
 								"Перо стоит 8 мон."
-							]
+							],
+							"walk": "img/walk_bird_heron.png",
+							"walk_h": 55,
+							"walk_n": 4,
+							"walk_w": 37
 						},
 						{
 							"id": "crane",
@@ -8036,7 +8770,11 @@
 								"Когда: днём, у воды",
 								"Перо в котле: Чары 1, Покой 1, Свет 1",
 								"Перо стоит 18 мон."
-							]
+							],
+							"walk": "img/walk_bird_crane.png",
+							"walk_h": 53,
+							"walk_n": 4,
+							"walk_w": 39
 						},
 						{
 							"id": "swan",
@@ -8051,7 +8789,11 @@
 								"Когда: днём, у воды",
 								"Перо в котле: Свет 1, Покой 1, Исцеление 1",
 								"Перо стоит 14 мон."
-							]
+							],
+							"walk": "img/walk_bird_swan.png",
+							"walk_h": 50,
+							"walk_n": 4,
+							"walk_w": 43
 						},
 						{
 							"id": "goose",
@@ -8066,7 +8808,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Сила 1, Тепло 1",
 								"Перо стоит 5 мон."
-							]
+							],
+							"walk": "img/walk_bird_goose.png",
+							"walk_h": 37,
+							"walk_n": 4,
+							"walk_w": 33
 						},
 						{
 							"id": "gull",
@@ -8081,7 +8827,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Свежесть 1, Холод 1",
 								"Перо стоит 3 мон."
-							]
+							],
+							"walk": "img/walk_bird_gull.png",
+							"walk_h": 26,
+							"walk_n": 4,
+							"walk_w": 31
 						},
 						{
 							"id": "sandpiper",
@@ -8096,7 +8846,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Свежесть 1",
 								"Перо стоит 3 мон."
-							]
+							],
+							"walk": "img/walk_bird_sandpiper.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 22
 						},
 						{
 							"id": "bee_eater",
@@ -8111,7 +8865,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Огонь 1, Свет 1, Жгучесть 1",
 								"Перо стоит 11 мон."
-							]
+							],
+							"walk": "img/walk_bird_bee_eater.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 27
 						},
 						{
 							"id": "crossbill",
@@ -8126,7 +8884,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Огонь 1, Холод 1",
 								"Перо стоит 6 мон."
-							]
+							],
+							"walk": "img/walk_bird_crossbill.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 25
 						},
 						{
 							"id": "nuthatch",
@@ -8141,7 +8903,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Сила 1, Свежесть 1",
 								"Перо стоит 4 мон."
-							]
+							],
+							"walk": "img/walk_bird_nuthatch.png",
+							"walk_h": 21,
+							"walk_n": 4,
+							"walk_w": 21
 						},
 						{
 							"id": "white_eye",
@@ -8156,7 +8922,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Свежесть 1, Чары 1",
 								"Перо стоит 6 мон."
-							]
+							],
+							"walk": "img/walk_bird_white_eye.png",
+							"walk_h": 20,
+							"walk_n": 4,
+							"walk_w": 21
 						},
 						{
 							"id": "rosefinch",
@@ -8171,7 +8941,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Чары 1, Исцеление 1",
 								"Перо стоит 9 мон."
-							]
+							],
+							"walk": "img/walk_bird_rosefinch.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 23
 						},
 						{
 							"id": "mandarin_duck",
@@ -8186,7 +8960,11 @@
 								"Когда: днём, у воды",
 								"Перо в котле: Чары 1, Тепло 1, Свет 1",
 								"Перо стоит 12 мон."
-							]
+							],
+							"walk": "img/walk_bird_mandarin_duck.png",
+							"walk_h": 26,
+							"walk_n": 4,
+							"walk_w": 26
 						},
 						{
 							"id": "nightjar",
@@ -8201,7 +8979,11 @@
 								"Когда: ночью, на земле",
 								"Перо в котле: Сон 2, Тьма 1",
 								"Перо стоит 9 мон."
-							]
+							],
+							"walk": "img/walk_bird_nightjar.png",
+							"walk_h": 21,
+							"walk_n": 4,
+							"walk_w": 28
 						}
 					],
 					"title": "Певчие и другие птицы"
@@ -8221,7 +9003,11 @@
 								"Когда: ночью, на деревьях",
 								"Перо в котле: Сон 1, Тьма 1, Покой 1",
 								"Перо стоит 6 мон."
-							]
+							],
+							"walk": "img/walk_bird_tawny_owl.png",
+							"walk_h": 27,
+							"walk_n": 4,
+							"walk_w": 22
 						},
 						{
 							"id": "eagle_owl",
@@ -8236,7 +9022,11 @@
 								"Когда: ночью, на деревьях",
 								"Перо в котле: Тьма 2, Сила 1",
 								"Перо стоит 12 мон."
-							]
+							],
+							"walk": "img/walk_bird_eagle_owl.png",
+							"walk_h": 34,
+							"walk_n": 4,
+							"walk_w": 27
 						},
 						{
 							"id": "barn_owl",
@@ -8251,7 +9041,11 @@
 								"Когда: ночью, на деревьях",
 								"Перо в котле: Сон 1, Свет 1, Покой 1",
 								"Перо стоит 8 мон."
-							]
+							],
+							"walk": "img/walk_bird_barn_owl.png",
+							"walk_h": 27,
+							"walk_n": 4,
+							"walk_w": 22
 						},
 						{
 							"id": "scops_owl",
@@ -8266,7 +9060,11 @@
 								"Когда: ночью, на деревьях",
 								"Перо в котле: Сон 2",
 								"Перо стоит 7 мон."
-							]
+							],
+							"walk": "img/walk_bird_scops_owl.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 18
 						},
 						{
 							"id": "snowy_owl",
@@ -8281,7 +9079,11 @@
 								"Когда: ночью, на земле",
 								"Перо в котле: Холод 2, Свет 1",
 								"Перо стоит 16 мон."
-							]
+							],
+							"walk": "img/walk_bird_snowy_owl.png",
+							"walk_h": 30,
+							"walk_n": 4,
+							"walk_w": 25
 						}
 					],
 					"title": "Совы и ночные"
@@ -8301,7 +9103,11 @@
 								"Когда: днём, на деревьях",
 								"Перо в котле: Огонь 2, Свет 2, Исцеление 1",
 								"Перо стоит 60 мон."
-							]
+							],
+							"walk": "img/walk_bird_firebird.png",
+							"walk_h": 44,
+							"walk_n": 4,
+							"walk_w": 104
 						},
 						{
 							"id": "moon_finch",
@@ -8316,7 +9122,11 @@
 								"Когда: ночью, на деревьях",
 								"Перо в котле: Чары 2, Свет 1, Холод 1",
 								"Перо стоит 30 мон."
-							]
+							],
+							"walk": "img/walk_bird_moon_finch.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 23
 						},
 						{
 							"id": "fairy_wren",
@@ -8331,7 +9141,11 @@
 								"Когда: днём, на земле",
 								"Перо в котле: Чары 2, Свежесть 1",
 								"Перо стоит 26 мон."
-							]
+							],
+							"walk": "img/walk_bird_fairy_wren.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 23
 						},
 						{
 							"id": "shadow_crow",
@@ -8346,7 +9160,11 @@
 								"Когда: в сумерках, на земле",
 								"Перо в котле: Тьма 3, Чары 1",
 								"Перо стоит 34 мон."
-							]
+							],
+							"walk": "img/walk_bird_shadow_crow.png",
+							"walk_h": 27,
+							"walk_n": 4,
+							"walk_w": 36
 						}
 					],
 					"title": "Волшебные птицы"
@@ -8986,7 +9804,11 @@
 							"text": [
 								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
 								"Сила: 18   ·   Удар: 4   ·   Скорость: 30"
-							]
+							],
+							"walk": "img/walk_mon_slime.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 30
 						},
 						{
 							"id": "slime_blue",
@@ -8997,7 +9819,11 @@
 							"text": [
 								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
 								"Сила: 24   ·   Удар: 5   ·   Скорость: 28"
-							]
+							],
+							"walk": "img/walk_mon_slime_blue.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 30
 						},
 						{
 							"id": "slime_pink",
@@ -9008,7 +9834,11 @@
 							"text": [
 								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
 								"Сила: 22   ·   Удар: 4   ·   Скорость: 32"
-							]
+							],
+							"walk": "img/walk_mon_slime_pink.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 30
 						},
 						{
 							"id": "slime_sand",
@@ -9019,7 +9849,11 @@
 							"text": [
 								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
 								"Сила: 22   ·   Удар: 5   ·   Скорость: 30"
-							]
+							],
+							"walk": "img/walk_mon_slime_sand.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 30
 						},
 						{
 							"id": "mushroom",
@@ -9030,7 +9864,11 @@
 							"text": [
 								"Проделка: Пускает сонные споры — героиня задрёмывает на месте.",
 								"Сила: 20   ·   Удар: 5   ·   Скорость: 34"
-							]
+							],
+							"walk": "img/walk_mon_mushroom.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 22
 						},
 						{
 							"id": "mushroom_blue",
@@ -9041,7 +9879,11 @@
 							"text": [
 								"Проделка: Пускает сонные споры — героиня задрёмывает на месте.",
 								"Сила: 26   ·   Удар: 6   ·   Скорость: 32"
-							]
+							],
+							"walk": "img/walk_mon_mushroom_blue.png",
+							"walk_h": 23,
+							"walk_n": 4,
+							"walk_w": 22
 						},
 						{
 							"id": "skeleton",
@@ -9052,7 +9894,11 @@
 							"text": [
 								"Проделка: Ворует вещь из сумки и удирает. Догони и победи — вернёт.",
 								"Сила: 30   ·   Удар: 6   ·   Скорость: 36"
-							]
+							],
+							"walk": "img/walk_mon_skeleton.png",
+							"walk_h": 28,
+							"walk_n": 4,
+							"walk_w": 24
 						},
 						{
 							"id": "ghost",
@@ -9063,7 +9909,11 @@
 							"text": [
 								"Проделка: Пугает — пару секунд всё управление наоборот.",
 								"Сила: 22   ·   Удар: 6   ·   Скорость: 44"
-							]
+							],
+							"walk": "img/walk_mon_ghost.png",
+							"walk_h": 22,
+							"walk_n": 4,
+							"walk_w": 22
 						},
 						{
 							"id": "golem",
@@ -9074,7 +9924,11 @@
 							"text": [
 								"Проделка: Швыряет в сторону и оглушает.",
 								"Сила: 60   ·   Удар: 9   ·   Скорость: 22"
-							]
+							],
+							"walk": "img/walk_mon_golem.png",
+							"walk_h": 36,
+							"walk_n": 4,
+							"walk_w": 40
 						},
 						{
 							"id": "crystal_golem",
@@ -9085,7 +9939,11 @@
 							"text": [
 								"Проделка: Швыряет в сторону и оглушает.",
 								"Сила: 70   ·   Удар: 10   ·   Скорость: 24"
-							]
+							],
+							"walk": "img/walk_mon_crystal_golem.png",
+							"walk_h": 42,
+							"walk_n": 4,
+							"walk_w": 40
 						},
 						{
 							"id": "ice_imp",
@@ -9096,7 +9954,11 @@
 							"text": [
 								"Проделка: Ворует монетки и удирает.",
 								"Сила: 26   ·   Удар: 6   ·   Скорость: 46"
-							]
+							],
+							"walk": "img/walk_mon_ice_imp.png",
+							"walk_h": 30,
+							"walk_n": 4,
+							"walk_w": 28
 						},
 						{
 							"id": "scarab",
@@ -9107,7 +9969,11 @@
 							"text": [
 								"Проделка: Облепляет липкой паутинкой — героиня еле идёт.",
 								"Сила: 26   ·   Удар: 6   ·   Скорость: 40"
-							]
+							],
+							"walk": "img/walk_mon_scarab.png",
+							"walk_h": 25,
+							"walk_n": 4,
+							"walk_w": 33
 						},
 						{
 							"id": "frog",
@@ -9118,7 +9984,11 @@
 							"text": [
 								"Проделка: Длинным языком притягивает к себе.",
 								"Сила: 30   ·   Удар: 6   ·   Скорость: 38"
-							]
+							],
+							"walk": "img/walk_mon_frog.png",
+							"walk_h": 20,
+							"walk_n": 4,
+							"walk_w": 19
 						},
 						{
 							"id": "bat_m",
@@ -9129,7 +9999,11 @@
 							"text": [
 								"Проделка: Мельтешит перед лицом — управление на миг наоборот.",
 								"Сила: 14   ·   Удар: 4   ·   Скорость: 60"
-							]
+							],
+							"walk": "img/walk_mon_bat_m.png",
+							"walk_h": 15,
+							"walk_n": 4,
+							"walk_w": 32
 						},
 						{
 							"id": "spiderling",
@@ -9140,7 +10014,11 @@
 							"text": [
 								"Проделка: Облепляет липкой паутинкой — героиня еле идёт.",
 								"Сила: 20   ·   Удар: 5   ·   Скорость: 50"
-							]
+							],
+							"walk": "img/walk_mon_spiderling.png",
+							"walk_h": 15,
+							"walk_n": 4,
+							"walk_w": 24
 						},
 						{
 							"id": "salamander",
@@ -9151,7 +10029,11 @@
 							"text": [
 								"Проделка: Длинным языком притягивает к себе.",
 								"Сила: 34   ·   Удар: 7   ·   Скорость: 42"
-							]
+							],
+							"walk": "img/walk_mon_salamander.png",
+							"walk_h": 18,
+							"walk_n": 4,
+							"walk_w": 39
 						},
 						{
 							"id": "wisp",
@@ -9162,7 +10044,11 @@
 							"text": [
 								"Проделка: Пугает — пару секунд всё управление наоборот.",
 								"Сила: 18   ·   Удар: 5   ·   Скорость: 52"
-							]
+							],
+							"walk": "img/walk_mon_wisp.png",
+							"walk_h": 19,
+							"walk_n": 4,
+							"walk_w": 13
 						},
 						{
 							"id": "imp",
@@ -9173,7 +10059,11 @@
 							"text": [
 								"Проделка: Ворует монетки и удирает.",
 								"Сила: 36   ·   Удар: 7   ·   Скорость: 50"
-							]
+							],
+							"walk": "img/walk_mon_imp.png",
+							"walk_h": 30,
+							"walk_n": 4,
+							"walk_w": 28
 						},
 						{
 							"id": "demon",
@@ -9184,7 +10074,11 @@
 							"text": [
 								"Проделка: Ворует монетки и хохочет.",
 								"Сила: 80   ·   Удар: 11   ·   Скорость: 38"
-							]
+							],
+							"walk": "img/walk_mon_demon.png",
+							"walk_h": 38,
+							"walk_n": 4,
+							"walk_w": 34
 						},
 						{
 							"id": "hellhound",
@@ -9195,7 +10089,11 @@
 							"text": [
 								"Проделка: Ворует еду из сумки и удирает.",
 								"Сила: 60   ·   Удар: 10   ·   Скорость: 62"
-							]
+							],
+							"walk": "img/walk_mon_hellhound.png",
+							"walk_h": 30,
+							"walk_n": 4,
+							"walk_w": 43
 						}
 					],
 					"title": "Монстры подземелий"
@@ -9211,7 +10109,11 @@
 							"text": [
 								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
 								"Сила: 160   ·   Удар: 9   ·   Скорость: 22"
-							]
+							],
+							"walk": "img/walk_mon_slime_king.png",
+							"walk_h": 41,
+							"walk_n": 4,
+							"walk_w": 52
 						},
 						{
 							"id": "devil",
@@ -9222,7 +10124,11 @@
 							"text": [
 								"Проделка: Ворует монетки и хохочет.",
 								"Сила: 400   ·   Удар: 14   ·   Скорость: 34"
-							]
+							],
+							"walk": "img/walk_mon_devil.png",
+							"walk_h": 54,
+							"walk_n": 4,
+							"walk_w": 41
 						},
 						{
 							"id": "golem_king",
@@ -9233,7 +10139,11 @@
 							"text": [
 								"Проделка: Швыряет в сторону и оглушает.",
 								"Сила: 260   ·   Удар: 12   ·   Скорость: 20"
-							]
+							],
+							"walk": "img/walk_mon_golem_king.png",
+							"walk_h": 59,
+							"walk_n": 4,
+							"walk_w": 56
 						},
 						{
 							"id": "lich",
@@ -9244,7 +10154,11 @@
 							"text": [
 								"Проделка: Ворует вещь из сумки и удирает. Догони и победи — вернёт.",
 								"Сила: 220   ·   Удар: 11   ·   Скорость: 30"
-							]
+							],
+							"walk": "img/walk_mon_lich.png",
+							"walk_h": 40,
+							"walk_n": 4,
+							"walk_w": 31
 						}
 					],
 					"title": "Главные монстры"

@@ -8,6 +8,7 @@ extends Node2D
 
 const W = preload("res://wild_db.gd")
 const F25 = preload("res://fauna25_db.gd")
+const AV = preload("res://animal_voices_db.gd")   # свои голоса каждого зверя (tools/animal_voices.py)
 const FRAMES: int = 12
 
 # занятие зверя: [звук, эффект, сдвиг эффекта (доля ширины, доля высоты), длительность от/до]
@@ -200,8 +201,9 @@ func _process(delta: float) -> void:
 	sound_t -= delta
 	if sound_t <= 0.0:
 		sound_t = randf_range(7.0, 18.0)
-		if d < 300.0 and String(info["sound"]) != "" and state != "rest":
-			Sound.play(String(info["sound"]), -14.0, 0.15, global_position)
+		var vo: String = voice()
+		if d < 300.0 and vo != "" and state != "rest":
+			Sound.play(vo, -12.0, 0.08, global_position)
 
 
 ## Стоит на месте: занимается делом, отдыхает или просто оглядывается
@@ -219,7 +221,9 @@ func _still(delta: float, d: float) -> void:
 				if fx != "" and randf() < 0.6:
 					Game.fx.emit(global_position + Vector2(off.x * hw * 2.0 * (-1.0 if spr.flip_h else 1.0), off.y * hh * 2.0), fx)
 				if String(a[0]) != "" and d < 260.0 and randf() < 0.35:
-					Sound.play(String(a[0]), -16.0, 0.15, global_position)
+					# если занятие «звучит» общим голосом (кря, хрю…) — берём свой голос зверя
+					var asnd: String = voice() if String(a[0]) == String(info["sound"]) and AV.VOICE.has(kind) else String(a[0])
+					Sound.play(asnd, -16.0, 0.08, global_position)
 			if state_t <= 0.0:
 				state = "idle"
 				wait_t = randf_range(1.0, 3.0)
@@ -294,8 +298,9 @@ func interact() -> void:
 		Game.forms_known.append(kind)          # v25: погладила — теперь знает этот облик
 	Game.fx.emit(global_position + Vector2(0, -hh - 6.0), "heart")
 	get_tree().call_group("player", "react", "happy", 1.4)
-	if String(info["sound"]) != "":
-		Sound.play(String(info["sound"]), -6.0, 0.1, global_position)
+	var pv: String = voice(true)
+	if pv != "":
+		Sound.play(pv, -6.0, 0.05, global_position)
 	# трижды погладили и дома есть место в загоне — идёт за героиней
 	pets += 1
 	var hs: Node = get_tree().get_first_node_in_group("homestead")
@@ -321,3 +326,11 @@ func settle(c: Vector2) -> void:
 	roam = 40.0
 	info = info.duplicate()
 	info["shy"] = false
+
+
+## Свой голос зверя: один из двух криков, а когда гладят — довольный звук.
+## Если голоса нет (новый зверь без файла) — старый общий звук из таблицы.
+func voice(pet: bool = false) -> String:
+	if AV.VOICE.has(kind):
+		return "av_%s_%s" % [kind, "pet" if pet else str(randi() % 2)]
+	return String(info.get("sound", ""))

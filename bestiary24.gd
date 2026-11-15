@@ -100,6 +100,53 @@ func _frame(path: String, frames_x: int, frames_y: int = 1) -> Texture2D:
 	at.region = Rect2(0, 0, src.get_width() / float(frames_x), src.get_height() / float(frames_y))
 	return at
 
+# v28: полоска кадров ходьбы для анимации в бестиарии (все кадры режутся одним общим прямоугольником — без дрожания)
+func _walk(e: Dictionary, key: String, path: String, frames_x: int, idx: Array) -> void:
+	if not ResourceLoader.exists(path):
+		return
+	var src: Image = (load(path) as Texture2D).get_image()
+	if src == null or src.is_empty():
+		return
+	if src.is_compressed():
+		src.decompress()
+	var fw: int = int(src.get_width() / float(frames_x))
+	var fh: int = src.get_height()
+	var u: Rect2i = Rect2i()
+	var first: bool = true
+	for i in idx:
+		var fr: Image = src.get_region(Rect2i(int(i) * fw, 0, fw, fh))
+		var ur: Rect2i = fr.get_used_rect()
+		if ur.size.x == 0:
+			continue
+		u = ur if first else u.merge(ur)
+		first = false
+	if first:
+		return
+	var strip: Image = Image.create(u.size.x * idx.size(), u.size.y, false, Image.FORMAT_RGBA8)
+	var n: int = 0
+	for i in idx:
+		var fr2: Image = src.get_region(Rect2i(int(i) * fw, 0, fw, fh))
+		strip.blit_rect(fr2, u, Vector2i(n * u.size.x, 0))
+		n += 1
+	var rel: String = "img/walk_%s.png" % key.validate_filename()
+	strip.save_png(out + "/" + rel)
+	e["walk"] = rel
+	e["walk_n"] = idx.size()
+	e["walk_w"] = u.size.x
+	e["walk_h"] = u.size.y
+
+
+## Копирует звук из audio/ в папку бестиария (snd/), возвращает путь для HTML.
+func _snd(name: String) -> String:
+	var b: PackedByteArray = FileAccess.get_file_as_bytes("res://audio/%s.wav" % name)
+	if b.is_empty():
+		return ""
+	DirAccess.make_dir_recursive_absolute(out + "/snd")
+	var f: FileAccess = FileAccess.open(out + "/snd/%s.wav" % name, FileAccess.WRITE)
+	f.store_buffer(b)
+	f.close()
+	return "snd/%s.wav" % name
+
 
 func _e(id: String, name: String, img: String, sub: String, lines: Array, tags: Array = []) -> Dictionary:
 	var clean: Array = []
@@ -255,6 +302,12 @@ func _animals() -> Dictionary:
 		var e: Dictionary = _e(id, nm, _img("animal_" + id, _frame("res://art/animal_%s.png" % id, 12)), "",
 			[String(z[0]), "Пол: " + preload("res://sex27.gd").species_text(id) + " (у каждой особи свой, видно в подсказке)", "Где живёт: " + String(z[1]), "Любит: " + ", ".join(likes),
 			"В загоне даёт: %s ×%d в день" % [_nm(String(pr[0])), int(pr[1])], "Малыши: %d%%" % int(float(z[4]) * 100.0)])
+		_walk(e, "animal_" + id, "res://art/animal_%s.png" % id, 12, [0, 1, 2, 3])
+		var av: Dictionary = preload("res://animal_voices_db.gd").VOICE
+		if av.has(id):   # свой голос зверя: строка + кнопки «послушать» в HTML
+			(e["text"] as Array).append("Голос: " + String(av[id]))
+			e["voice"] = _snd("av_%s_0" % id)
+			e["voice_pet"] = _snd("av_%s_pet" % id)
 		if ResourceLoader.exists("res://art/animal_%s_baby.png" % id):   # малыш зверя — маленькой картинкой
 			e["img2"] = _img("animal_%s_baby" % id, _frame("res://art/animal_%s_baby.png" % id, 12))
 		if bool(info.get("mythic", false)):
@@ -280,6 +333,7 @@ func _cats26() -> Dictionary:
 		var e: Dictionary = _e("cat26_" + s, CD.title(s), _img("cat26_" + s, _frame(CD.tex_path(s), 10)), String(CD.TIER_NAME[tr]) + " окрас",
 			[CD.desc(s), where, "Погладь %d раз — пойдёт жить к тебе и будет ходить следом." % (3 + tr * 2), "При поглаживании иногда остаётся кошачья шерсть."],
 			(["rar%d" % tr, String(CD.TIER_NAME[tr])] if tr > 0 else []))
+		_walk(e, "cat26_" + s, CD.tex_path(s), 10, [6, 7, 8, 9])
 		e["img2"] = _img("cat26_kit_" + s, _frame(CD.tex_path("kit_" + s), 10))
 		e["img2_t"] = "котёнок"
 		(by_tier[tr] as Array).append(e)
@@ -301,6 +355,7 @@ func _birds() -> Dictionary:
 		var e: Dictionary = _e(id, String(d["name"]), _img("bird_" + id, _frame("res://art/bird_%s.png" % id, 12)), "",
 			[BL.text(id), "Где: " + BL.where(d), "Когда: %s, %s" % [String(BL.WHEN_RU.get(String(d["when"]), "")), String(BL.PERCH_RU.get(String(d["perch"]), ""))],
 			"Перо в котле: " + _props(d.get("props", {})), "Перо стоит %d мон." % int(d["price"])])
+		_walk(e, "bird_" + id, "res://art/bird_%s.png" % id, 12, [5, 4, 5, 5])
 		e["img2"] = _img("feather_" + id, load("res://art/icon_feather_%s.png" % id) if ResourceLoader.exists("res://art/icon_feather_%s.png" % id) else null)
 		if bool(d.get("magic", false)):
 			magic.append(e)
@@ -351,6 +406,7 @@ func _monsters() -> Dictionary:
 		var e: Dictionary = _e(id, String(d["name"]), _img("mon_" + id, _frame("res://art/mon_%s.png" % id, 4)), String(HOME_RU.get(home, home)),
 			["Проделка: " + String(TRICKS.get(String(d.get("shape", "")), "толкается.")),
 			"Сила: %d   ·   Удар: %d   ·   Скорость: %d" % [int(d["hp"]), int(d["dmg"]), int(d["speed"])]])
+		_walk(e, "mon_" + id, "res://art/mon_%s.png" % id, 4, [0, 1, 2, 3])
 		if home.begins_with("boss"):
 			bosses.append(e)
 		else:
