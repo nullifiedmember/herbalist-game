@@ -482,6 +482,49 @@ def sec_trees_chop():
     return out
 
 
+def _animals_data():
+    """Звери: имена, где живут, что любят, что дают в загоне, шанс малышей (как в книге и бестиарии)."""
+    names = {}
+    for f, n in (("wild_db.gd", "ANIMALS_BASE"), ("fauna25_db.gd", "ANIMALS")):
+        for k, v in g.load(f, n).items():
+            names[k] = v.get("name", k)
+    for k, v in g.load("v23_data.gd", "FARM").items():
+        names.setdefault(k, v.get("name", k))
+    zoo = dict(g.load("farm23.gd", "ZOO_BASE"))
+    zoo.update(g.load("fauna25_db.gd", "ZOO"))
+    order = list(g.load("farm23.gd", "ORDER_BASE")) + list(g.load("fauna25_db.gd", "ORDER"))
+    return names, zoo, order
+
+
+BABY_LOOK = {
+    "duck": "жёлтый пушистый утёнок", "chicken": "жёлтый цыплёнок", "goose": "жёлтый гусёнок",
+    "boar": "полосатый кабанёнок", "flat_boar": "полосатый кабанёнок", "deer": "оленёнок в светлых пятнышках",
+    "roe_deer": "косулёнок в светлых пятнышках", "seal": "белый пушистый бельк", "elk": "лосёнок без рогов",
+}
+FOOD_KIND = {"veg": "овощи", "berry": "ягоды", "meat": "мясо", "fish": "рыба", "grain": "зерно", "fruit": "фрукты", "nut": "орехи",
+             "herb": "травы", "seed": "семена", "sweet": "сладкое", "mushroom": "грибы", "milk": "молоко", "honey": "мёд", "bug": "жуки"}
+
+
+def sec_animals():
+    names, zoo, order = _animals_data()
+    out = []
+    for k in order:
+        if k not in zoo:
+            continue
+        z = zoo[k]
+        likes = ", ".join(FOOD_KIND.get(str(x), nm(x)) for x in z[2])
+        pr = z[3]
+        baby = BABY_LOOK.get(k, "маленький, с большой головой и короткими лапками" + (", без рогов" if k in ("cow", "goat", "ram", "ibex", "yak", "bison", "kirin", "unicorn", "forest_stag", "golden_deer", "jackalope") else ""))
+        rows = [("Какой", z[0]), ("Где живёт", z[1]), ("Как приманить", f"взять в руку угощение ({likes}) и подойти — зверь пойдёт за тобой в загон"),
+                ("В загоне даёт", f"{nm(pr[0])} ×{pr[1]} в день" if pr else ""),
+                ("Малыши", f"если в загоне двое взрослых, ночью с шансом {int(float(z[4]) * 100)}% рождается малыш: {baby}. Через несколько дней вырастает.")]
+        # картинка зверя — из бестиария (там кадры уже вырезаны из листа)
+        bimg = GAME.parent / "Бестиарий" / "img" / ("animal_%s.png" % k)
+        pic = "../Бестиарий/img/animal_%s.png" % k if bimg.exists() else ""
+        out.append(card(names.get(k, k), pic, rows=rows, tags=["есть малыш"] if (ART / ("animal_%s_baby.png" % k)).exists() else []))
+    return out
+
+
 def sec_traps():
     out = []
     for k, t in TRAPS.items():
@@ -642,6 +685,29 @@ q.addEventListener('input', () => {
 """
 
 
+TREES27 = [("tree_a", "Дуб", "луга у дома, светлые рощи, земли рыцарей"), ("tree_b", "Клён", "луга, светлые рощи"),
+           ("tree_c", "Липа", "сумрачные леса, луга, болота"), ("tree_d", "Вяз", "луга, рощи, осенний лес"),
+           ("tree_apple", "Яблоня", "двор травницы, деревня кошкодевочек"), ("tree_autumn", "Осенний клён", "осенний лес, луга"),
+           ("tree_autumn2", "Рыжий клён", "осенний лес"), ("tree_blossom", "Сакура", "цветущие рощи, земли Восходящего Солнца"),
+           ("tree_unicorn", "Единорожье дерево", "земли единорогов"), ("tree_birch", "Берёза", "берёзовые рощи, земли единорогов")]
+FLOWERS27 = [("flowers_pink", "Розовая гвоздичка", "луга, цветущие рощи, поля"), ("flowers_white", "Нивяник (луговая ромашка)", "луга и поля у дома"),
+             ("flowers_blue", "Василёк луговой", "луга, поля, берёзовые рощи"), ("flowers_yellow", "Лютик едкий", "луга и поля")]
+
+
+def sec_nature27():
+    """v27: деревья, луговые цветы и травы так, как они растут в мире."""
+    trees = [card(n, img(k), rows=[("Где растёт", w), ("Зачем", "рубить топором: брёвна, кора, листья (см. «Места добычи»)"),
+                                   ("Вид", "ствол в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла")]) for k, n, w in TREES27]
+    fl = [card(n, img(k), rows=[("Где растёт", w), ("Зачем", "украшение луга, собрать нельзя")]) for k, n, w in FLOWERS27]
+    hw = []
+    for hid in H_ORDER:
+        p = img("herbw_" + hid)
+        if p:
+            hw.append(card(HERBS[hid]["name"], p, sub="так растёт в мире",
+                           rows=[("Где", HERBS[hid]["where"]), ("Как", "подойти и нажать E")]))
+    return [("Деревья", trees), ("Луговые цветы", fl), ("Травы в мире", hw)]
+
+
 def grp(title, cards, about=""):
     if not cards:
         return ""
@@ -670,6 +736,8 @@ def build():
     secs.append(section("feathers", "Перья птиц", "Перья дают свойства для котла. Птицу надо вспугнуть, а перо — подобрать.", [("Перья", sec_feathers())]))
     secs.append(section("bugs", "Насекомые и листья", "Насекомых ловят сачком, листья собирают с крон. Всё идёт в котёл.",
                         [("Насекомые", sec_bugs()), ("Листья деревьев", sec_leaves())]))
+    secs.append(section("animals", "Звери и малыши", "Где живёт каждый зверь, чем его приманить, что он даёт в загоне и как выглядит его малыш.",
+                        [("Звери", sec_animals())]))
     secs.append(section("traps", "Ловушки и добыча со зверей", "Поймай зверя — и вычеши из него пух для пряжи.", [("Ловушки", sec_traps())]))
     pg = sec_potions()
     secs.append(section("potions", "Рецепты зелий", "Как сварить каждое зелье. Пример — один из способов, получить можно и по-другому: смотри «Что нужно».",
@@ -681,6 +749,9 @@ def build():
     bg, kb, plot = sec_build()
     secs.append(section("build", "Постройки", "Что нужно для каждой постройки. Строить — через верстак.",
                         list(bg.items()) + [("Постройки королевства", kb), ("Расширение участка", plot)]))
+    secs.append(section("nature", "Деревья, луговые цветы и травы в мире",
+                        "Как всё выглядит в мире (стиль яблока). Травы и цветы растут прямо из земли: под ними тень-лунка и травинки в цвет травы своего края.",
+                        sec_nature27()))
     ctl = [
         ("B", "Мебель и комнаты", "Строительство внутри дома."), ("J", "Книга травника", "Травы, рецепты, птицы."),
         ("I", "Крафт", "Окно крафта."), ("M", "Карта", "Открывается по мере прогулок."), ("Q", "Задания", "Список заданий."),

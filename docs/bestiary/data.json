@@ -7,6 +7,8 @@
 						{
 							"id": "mint",
 							"img": "img/herb_mint.png",
+							"img2": "img/herbw_mint.png",
+							"img2_t": "так растёт в мире",
 							"name": "Мята перечная",
 							"sub": "Mentha piperita",
 							"tags": [
@@ -22,6 +24,8 @@
 						{
 							"id": "lavender",
 							"img": "img/herb_lavender.png",
+							"img2": "img/herbw_lavender.png",
+							"img2_t": "так растёт в мире",
 							"name": "Лаванда",
 							"sub": "Lavandula angustifolia",
 							"tags": [
@@ -37,6 +41,8 @@
 						{
 							"id": "chamomile",
 							"img": "img/herb_chamomile.png",
+							"img2": "img/herbw_chamomile.png",
+							"img2_t": "так растёт в мире",
 							"name": "Ромашка аптечная",
 							"sub": "Matricaria chamomilla",
 							"tags": [
@@ -52,6 +58,8 @@
 						{
 							"id": "nettle",
 							"img": "img/herb_nettle.png",
+							"img2": "img/herbw_nettle.png",
+							"img2_t": "так растёт в мире",
 							"name": "Крапива двудомная",
 							"sub": "Urtica dioica",
 							"tags": [],
@@ -65,6 +73,8 @@
 						{
 							"id": "plantain",
 							"img": "img/herb_plantain.png",
+							"img2": "img/herbw_plantain.png",
+							"img2_t": "так растёт в мире",
 							"name": "Подорожник большой",
 							"sub": "Plantago major",
 							"tags": [],
@@ -78,6 +88,8 @@
 						{
 							"id": "clover",
 							"img": "img/herb_clover.png",
+							"img2": "img/herbw_clover.png",
+							"img2_t": "так растёт в мире",
 							"name": "Клевер луговой",
 							"sub": "Trifolium pratense",
 							"tags": [],
@@ -91,6 +103,8 @@
 						{
 							"id": "dandelion",
 							"img": "img/herb_dandelion.png",
+							"img2": "img/herbw_dandelion.png",
+							"img2_t": "так растёт в мире",
 							"name": "Одуванчик",
 							"sub": "Taraxacum officinale",
 							"tags": [],
@@ -104,6 +118,8 @@
 						{
 							"id": "yarrow",
 							"img": "img/herb_yarrow.png",
+							"img2": "img/herbw_yarrow.png",
+							"img2_t": "так растёт в мире",
 							"name": "Тысячелистник",
 							"sub": "Achillea millefolium",
 							"tags": [],
@@ -117,6 +133,8 @@
 						{
 							"id": "thyme",
 							"img": "img/herb_thyme.png",
+							"img2": "img/herbw_thyme.png",
+							"img2_t": "так растёт в мире",
 							"name": "Чабрец",
 							"sub": "Thymus serpyllum",
 							"tags": [],
@@ -130,6 +148,8 @@
 						{
 							"id": "calendula",
 							"img": "img/herb_calendula.png",
+							"img2": "img/herbw_calendula.png",
+							"img2_t": "так растёт в мире",
 							"name": "Календула",
 							"sub": "Calendula officinalis",
 							"tags": [],
@@ -143,6 +163,8 @@
 						{
 							"id": "cornflower",
 							"img": "img/herb_cornflower.png",
+							"img2": "img/herbw_cornflower.png",
+							"img2_t": "так растёт в мире",
 							"name": "Василёк синий",
 							"sub": "Centaurea cyanus",
 							"tags": [],
@@ -156,6 +178,8 @@
 						{
 							"id": "poppy",
 							"img": "img/herb_poppy.png",
+							"img2": "img/herbw_poppy.png",
+							"img2_t": "так растёт в мире",
 							"name": "Мак полевой",
 							"sub": "Papaver rhoeas",
 							"tags": [],
@@ -169,6 +193,8 @@
 						{
 							"id": "st_john",
 							"img": "img/herb_st_john.png",
+							"img2": "img/herbw_st_john.png",
+							"img2_t": "так растёт в мире",
 							"name": "Зверобой",
 							"sub": "Hypericum perforatum",
 							"tags": [],
@@ -182,6 +208,8 @@
 						{
 							"id": "oregano",
 							"img": "img/herb_oregano.png",
+							"img2": "img/herbw_oregano.png",
+							"img2_t": "так растёт в мире",
 							"name": "Душица",
 							"sub": "Origanum vulgare",
 							"tags": [],
@@ -195,6 +223,8 @@
 						{
 							"id": "lungwort",
 							"img": "img/herb_lungwort.png",
+							"img2": "img/herbw_lungwort.png",
+							"img2_t": "так растёт в мире",
 							"name": "Медуница",
 							"sub": "Pulmonaria officinalis",
 							"tags": [],
@@ -208,6 +238,8 @@
 						{
 							"id": "lily_valley",
 							"img": "img/herb_lily_valley.png",
+							"img2": "img/herbw_lily_valley.png",
+							"img2_t": "так растёт в мире",
 							"name": "Ландыш майский",
 							"sub": "Convallaria majalis",
 							"tags": [],
@@ -221,6 +253,8 @@
 						{
 							"id": "strawberry",
 							"img": "img/herb_strawberry.png",
+							"img2": "img/herbw_strawberry.png",
+							"img2_t": "так растёт в мире",
 							"name": "Земляника лесная",
 							"sub": "Fragaria vesca",
 							"tags": [],
@@ -234,6 +268,8 @@
 						{
 							"id": "lingonberry",
 							"img": "img/herb_lingonberry.png",
+							"img2": "img/herbw_lingonberry.png",
+							"img2_t": "так растёт в мире",
 							"name": "Брусника",
 							"sub": "Vaccinium vitis-idaea",
 							"tags": [],
@@ -247,6 +283,8 @@
 						{
 							"id": "fern",
 							"img": "img/herb_fern.png",
+							"img2": "img/herbw_fern.png",
+							"img2_t": "так растёт в мире",
 							"name": "Папоротник мужской",
 							"sub": "Dryopteris filix-mas",
 							"tags": [],
@@ -260,6 +298,8 @@
 						{
 							"id": "club_moss",
 							"img": "img/herb_club_moss.png",
+							"img2": "img/herbw_club_moss.png",
+							"img2_t": "так растёт в мире",
 							"name": "Плаун булавовидный",
 							"sub": "Lycopodium clavatum",
 							"tags": [],
@@ -273,6 +313,8 @@
 						{
 							"id": "heather",
 							"img": "img/herb_heather.png",
+							"img2": "img/herbw_heather.png",
+							"img2_t": "так растёт в мире",
 							"name": "Вереск",
 							"sub": "Calluna vulgaris",
 							"tags": [],
@@ -286,6 +328,8 @@
 						{
 							"id": "rosehip",
 							"img": "img/herb_rosehip.png",
+							"img2": "img/herbw_rosehip.png",
+							"img2_t": "так растёт в мире",
 							"name": "Шиповник",
 							"sub": "Rosa canina",
 							"tags": [],
@@ -299,6 +343,8 @@
 						{
 							"id": "sage",
 							"img": "img/herb_sage.png",
+							"img2": "img/herbw_sage.png",
+							"img2_t": "так растёт в мире",
 							"name": "Шалфей",
 							"sub": "Salvia officinalis",
 							"tags": [],
@@ -312,6 +358,8 @@
 						{
 							"id": "valerian",
 							"img": "img/herb_valerian.png",
+							"img2": "img/herbw_valerian.png",
+							"img2_t": "так растёт в мире",
 							"name": "Валериана",
 							"sub": "Valeriana officinalis",
 							"tags": [],
@@ -325,6 +373,8 @@
 						{
 							"id": "wormwood",
 							"img": "img/herb_wormwood.png",
+							"img2": "img/herbw_wormwood.png",
+							"img2_t": "так растёт в мире",
 							"name": "Полынь горькая",
 							"sub": "Artemisia absinthium",
 							"tags": [],
@@ -338,6 +388,8 @@
 						{
 							"id": "moonbloom",
 							"img": "img/herb_moonbloom.png",
+							"img2": "img/herbw_moonbloom.png",
+							"img2_t": "так растёт в мире",
 							"name": "Лунноцвет",
 							"sub": "Selene noctiflora",
 							"tags": [],
@@ -351,6 +403,8 @@
 						{
 							"id": "unicorn_mane",
 							"img": "img/herb_unicorn_mane.png",
+							"img2": "img/herbw_unicorn_mane.png",
+							"img2_t": "так растёт в мире",
 							"name": "Единорожья грива",
 							"sub": "Crinis unicornis",
 							"tags": [],
@@ -364,6 +418,8 @@
 						{
 							"id": "pink_clover",
 							"img": "img/herb_pink_clover.png",
+							"img2": "img/herbw_pink_clover.png",
+							"img2_t": "так растёт в мире",
 							"name": "Клевер розовый",
 							"sub": "Trifolium roseum",
 							"tags": [],
@@ -377,6 +433,8 @@
 						{
 							"id": "glowmoss",
 							"img": "img/herb_glowmoss.png",
+							"img2": "img/herbw_glowmoss.png",
+							"img2_t": "так растёт в мире",
 							"name": "Светомох",
 							"sub": "Muscus lucens",
 							"tags": [],
@@ -390,6 +448,8 @@
 						{
 							"id": "stonecrop",
 							"img": "img/herb_stonecrop.png",
+							"img2": "img/herbw_stonecrop.png",
+							"img2_t": "так растёт в мире",
 							"name": "Очиток едкий",
 							"sub": "Sedum acre",
 							"tags": [],
@@ -403,6 +463,8 @@
 						{
 							"id": "crystal_root",
 							"img": "img/herb_crystal_root.png",
+							"img2": "img/herbw_crystal_root.png",
+							"img2_t": "так растёт в мире",
 							"name": "Кристальный корень",
 							"sub": "Radix crystallina",
 							"tags": [],
@@ -416,6 +478,8 @@
 						{
 							"id": "calamus",
 							"img": "img/herb_calamus.png",
+							"img2": "img/herbw_calamus.png",
+							"img2_t": "так растёт в мире",
 							"name": "Аир болотный",
 							"sub": "Acorus calamus",
 							"tags": [],
@@ -429,6 +493,8 @@
 						{
 							"id": "marsh_tea",
 							"img": "img/herb_marsh_tea.png",
+							"img2": "img/herbw_marsh_tea.png",
+							"img2_t": "так растёт в мире",
 							"name": "Багульник",
 							"sub": "Rhododendron tomentosum",
 							"tags": [],
@@ -442,6 +508,8 @@
 						{
 							"id": "sundew",
 							"img": "img/herb_sundew.png",
+							"img2": "img/herbw_sundew.png",
+							"img2_t": "так растёт в мире",
 							"name": "Росянка",
 							"sub": "Drosera rotundifolia",
 							"tags": [],
@@ -455,6 +523,8 @@
 						{
 							"id": "cloudberry",
 							"img": "img/herb_cloudberry.png",
+							"img2": "img/herbw_cloudberry.png",
+							"img2_t": "так растёт в мире",
 							"name": "Морошка",
 							"sub": "Rubus chamaemorus",
 							"tags": [],
@@ -468,6 +538,8 @@
 						{
 							"id": "sea_buckthorn",
 							"img": "img/herb_sea_buckthorn.png",
+							"img2": "img/herbw_sea_buckthorn.png",
+							"img2_t": "так растёт в мире",
 							"name": "Облепиха",
 							"sub": "Hippophae rhamnoides",
 							"tags": [],
@@ -481,6 +553,8 @@
 						{
 							"id": "sea_lavender",
 							"img": "img/herb_sea_lavender.png",
+							"img2": "img/herbw_sea_lavender.png",
+							"img2_t": "так растёт в мире",
 							"name": "Кермек морской",
 							"sub": "Limonium vulgare",
 							"tags": [],
@@ -494,6 +568,8 @@
 						{
 							"id": "sea_kale",
 							"img": "img/herb_sea_kale.png",
+							"img2": "img/herbw_sea_kale.png",
+							"img2_t": "так растёт в мире",
 							"name": "Катран морской",
 							"sub": "Crambe maritima",
 							"tags": [],
@@ -507,6 +583,8 @@
 						{
 							"id": "nightshade",
 							"img": "img/herb_nightshade.png",
+							"img2": "img/herbw_nightshade.png",
+							"img2_t": "так растёт в мире",
 							"name": "Белладонна",
 							"sub": "Atropa belladonna",
 							"tags": [],
@@ -520,6 +598,8 @@
 						{
 							"id": "mandrake",
 							"img": "img/herb_mandrake.png",
+							"img2": "img/herbw_mandrake.png",
+							"img2_t": "так растёт в мире",
 							"name": "Мандрагора",
 							"sub": "Mandragora officinarum",
 							"tags": [],
@@ -533,6 +613,8 @@
 						{
 							"id": "elf_leaf",
 							"img": "img/herb_elf_leaf.png",
+							"img2": "img/herbw_elf_leaf.png",
+							"img2_t": "так растёт в мире",
 							"name": "Эльфийский лист",
 							"sub": "Folium elvorum",
 							"tags": [],
@@ -546,6 +628,8 @@
 						{
 							"id": "shiso",
 							"img": "img/herb_shiso.png",
+							"img2": "img/herbw_shiso.png",
+							"img2_t": "так растёт в мире",
 							"name": "Перилла",
 							"sub": "Perilla frutescens",
 							"tags": [],
@@ -559,6 +643,8 @@
 						{
 							"id": "ginseng",
 							"img": "img/herb_ginseng.png",
+							"img2": "img/herbw_ginseng.png",
+							"img2_t": "так растёт в мире",
 							"name": "Женьшень",
 							"sub": "Panax ginseng",
 							"tags": [],
@@ -572,6 +658,8 @@
 						{
 							"id": "fire_pepper",
 							"img": "img/herb_fire_pepper.png",
+							"img2": "img/herbw_fire_pepper.png",
+							"img2_t": "так растёт в мире",
 							"name": "Огнецвет",
 							"sub": "Capsicum ignis",
 							"tags": [],
@@ -585,6 +673,8 @@
 						{
 							"id": "catnip",
 							"img": "img/herb_catnip.png",
+							"img2": "img/herbw_catnip.png",
+							"img2_t": "так растёт в мире",
 							"name": "Котовник",
 							"sub": "Nepeta cataria",
 							"tags": [],
@@ -598,6 +688,8 @@
 						{
 							"id": "star_bell",
 							"img": "img/herb_star_bell.png",
+							"img2": "img/herbw_star_bell.png",
+							"img2_t": "так растёт в мире",
 							"name": "Звёздный колокольчик",
 							"sub": "Campanula stellaris",
 							"tags": [],
@@ -611,6 +703,8 @@
 						{
 							"id": "web_grass",
 							"img": "img/herb_web_grass.png",
+							"img2": "img/herbw_web_grass.png",
+							"img2_t": "так растёт в мире",
 							"name": "Паутинная трава",
 							"sub": "Herba araneae",
 							"tags": [],
@@ -624,6 +718,8 @@
 						{
 							"id": "arnica",
 							"img": "img/herb_arnica.png",
+							"img2": "img/herbw_arnica.png",
+							"img2_t": "так растёт в мире",
 							"name": "Арника горная",
 							"sub": "Arnica montana",
 							"tags": [],
@@ -637,6 +733,8 @@
 						{
 							"id": "fire_lily",
 							"img": "img/herb_fire_lily.png",
+							"img2": "img/herbw_fire_lily.png",
+							"img2_t": "так растёт в мире",
 							"name": "Огненная лилия",
 							"sub": "Lilium ignifer",
 							"tags": [],
@@ -650,6 +748,8 @@
 						{
 							"id": "frost_lotus",
 							"img": "img/herb_frost_lotus.png",
+							"img2": "img/herbw_frost_lotus.png",
+							"img2_t": "так растёт в мире",
 							"name": "Ледяной лотос",
 							"sub": "Nymphaea glacialis",
 							"tags": [],
@@ -663,6 +763,8 @@
 						{
 							"id": "shadow_orchid",
 							"img": "img/herb_shadow_orchid.png",
+							"img2": "img/herbw_shadow_orchid.png",
+							"img2_t": "так растёт в мире",
 							"name": "Теневая орхидея",
 							"sub": "Orchis umbrae",
 							"tags": [],
@@ -676,6 +778,8 @@
 						{
 							"id": "sunflower_gold",
 							"img": "img/herb_sunflower_gold.png",
+							"img2": "img/herbw_sunflower_gold.png",
+							"img2_t": "так растёт в мире",
 							"name": "Солнечник",
 							"sub": "Helianthus aureus",
 							"tags": [],
@@ -689,6 +793,8 @@
 						{
 							"id": "dragon_root",
 							"img": "img/herb_dragon_root.png",
+							"img2": "img/herbw_dragon_root.png",
+							"img2_t": "так растёт в мире",
 							"name": "Драконий корень",
 							"sub": "Radix draconis",
 							"tags": [],
@@ -702,6 +808,8 @@
 						{
 							"id": "void_bloom",
 							"img": "img/herb_void_bloom.png",
+							"img2": "img/herbw_void_bloom.png",
+							"img2_t": "так растёт в мире",
 							"name": "Бездноцвет",
 							"sub": "Flos abyssi",
 							"tags": [],
@@ -715,6 +823,8 @@
 						{
 							"id": "phoenix_grass",
 							"img": "img/herb_phoenix_grass.png",
+							"img2": "img/herbw_phoenix_grass.png",
+							"img2_t": "так растёт в мире",
 							"name": "Перо феникса",
 							"sub": "Herba phoenicis",
 							"tags": [],
@@ -728,6 +838,8 @@
 						{
 							"id": "world_leaf",
 							"img": "img/herb_world_leaf.png",
+							"img2": "img/herbw_world_leaf.png",
+							"img2_t": "так растёт в мире",
 							"name": "Лист Великого древа",
 							"sub": "Folium mundi",
 							"tags": [],
@@ -746,6 +858,8 @@
 						{
 							"id": "sea_lettuce",
 							"img": "img/herb_sea_lettuce.png",
+							"img2": "img/herbw_sea_lettuce.png",
+							"img2_t": "так растёт в мире",
 							"name": "Морской салат",
 							"sub": "Ulva lactuca",
 							"tags": [],
@@ -759,6 +873,8 @@
 						{
 							"id": "eelgrass",
 							"img": "img/herb_eelgrass.png",
+							"img2": "img/herbw_eelgrass.png",
+							"img2_t": "так растёт в мире",
 							"name": "Взморник",
 							"sub": "Zostera marina",
 							"tags": [],
@@ -772,6 +888,8 @@
 						{
 							"id": "kelp_gold",
 							"img": "img/herb_kelp_gold.png",
+							"img2": "img/herbw_kelp_gold.png",
+							"img2_t": "так растёт в мире",
 							"name": "Золотая ламинария",
 							"sub": "Laminaria aurea",
 							"tags": [],
@@ -785,6 +903,8 @@
 						{
 							"id": "sea_grape",
 							"img": "img/herb_sea_grape.png",
+							"img2": "img/herbw_sea_grape.png",
+							"img2_t": "так растёт в мире",
 							"name": "Морской виноград",
 							"sub": "Caulerpa racemosa",
 							"tags": [],
@@ -798,6 +918,8 @@
 						{
 							"id": "storm_weed",
 							"img": "img/herb_storm_weed.png",
+							"img2": "img/herbw_storm_weed.png",
+							"img2_t": "так растёт в мире",
 							"name": "Штормовая трава",
 							"sub": "Fucus tempestas",
 							"tags": [],
@@ -811,6 +933,8 @@
 						{
 							"id": "sea_anemone",
 							"img": "img/herb_sea_anemone.png",
+							"img2": "img/herbw_sea_anemone.png",
+							"img2_t": "так растёт в мире",
 							"name": "Цветок-анемон",
 							"sub": "Actinia florida",
 							"tags": [],
@@ -824,6 +948,8 @@
 						{
 							"id": "pearl_moss",
 							"img": "img/herb_pearl_moss.png",
+							"img2": "img/herbw_pearl_moss.png",
+							"img2_t": "так растёт в мире",
 							"name": "Жемчужный мох",
 							"sub": "Bryum margarita",
 							"tags": [],
@@ -837,6 +963,8 @@
 						{
 							"id": "coral_bloom",
 							"img": "img/herb_coral_bloom.png",
+							"img2": "img/herbw_coral_bloom.png",
+							"img2_t": "так растёт в мире",
 							"name": "Коралловый цвет",
 							"sub": "Corallium florens",
 							"tags": [],
@@ -850,6 +978,8 @@
 						{
 							"id": "ice_algae",
 							"img": "img/herb_ice_algae.png",
+							"img2": "img/herbw_ice_algae.png",
+							"img2_t": "так растёт в мире",
 							"name": "Ледяная водоросль",
 							"sub": "Chondrus glacialis",
 							"tags": [],
@@ -863,6 +993,8 @@
 						{
 							"id": "star_coral",
 							"img": "img/herb_star_coral.png",
+							"img2": "img/herbw_star_coral.png",
+							"img2_t": "так растёт в мире",
 							"name": "Звёздный коралл",
 							"sub": "Astrocoenia lucida",
 							"tags": [],
@@ -876,6 +1008,8 @@
 						{
 							"id": "glow_algae",
 							"img": "img/herb_glow_algae.png",
+							"img2": "img/herbw_glow_algae.png",
+							"img2_t": "так растёт в мире",
 							"name": "Световодоросль",
 							"sub": "Noctiluca viridis",
 							"tags": [],
@@ -889,6 +1023,8 @@
 						{
 							"id": "mermaid_hair",
 							"img": "img/herb_mermaid_hair.png",
+							"img2": "img/herbw_mermaid_hair.png",
+							"img2_t": "так растёт в мире",
 							"name": "Волосы русалки",
 							"sub": "Cladophora sirena",
 							"tags": [],
@@ -902,6 +1038,8 @@
 						{
 							"id": "abyss_kelp",
 							"img": "img/herb_abyss_kelp.png",
+							"img2": "img/herbw_abyss_kelp.png",
+							"img2_t": "так растёт в мире",
 							"name": "Глубинная ламинария",
 							"sub": "Laminaria abyssalis",
 							"tags": [],
@@ -915,6 +1053,8 @@
 						{
 							"id": "siren_lily",
 							"img": "img/herb_siren_lily.png",
+							"img2": "img/herbw_siren_lily.png",
+							"img2_t": "так растёт в мире",
 							"name": "Лилия сирен",
 							"sub": "Nymphaea sirena",
 							"tags": [],
@@ -928,6 +1068,8 @@
 						{
 							"id": "tide_orchid",
 							"img": "img/herb_tide_orchid.png",
+							"img2": "img/herbw_tide_orchid.png",
+							"img2_t": "так растёт в мире",
 							"name": "Приливная орхидея",
 							"sub": "Orchis aestus",
 							"tags": [],
@@ -941,6 +1083,8 @@
 						{
 							"id": "pearl_flower",
 							"img": "img/herb_pearl_flower.png",
+							"img2": "img/herbw_pearl_flower.png",
+							"img2_t": "так растёт в мире",
 							"name": "Жемчужный цветок",
 							"sub": "Flos margaritae",
 							"tags": [],
@@ -22579,6 +22723,192 @@
 			"id": "furniture",
 			"intro": "Мебель ставится в доме (клавиша B). Комнаты можно пристраивать.",
 			"title": "Мебель и дом"
+		},
+		{
+			"groups": [
+				{
+					"entries": [
+						{
+							"id": "tree_a",
+							"img": "img/nat_tree_a.png",
+							"name": "Дуб",
+							"sub": "Quercus robur",
+							"tags": [],
+							"text": [
+								"Крепкая кора, широкая крона. Даёт брёвна, кору и листья для котла.",
+								"Где растёт: Луга у дома, светлые рощи, земли рыцарей.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						},
+						{
+							"id": "tree_b",
+							"img": "img/nat_tree_b.png",
+							"name": "Клён",
+							"sub": "Acer platanoides",
+							"tags": [],
+							"text": [
+								"Светлая пышная крона. Брёвна, кора, листья.",
+								"Где растёт: Луга и светлые рощи.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						},
+						{
+							"id": "tree_c",
+							"img": "img/nat_tree_c.png",
+							"name": "Липа",
+							"sub": "Tilia cordata",
+							"tags": [],
+							"text": [
+								"Тёмная густая крона, в тени под ней прохладно.",
+								"Где растёт: Сумрачные леса, луга, болота.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						},
+						{
+							"id": "tree_d",
+							"img": "img/nat_tree_d.png",
+							"name": "Вяз",
+							"sub": "Ulmus glabra",
+							"tags": [],
+							"text": [
+								"Самое высокое лиственное дерево мира.",
+								"Где растёт: Луга, рощи, осенний лес.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						},
+						{
+							"id": "tree_apple",
+							"img": "img/nat_tree_apple.png",
+							"name": "Яблоня",
+							"sub": "Malus domestica",
+							"tags": [],
+							"text": [
+								"Даёт яблоки. Можно посадить саженец у дома.",
+								"Где растёт: Двор травницы, деревня кошкодевочек.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						},
+						{
+							"id": "tree_autumn",
+							"img": "img/nat_tree_autumn.png",
+							"name": "Осенний клён",
+							"sub": "Acer (осень)",
+							"tags": [],
+							"text": [
+								"Золотая листва круглый год.",
+								"Где растёт: Осенний лес, луга.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						},
+						{
+							"id": "tree_autumn2",
+							"img": "img/nat_tree_autumn2.png",
+							"name": "Рыжий клён",
+							"sub": "Acer rubrum",
+							"tags": [],
+							"text": [
+								"Огненно-рыжая крона.",
+								"Где растёт: Осенний лес.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						},
+						{
+							"id": "tree_blossom",
+							"img": "img/nat_tree_blossom.png",
+							"name": "Сакура",
+							"sub": "Prunus serrulata",
+							"tags": [],
+							"text": [
+								"Розовые лепестки падают на траву.",
+								"Где растёт: Цветущие рощи, земли Восходящего Солнца, луга.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						},
+						{
+							"id": "tree_unicorn",
+							"img": "img/nat_tree_unicorn.png",
+							"name": "Единорожье дерево",
+							"sub": "Arbor unicornis",
+							"tags": [],
+							"text": [
+								"Сказочная розово-сиреневая крона.",
+								"Где растёт: Земли единорогов.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						},
+						{
+							"id": "tree_birch",
+							"img": "img/nat_tree_birch.png",
+							"name": "Берёза",
+							"sub": "Betula pendula",
+							"tags": [],
+							"text": [
+								"Белая кора с чёрными полосками.",
+								"Где растёт: Берёзовые рощи, земли единорогов.",
+								"Ствол перерисован в стиле яблока: мягкий цветной контур, кора с волокнами, без дупла."
+							]
+						}
+					],
+					"title": "Деревья"
+				},
+				{
+					"entries": [
+						{
+							"id": "flowers_pink",
+							"img": "img/nat_flowers_pink.png",
+							"name": "Розовая гвоздичка",
+							"sub": "Dianthus deltoides",
+							"tags": [],
+							"text": [
+								"Украшение луга, собрать нельзя.",
+								"Где растёт: Луга, цветущие рощи, поля.",
+								"Растёт прямо из земли: под кустиком тень-лунка и травинки в цвет травы своего края."
+							]
+						},
+						{
+							"id": "flowers_white",
+							"img": "img/nat_flowers_white.png",
+							"name": "Нивяник (луговая ромашка)",
+							"sub": "Leucanthemum vulgare",
+							"tags": [],
+							"text": [
+								"Украшение луга, собрать нельзя.",
+								"Где растёт: Луга и поля у дома.",
+								"Растёт прямо из земли: под кустиком тень-лунка и травинки в цвет травы своего края."
+							]
+						},
+						{
+							"id": "flowers_blue",
+							"img": "img/nat_flowers_blue.png",
+							"name": "Василёк луговой",
+							"sub": "Centaurea jacea",
+							"tags": [],
+							"text": [
+								"Украшение луга, собрать нельзя.",
+								"Где растёт: Луга, поля, берёзовые рощи.",
+								"Растёт прямо из земли: под кустиком тень-лунка и травинки в цвет травы своего края."
+							]
+						},
+						{
+							"id": "flowers_yellow",
+							"img": "img/nat_flowers_yellow.png",
+							"name": "Лютик едкий",
+							"sub": "Ranunculus acris",
+							"tags": [],
+							"text": [
+								"Украшение луга, собрать нельзя.",
+								"Где растёт: Луга и поля.",
+								"Растёт прямо из земли: под кустиком тень-лунка и травинки в цвет травы своего края."
+							]
+						}
+					],
+					"title": "Луговые цветы"
+				}
+			],
+			"icon": "img/nat_tree_a.png",
+			"id": "nature27",
+			"intro": "Деревья и цветы мира в стиле яблока. Травы, которые можно собрать, — в разделе «Травы» (маленькая картинка — как трава растёт в мире).",
+			"title": "Деревья и луговые цветы"
 		}
 	],
 	"title": "Бестиарий «Лесного травника»"
