@@ -20,12 +20,12 @@ func run(main: Node2D, f: Array) -> void:
 	m = main
 	fails = f
 	var tree: SceneTree = m.get_tree()
-	# --- картинки: у каждого окраса взрослый и котёнок, по 10 кадров как у кота травницы
+	# --- картинки: у каждого окраса взрослый и котёнок, по 10 кадров как у кота травницы (кадр 42 px: место для хвоста)
 	var bad: Array = []
 	for s in DB.ORDER:
 		for sk in [s, "kit_" + s]:
 			var tex: Texture2D = load(DB.tex_path(sk))
-			if tex == null or tex.get_width() != 360 or tex.get_height() != 30:
+			if tex == null or tex.get_width() % 10 != 0 or tex.get_height() < 16:   # чиби-листы: 10 кадров, размер у каждого свой
 				bad.append(sk)
 	ck(bad.is_empty(), "листы %d окрасов и котят на месте %s" % [DB.ORDER.size(), str(bad)])
 	var rares: int = 0
@@ -73,7 +73,7 @@ func run(main: Node2D, f: Array) -> void:
 	await wait(0.3)
 	var pet: Node2D = null
 	for p in tree.get_nodes_in_group("pets18"):
-		if String(p.get("skin")) == "golden":
+		if str(p.get("skin")) == "golden":
 			pet = p
 	ck((Game.pets as Array).size() == pets0 + 1 and pet != null, "золотой кот пошёл с героиней")
 	if pet != null:

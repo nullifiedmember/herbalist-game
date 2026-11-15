@@ -14,7 +14,7 @@ func setup(at: Vector2) -> void:
 	spr.texture = load("res://art/mimic.png")
 	spr.hframes = 2
 	spr.centered = false
-	spr.offset = Vector2(-22, -38)
+	spr.offset = Vector2(-spr.texture.get_width() / 4.0, -spr.texture.get_height() + 2.0)
 	add_child(spr)
 
 

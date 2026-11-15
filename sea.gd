@@ -229,7 +229,7 @@ func _build_under() -> void:
 			var f: Sprite2D = Sprite2D.new()
 			f.texture = load("res://art/sea_fish.png")
 			f.region_enabled = true
-			f.region_rect = Rect2(0, kind * 10, 16, 10)
+			f.region_rect = Rect2(0, kind * 12, 20, 12)
 			f.z_index = 25
 			f.set_meta("off", Vector2(rng.randf_range(-26, 26), rng.randf_range(-14, 14)))
 			f.set_meta("k", kind)
@@ -294,7 +294,7 @@ func _process(delta: float) -> void:
 			fs.position = (lead + off + Vector2(sin(t * 1.3 + off.x) * 3.0, cos(t * 1.1 + off.y) * 2.0)).round()
 			fs.flip_h = vel.x > 0.0
 			var fr: int = int(t * 6.0 + off.x) % 2
-			fs.region_rect = Rect2(fr * 16, int(fs.get_meta("k")) * 10, 16, 10)
+			fs.region_rect = Rect2(fr * 20, int(fs.get_meta("k")) * 12, 20, 12)
 	# русалки плавают: покачиваются над дном
 	for sw in swimmers:
 		var nd: Node2D = sw[0]

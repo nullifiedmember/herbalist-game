@@ -79,6 +79,10 @@ func _img(key: String, tex: Texture2D) -> String:
 		return ""
 	if im.is_compressed():
 		im.decompress()
+	# прозрачные отступы кадра (они нужны в игре) в бестиарии не нужны — режем по самой картинке
+	var ur: Rect2i = im.get_used_rect()
+	if ur.size.x > 0 and ur.size.y > 0 and ur.size != im.get_size():
+		im = im.get_region(ur)
 	var p: String = "img/%s.png" % key.validate_filename()
 	im.save_png(out + "/" + p)
 	saved[key] = p
@@ -244,8 +248,10 @@ func _animals() -> Dictionary:
 			likes.append(String(k))
 		var pr: Array = z[3]
 		var e: Dictionary = _e(id, nm, _img("animal_" + id, _frame("res://art/animal_%s.png" % id, 12)), "",
-			[String(z[0]), "Где живёт: " + String(z[1]), "Любит: " + ", ".join(likes),
+			[String(z[0]), "Пол: " + preload("res://sex27.gd").species_text(id) + " (у каждой особи свой, видно в подсказке)", "Где живёт: " + String(z[1]), "Любит: " + ", ".join(likes),
 			"В загоне даёт: %s ×%d в день" % [_nm(String(pr[0])), int(pr[1])], "Малыши: %d%%" % int(float(z[4]) * 100.0)])
+		if ResourceLoader.exists("res://art/animal_%s_baby.png" % id):   # малыш зверя — маленькой картинкой
+			e["img2"] = _img("animal_%s_baby" % id, _frame("res://art/animal_%s_baby.png" % id, 12))
 		if bool(info.get("mythic", false)):
 			magic.append(e)
 		elif bool(info.get("farm", false)) or V23.FARM.has(id):

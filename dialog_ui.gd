@@ -12,6 +12,7 @@ const FD = preload("res://food_db.gd")
 const TIPS = preload("res://tips_db.gd")
 const RECR = preload("res://recruit.gd")
 const SVD = preload("res://svc_dialog.gd")
+const TUT = preload("res://tutor27.gd")
 const MD = preload("res://mining_db.gd")
 const INK: Color = Color("3a2718")
 const PX: float = 3.0
@@ -94,6 +95,10 @@ func start(who: Node2D) -> void:
 	open = true
 	Game.ui_open = true
 	root.visible = true
+	if who.has_meta("tutor"):
+		who.set("met_day", Game.day)
+		TUT.menu(self)
+		return
 	if int(who.get("met_day")) != Game.day:
 		Game.rep_add(String(who.get("land")), 1, true)   # поздоровалась — уже приятно
 	_say(_greeting())
@@ -183,6 +188,8 @@ func _display_name() -> String:
 func _display_name0() -> String:
 	var role: String = String(npc.get("role"))
 	var n: String = String(npc.get("npc_name"))
+	if npc.has_meta("tutor"):
+		return n
 	if role == "лидер":
 		return String(_land().get("leader", n))
 	if role == "торговец":
@@ -234,6 +241,9 @@ func _choose(i: int) -> void:
 		shown = float(full_text.length())
 		text_label.text = full_text
 	var act: String = String(options[i][1])
+	if TUT.handles(act):
+		TUT.handle(self, act)
+		return
 	if SVD.handles(act):
 		SVD.handle(self, act)
 		return

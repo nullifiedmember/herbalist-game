@@ -139,7 +139,7 @@ func _show() -> void:
 		sc = 0.6
 	elif c == "*bat":
 		at.atlas = load("res://art/bat.png")
-		at.region = Rect2(0, 0, 16, 16)
+		at.region = Rect2(0, 0, at.atlas.get_width() / 4.0, at.atlas.get_height())
 		sc = 1.0
 	else:
 		var a: Dictionary = WDB.ANIMALS.get(c, {"w": 22, "h": 18})

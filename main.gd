@@ -463,6 +463,8 @@ func _ready() -> void:
 			hud.call("show_toast", String(SCN.get_s(Game.scenario)["name"]) + " · " + String((SCN.SPAWNS.get(Game.home_biome, {}) as Dictionary).get("name", "")), IT.icon(String(SCN.get_s(Game.scenario)["icon"]).substr(5)))
 		else:
 			mn.call("show_menu")
+	if not test and shot == "" and not OS.get_cmdline_user_args().has("--loadtest"):
+		_spawn_tutor()
 	if OS.get_cmdline_user_args().has("--autoplay"):
 		# автоигра: бот сам играет на ускорении и пишет сохранение (autoplay.gd)
 		var ap: Node = Node.new()
@@ -470,6 +472,17 @@ func _ready() -> void:
 		ap.name = "Autoplay"
 		add_child(ap)
 		ap.call("start", self)
+
+
+## v27: девушка-гид у дома (обучение, tutor27.gd)
+func _spawn_tutor() -> void:
+	var at: Vector2 = LAY.DOOR_POS + home_off() + Vector2(-110, 44)
+	var g: Node2D = _room_npc(String(preload("res://tutor27.gd").TEX), at)
+	g.set_meta("tutor", true)
+	g.set("job", "post")
+	g.set("role", "житель")
+	g.set("roam", 24.0)
+	g.set("npc_name", "Мира, гид")
 
 
 ## Новая игра: что надето, что в сумке, монеты и семена — по выбранному сценарию
@@ -511,6 +524,10 @@ func _apply_scenario() -> void:
 func _place_window() -> void:
 	if DisplayServer.get_name() == "headless":
 		return
+	# v27: полный экран, включённый в настройках, не сбрасывается при старте новой игры
+	if bool(Saves.opt.get("fullscreen", false)):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		return
 	var scr: int = DisplayServer.get_primary_screen()
 	var area: Rect2i = DisplayServer.screen_get_usable_rect(scr)
 	var w: int = mini(1600, int(area.size.x * 0.9))
@@ -518,6 +535,10 @@ func _place_window() -> void:
 	if h > int(area.size.y * 0.88):
 		h = int(area.size.y * 0.88)
 		w = int(h * 16.0 / 9.0)
+	var rs: int = int(Saves.opt.get("res", 0))
+	if rs > 0:
+		w = rs
+		h = int(rs * 9.0 / 16.0)
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	DisplayServer.window_set_current_screen(scr)
 	DisplayServer.window_set_size(Vector2i(w, h))

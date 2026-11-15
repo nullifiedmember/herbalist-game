@@ -7,25 +7,25 @@ const S25 = preload("res://shrooms25_db.gd")
 
 # Звери: имя, ширина кадра, высота, скорость, пугливость (бежит от героини), можно погладить
 const ANIMALS_BASE: Dictionary = {
-	"rabbit": {"name": "Кролик", "w": 22, "h": 18, "speed": 40.0, "shy": true, "pet": true, "sound": "squeak"},
-	"fox": {"name": "Лиса", "w": 34, "h": 22, "speed": 46.0, "shy": true, "pet": false, "sound": "sniff"},
-	"deer": {"name": "Олень", "w": 42, "h": 44, "speed": 50.0, "shy": true, "pet": false, "sound": ""},
-	"boar": {"name": "Кабан", "w": 36, "h": 26, "speed": 34.0, "shy": false, "pet": false, "sound": "grunt"},
-	"flat_boar": {"name": "Сплющенный кабан", "w": 42, "h": 18, "speed": 22.0, "shy": false, "pet": true, "sound": "grunt"},
-	"hedgehog": {"name": "Ёжик", "w": 22, "h": 14, "speed": 14.0, "shy": false, "pet": true, "sound": "sniff"},
-	"squirrel": {"name": "Белка", "w": 22, "h": 20, "speed": 44.0, "shy": true, "pet": false, "sound": "squeak"},
-	"duck": {"name": "Утка", "w": 20, "h": 16, "speed": 20.0, "shy": false, "pet": true, "sound": "quack"},
-	"sapphire_hare": {"name": "Сапфировый заяц", "w": 24, "h": 20, "speed": 60.0, "shy": true, "pet": true, "sound": "magic", "mythic": true},
-	"unicorn": {"name": "Единорог", "w": 48, "h": 46, "speed": 44.0, "shy": false, "pet": true, "sound": "neigh", "mythic": true},
-	"golden_deer": {"name": "Золотой олень", "w": 42, "h": 44, "speed": 56.0, "shy": true, "pet": true, "sound": "magic", "mythic": true},
-	"ember_fox": {"name": "Угольная лиса", "w": 34, "h": 24, "speed": 52.0, "shy": true, "pet": true, "sound": "magic", "mythic": true},
+	"rabbit": {"name": "Кролик", "w": 55, "h": 57, "speed": 40.0, "shy": true, "pet": true, "sound": "squeak"},
+	"fox": {"name": "Лиса", "w": 71, "h": 44, "speed": 46.0, "shy": true, "pet": false, "sound": "sniff"},
+	"deer": {"name": "Олень", "w": 73, "h": 58, "speed": 50.0, "shy": true, "pet": false, "sound": ""},
+	"boar": {"name": "Кабан", "w": 66, "h": 45, "speed": 34.0, "shy": false, "pet": false, "sound": "grunt"},
+	"flat_boar": {"name": "Сплющенный кабан", "w": 60, "h": 48, "speed": 22.0, "shy": false, "pet": true, "sound": "grunt"},
+	"hedgehog": {"name": "Ёжик", "w": 64, "h": 34, "speed": 14.0, "shy": false, "pet": true, "sound": "sniff"},
+	"squirrel": {"name": "Белка", "w": 67, "h": 41, "speed": 44.0, "shy": true, "pet": false, "sound": "squeak"},
+	"duck": {"name": "Утка", "w": 54, "h": 39, "speed": 20.0, "shy": false, "pet": true, "sound": "quack"},
+	"sapphire_hare": {"name": "Сапфировый заяц", "w": 61, "h": 48, "speed": 60.0, "shy": true, "pet": true, "sound": "magic", "mythic": true},
+	"unicorn": {"name": "Единорог", "w": 89, "h": 62, "speed": 44.0, "shy": false, "pet": true, "sound": "neigh", "mythic": true},
+	"golden_deer": {"name": "Золотой олень", "w": 77, "h": 65, "speed": 56.0, "shy": true, "pet": true, "sound": "magic", "mythic": true},
+	"ember_fox": {"name": "Угольная лиса", "w": 71, "h": 44, "speed": 52.0, "shy": true, "pet": true, "sound": "magic", "mythic": true},
 	# v23: домашние звери (приманить едой, в загоне дают яйца, молоко, шерсть)
-	"chicken": {"name": "Курочка", "w": 22, "h": 22, "speed": 22.0, "shy": false, "pet": true, "sound": "squeak", "farm": true},
-	"cow": {"name": "Корова", "w": 46, "h": 34, "speed": 16.0, "shy": false, "pet": true, "sound": "grunt", "farm": true},
-	"sheep": {"name": "Овечка", "w": 34, "h": 28, "speed": 20.0, "shy": false, "pet": true, "sound": "squeak", "farm": true},
-	"goat": {"name": "Козочка", "w": 32, "h": 30, "speed": 26.0, "shy": false, "pet": true, "sound": "squeak", "farm": true},
-	"pig": {"name": "Свинка", "w": 34, "h": 24, "speed": 20.0, "shy": false, "pet": true, "sound": "grunt", "farm": true},
-	"goose": {"name": "Гусь", "w": 24, "h": 26, "speed": 22.0, "shy": false, "pet": true, "sound": "quack", "farm": true},
+	"chicken": {"name": "Курочка", "w": 55, "h": 41, "speed": 22.0, "shy": false, "pet": true, "sound": "squeak", "farm": true},
+	"cow": {"name": "Корова", "w": 78, "h": 51, "speed": 16.0, "shy": false, "pet": true, "sound": "grunt", "farm": true},
+	"sheep": {"name": "Овечка", "w": 62, "h": 38, "speed": 20.0, "shy": false, "pet": true, "sound": "squeak", "farm": true},
+	"goat": {"name": "Козочка", "w": 61, "h": 43, "speed": 26.0, "shy": false, "pet": true, "sound": "squeak", "farm": true},
+	"pig": {"name": "Свинка", "w": 64, "h": 40, "speed": 20.0, "shy": false, "pet": true, "sound": "grunt", "farm": true},
+	"goose": {"name": "Гусь", "w": 65, "h": 53, "speed": 22.0, "shy": false, "pet": true, "sound": "quack", "farm": true},
 }
 
 # Кто живёт в биоме: [зверь, сколько в области]; мифические — [зверь, шанс появиться]

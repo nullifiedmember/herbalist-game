@@ -31,6 +31,7 @@ var mspeed: float = 0.0
 var held: bool = false
 var grab: int = -1                    # какое растение в руке (индекс)
 var t: float = 0.0
+var done_t: float = 0.0               # v27: сколько всё уже собрано (автозакрытие)
 var shake: float = 0.0
 var stun: float = 0.0                 # оглушило криком мандрагоры
 var dizzy: float = 0.0                # яд белладонны
@@ -122,6 +123,7 @@ func open(src: Node, ids: Array) -> void:
 	prev_mouse = mouse
 	trail.clear()
 	held = false
+	done_t = 0.0
 
 
 func close() -> void:
@@ -391,6 +393,19 @@ func _process(delta: float) -> void:
 	if not is_open:
 		return
 	t += delta
+	# v27: всё собрано (или потеряно) — окно закрывается само
+	var busy: bool = false
+	for q in plants:
+		if String(q["state"]) in ["ground", "loose", "air", "held"]:
+			busy = true
+	if busy or grab >= 0:
+		done_t = 0.0
+	else:
+		done_t += delta
+		if done_t > 0.7:
+			done_t = 0.0
+			close()
+			return
 	var h: Vector2 = _hand()
 	mspeed = mouse.distance_to(prev_mouse) / maxf(delta, 0.001)
 	var dy: float = prev_mouse.y - mouse.y           # вверх — положительно

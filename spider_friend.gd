@@ -23,7 +23,7 @@ func setup(tex: String, at: Vector2) -> void:
 	spr.texture = load("res://art/%s.png" % tex)
 	spr.hframes = 6
 	spr.centered = false
-	spr.offset = Vector2(-18, -26)
+	spr.offset = Vector2(-spr.texture.get_width() / 12.0, -spr.texture.get_height() + 2.0)
 	add_child(spr)
 	wait_t = randf_range(0.2, 3.0)
 	speed = randf_range(28.0, 42.0)

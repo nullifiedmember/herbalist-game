@@ -23,7 +23,7 @@ func setup(c: Vector2, k: int, rad: float, seed_v: int) -> void:
 		var f: Sprite2D = Sprite2D.new()
 		f.texture = load("res://art/sea_fish.png")
 		f.region_enabled = true
-		f.region_rect = Rect2(0, kind * 10, 16, 10)
+		f.region_rect = Rect2(0, kind * 12, 20, 12)
 		f.z_index = 25
 		f.modulate = Color(1, 1, 1, 0.9)
 		f.set_meta("off", Vector2(rng.randf_range(-26, 26), rng.randf_range(-14, 14)))
@@ -50,4 +50,4 @@ func _process(delta: float) -> void:
 		fs.global_position = pos.round()
 		fs.flip_h = vel.x > 0.0
 		var fr: int = int(t * 6.0 + off.x) % 2
-		fs.region_rect = Rect2(fr * 16, kind * 10, 16, 10)
+		fs.region_rect = Rect2(fr * 20, kind * 12, 20, 12)

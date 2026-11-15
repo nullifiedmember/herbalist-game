@@ -58,25 +58,21 @@ var player_ref: Node2D = null
 var pets: int = 0                # сколько раз погладили (трижды — пойдёт в загон)
 var follow: bool = false         # идёт за героиней в загон
 var roam: float = 160.0
+var sex: String = "f"            # v27: пол особи ("f" самка / "m" самец)
 
 
 func setup(k: String, at: Vector2) -> void:
 	kind = k
+	sex = preload("res://sex27.gd").roll(k)
 	info = W.ANIMALS[k]
 	home = at
 	position = at
 	spr = Sprite2D.new()
-	spr.texture = load("res://art/animal_%s.png" % k)
 	spr.hframes = FRAMES
 	spr.centered = false
-	var fw: float = float(spr.texture.get_width()) / FRAMES
-	var fh: float = float(spr.texture.get_height())
-	spr.offset = Vector2(-fw / 2.0, -fh + 2.0)
 	spr.scale = Vector2(0.5, 0.5)
 	add_child(spr)
-	hw = fw * 0.25
-	hh = fh * 0.5
-	interact_offset = Vector2(0, -hh * 0.6)
+	_apply_sheet("res://art/animal_%s.png" % k)
 	wait_t = randf_range(0.0, 3.0)
 	sound_t = randf_range(3.0, 12.0)
 	if info.get("mythic", false):
@@ -95,6 +91,34 @@ func setup(k: String, at: Vector2) -> void:
 			"salamander": Color(1.0, 0.6, 0.2), "crystal_tortoise": Color(0.6, 0.85, 1.0), "white_tiger": Color(0.8, 0.9, 1.0)}.get(k, Color.WHITE)
 		p.color = c
 		add_child(p)
+
+
+## Лист зверя: смещение и размер тела считаются по картинке (в кадре большие прозрачные отступы)
+func _apply_sheet(path: String) -> void:
+	spr.texture = load(path)
+	var fw: float = float(spr.texture.get_width()) / FRAMES
+	var fh: float = float(spr.texture.get_height())
+	spr.offset = Vector2(-fw / 2.0, -fh + 2.0)
+	var used: Rect2i = Rect2i(0, 0, int(fw), int(fh))
+	var img: Image = spr.texture.get_image()
+	if img != null:
+		if img.is_compressed():
+			img.decompress()
+		var ur: Rect2i = img.get_region(Rect2i(int(fw) * 4, 0, int(fw), int(fh))).get_used_rect()
+		if ur.size.x > 0:
+			used = ur
+	hw = float(used.size.x) * 0.25
+	hh = float(used.size.y) * 0.5
+	interact_offset = Vector2(0, -hh * 0.6)
+
+
+## Малыш: свой детский лист (жёлтые утята, полосатые кабанята…); вырос — снова взрослый
+func set_baby(b: bool) -> void:
+	var p: String = "res://art/animal_%s_baby.png" % kind
+	if b and ResourceLoader.exists(p):
+		_apply_sheet(p)
+	else:
+		_apply_sheet("res://art/animal_%s.png" % kind)
 
 
 func _ready() -> void:
@@ -246,7 +270,7 @@ func get_prompt() -> String:
 			return vp
 	if not bool(info["pet"]) or fleeing > 0.0:
 		return ""
-	return "Погладить"
+	return "Погладить (%s)" % preload("res://sex27.gd").label(kind, sex)
 
 
 func interact() -> void:

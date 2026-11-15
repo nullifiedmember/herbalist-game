@@ -140,7 +140,7 @@ func _tree_near(p: Vector2) -> Array:
 		return []
 	var s2: Sprite2D = cands[randi() % cands.size()]
 	var hh: float = float(s2.texture.get_height()) * s2.scale.y
-	return [s2.global_position + Vector2(randf_range(-0.22, 0.22) * float(s2.texture.get_width()), 1.0), hh * randf_range(0.5, 0.75)]
+	return [s2.global_position + Vector2(randf_range(-0.22, 0.22) * float(s2.texture.get_width()), 1.0), hh * randf_range(0.5, 0.75), s2]
 
 
 ## v25: насест поблизости — забор, крыша дома или ветка дерева: [точка у основания, высота]
@@ -200,6 +200,7 @@ func _spawn(lst: Array, pp: Vector2, night: bool) -> void:
 	var owl: bool = bool(bd["owl"])
 	var at: Vector2 = Vector2.INF
 	var h: float = 0.0
+	var tree_spr: Sprite2D = null
 	# совы ночью — на присаде у дома, если она рядом
 	if owl:
 		for y in get_tree().get_nodes_in_group("yard20"):
@@ -212,6 +213,7 @@ func _spawn(lst: Array, pp: Vector2, night: bool) -> void:
 		if not tr.is_empty() and (tr[0] as Vector2).distance_to(pp) > 90.0:
 			at = tr[0]
 			h = float(tr[1])
+			tree_spr = tr[2] as Sprite2D
 	# v25: и наземные птицы часто садятся повыше — на ветки, заборы, крыши домов
 	if at == Vector2.INF and randf() < (0.55 if not owl else 0.4):
 		var pr: Array = _perch_near(pp)
@@ -239,6 +241,8 @@ func _spawn(lst: Array, pp: Vector2, night: bool) -> void:
 	if randf() < 0.55:
 		from = at + Vector2(randf_range(-1.0, 1.0) * 260.0, -220.0)
 	b.call("setup", id, self, from, h)
+	if tree_spr != null:
+		b.call("tuck_into_tree", tree_spr)
 
 
 ## Перо на земле: подобрать на E

@@ -86,7 +86,12 @@ func _spawn(kind: String, at: Vector2) -> Node2D:
 func _baby_look(an: Node2D, e: Dictionary) -> void:
 	var sp: Sprite2D = an.get("spr")
 	if sp != null:
-		sp.scale = Vector2(0.5, 0.5) * (0.6 if bool(e.get("baby", false)) else 1.0)
+		var baby: bool = bool(e.get("baby", false))
+		if an.has_method("set_baby") and ResourceLoader.exists("res://art/animal_%s_baby.png" % String(an.get("kind"))):
+			an.call("set_baby", baby)       # у каждого зверя свой нарисованный малыш
+			sp.scale = Vector2(0.5, 0.5)
+		else:
+			sp.scale = Vector2(0.5, 0.5) * (0.6 if baby else 1.0)
 
 
 func _mark_seen() -> void:

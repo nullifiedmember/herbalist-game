@@ -118,23 +118,39 @@ func _build_clock() -> void:
 
 
 func _build_hint() -> void:
+	# v27: ряд значков меню с буквой клавиши (вместо одной плашки «Книга травника»)
+	var items: Array = [
+		["book", "icon_potionbook", "Книга травника"], ["craft", "icon_bottle", "Крафт"], ["build", "icon_log", "Мебель и комнаты"],
+		["map", "icon_scroll", "Карта"], ["quests", "icon_book_lore", "Задания"], ["chronicle", "icon_book_recipe", "Летопись"],
+		["skills", "icon_star_blade", "Навыки"], ["grimoire", "icon_spellbook25", "Гримуар"], ["kingdom", "icon_crown23", "Королевство"],
+	]
+	var cw: float = 74.0
 	var root: Control = Control.new()
-	root.position = Vector2(1920 - 28 - 270, 24)
+	root.position = Vector2(1920 - 24 - cw * items.size(), 20)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(root)
-	panel(root, Vector2.ZERO, Vector2(270, 64))
-	var key: TextureRect = TextureRect.new()
-	key.texture = load("res://art/ui_key.png")
-	key.position = Vector2(16, 10)
-	key.size = Vector2(22, 22)
-	key.scale = Vector2(2, 2)
-	key.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	root.add_child(key)
-	var k: Label = label(root, "J", font_bold, 17, INK, Vector2(20, 18))
-	key_labels.append([k, "book", 17])
-	k.size = Vector2(36, 24)
-	k.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label(root, "Книга травника", font_body, 26, INK, Vector2(70, 14))
+	for i in range(items.size()):
+		var it: Array = items[i]
+		var c: Control = Control.new()
+		c.position = Vector2(i * cw, 0)
+		c.size = Vector2(cw - 6, 72)
+		c.tooltip_text = String(it[2])
+		c.mouse_filter = Control.MOUSE_FILTER_PASS
+		root.add_child(c)
+		panel(c, Vector2.ZERO, Vector2(cw - 6, 72))
+		var ic: TextureRect = TextureRect.new()
+		ic.texture = load("res://art/%s.png" % String(it[1]))
+		ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		ic.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		ic.position = Vector2(10, 6)
+		ic.size = Vector2(48, 40)
+		c.add_child(ic)
+		var k: Label = label(c, "", font_bold, 22, INK, Vector2(0, 44))
+		key_labels.append([k, String(it[0]), 22])
+		k.size = Vector2(cw - 6, 26)
+		k.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 
 var key_labels: Array = []          # v24: [Label, действие] — подпись меняется вместе с клавишей

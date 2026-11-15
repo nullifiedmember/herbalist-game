@@ -21,8 +21,8 @@ func _ready() -> void:
 	spr.texture = load(preload("res://cats26_db.gd").tex_path(skin))   # v26: пушистые окрасы
 	spr.hframes = 10
 	spr.centered = false
-	spr.offset = Vector2(-18, -32)
-	spr.scale = Vector2(CAT_K, CAT_K)
+	spr.offset = Vector2(-spr.texture.get_width() / 20.0, -spr.texture.get_height() + 2.0)
+	spr.scale = Vector2.ONE   # чиби-лист: пиксель 1:1
 	spr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	add_child(spr)
 	t = randf() * 3.0

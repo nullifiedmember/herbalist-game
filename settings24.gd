@@ -139,6 +139,8 @@ func _fill() -> void:
 			_toggle_row("Без звука, когда окно свёрнуто", "mute_unfocus")
 		"video":
 			_toggle_row("Полный экран", "fullscreen")
+			_choice_row("Разрешение окна", "res", [[0, "авто"], [1280, "1280x720"], [1366, "1366x768"], [1600, "1600x900"],
+					[1920, "1920x1080"], [2048, "2048x1152"], [2560, "2560x1440"]])
 			_toggle_row("Вертикальная синхронизация", "vsync")
 			_choice_row("Ограничение кадров", "fps", [[0, "нет"], [30, "30"], [60, "60"], [120, "120"], [144, "144"]])
 			_choice_row("Размер интерфейса", "ui_scale", [[0.85, "мелкий"], [1.0, "обычный"], [1.15, "крупный"]])
@@ -169,7 +171,7 @@ func _reset_tab() -> void:
 			Sound.music_vol = 0.7
 			Sound.sfx_vol = 0.8
 		"video":
-			for k in ["fullscreen", "vsync", "fps", "ui_scale", "brightness"]:
+			for k in ["fullscreen", "res", "vsync", "fps", "ui_scale", "brightness"]:
 				Saves.opt[k] = d[k]
 		"game":
 			for k2 in ["run_toggle", "autosave", "pause_unfocus"]:

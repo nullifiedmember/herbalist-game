@@ -34,7 +34,7 @@ var bright: ColorRect                # яркость: затемнение (у�
 var opt: Dictionary = {
 	"master": 1.0, "fullscreen": false, "vsync": true, "fps": 0, "ui_scale": 1.0,
 	"run_toggle": false, "autosave": 3, "pause_unfocus": true, "mute_unfocus": false,
-	"brightness": 1.0,
+	"brightness": 1.0, "res": 0,
 }
 
 
@@ -290,6 +290,14 @@ func apply_settings() -> void:
 	var want: int = DisplayServer.WINDOW_MODE_FULLSCREEN if fs else DisplayServer.WINDOW_MODE_WINDOWED
 	if DisplayServer.window_get_mode() != want and not (not fs and DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MAXIMIZED):
 		DisplayServer.window_set_mode(want)
+	# v27: разрешение окна (до 2560x1440); 0 — авто
+	var rs: int = int(opt.get("res", 0))
+	if not fs and rs > 0 and DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+		var nsz: Vector2i = Vector2i(rs, int(rs * 9.0 / 16.0))
+		if DisplayServer.window_get_size() != nsz:
+			var cen: Vector2i = DisplayServer.window_get_position() + DisplayServer.window_get_size() / 2
+			DisplayServer.window_set_size(nsz)
+			DisplayServer.window_set_position(cen - nsz / 2)
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if bool(opt.get("vsync", true)) else DisplayServer.VSYNC_DISABLED)
 	Engine.max_fps = int(opt.get("fps", 0))
 	get_tree().root.content_scale_factor = float(opt.get("ui_scale", 1.0))

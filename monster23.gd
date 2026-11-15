@@ -53,10 +53,10 @@ func setup(k: String, at: Vector2, tr: int = 1) -> void:
 	spr.hframes = 4
 	spr.centered = false
 	var sz: float = float(info["size"])
-	spr.offset = Vector2(-sz / 2.0, -sz + 1.0)
+	spr.offset = Vector2(-spr.texture.get_width() / 8.0, -spr.texture.get_height() + 1.0)   # чиби-лист с отступами
 	add_child(spr)
 	bar = Node2D.new()
-	bar.position = Vector2(0, -sz - 4.0)
+	bar.position = Vector2(0, -float(spr.texture.get_height() - 8) - 4.0)
 	bar.draw.connect(_draw_bar)
 	add_child(bar)
 	t = randf() * 4.0

@@ -17,7 +17,11 @@ from PIL import Image
 GAME = Path(__file__).resolve().parents[1]
 ART = GAME / "art"
 SHOTS = GAME.parent / "screenshots"
-FW, FH, NF = 36, 30, 10
+SRC_FW = 36                      # ширина кадра в cat.png
+FW, FH, NF = 42, 30, 10
+PAD = 3                          # v26: пустая рамка вокруг каждого кадра, чтобы обводка/уши никогда не обрезались
+OW, OH = FW + 2 * PAD, FH + 2 * PAD  # размер кадра в готовом листе
+# v26: кадр шире на 6 px справа — хвосту есть куда отойти назад (кот на том же месте)
 SIT, NAP, WALK = (0, 1, 4, 5), (2, 3), (6, 7, 8, 9)
 
 
@@ -111,8 +115,8 @@ def load_src():
     px = {}
     for f in range(NF):
         for y in range(FH):
-            for x in range(FW):
-                c = im.getpixel((f * FW + x, y))
+            for x in range(SRC_FW):
+                c = im.getpixel((f * SRC_FW + x, y))
                 if c[3] > 0:
                     # (цвет, часть тела, исходные x, y)
                     px[(f, x, y)] = (c, part(f, x, y), x, y)
@@ -194,6 +198,89 @@ def reshape(px: dict) -> dict:
                 q = px.get((f, x, sy))
                 if q is not None and q[1] in BODYP and (f, x, y) not in out:
                     out[(f, x, y)] = q
+    return out
+
+
+# ------------------------------------------------------------------ хвост при ходьбе
+
+def bend_tail(px: dict) -> dict:
+    """В кадрах ходьбы хвост не торчит палкой вверх: от крупа уходит назад, потом плавно загибается кверху.
+    Каждый пиксель хвоста поворачивается вокруг корня: у корня сильнее, к кончику слабее — выходит дуга."""
+    out = dict(px)
+    for f in WALK:
+        tl = [(x, y) for (ff, x, y), v in px.items() if ff == f and v[1] == "tail"]
+        if not tl:
+            continue
+        by = max(y for x, y in tl)
+        bx = sum(x for x, y in tl if y >= by - 1) / max(1, len([1 for x, y in tl if y >= by - 1]))
+        R0 = max(math.hypot(x - bx, y - by) for x, y in tl) + 1.0
+        for (x, y) in tl:
+            del out[(f, x, y)]
+
+        def th(r):
+            return math.radians(58.0 * (1.0 - 0.75 * min(1.0, r / R0)))
+
+        for oy in range(0, FH - 6):
+            for ox in range(int(bx) - 4, FW):
+                dx, dy = ox - bx, oy - by
+                r = math.hypot(dx, dy)
+                if r > R0 + 1:
+                    continue
+                a = -th(r)
+                sx = bx + dx * math.cos(a) - dy * math.sin(a)
+                sy = by + dx * math.sin(a) + dy * math.cos(a)
+                q = px.get((f, int(round(sx)), int(round(sy))))
+                if q is None or q[1] != "tail":
+                    continue
+                cur = out.get((f, ox, oy))
+                if cur is not None and cur[1] != "tail":
+                    continue          # хвост позади тела
+                out[(f, ox, oy)] = q
+        # дырки внутри хвоста после поворота — заполнить соседом
+        for _ in range(2):
+            for oy in range(FH):
+                for ox in range(int(bx) - 4, FW):
+                    if (f, ox, oy) in out:
+                        continue
+                    nb = [out.get((f, ox + dx, oy + dy)) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))]
+                    tails = [v for v in nb if v is not None and v[1] == "tail"]
+                    if len(tails) >= 3:
+                        out[(f, ox, oy)] = max(tails, key=lambda v: lum(v[0]))
+    return out
+
+
+# ------------------------------------------------------------------ дырки
+
+def fill_holes(px: dict) -> dict:
+    """Прозрачные точки внутри силуэта (после уменьшения котёнка и поворота хвоста) заливаются шерстью соседей.
+    Дырка — прозрачная точка, до которой нельзя дойти от края кадра, или щель в 1 px между тремя-четырьмя пикселями."""
+    out = dict(px)
+    for f in range(NF):
+        for _ in range(3):
+            solid = set((x, y) for (ff, x, y) in out if ff == f)
+            # заливка снаружи
+            seen = set()
+            stack = [(x, y) for x in range(FW) for y in (0, FH - 1)] + [(x, y) for y in range(FH) for x in (0, FW - 1)]
+            while stack:
+                q = stack.pop()
+                if q in seen or q in solid or not (0 <= q[0] < FW and 0 <= q[1] < FH):
+                    continue
+                seen.add(q)
+                stack += [(q[0] + 1, q[1]), (q[0] - 1, q[1]), (q[0], q[1] + 1), (q[0], q[1] - 1)]
+            changed = False
+            for y in range(FH):
+                for x in range(FW):
+                    if (x, y) in solid:
+                        continue
+                    nb = [out.get((f, x + dx, y + dy)) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))]
+                    nb = [v for v in nb if v is not None and not special(v[0])]
+                    enclosed = (x, y) not in seen
+                    if (enclosed and nb) or (len(nb) >= 3 and y < FH - 1):
+                        nb.sort(key=lambda v: lum(v[0]))
+                        out[(f, x, y)] = nb[len(nb) // 2]
+                        changed = True
+            if not changed:
+                break
     return out
 
 # ------------------------------------------------------------------ пушистость
@@ -279,7 +366,43 @@ def fluff(px: dict, small: bool = False) -> dict:
 
 KIT_B = 0.64     # тело
 KIT_L = 0.42     # лапки по высоте (короче)
-KIT_H = 0.84     # голова (крупнее относительно тела)
+KIT_H = 1.0      # голова как у взрослого: целиком, без среза ушей и щёк (котёнок — большая голова, маленькое тело)
+
+
+HEADP = ("head", "ear", "face", "blaze")
+
+
+def _keep_lines(lo: int, hi: int, protect: set, want: int) -> list:
+    """какие строки/столбцы головы оставить: выкидываем только «пустую» шерсть, не трогая глаза и нос,
+    и не крайние (там контур)"""
+    allv = list(range(lo, hi + 1))
+    drop_n = len(allv) - want
+    cand = [v for v in allv[1:-1] if v not in protect]
+    if drop_n <= 0 or not cand:
+        return allv
+    drop_n = min(drop_n, len(cand))
+    drop = set(cand[int((i + 0.5) * len(cand) / drop_n)] for i in range(drop_n))
+    return [v for v in allv if v not in drop]
+
+
+def _head_map(src: dict, f: int):
+    """голова котёнка без растягивания: те же пиксели лица, только без нескольких рядов шерсти"""
+    hs = [(x, y) for (ff, x, y), v in src.items() if ff == f and v[1] in HEADP]
+    xs = [p[0] for p in hs]
+    ys = [p[1] for p in hs]
+    feat = [(x, y) for (x, y) in hs if special(src[(f, x, y)][0]) and src[(f, x, y)][1] != "ear"
+            or (level(src[(f, x, y)][0]) == 0 and any(special(src.get((f, x + dx, y), ((0, 0, 0, 0),))[0]) for dx in (-1, 1)))]
+    pc = set()
+    pr = set()
+    for (x, y) in feat:
+        for d in (-1, 0, 1):
+            pc.add(x + d)
+            pr.add(y + d)
+    w = max(xs) - min(xs) + 1
+    h = max(ys) - min(ys) + 1
+    cols = _keep_lines(min(xs), max(xs), pc, round(w * KIT_H))
+    rows = _keep_lines(min(ys), max(ys), pr, round(h * KIT_H))
+    return cols, rows
 
 
 def kitten(src: dict) -> dict:
@@ -305,15 +428,19 @@ def kitten(src: dict) -> dict:
         ny -= 0.5
         if k == "walk":
             nx += 1.0
+        cols, rows = _head_map(src, f)
+        ia = min(range(len(cols)), key=lambda i: abs(cols[i] - ax))
+        ja = min(range(len(rows)), key=lambda j: abs(rows[j] - ay))
+        bx0, by0 = int(round(nx)) - ia, int(round(ny)) - ja
         for oy in range(FH):
             for ox in range(FW):
                 got = None
-                # голова сверху
-                hx = ax + (ox - nx) / KIT_H
-                hy = ay + (oy - ny) / KIT_H
-                hp = src.get((f, int(round(hx)), int(round(hy))))
-                if hp is not None and hp[1] in ("head", "ear", "face", "blaze"):
-                    got = hp
+                # голова сверху: пиксель в пиксель, только без выкинутых рядов
+                i, j = ox - bx0, oy - by0
+                if 0 <= i < len(cols) and 0 <= j < len(rows):
+                    hp = src.get((f, cols[i], rows[j]))
+                    if hp is not None and hp[1] in HEADP:
+                        got = hp
                 if got is None:
                     bx, by = body_inv(ox, oy)
                     bp = src.get((f, int(round(bx)), int(round(by))))
@@ -321,6 +448,22 @@ def kitten(src: dict) -> dict:
                         got = bp
                 if got is not None:
                     out[(f, ox, oy)] = got
+        # морда круглее: нижние углы головы срезаются ступеньками (1-2-3 px к подбородку), как нарисовал пользователь
+        hp = [(x, y) for (ff, x, y), v in out.items() if ff == f and v[1] in HEADP]
+        if hp:
+            hx0 = min(x for x, y in hp)
+            hx1 = max(x for x, y in hp)
+            hy1 = max(y for x, y in hp)
+            for (x, y) in hp:
+                up = hy1 - y              # 0 — подбородок
+                inset = {0: 4, 1: 3, 2: 2, 3: 1}.get(up, 0)
+                if inset and (x < hx0 + inset or x > hx1 - inset) and not special(out[(f, x, y)][0]):
+                    bx, by = body_inv(x, y)
+                    bp = src.get((f, int(round(bx)), int(round(by))))
+                    if bp is not None and bp[1] not in HEADP:
+                        out[(f, x, y)] = bp
+                    else:
+                        del out[(f, x, y)]
         # контур: край силуэта и шея под головой темнее
         for (ff, x, y), v in list(out.items()):
             if ff != f:
@@ -335,6 +478,66 @@ def kitten(src: dict) -> dict:
                 below = out.get((f, x, y + 1))
                 if below is not None and below[1] not in ("head", "ear", "face", "blaze"):
                     out[(f, x, y)] = ((46, 39, 72, 255),) + v[1:]
+    return out
+
+
+def kit_nap_shape(px: dict) -> dict:
+    """Спящий котёнок: после уменьшения тело было прямоугольным «кирпичиком». Здесь спина делается горбиком,
+    круп сзади скругляется (как у взрослого), а «дыхание» — в кадре 3 горб поднимается на 1 px, форма та же."""
+    out = dict(px)
+    # общие столбцы тела для обоих кадров сна (справа от головы)
+    info = {}
+    for f in NAP:
+        head_x = set(x for (ff, x, y), v in px.items() if ff == f and v[1] in HEADP)
+        cols = {}
+        for (ff, x, y), v in px.items():
+            if ff == f and v[1] in BODYP and x not in head_x:
+                t, b = cols.get(x, (99, -1))
+                cols[x] = (min(t, y), max(b, y))
+        info[f] = cols
+    xs = sorted(set(info[NAP[0]]) & set(info[NAP[1]]))
+    if len(xs) < 5:
+        return out
+    tops = sorted(info[f][x][0] for f in NAP for x in xs)
+    L = tops[len(tops) // 2]
+    bot = sorted(info[NAP[0]][x][1] for x in xs)[len(xs) // 2]
+    n = len(xs)
+    peak = L - 2                      # спина выше, на уровне щёк — тело продолжает голову, а не «коробка» сбоку
+    for f in NAP:
+        cols = info[f]
+        breath = 1 if f == NAP[1] else 0
+        for i, x in enumerate(xs):
+            u = i / (n - 1)
+            if u < 0.3:
+                t1 = peak
+            else:
+                k = (u - 0.3) / 0.7
+                t1 = peak + round((bot - 2 - peak) * k ** 2.2)
+            if 0.1 <= u <= 0.7:
+                t1 -= breath
+            t0, b0 = cols[x]
+            b1 = b0 - (1 if i == n - 1 else 0)      # круглый задок снизу
+            if t1 >= b1:
+                t1 = b1
+            col = [px.get((f, x, y)) for y in range(t0, b0 + 1)]
+            for y in range(min(t0, t1), b0 + 1):
+                q = out.get((f, x, y))
+                if q is not None and q[1] in BODYP:
+                    del out[(f, x, y)]
+            for y in range(t1, b1 + 1):
+                if (f, x, y) in out:
+                    continue
+                sy = round((y - t1) * (len(col) - 1) / max(1, b1 - t1))
+                q = col[sy]
+                if q is None or q[1] not in BODYP:
+                    q = next((c for c in col if c is not None and c[1] in BODYP), None)
+                if q is not None:
+                    out[(f, x, y)] = q
+        # обрывки тела выше спины (лишний «выступ» в кадре вдоха) — убрать
+        right = xs[0]
+        for (ff, x, y), v in list(out.items()):
+            if ff == f and x >= right and v[1] in BODYP and x not in xs:
+                del out[(f, x, y)]
     return out
 
 
@@ -401,6 +604,8 @@ R = {
     "rose": ramp("#f0a8c8"),
     "violet": ramp("#a890e8"),
 }
+# «фрак»: чёрное как у родного кота — ровное, без серых пятен
+R["tux"] = [LV[k][:3] for k in range(7)]
 
 EYES = {  # замена жёлто-зелёных глаз (5 тонов от тёмного к светлому)
     "green": None,
@@ -452,7 +657,23 @@ def stripe(f: int, p: str, x: int, y: int) -> bool:
 
 
 def is_white_bib(f: int, p: str, x: int, y: int, more: bool = False) -> bool:
-    """белая манишка, носочки, мордочка (для «фрака» и двухцветных)"""
+    """белая манишка, носочки и подбородок (для «фрака» и двухцветных). Без белой «пасти» — иначе похож на волка"""
+    k = kind(f)
+    if p == "face":
+        return y >= {"sit": 11, "nap": 22, "walk": 13}[k] and (k != "walk" or x <= 6)
+    if p == "paw":
+        return True
+    if p == "chest":
+        return y >= {"sit": 14, "nap": 0, "walk": 15}[k]
+    if p == "belly":
+        return k != "walk" or x <= 17
+    if p == "blaze":
+        return more and k == "sit" and x == 13
+    return False
+
+
+def is_white_calico(f: int, p: str, x: int, y: int, more: bool = False) -> bool:
+    """у трёхцветной белого много: грудь, живот, лапы, мордочка"""
     if p in ("chest", "belly", "paw"):
         return True
     if p == "face":
@@ -514,7 +735,7 @@ def skin_fn(name: str):
         return fn
     if name == "calico":
         def fn(f, p, x, y):
-            if is_white_bib(f, p, x, y, True):
+            if is_white_calico(f, p, x, y, True):
                 return ("white", 0)
             if blob(x + 50 * (f in NAP), y, 11, 5, 0.55):
                 return ("calico_k", 0)
@@ -570,7 +791,7 @@ OLD = ("black", "ginger", "white", "gray", "calico")
 def recolor(px: dict, name: str) -> Image.Image:
     eyes, fx = SKINS[name]
     fn = skin_fn(name)
-    img = Image.new("RGBA", (FW * NF, FH), (0, 0, 0, 0))
+    img = Image.new("RGBA", (OW * NF, OH), (0, 0, 0, 0))
     # глаза: где они в каждом кадре — вокруг них тёмный ободок, внутри чёрный зрачок
     eye = set(k for k, v in px.items() if tuple(v[0][:3]) in EYE_SRC)
     def near_eye(f, x, y):
@@ -607,14 +828,33 @@ def recolor(px: dict, name: str) -> Image.Image:
                 out = (240, 250, 255, a)
             elif fx == "petals" and p == "body" and lv >= 4 and h2(sx, sy, 17) > 0.9:
                 out = (255, 236, 242, a)
-        img.putpixel((f * FW + x, y), out)
+        img.putpixel((f * OW + x + PAD, y + PAD), out)
+    # в исходном cat.png кончики ушей упирались в край кадра без обводки — дорисовать её в отступе
+    for f in range(NF):
+        for x in range(FW):
+            for (yy, dy) in ((0, -1), (FH - 1, 1)):
+                X, Y = f * OW + x + PAD, yy + PAD
+                c = img.getpixel((X, Y))
+                if c[3] == 0 or img.getpixel((X, Y + dy))[3] != 0:
+                    continue
+                nb = [img.getpixel((X + d, Y)) for d in (-1, 1)] + [c]
+                nb = [n for n in nb if n[3] > 0]
+                dark = min(nb, key=lambda n: lum(n))
+                if lum(dark) < lum(c) - 10 or lum(c) > 40:
+                    img.putpixel((X, Y + dy), dark if lum(dark) < lum(c) - 10 else (33, 26, 48, 255))
+        for y in range(FH):
+            for (xx, dx) in ((0, -1), (FW - 1, 1)):
+                X, Y = f * OW + xx + PAD, y + PAD
+                c = img.getpixel((X, Y))
+                if c[3] != 0 and img.getpixel((X + dx, Y))[3] == 0 and lum(c) > 40:
+                    img.putpixel((X + dx, Y), (33, 26, 48, 255))
     return img
 
 
 def main():
-    raw = reshape(load_src())
-    src = fluff(raw)
-    kit = fluff(kitten(raw), small=True)
+    raw = bend_tail(reshape(load_src()))
+    src = fill_holes(fluff(fill_holes(raw)))
+    kit = fill_holes(fluff(fill_holes(kit_nap_shape(kitten(raw))), small=True))
     made = []
     for name in SKINS:
         recolor(src, name).save(ART / f"cat26_{name}.png")
@@ -630,14 +870,14 @@ def preview():
     """лист всех окрасов: слева взрослые, справа котята (кадры сидит/спит/идёт), прозрачный фон"""
     names = list(SKINS)
     frames = (0, 2, 6, 7)
-    cw = FW * len(frames)
-    sheet = Image.new("RGBA", (cw * 2 + 12, FH * len(names)), (0, 0, 0, 0))
+    cw = OW * len(frames)
+    sheet = Image.new("RGBA", (cw * 2 + 12, OH * len(names)), (0, 0, 0, 0))
     for i, n in enumerate(names):
         adult = Image.open(ART / f"cat26_{n}.png")
         kid = Image.open(ART / f"cat26_kit_{n}.png")
         for j, fr in enumerate(frames):
-            sheet.alpha_composite(adult.crop((fr * FW, 0, fr * FW + FW, FH)).convert("RGBA"), (j * FW, i * FH))
-            sheet.alpha_composite(kid.crop((fr * FW, 0, fr * FW + FW, FH)).convert("RGBA"), (cw + 12 + j * FW, i * FH))
+            sheet.alpha_composite(adult.crop((fr * OW, 0, fr * OW + OW, OH)).convert("RGBA"), (j * OW, i * OH))
+            sheet.alpha_composite(kid.crop((fr * OW, 0, fr * OW + OW, OH)).convert("RGBA"), (cw + 12 + j * OW, i * OH))
     SHOTS.mkdir(exist_ok=True)
     sheet.save(SHOTS / "cats26_preview.png")
     sheet.resize((sheet.width * 4, sheet.height * 4), Image.NEAREST).save(SHOTS / "cats26_preview_x4.png")

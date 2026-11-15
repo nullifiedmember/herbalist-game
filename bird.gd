@@ -6,6 +6,7 @@ extends Node2D
 const BDB = preload("res://birds_db.gd")
 
 var bid: String = "sparrow"
+var sex: String = preload("res://sex27.gd").roll("bird")   # v27: пол особи
 var data: Dictionary = {}
 var mgr: Node = null
 var spr: Sprite2D
@@ -62,6 +63,56 @@ func setup(id: String, m: Node, arrive_from: Vector2, h: float) -> void:
 	add_to_group("birds20")
 
 
+var cover: Sprite2D = null        # листва поверх птицы: она сидит В кроне, а не поверх неё
+
+
+## Птица в кроне: кусок самой кроны рисуется перед её нижней половиной
+func tuck_into_tree(tree: Sprite2D) -> void:
+	if tree == null or tree.texture == null or spr == null:
+		return
+	perch_h = maxf(perch_h - 3.0, 4.0)
+	if state != "arrive":
+		spr.position = Vector2(0, -perch_h)
+	var tex: Texture2D = tree.texture
+	var sc: Vector2 = tree.scale.abs()
+	var tw: float = float(tex.get_width())
+	var th: float = float(tex.get_height())
+	# мировой прямоугольник, который закрываем: нижние ~45% птицы + чуть ниже лапок
+	var feet: Vector2 = global_position + Vector2(0, -perch_h)
+	var wr: Rect2 = Rect2(feet + Vector2(-fw * 0.3, -fh * 0.5 * 0.45), Vector2(fw * 0.6, fh * 0.5 * 0.45 + 5.0))
+	# в координаты текстуры дерева
+	var u0: float = (wr.position.x - tree.global_position.x) / sc.x - tree.offset.x
+	var v0: float = (wr.position.y - tree.global_position.y) / sc.y - tree.offset.y
+	var uw: float = wr.size.x / sc.x
+	var vh: float = wr.size.y / sc.y
+	if tree.flip_h:
+		u0 = tw - u0 - uw
+	u0 = clampf(u0, 0.0, tw - 1.0)
+	v0 = clampf(v0, 0.0, th - 1.0)
+	uw = minf(uw, tw - u0)
+	vh = minf(vh, th - v0)
+	if uw < 2.0 or vh < 2.0:
+		return
+	var at: AtlasTexture = AtlasTexture.new()
+	at.atlas = tex
+	at.region = Rect2(u0, v0, uw, vh)
+	cover = Sprite2D.new()
+	cover.texture = at
+	cover.centered = false
+	cover.flip_h = tree.flip_h
+	cover.scale = sc
+	cover.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	cover.modulate = tree.modulate
+	if tree.material != null:
+		cover.material = tree.material
+	# левый верх закрывающего куска в мире -> локально
+	var ru: float = (tw - u0 - uw) if tree.flip_h else u0
+	var wx: float = tree.global_position.x + (tree.offset.x + ru) * sc.x
+	var wy: float = tree.global_position.y + (tree.offset.y + v0) * sc.y
+	cover.position = Vector2(wx, wy) - global_position
+	add_child(cover)
+
+
 func _frame(i: int) -> void:
 	atlas.region = Rect2(fw * float(i), 0, fw, fh)
 
@@ -94,6 +145,8 @@ func _process(delta: float) -> void:
 		return
 	t += delta
 	st_t -= delta
+	if cover != null:
+		cover.visible = state != "arrive" and state != "flee"
 	var pl: Node2D = _player()
 	# прилёт: дуга сверху к месту посадки
 	if state == "arrive":
@@ -207,7 +260,7 @@ func can_catch() -> bool:
 
 
 func get_prompt() -> String:
-	return "Поймать сачком: " + String(data["name"]).to_lower() if can_catch() else ""
+	return "Поймать сачком: %s (%s)" % [String(data["name"]).to_lower(), preload("res://sex27.gd").label(bid, sex)] if can_catch() else ""
 
 
 func interact() -> void:
