@@ -1,6 +1,8 @@
 extends Node
 ## Глобальное состояние: сумка, семена, день и время суток.
 
+const SOLO: bool = true   # v29: одиночная игра — своя зельеварня. Без королевства, вербовки, оружия, подземелий и врагов (вернуть: false)
+
 signal inventory_changed
 signal day_changed
 signal toast(text: String, icon: Texture2D)
@@ -65,6 +67,13 @@ var hotbar: Array = ["axe", "", "", "", "", "", "", "", ""]   # панель (9 
 var hot_sel: int = 0                  # какая ячейка в руках
 var tut_step: int = 0                # v28: обучение у гида Миры: 0 — не взято, 1 — дрова, 2 — верстак, 99 — готово
 var plot_level: int = 0               # сколько раз расширяла участок
+# v29: задний двор, лейка, погода
+var yard29: Dictionary = {}           # грядки cells, грибные деревья trees, вода в бочке barrel (backyard29.gd)
+var can_water: int = 0                # поливов в лейке
+var seed_sel: String = ""             # какие семена сеять
+var weather: String = "clear"         # clear / cloudy / rain / storm / fog (weather29.gd)
+var weather_h: float = 5.0            # часов до смены погоды
+var rain_today: float = 0.0           # сколько часов шёл дождь с прошлого утра
 var researched: Dictionary = {}       # изученные травы (дороже продаются)
 var dryer: Array = []                 # v19: пучки на сушилке: {id, hook, t0 (игровые минуты)}
 var pets: Array = []                  # v19: питомцы из приютов: {kind, name}
@@ -300,6 +309,7 @@ func drink_flask(i: int) -> bool:
 	if get_count(id) > 0:
 		inventory[id] = get_count(id) - 1
 		equip[slot] = id
+	add_item("bottle")                  # v29: пустая бутылочка остаётся
 	drink(0.6)
 	hunger = maxf(0.0, hunger - 0.1)
 	buff_t = 60.0

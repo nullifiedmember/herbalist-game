@@ -146,16 +146,24 @@ func _herb_spot(rng: RandomNumberGenerator, rect: Rect2) -> Vector2:
 		var p: Vector2 = Vector2(rng.randf_range(rect.position.x + 30, rect.end.x - 30), rng.randf_range(rect.position.y + 30, rect.end.y - 30))
 		if WD.road_value(p) < 14.0 or bool(main.call("is_blocked", p)) or bool(main.call("is_blocked", p + Vector2(0, -6))):
 			continue
-		if WD.biome_at(p) == WD.SEA or bool(world.call("under_crown", p)):
+		if WD.biome_at(p) == WD.SEA or bool(world.call("plant_banned", p)):
+			continue
+		if _town_street(p):
 			continue
 		return p
 	return Vector2(-1e9, -1e9)
 
 
+## v32: на городских улицах и тропинках к дверям ничего не растёт
+func _town_street(p: Vector2) -> bool:
+	var tn: Node = get_tree().get_first_node_in_group("towns") if is_inside_tree() else null
+	return tn != null and (bool(tn.call("on_street", p)) or bool(tn.call("on_street", p + Vector2(0, -10))))
+
+
 func _spot(rng: RandomNumberGenerator, rect: Rect2, rad: float) -> Vector2:
 	for i in range(20):
 		var p: Vector2 = Vector2(rng.randf_range(rect.position.x + 30, rect.end.x - 30), rng.randf_range(rect.position.y + 30, rect.end.y - 30))
-		if bool(world.call("free_at", p, rad, 24.0)) and not bool(main.call("is_blocked", p)) and not bool(world.call("under_crown", p)):
+		if bool(world.call("free_at", p, rad, 24.0)) and not bool(main.call("is_blocked", p)) and not bool(world.call("plant_banned", p)) and not _town_street(p):
 			return p
 	return Vector2(-1e9, -1e9)
 

@@ -58,8 +58,17 @@ var hh: float = 10.0
 var player_ref: Node2D = null
 var pets: int = 0                # сколько раз погладили (трижды — пойдёт в загон)
 var follow: bool = false         # идёт за героиней в загон
+var yard: bool = false           # v29: гуляет в окрестностях дома
+var stay: bool = false           # v29: прирученный оставлен на месте — ждёт, пока не позовут
 var roam: float = 160.0
 var sex: String = "f"            # v27: пол особи ("f" самка / "m" самец)
+# ходьба вниз/вверх: лист animal_<id>_dirs.png (0-3 идёт к нам, 4-7 идёт от нас)
+const DIR_FRAMES: int = 8
+var side_tex: Texture2D = null
+var side_off: Vector2 = Vector2.ZERO
+var dirs_tex: Texture2D = null
+var dirs_off: Vector2 = Vector2.ZERO
+var last_dir: Vector2 = Vector2.LEFT
 
 
 func setup(k: String, at: Vector2) -> void:
@@ -100,6 +109,15 @@ func _apply_sheet(path: String) -> void:
 	var fw: float = float(spr.texture.get_width()) / FRAMES
 	var fh: float = float(spr.texture.get_height())
 	spr.offset = Vector2(-fw / 2.0, -fh + 2.0)
+	side_tex = spr.texture
+	side_off = spr.offset
+	spr.hframes = FRAMES
+	var dp: String = path.replace(".png", "_dirs.png")
+	dirs_tex = null
+	if ResourceLoader.exists(dp):
+		dirs_tex = load(dp)
+		var dw: float = float(dirs_tex.get_width()) / DIR_FRAMES
+		dirs_off = Vector2(-dw / 2.0, -float(dirs_tex.get_height()) + 2.0)
 	var used: Rect2i = Rect2i(0, 0, int(fw), int(fh))
 	var img: Image = spr.texture.get_image()
 	if img != null:
@@ -120,6 +138,35 @@ func set_baby(b: bool) -> void:
 		_apply_sheet(p)
 	else:
 		_apply_sheet("res://art/animal_%s.png" % kind)
+
+
+## Шаг в сторону v: вниз/вверх — свой лист (морда к нам / спиной), вбок — вид сбоку с отражением
+func _walk_frame(v: Vector2, f: int) -> void:
+	if v.length() > 0.01:
+		last_dir = v
+	var d: Vector2 = last_dir
+	if dirs_tex != null and absf(d.y) > absf(d.x) * 1.15:
+		if spr.texture != dirs_tex:
+			spr.frame = 0
+			spr.texture = dirs_tex
+			spr.hframes = DIR_FRAMES
+			spr.offset = dirs_off
+		spr.flip_h = false
+		spr.frame = (0 if d.y > 0.0 else 4) + f % 4
+	else:
+		_side_frame(f % 4)
+		spr.flip_h = d.x > 0.0
+
+
+## Кадр вида сбоку (стоит, занимается делом, спит)
+func _side_frame(f: int) -> void:
+	if spr.texture != side_tex:
+		spr.frame = 0
+		spr.texture = side_tex
+		spr.hframes = FRAMES
+		spr.offset = side_off
+		spr.flip_h = last_dir.x > 0.0
+	spr.frame = f
 
 
 func _ready() -> void:
@@ -158,20 +205,23 @@ func _process(delta: float) -> void:
 			var away: Vector2 = (global_position - pl.global_position).normalized()
 			goal = global_position + away.rotated(randf_range(-0.6, 0.6)) * 160.0
 			moving = true
+	if stay and follow and happy_t <= 0.0:
+		moving = false
+		_side_frame(4)
+		return
 	if follow and pl != null and happy_t <= 0.0:
 		var to_pl: Vector2 = pl.global_position - global_position
 		if to_pl.length() > 34.0:
 			global_position += to_pl.normalized() * minf(to_pl.length() - 30.0, maxf(spd, 70.0) * delta)
 			dist += spd * delta
-			spr.flip_h = to_pl.x > 0.0
-			spr.frame = int(dist / 6.0) % 4
+			_walk_frame(to_pl, int(dist / 6.0))
 		else:
-			spr.frame = 4
+			_side_frame(4)
 		return
 	if happy_t > 0.0:
 		happy_t -= delta
 		moving = false
-		spr.frame = 4
+		_side_frame(4)
 		spr.position.y = -absf(sin(happy_t * 9.0)) * 3.0
 		return
 	spr.position.y = 0.0
@@ -193,8 +243,8 @@ func _process(delta: float) -> void:
 			else:
 				position = np
 				dist += step
-				spr.flip_h = to.x > 0.0
-		spr.frame = int(dist / (4.0 if spd < 30.0 else 7.0)) % 4
+				last_dir = to
+		_walk_frame(Vector2.ZERO, int(dist / (4.0 if spd < 30.0 else 7.0)))
 	else:
 		_still(delta, d)
 	# голоса зверей рядом с героиней
@@ -212,7 +262,7 @@ func _still(delta: float, d: float) -> void:
 	match state:
 		"act":
 			var k: int = int(t * 5.0) % 4
-			spr.frame = 6 + k
+			_side_frame(6 + k)
 			# каждый «такт» занятия — звук и эффект (земля, искры, пар)
 			var a: Array = ACTS.get(kind, [])
 			if not a.is_empty() and int(t * 5.0) != int((t - delta) * 5.0) and k == 1:
@@ -228,7 +278,7 @@ func _still(delta: float, d: float) -> void:
 				state = "idle"
 				wait_t = randf_range(1.0, 3.0)
 		"rest", "curl":
-			spr.frame = 10 + int(t * 0.8) % 2
+			_side_frame(10 + int(t * 0.8) % 2)
 			if state_t <= 0.0:
 				if state == "rest" and _sleepy():
 					state_t = randf_range(6.0, 12.0)
@@ -236,7 +286,7 @@ func _still(delta: float, d: float) -> void:
 					state = "idle"
 					wait_t = 1.0
 		_:
-			spr.frame = 5 if fmod(t, 3.2) < 0.15 else 4
+			_side_frame(5 if fmod(t, 3.2) < 0.15 else 4)
 			wait_t -= delta
 			if wait_t <= 0.0:
 				if _sleepy() and randf() < 0.7:
@@ -267,6 +317,8 @@ func _calm(pl: Node2D) -> bool:
 
 
 func get_prompt() -> String:
+	if is_tamed() and Game.shape_form == "" and not Game.held().begins_with("food_"):
+		return String(info["name"]) + (" (ждёт здесь)" if stay else "")
 	var v25: Node = get_tree().get_first_node_in_group("v25")
 	if v25 != null:
 		var vp: String = String(v25.call("animal_prompt", self))
@@ -277,9 +329,47 @@ func get_prompt() -> String:
 	return "Погладить (%s)" % preload("res://sex27.gd").label(kind, sex)
 
 
+## v29: прирученный — свой питомец из приюта или скакун
+func is_tamed() -> bool:
+	return is_in_group("pets18") or has_meta("mount25")
+
+
 func interact() -> void:
+	if is_tamed() and Game.shape_form == "" and not Game.held().begins_with("food_"):
+		var v24n: Node = get_tree().get_first_node_in_group("v24")
+		if v24n != null:
+			var opts: Array = []
+			if has_meta("mount25"):
+				opts.append(["Сесть верхом", func() -> void:
+					var v25m: Node = get_tree().get_first_node_in_group("v25")
+					if v25m != null:
+						v25m.call("mount")])
+			if bool(info["pet"]):
+				opts.append(["Погладить", func() -> void: _interact_base(true)])
+			if not yard:
+				opts.append(["Гуляй у дома", func() -> void: _send_home()])
+			if stay or yard:
+				opts.append(["Пойдём со мной", func() -> void:
+					stay = false
+					_leave_yard()
+					happy_t = 0.8
+					Game.fx.emit(global_position + Vector2(0, -hh - 6.0), "heart")])
+			else:
+				opts.append(["Сиди здесь", func() -> void:
+					stay = true
+					moving = false
+					happy_t = 0.8
+					Game.fx.emit(global_position + Vector2(0, -hh - 6.0), "heart")])
+			opts.append(["Ничего", func() -> void: pass])
+			var tx: Texture2D = load("res://art/fx_heart.png")
+			v24n.call("talk_menu", tx, String(info["name"]), "", opts)
+			return
+	_interact_base(false)
+
+
+func _interact_base(skip_v25: bool) -> void:
 	var v25: Node = get_tree().get_first_node_in_group("v25")
-	if v25 != null and bool(v25.call("animal_interact", self)):
+	if not skip_v25 and v25 != null and bool(v25.call("animal_interact", self)):
 		return
 	# v23: еда в руке — приманить в загон
 	var held: String = Game.held()
@@ -316,6 +406,35 @@ func interact() -> void:
 	if info.get("mythic", false) and not Game.met.has(kind):
 		Game.met[kind] = Game.day
 		Game.toast.emit("Встреча: %s!" % String(info["name"]), load("res://art/fx_heart.png"))
+
+
+## v29: прирученный живёт во дворе и бродит возле дома
+func _send_home() -> void:
+	var m: Node = get_tree().current_scene
+	var LAY = preload("res://world_layout.gd")
+	var hp: Vector2 = LAY.DOOR_POS + (m.call("home_off") as Vector2) + Vector2(randf_range(-60, 60), 90)
+	global_position = m.call("free_near", hp)
+	home = hp
+	yard = true
+	stay = false
+	follow = false
+	roam = 150.0
+	moving = false
+	remove_from_group("followers")
+	var inf: Dictionary = info.duplicate()
+	inf["shy"] = false
+	info = inf
+	happy_t = 0.8
+	Game.toast.emit("%s гуляет возле дома" % String(info["name"]), load("res://art/fx_heart.png"))
+
+
+func _leave_yard() -> void:
+	if not yard:
+		return
+	yard = false
+	follow = true
+	roam = 30.0
+	add_to_group("followers")
 
 
 ## Дошёл до загона: живёт в нём, не пугается

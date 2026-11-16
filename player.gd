@@ -434,9 +434,20 @@ func _mon_effects(delta: float) -> void:
 		Game.fx.emit(global_position + Vector2(0, -2), "steam_green")
 
 
+var voice_cd: float = 0.0
+
+
+## v29: голос героини — звук к эмоции (не чаще раза в 3 секунды)
+const VOICE: Dictionary = {"happy": "hero_giggle", "pout": "hero_hm", "sad": "hero_sigh", "surprised": "hero_oh"}
+
+
 func react(kind: String, dur: float = 1.2) -> void:
 	expr = kind
 	expr_t = dur
+	var now: float = float(Time.get_ticks_msec()) / 1000.0
+	if VOICE.has(kind) and now - voice_cd > 3.0 and not Game.busy:
+		voice_cd = now
+		Sound.play(String(VOICE[kind]), -8.0, 0.06)
 
 
 func _update_face(delta: float, frame: int) -> void:

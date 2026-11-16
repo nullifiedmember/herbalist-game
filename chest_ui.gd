@@ -20,6 +20,7 @@ var panel: Control
 var grid: Control
 var carry_id: String = ""
 var carry_n: int = 0
+var carry_rot: bool = false         # v29: вещь в курсоре повёрнута (R)
 var carry_icon: TextureRect
 var open: bool = false
 var tip: Control
@@ -30,7 +31,9 @@ var cols: int = COLS
 var rows: int = ROWS
 var cell: float = CELL
 var title_l: Label
-var bg_rect: TextureRect
+var bg_rect: Control
+var sign_rect: TextureRect
+const U31 = preload("res://ui31.gd")
 var btn_box: HBoxContainer
 var filter_box: HBoxContainer
 var filter_btn: OptionButton
@@ -52,23 +55,41 @@ func setup(m: Node2D, h: CanvasLayer) -> void:
 	panel.size = Vector2(PW, PH)
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	root.add_child(panel)
-	var bg: TextureRect = TextureRect.new()
+	# v31: рамка в стиле яблока (картинка уже ×2 — размер можно задавать напрямую)
+	# рамка-плитка: уголки и рёбра не растягиваются, бумага повторяется (ui31_wpanel, поля 12 → 24 на экране)
+	var bg: NinePatchRect = U31.np("ui31_wpanel_x2", 24, 1.0, panel.size)
+	bg.axis_stretch_horizontal = NinePatchRect.AXIS_STRETCH_MODE_TILE_FIT
+	bg.axis_stretch_vertical = NinePatchRect.AXIS_STRETCH_MODE_TILE_FIT
 	bg_rect = bg
-	bg.texture = load("res://art/inv_bg.png")
-	bg.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	bg.stretch_mode = TextureRect.STRETCH_SCALE
-	bg.size = panel.size
-	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.add_child(bg)
+	sign_rect = TextureRect.new()
+	sign_rect.texture = U31.tex("ui31_sign")
+	sign_rect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	sign_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	sign_rect.stretch_mode = TextureRect.STRETCH_SCALE
+	sign_rect.size = Vector2(260, 44)
+	sign_rect.position = Vector2(PW / 2.0 - 130.0, 28)
+	sign_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.add_child(sign_rect)
+	# пучки трав по бокам таблички, как в сумке
+	for bk in ["lavender", "chamomile"]:
+		var bt: TextureRect = TextureRect.new()
+		bt.name = "bundle_" + bk
+		bt.texture = U31.tex("ui31_bundle_" + bk)
+		bt.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		bt.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		bt.size = bt.texture.get_size() * 2.0
+		bt.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		panel.add_child(bt)
 	var ttl: Label = Label.new()
 	title_l = ttl
 	ttl.text = "Сундук"
 	ttl.add_theme_font_override("font", hud.get("font_title"))
 	ttl.add_theme_font_size_override("font_size", 36)
-	ttl.add_theme_color_override("font_color", Color("f0d89a"))
-	ttl.position = Vector2(0, 26)
-	ttl.size = Vector2(PW, 50)
+	ttl.add_theme_color_override("font_color", U31.INK)
+	ttl.position = Vector2(0, 21)
+	ttl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	ttl.size = Vector2(PW, 44)
 	ttl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ttl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.add_child(ttl)
@@ -82,29 +103,30 @@ func setup(m: Node2D, h: CanvasLayer) -> void:
 		var btn: Button = Button.new()
 		btn.text = String(b[0])
 		btn.focus_mode = Control.FOCUS_NONE
-		btn.add_theme_font_override("font", hud.get("font_body"))
-		btn.add_theme_font_size_override("font_size", 18)
+		U31.style_button(btn, hud.get("font_body"), 18)
 		btn.pressed.connect(b[1])
 		bx.add_child(btn)
 	filter_box = HBoxContainer.new()
-	filter_box.position = Vector2(24, 74)
+	filter_box.position = Vector2(30, 76)
+	filter_box.alignment = BoxContainer.ALIGNMENT_BEGIN
 	filter_box.add_theme_constant_override("separation", 8)
 	panel.add_child(filter_box)
 	var fl: Label = Label.new()
 	fl.text = "Для чего:"
 	fl.add_theme_font_override("font", hud.get("font_body"))
 	fl.add_theme_font_size_override("font_size", 18)
-	fl.add_theme_color_override("font_color", Color("c8b898"))
+	fl.add_theme_color_override("font_color", U31.INK_SOFT)
+	fl.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	filter_box.add_child(fl)
 	filter_btn = OptionButton.new()
 	filter_btn.focus_mode = Control.FOCUS_NONE
-	filter_btn.add_theme_font_override("font", hud.get("font_body"))
-	filter_btn.add_theme_font_size_override("font_size", 18)
+	U31.style_option(filter_btn, hud.get("font_body"), 18)
+	filter_btn.add_theme_constant_override("icon_max_width", 22)
+	filter_btn.custom_minimum_size = Vector2(300, 38)
+	filter_btn.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	for i in range(SDB.CATS.size()):
 		var ce: Array = SDB.CATS[i]
 		filter_btn.add_icon_item(SDB.cat_icon(String(ce[0])), String(ce[1]), i)
-	filter_btn.get_popup().add_theme_font_override("font", hud.get("font_body"))
-	filter_btn.get_popup().add_theme_font_size_override("font_size", 18)
 	filter_btn.item_selected.connect(func(i: int) -> void:
 		if cur_key != "" and Game.chests.has(cur_key):
 			Game.chests[cur_key]["filter"] = String(SDB.CATS[i][0])
@@ -130,13 +152,11 @@ func setup(m: Node2D, h: CanvasLayer) -> void:
 	tip.z_index = 31
 	tip.visible = false
 	root.add_child(tip)
-	var tbg: ColorRect = ColorRect.new()
+	var tbg: NinePatchRect = U31.np("ui31_tip_x2", 12, 1.0, Vector2(64, 64))
 	tbg.name = "bg"
-	tbg.color = Color(0.03, 0.025, 0.02, 0.94)
-	tbg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tip.add_child(tbg)
 	tip_box = VBoxContainer.new()
-	tip_box.position = Vector2(14, 10)
+	tip_box.position = Vector2(18, 14)
 	tip_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tip_box.add_theme_constant_override("separation", 2)
 	tip.add_child(tip_box)
@@ -336,15 +356,15 @@ func _cells(skip: int = -1) -> Array:
 		if i == skip:
 			continue
 		var e: Dictionary = L()[i]
-		var sz: Vector2i = IT.size(String(e["id"]))
+		var sz: Vector2i = Game.esize(e)
 		for yy in range(int(e["y"]), mini(rows, int(e["y"]) + sz.y)):
 			for xx in range(int(e["x"]), mini(cols, int(e["x"]) + sz.x)):
 				g[yy][xx] = i
 	return g
 
 
-func _covered(id: String, x: int, y: int) -> Array:
-	var sz: Vector2i = IT.size(id)
+func _covered(id: String, x: int, y: int, rot: bool = false) -> Array:
+	var sz: Vector2i = Game.rsize(id, rot)
 	if x < 0 or y < 0 or x + sz.x > cols or y + sz.y > rows:
 		return [-2]
 	var g: Array = _cells()
@@ -358,8 +378,8 @@ func _covered(id: String, x: int, y: int) -> Array:
 
 
 ## Первое свободное место для вещи (сетка g из _cells, строится один раз; раньше сетка строилась на каждую клетку — давало лаг на секунды)
-func _find_spot(id: String, g: Array) -> Vector2i:
-	var sz: Vector2i = IT.size(id)
+func _find_spot(id: String, g: Array, rot: bool = false) -> Vector2i:
+	var sz: Vector2i = Game.rsize(id, rot)
 	for y in range(rows - sz.y + 1):
 		for x in range(cols - sz.x + 1):
 			var ok: bool = true
@@ -386,11 +406,16 @@ func _add(id: String, n: int) -> int:
 			e["n"] = int(e["n"]) + put
 			n -= put
 	while n > 0:
-		var spot: Vector2i = _find_spot(id, _cells())
+		var g0: Array = _cells()
+		var spot: Vector2i = _find_spot(id, g0)
+		var rot0: bool = false
+		if spot.x < 0 and IT.size(id).x != IT.size(id).y:
+			spot = _find_spot(id, g0, true)      # v29: не влезло прямо — кладём повёрнутым
+			rot0 = true
 		if spot.x < 0:
 			return n
 		var put2: int = mini(n, st)
-		L().append({"id": id, "n": put2, "x": spot.x, "y": spot.y})
+		L().append({"id": id, "n": put2, "x": spot.x, "y": spot.y, "r": rot0})
 		n -= put2
 	return 0
 
@@ -440,14 +465,18 @@ func open_chest(key: String = "", kind: String = "chest") -> void:
 
 func _layout_panel() -> void:
 	var pw: float = cols * cell + 48.0
-	var ph: float = rows * cell + 198.0
+	var ph: float = rows * cell + 212.0
 	panel.size = Vector2(maxf(pw, 560.0), ph)
 	panel.position = Vector2(24, clampf(540.0 - ph / 2.0, 20.0, 400.0))
 	bg_rect.size = panel.size
-	title_l.size = Vector2(panel.size.x, 50)
+	title_l.size = Vector2(panel.size.x, 44)
+	sign_rect.position = Vector2(panel.size.x / 2.0 - 130.0, 28)
+	# справа от таблички (слева занято списком «Для чего»)
+	(panel.get_node("bundle_lavender") as Control).position = Vector2(panel.size.x / 2.0 + 168.0, 14)
+	(panel.get_node("bundle_chamomile") as Control).position = Vector2(panel.size.x / 2.0 + 218.0, 14)
 	title_l.text = String(SDB.KINDS.get(String(Game.chests[cur_key].get("kind", "chest")), ["Сундук"])[0])
 	grid.size = Vector2(cols * cell, rows * cell)
-	grid.position = Vector2((panel.size.x - grid.size.x) / 2.0, 126)
+	grid.position = Vector2((panel.size.x - grid.size.x) / 2.0, 140)
 	btn_box.position = Vector2(24, ph - 54)
 	var f: String = String(Game.chests[cur_key].get("filter", "all"))
 	for i in range(SDB.CATS.size()):
@@ -461,6 +490,7 @@ func close_chest() -> void:
 	if carry_id != "":
 		_to_bag(carry_id, carry_n)
 		carry_id = ""
+		carry_rot = false
 	open = false
 	root.visible = false
 	var iu: Node = get_tree().get_first_node_in_group("inventory_ui")
@@ -476,42 +506,50 @@ func _refresh() -> void:
 	for i in range(L().size()):
 		var e: Dictionary = L()[i]
 		var id: String = String(e["id"])
-		var sz: Vector2i = IT.size(id)
+		var sz0: Vector2i = IT.size(id)
+		var sz: Vector2i = Game.esize(e)
 		var ic: TextureRect = TextureRect.new()
 		ic.texture = preload("res://item_info.gd").ui_icon(id)
 		ic.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		ic.position = Vector2(int(e["x"]) * cell + 2, int(e["y"]) * cell + 2)
-		ic.size = Vector2(sz.x * cell - 4, sz.y * cell - 4)
+		ic.size = Vector2(sz0.x * cell - 4, sz0.y * cell - 4)
+		var ctr: Vector2 = Vector2(int(e["x"]) * cell, int(e["y"]) * cell) + Vector2(sz.x * cell, sz.y * cell) / 2.0
+		ic.position = ctr - ic.size / 2.0
+		ic.pivot_offset = ic.size / 2.0
+		ic.rotation = PI / 2.0 if bool(e.get("r", false)) else 0.0
 		ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		grid.add_child(ic)
 		if int(e["n"]) > 1:
-			var l: Label = Label.new()
-			l.text = str(int(e["n"]))
-			l.add_theme_font_override("font", hud.get("font_bold"))
-			l.add_theme_font_size_override("font_size", 18)
-			l.add_theme_color_override("font_outline_color", Color.BLACK)
-			l.add_theme_constant_override("outline_size", 6)
-			l.position = ic.position + ic.size - Vector2(11 * str(int(e["n"])).length() + 2, 24)
-			l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			var l: Control = U31.pix_count(int(e["n"]), 2.0)
+			l.position = Vector2(int(e["x"]) * cell, int(e["y"]) * cell) + Vector2(sz.x * cell, sz.y * cell) - l.size - Vector2(2, 2)
 			grid.add_child(l)
 	grid.queue_redraw()
 
 
 func _draw_grid() -> void:
-	var cell_t: Texture2D = load("res://art/inv_cell.png")
+	var cell_t: Texture2D = U31.tex("ui31_cell")
+	# деревянный лоток под сеткой: контур, кромка света сверху-слева, тень снизу-справа
+	var gr: Rect2 = Rect2(Vector2.ZERO, grid.size)
+	grid.draw_rect(gr.grow(8), Color("6e4636"))
+	grid.draw_rect(gr.grow(6), Color("9c6a48"))
+	grid.draw_rect(Rect2(gr.position - Vector2(6, 6), Vector2(gr.size.x + 10, 2)), Color("ecc48e"))
+	grid.draw_rect(Rect2(gr.position - Vector2(6, 6), Vector2(2, gr.size.y + 10)), Color("ecc48e"))
+	grid.draw_rect(Rect2(gr.position - Vector2(4, 4), Vector2(gr.size.x + 6, 2)), Color("d9a873"))
+	grid.draw_rect(Rect2(gr.position - Vector2(4, 4), Vector2(2, gr.size.y + 6)), Color("d9a873"))
+	grid.draw_rect(gr.grow(2), Color("6e4636"))
 	for y in range(rows):
 		for x in range(cols):
 			grid.draw_texture_rect(cell_t, Rect2(x * cell, y * cell, cell, cell), false)
 	for e in L():
-		var sz: Vector2i = IT.size(String(e["id"]))
-		grid.draw_rect(Rect2(int(e["x"]) * cell + 2, int(e["y"]) * cell + 2, sz.x * cell - 4, sz.y * cell - 4), Color(0.1, 0.16, 0.3, 0.35) if not IT.is_gear(String(e["id"])) else Color(0.25, 0.2, 0.08, 0.35))
+		var sz: Vector2i = Game.esize(e)
+		grid.draw_rect(Rect2(int(e["x"]) * cell + 2, int(e["y"]) * cell + 2, sz.x * cell - 4, sz.y * cell - 4), Color(0.55, 0.72, 0.42, 0.22) if not IT.is_gear(String(e["id"])) else Color(0.85, 0.6, 0.28, 0.22))
 	var cid: String = _carry_any()
 	if cid != "":
-		var tgt: Vector2i = _target(cid)
-		var sz2: Vector2i = IT.size(cid)
-		var cov: Array = _covered(cid, tgt.x, tgt.y)
+		var crot: bool = _carry_rot_any()
+		var tgt: Vector2i = _target(cid, crot)
+		var sz2: Vector2i = Game.rsize(cid, crot)
+		var cov: Array = _covered(cid, tgt.x, tgt.y, crot)
 		var ok: bool = not cov.has(-2) and cov.size() <= 1
 		grid.draw_rect(Rect2(tgt.x * cell, tgt.y * cell, sz2.x * cell, sz2.y * cell), Color(0.3, 0.9, 0.3, 0.28) if ok else Color(0.9, 0.25, 0.2, 0.3))
 
@@ -524,9 +562,16 @@ func _carry_any() -> String:
 	return String(iu.get("carry_id")) if iu != null else ""
 
 
-func _target(id: String) -> Vector2i:
+func _carry_rot_any() -> bool:
+	if carry_id != "":
+		return carry_rot
+	var iu: Node = get_tree().get_first_node_in_group("inventory_ui")
+	return bool(iu.get("carry_rot")) if iu != null else false
+
+
+func _target(id: String, rot: bool = false) -> Vector2i:
 	var mp: Vector2 = grid.get_local_mouse_position()
-	var sz: Vector2i = IT.size(id)
+	var sz: Vector2i = Game.rsize(id, rot)
 	return Vector2i(int(floor(mp.x / cell - float(sz.x) / 2.0 + 0.5)), int(floor(mp.y / cell - float(sz.y) / 2.0 + 0.5)))
 
 
@@ -547,10 +592,11 @@ func _grid_input(ev: InputEvent) -> void:
 	if carry_id == "" and iu != null and String(iu.get("carry_id")) != "":
 		var cid: String = String(iu.get("carry_id"))
 		var cn: int = maxi(1, int(iu.get("carry_n")))
-		var tgt0: Vector2i = _target(cid)
-		var cov0: Array = _covered(cid, tgt0.x, tgt0.y)
+		var rot_b: bool = bool(iu.get("carry_rot"))
+		var tgt0: Vector2i = _target(cid, rot_b)
+		var cov0: Array = _covered(cid, tgt0.x, tgt0.y, rot_b)
 		if cov0.is_empty():
-			L().append({"id": cid, "n": cn, "x": tgt0.x, "y": tgt0.y})
+			L().append({"id": cid, "n": cn, "x": tgt0.x, "y": tgt0.y, "r": rot_b})
 		elif _add(cid, cn) > 0:
 			Sound.play("ui_click", -2.0)
 			return
@@ -558,6 +604,7 @@ func _grid_input(ev: InputEvent) -> void:
 		iu.set("carry_id", "")
 		iu.set("carry_n", 0)
 		iu.set("carry_from_grid", false)
+		iu.set("carry_rot", false)
 		Game.hold = {}
 		Game.layout_sync()
 		Game.inventory_changed.emit()
@@ -579,20 +626,23 @@ func _grid_input(ev: InputEvent) -> void:
 			e["n"] = int(e["n"]) - 1
 			carry_id = String(e["id"])
 			carry_n = 1
+			carry_rot = bool(e.get("r", false))
 		else:
 			carry_id = String(e["id"])
 			carry_n = int(e["n"])
+			carry_rot = bool(e.get("r", false))
 			L().remove_at(idx)
 		Sound.play("ui_click", -6.0)
 	else:
-		var tgt: Vector2i = _target(carry_id)
-		var cov: Array = _covered(carry_id, tgt.x, tgt.y)
+		var tgt: Vector2i = _target(carry_id, carry_rot)
+		var cov: Array = _covered(carry_id, tgt.x, tgt.y, carry_rot)
 		if cov.has(-2) or cov.size() > 1:
 			Sound.play("ui_click", -2.0)
 			return
 		if cov.is_empty():
-			L().append({"id": carry_id, "n": carry_n, "x": tgt.x, "y": tgt.y})
+			L().append({"id": carry_id, "n": carry_n, "x": tgt.x, "y": tgt.y, "r": carry_rot})
 			carry_id = ""
+			carry_rot = false
 		else:
 			var o: Dictionary = L()[int(cov[0])]
 			if String(o["id"]) == carry_id and IT.stack(carry_id) > 1:
@@ -604,9 +654,10 @@ func _grid_input(ev: InputEvent) -> void:
 			else:
 				var old: Dictionary = {"id": String(o["id"]), "n": int(o["n"])}
 				L().remove_at(int(cov[0]))
-				L().append({"id": carry_id, "n": carry_n, "x": tgt.x, "y": tgt.y})
+				L().append({"id": carry_id, "n": carry_n, "x": tgt.x, "y": tgt.y, "r": carry_rot})
 				carry_id = String(old["id"])
 				carry_n = int(old["n"])
+				carry_rot = bool(o.get("r", false))
 		Sound.play("ui_click", -6.0)
 	_sync_dict()
 	_refresh()
@@ -656,6 +707,18 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		var k: Key = (event as InputEventKey).physical_keycode
+		if k == KEY_R and _carry_any() != "":
+			var rid: String = _carry_any()
+			if IT.size(rid).x != IT.size(rid).y:
+				if carry_id != "":
+					carry_rot = not carry_rot
+				else:
+					var iu2: Node = get_tree().get_first_node_in_group("inventory_ui")
+					if iu2 != null:
+						iu2.set("carry_rot", not bool(iu2.get("carry_rot")))
+				Sound.play("ui_click", -8.0)
+			get_viewport().set_input_as_handled()
+			return
 		if k == KEY_ESCAPE or KB.is_key("interact", k) or KB.is_key("inventory", k):
 			close_chest()
 			get_viewport().set_input_as_handled()
@@ -681,6 +744,8 @@ func _process(_delta: float) -> void:
 		carry_icon.texture = preload("res://item_info.gd").ui_icon(carry_id)
 		carry_icon.size = Vector2(sz.x * cell - 4, sz.y * cell - 4)
 		carry_icon.position = mp - carry_icon.size / 2.0
+		carry_icon.pivot_offset = carry_icon.size / 2.0
+		carry_icon.rotation = PI / 2.0 if carry_rot else 0.0
 	grid.queue_redraw()
 	var idx: int = _index_at(grid.get_local_mouse_position()) if Rect2(Vector2.ZERO, grid.size).has_point(grid.get_local_mouse_position()) else -1
 	if idx < 0 or carry_id != "":
@@ -696,8 +761,8 @@ func _process(_delta: float) -> void:
 		tip_box.reset_size()
 		tip.visible = false
 		return
-	var bg: ColorRect = tip.get_node("bg")
-	bg.size = tip_box.size + Vector2(28, 20)
+	var bg: NinePatchRect = tip.get_node("bg")
+	bg.size = tip_box.size + Vector2(36, 28)
 	var tp: Vector2 = mp + Vector2(24, 18)
 	if tp.x + bg.size.x > 1912.0:
 		tp.x = mp.x - bg.size.x - 24.0

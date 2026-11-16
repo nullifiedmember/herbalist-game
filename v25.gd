@@ -7,6 +7,7 @@ const SP = preload("res://spells25_db.gd")
 const W = preload("res://wild_db.gd")
 const WD = preload("res://world_data.gd")
 const SCN = preload("res://scenarios_db.gd")
+const BOOK_ON: bool = false           # Книга сфер (Magicka) и гримуар временно выключены; true — вернуть
 const FRAMES_A: int = 12
 const MANA_MAX: float = 100.0
 const MOVE_COST: int = 60
@@ -186,12 +187,12 @@ func _input(event: InputEvent) -> void:
 		return
 	if Game.ui_open or Game.busy:
 		return
-	if KB.is_key("spell_mode", kc):
+	if BOOK_ON and KB.is_key("spell_mode", kc):
 		spell_mode = not spell_mode
 		orbs.clear()
 		Sound.play("ui_click", -6.0)
 		get_viewport().set_input_as_handled()
-	elif KB.is_key("grimoire", kc):
+	elif BOOK_ON and KB.is_key("grimoire", kc):
 		toggle_grimoire()
 		get_viewport().set_input_as_handled()
 	elif KB.is_key("ride", kc):
@@ -800,7 +801,7 @@ func _process(delta: float) -> void:
 		if Game.shape_t <= 0.0:
 			end_form()
 	_companion_tick(delta, away)
-	if intro_t > 0.0:
+	if BOOK_ON and intro_t > 0.0:
 		intro_t -= delta
 		if intro_t <= 0.0 and Game.spells_known.is_empty() and bool(main.get("playing")):
 			Game.toast.emit("У тебя есть Книга сфер! %s — режим заклинаний, %s — гримуар." % [KB.key_name("spell_mode"), KB.key_name("grimoire")], load("res://art/icon_spellbook25.png"))
@@ -1036,7 +1037,7 @@ func _companion_tick(delta: float, away: bool) -> void:
 		return
 	if companion != null and is_instance_valid(companion):
 		# отстал совсем — догоняет «тропинкой»
-		if companion.global_position.distance_to(_pp()) > 900.0:
+		if companion.global_position.distance_to(_pp()) > 900.0 and not bool(companion.get("stay")) and not bool(companion.get("yard")):
 			companion.global_position = _pp() + Vector2(-40, 20)
 		return
 	comp_t -= delta
@@ -1050,6 +1051,7 @@ func call_mount() -> void:
 		Game.toast.emit("Пока нет скакуна. Приручи коня, единорога или другого зверя угощениями.", load("res://art/fx_heart.png"))
 		return
 	if companion != null and is_instance_valid(companion):
+		companion.set("stay", false)      # v29: зов отменяет «сиди здесь»
 		companion.global_position = _pp() + Vector2(-40, 20)
 	else:
 		_spawn_companion(_pp() + Vector2(-40, 20))

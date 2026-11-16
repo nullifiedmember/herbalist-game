@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://c2wcfj13knq74"
+path="res://.godot/imported/herb7b.fnt-a919d2b4958a6fb8fec72975bbc62024.fontdata"
+
+[deps]
+
+source_file="res://fonts/herb7b.fnt"
+dest_files=["res://.godot/imported/herb7b.fnt-a919d2b4958a6fb8fec72975bbc62024.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

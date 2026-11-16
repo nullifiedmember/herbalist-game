@@ -94,7 +94,8 @@ const STYLE: Dictionary = {
 	"knights": {"res": "grid", "wob": 12.0, "hw": 22.0, "plaza": "square", "edge": Color("34323e")},
 	"elves": {"res": "ring", "wob": 16.0, "hw": 14.0, "plaza": "round", "edge": Color("2e3a20")},
 	"mages": {"res": "spokes", "wob": 6.0, "hw": 18.0, "plaza": "square", "edge": Color("6a7090")},
-	"orcs": {"res": "ring", "wob": 18.0, "hw": 18.0, "plaza": "round", "edge": Color("4a2a1a")},
+	# v32: город орков — улицы как дороги мира (road: true → town_road.gdshader)
+	"orcs": {"res": "ring", "wob": 3.0, "hw": 18.0, "plaza": "round", "edge": Color("7a362e"), "road": true},
 	"goblins": {"res": "lanes", "wob": 22.0, "hw": 14.0, "plaza": "round", "edge": Color("22180e")},
 	"dwarves": {"res": "comb", "wob": 6.0, "hw": 22.0, "plaza": "square", "edge": Color("26221e")},
 	"japan": {"res": "grid", "wob": 4.0, "hw": 18.0, "plaza": "square", "edge": Color("4a3a32")},
@@ -117,9 +118,58 @@ const STATIONS: Dictionary = {
 
 var streets: Array = []          # улицы текущего города: [полуширина, PackedVector2Array]
 var street_cells: Dictionary = {}
+var all_street_cells: Dictionary = {}   # v32: улицы всех построенных городов (травы на них не растут)
 var house_rects: Array = []
 var street_mat: Dictionary = {}
 var zones: Array = []            # большие здания: [картинка, точка, вид, ширина]
+var door_pts: Array = []         # двери домов и зданий — к ним ведут тропинки
+
+
+## Ближайшая точка улицы (на отрезках) к точке p
+func _nearest_street(p: Vector2) -> Array:
+	var best: Vector2 = Vector2.INF
+	var bd: float = 1e9
+	var bw: float = 0.0
+	for s in streets:
+		var pts: PackedVector2Array = s[1]
+		for i in range(pts.size() - 1):
+			var q: Vector2 = Geometry2D.get_closest_point_to_segment(p, pts[i], pts[i + 1])
+			var d: float = q.distance_to(p)
+			if d < bd:
+				bd = d
+				best = q
+				bw = float(s[0])
+	return [best, bd, bw]
+
+
+## Тропинки от дверей: сначала прямо вниз от порога, потом к ближайшей улице
+func _door_paths(_rng: RandomNumberGenerator) -> void:
+	var add: Array = []
+	for dp in door_pts:
+		var p: Vector2 = dp
+		var st: Vector2 = p + Vector2(0, 10)
+		var ns: Array = _nearest_street(st)
+		var q: Vector2 = ns[0]
+		if q == Vector2.INF or float(ns[1]) > 520.0 or float(ns[1]) < float(ns[2]) + 2.0:
+			continue
+		var pts: PackedVector2Array = PackedVector2Array([p + Vector2(0, -2)])
+		# порог: прямой отрезок вниз, потом поворот к улице (если улица сбоку)
+		var down: Vector2 = Vector2(p.x, maxf(p.y + 14.0, minf(q.y, p.y + 40.0)))
+		pts.append(down.round())
+		if down.distance_to(q) > 4.0:
+			pts.append((q + (q - down).normalized() * 6.0).round())
+		add.append([11.0, pts])
+	for a in add:
+		streets.append(a)
+		var pts2: PackedVector2Array = a[1]
+		for i3 in range(pts2.size() - 1):
+			var steps: int = int(pts2[i3].distance_to(pts2[i3 + 1]) / 8.0) + 1
+			for k3 in range(steps + 1):
+				var pp: Vector2 = pts2[i3].lerp(pts2[i3 + 1], float(k3) / steps)
+				for oy in [-8.0, 0.0, 8.0]:
+					for ox in [-8.0, 0.0, 8.0]:
+						var q2: Vector2 = pp + Vector2(ox, oy)
+						street_cells[Vector2i(int(floor(q2.x / 16.0)), int(floor(q2.y / 16.0)))] = true
 
 
 ## Улица с изломами: почти прямые отрезки, каждые ~110 пикселей — лёгкий поворот (не волна и не линейка)
@@ -167,7 +217,10 @@ func _layout(land: String, c: Vector2, rng: RandomNumberGenerator) -> void:
 	# v18: у каждого города своя тюрьма (prison_<земля>.png — tools/aseprite/gen_prison.lua)
 	zones.append(["prison_" + land, c + Vector2(430, 330), "prison", 200.0])
 	# v19: приют для животных (у кошек — кошачий)
-	zones.append(["shelter_cats" if land == "cats" else "shelter_town", c + Vector2(-440, 330), "shelter", 200.0])
+	var shel: String = "shelter_cats" if land == "cats" else "shelter_town"
+	if ResourceLoader.exists("res://art/shelter_%s.png" % land):
+		shel = "shelter_" + land
+	zones.append([shel, c + Vector2(-440, 330), "shelter", 200.0])
 	# жилые улицы — у каждой земли свои
 	var kind: String = String(st.get("res", "grid"))
 	match kind:
@@ -248,7 +301,7 @@ func _in_plaza(land: String, c: Vector2, p: Vector2, grow: float) -> bool:
 
 
 func on_street(p: Vector2) -> bool:
-	return _on_street(p)
+	return _on_street(p) or all_street_cells.has(Vector2i(int(floor(p.x / 16.0)), int(floor(p.y / 16.0))))
 
 
 func _on_street(p: Vector2) -> bool:
@@ -263,10 +316,15 @@ func _draw_streets(node: Node2D, land: String, c: Vector2) -> void:
 	node.add_child(holder)
 	var mat: ShaderMaterial = ShaderMaterial.new()
 	mat.shader = load("res://street.gdshader")
-	mat.set_shader_parameter("cob", load("res://art/st10_%s.png" % land))
-	mat.set_shader_parameter("size", 64.0)
+	var cob_t: Texture2D = load("res://art/st10_%s.png" % land)
+	mat.set_shader_parameter("cob", cob_t)
+	mat.set_shader_parameter("size", float(cob_t.get_width()))   # v32: плитка орков 128×128
 	mat.set_shader_parameter("tint", Color(1, 1, 1))
 	var edge_c: Color = st["edge"]
+	# v32: улицы как дороги мира (тот же песок, волнистый край, кромка темнее)
+	if bool(st.get("road", false)):
+		_draw_world_roads(holder, c)
+		return
 	for pass_i in range(2):
 		for s in streets:
 			var l: Line2D = Line2D.new()
@@ -296,6 +354,53 @@ func _draw_streets(node: Node2D, land: String, c: Vector2) -> void:
 			poly.color = edge_c
 		else:
 			poly.material = mat
+		holder.add_child(poly)
+
+
+## v32: улицы и тропинки к дверям — шейдер town_road (как дороги мира). Два прохода:
+## края и покрытие, потом только середины — на перекрёстках кромки не видны.
+func _draw_world_roads(holder: Node2D, c: Vector2) -> void:
+	var sh: Shader = load("res://town_road.gdshader")
+	var road_t: Texture2D = load("res://art/wt_road.png")
+	var uvtex: ImageTexture = ImageTexture.create_from_image(Image.create(2, 2, false, Image.FORMAT_RGBA8))
+	var mats: Dictionary = {}
+	for mode in [0, 1]:
+		for s in streets:
+			var w: float = float(s[0]) * 2.0 + 12.0
+			var key: String = "%d_%d" % [mode, int(w)]
+			if not mats.has(key):
+				var m: ShaderMaterial = ShaderMaterial.new()
+				m.shader = sh
+				m.set_shader_parameter("troad", road_t)
+				m.set_shader_parameter("lw", w)
+				m.set_shader_parameter("mode", mode)
+				mats[key] = m
+			var l: Line2D = Line2D.new()
+			l.points = s[1]
+			l.width = w
+			l.texture = uvtex
+			l.texture_mode = Line2D.LINE_TEXTURE_STRETCH
+			l.joint_mode = Line2D.LINE_JOINT_ROUND
+			l.begin_cap_mode = Line2D.LINE_CAP_BOX
+			l.end_cap_mode = Line2D.LINE_CAP_BOX
+			l.round_precision = 6
+			l.antialiased = false
+			l.material = mats[key]
+			holder.add_child(l)
+		var poly: Polygon2D = Polygon2D.new()
+		var pts: PackedVector2Array = PackedVector2Array()
+		for k in range(48):
+			var a: float = TAU * float(k) / 48.0
+			pts.append(c + Vector2(cos(a) * 176.0, sin(a) * 131.0))
+		poly.polygon = pts
+		var pm: ShaderMaterial = ShaderMaterial.new()
+		pm.shader = sh
+		pm.set_shader_parameter("troad", road_t)
+		pm.set_shader_parameter("mode", mode)
+		pm.set_shader_parameter("plaza", true)
+		pm.set_shader_parameter("pc", c)
+		pm.set_shader_parameter("pr", Vector2(176.0, 131.0))
+		poly.material = pm
 		holder.add_child(poly)
 
 
@@ -386,6 +491,7 @@ func _zones(node: Node2D, r: Vector2i, land: String, t: Dictionary, rng: RandomN
 			d.set("open_from", 7.0)
 			d.set("open_to", 21.0)
 		node.add_child(d)
+		door_pts.append(p)
 		if kind == "prison":
 			# у ворот тюрьмы всегда дежурит стражница
 			var pg: Node2D = _npc(node, guard, p + Vector2(w * 0.5 + 16.0, 12.0), 0.0, "стража")
@@ -431,9 +537,9 @@ func _town(node: Node2D, r: Vector2i, land: String) -> void:
 	street_cells = {}
 	house_rects = []
 	_layout(land, c, rng)
+	door_pts = []
 	# внутри города деревья не растут
 	world.call("reserve", Rect2(c - Vector2(1000, 760), Vector2(2000, 1560)))
-	_draw_streets(node, land, c)
 	house_rects.append(Rect2(c - Vector2(180, 130), Vector2(360, 260)))   # площадь свободна
 	# v16: старых лавок-прилавков на площади больше нет — торгуют только в лавках с полками
 	_zones(node, r, land, t, rng)
@@ -479,9 +585,14 @@ func _town(node: Node2D, r: Vector2i, land: String) -> void:
 		_place_house(node, r, String(h[0]), hp2, w)
 		house_rects.append(Rect2(hp2.x - w / 2.0 - 10.0, hp2.y - 190.0, w + 20.0, 200.0))
 		_door(node, land, hp2, made, rng)
+		door_pts.append(hp2)
 		made += 1
 		if made >= 24:
 			break
+	# v32: от каждой двери — тропинка к ближайшей улице; улицы рисуются после домов
+	_door_paths(rng)
+	_draw_streets(node, land, c)
+	all_street_cells.merge(street_cells)
 	_finish(node, r, land, t, rng)
 
 

@@ -46,6 +46,8 @@ var fog_img: Image
 var fog_tex: ImageTexture
 var fog_mat: ShaderMaterial
 var marker: Control
+var home_mark: Control      # v29: значок дома на карте
+var home_map: Vector2 = Vector2.ZERO
 var open: bool = false
 var t: float = 0.0
 var map_size: Vector2 = Vector2.ONE
@@ -125,6 +127,11 @@ func setup(m: Node2D, w: Node2D) -> void:
 	marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	marker.draw.connect(_draw_marker)
 	view.add_child(marker)
+	home_mark = Control.new()
+	home_mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	home_mark.draw.connect(_draw_home)
+	view.add_child(home_mark)
+	view.move_child(home_mark, marker.get_index())      # дом под отметкой героини
 	zoom = clampf(Game.map_zoom, 1.0, ZOOM_MAX)
 	zoom_target = zoom
 
@@ -162,6 +169,24 @@ func _draw_marker() -> void:
 	marker.draw_circle(Vector2(-1.4, -1.4) * k, 1.6 * k, Color(1, 1, 1, 0.8))
 
 
+## v29: домик травницы — значок на карте (виден всегда, туман его не закрывает)
+func _draw_home() -> void:
+	var k: float = _marker_k() * 0.8
+	var o: Color = Color("2a1418")
+	home_mark.draw_circle(Vector2(0, 3.0 * k), 11.0 * k, Color(0, 0, 0, 0.3))
+	var roof: PackedVector2Array = PackedVector2Array([Vector2(-11, -2), Vector2(0, -12), Vector2(11, -2)]) 
+	var roof_o: PackedVector2Array = PackedVector2Array()
+	var roof_i: PackedVector2Array = PackedVector2Array()
+	for q in roof:
+		roof_o.append(q * k * 1.25 + Vector2(0, -1) * k)
+		roof_i.append(q * k)
+	home_mark.draw_rect(Rect2(Vector2(-8.5, -3.5) * k, Vector2(17, 13) * k), o)
+	home_mark.draw_colored_polygon(roof_o, o)
+	home_mark.draw_rect(Rect2(Vector2(-7, -2) * k, Vector2(14, 10.5) * k), Color("f4e2b8"))
+	home_mark.draw_colored_polygon(roof_i, Color("c8503c"))
+	home_mark.draw_rect(Rect2(Vector2(-2, 2.5) * k, Vector2(4, 6) * k), Color("6a4428"))
+
+
 func _grow(pts: PackedVector2Array, by: float) -> PackedVector2Array:
 	var c: Vector2 = Vector2.ZERO
 	for p in pts:
@@ -196,6 +221,8 @@ func toggle() -> void:
 
 
 func _update_hero() -> void:
+	var hp: Vector2 = preload("res://world_layout.gd").DOOR_POS + (main.call("home_off") as Vector2)
+	home_map = (hp - WD.ORIGIN) / float(WD.CELL)
 	var pl: Node2D = main.get("player") as Node2D
 	var wp: Vector2 = pl.global_position
 	if bool(main.get("inside")):
@@ -230,6 +257,8 @@ func _apply() -> void:
 	canvas.position = (VIEW.size / 2.0 - pan * s).round()
 	marker.position = canvas.position + hero_map * s
 	marker.queue_redraw()
+	home_mark.position = canvas.position + home_map * s
+	home_mark.queue_redraw()
 
 
 func _process(delta: float) -> void:

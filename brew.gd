@@ -43,9 +43,9 @@ const PROP_COL: Dictionary = {"Свежесть": Color("5cc88c"), "Покой":
 
 var root: Control
 var ui: Control
-var font_title: SystemFont
-var font_body: SystemFont
-var font_bold: SystemFont
+var font_title: Font
+var font_body: Font
+var font_bold: Font
 var is_open: bool = false
 var tex: Dictionary = {}
 var t: float = 0.0
@@ -84,10 +84,10 @@ var stream_fx: CPUParticles2D
 func _ready() -> void:
 	layer = 30
 	add_to_group("brew_ui")
-	font_title = _font(["Gabriola", "Palatino Linotype", "Georgia"])
-	font_body = _font(["Palatino Linotype", "Georgia"])
-	font_bold = _font(["Palatino Linotype", "Georgia"])
-	font_bold.font_weight = 700
+	# v31: пиксельный шрифт (ui31.gd)
+	font_title = preload("res://ui31.gd").title_font()
+	font_body = preload("res://ui31.gd").pixel_font(400)
+	font_bold = preload("res://ui31.gd").pixel_font(600)
 	for n in ["alch_room", "st_mortar", "st_pestle", "st_board", "st_knife", "st_brazier", "st_bowl", "st_ladle", "cauldron_big", "fx_soft", "st_hearth", "icon_potionbook"]:
 		tex[n] = load("res://art/%s.png" % n)
 	for i in range(RDB.PROPS.size()):
@@ -791,7 +791,7 @@ func _draw_ui() -> void:
 func _draw_count(br: Vector2, n: int) -> void:
 	var s: String = str(n)
 	ui.draw_string_outline(font_bold, br - Vector2(14 * s.length(), 0), s, HORIZONTAL_ALIGNMENT_LEFT, -1, 24, 6, Color("1a0e08"))
-	ui.draw_string(font_bold, br - Vector2(14 * s.length(), 0), s, HORIZONTAL_ALIGNMENT_LEFT, -1, 24, PAPER)
+	ui.draw_string(font_bold, br - Vector2(14 * s.length(), 0), s, HORIZONTAL_ALIGNMENT_LEFT, -1, 22, PAPER)
 
 
 ## Ингредиент с видом обработки: растёртый — горка порошка, резаный — ломтики, сушёный — бурый,
@@ -1007,6 +1007,15 @@ func _draw_bottle() -> void:
 			ui.draw_rect(Rect2(m0.x - 3 + sin(t * 20.0 + float(i)) * 1.5, yy, 6, 6), col.lightened(0.15 if i % 3 == 0 else 0.0))
 
 
+## v29: что делает каждое свойство травы (подпись в подсказке котла)
+const PROP_WORD: Dictionary = {
+	"Свежесть": "бодрит, утоляет жажду", "Покой": "успокаивает", "Сон": "клонит в сон",
+	"Тепло": "согревает", "Исцеление": "лечит", "Сила": "придаёт сил",
+	"Жгучесть": "жжёт, острое", "Холод": "студит", "Огонь": "пылает",
+	"Свет": "светится", "Тьма": "прячет в тени", "Чары": "волшебство",
+}
+
+
 func _draw_tip(id: String) -> void:
 	var nm: String = _name(id)
 	var m: Dictionary = RDB.herb_props(id)
@@ -1015,18 +1024,21 @@ func _draw_tip(id: String) -> void:
 	for k in RDB.PROPS:
 		if int(m.get(k, 0)) > 0:
 			keys.append(String(k))
-	var r: Rect2 = Rect2(mouse + Vector2(24, 10), Vector2(w, 52 + 40))
+	for k3 in keys:
+		w = maxf(w, font_bold.get_string_size("%s — %s" % [k3, PROP_WORD.get(k3, "")], HORIZONTAL_ALIGNMENT_LEFT, -1, 20).x + 28.0)
+	var r: Rect2 = Rect2(mouse + Vector2(24, 10), Vector2(w, 52 + 40 + 24 * keys.size()))
 	if r.end.x > 1900:
 		r.position.x -= r.size.x + 48
 	ui.draw_rect(r, Color(0.13, 0.08, 0.05, 0.92))
 	ui.draw_rect(r, Color("c8a96e"), false, 2.0)
-	ui.draw_string(font_bold, r.position + Vector2(14, 32), nm, HORIZONTAL_ALIGNMENT_LEFT, -1, 24, PAPER)
+	ui.draw_string(font_bold, r.position + Vector2(14, 32), nm, HORIZONTAL_ALIGNMENT_LEFT, -1, 22, PAPER)
 	for i in range(keys.size()):
 		var k2: String = keys[i]
 		var p: Vector2 = r.position + Vector2(14 + i * 64, 46)
 		ui.draw_texture_rect(tex["prop_" + k2], Rect2(p, Vector2(30, 30)), false)
 		for d in range(int(m[k2])):
 			ui.draw_rect(Rect2(p + Vector2(34, 22 - d * 9), Vector2(8, 7)), PROP_COL[k2])
+		ui.draw_string(font_bold, r.position + Vector2(14, 104 + i * 24), "%s — %s" % [k2, PROP_WORD.get(k2, "")], HORIZONTAL_ALIGNMENT_LEFT, -1, 22, PROP_COL[k2].lightened(0.35))
 
 
 func _draw_book_icon() -> void:
@@ -1064,7 +1076,7 @@ func _draw_book() -> void:
 		if Rect2(p, Vector2(76, 76)).has_point(mouse):
 			hover_id = id2
 	var shown: String = "Открыто %d из %d" % [Game.known_recipes.size(), ids.size()]
-	ui.draw_string(font_title, R.position + Vector2(40, R.size.y - 18), shown, HORIZONTAL_ALIGNMENT_LEFT, -1, 40, INK)
+	ui.draw_string(font_title, R.position + Vector2(40, R.size.y - 18), shown, HORIZONTAL_ALIGNMENT_LEFT, -1, 44, INK)
 	if hover_id != "":
 		var d: Dictionary = RDB.PRODUCTS[hover_id]
 		var known2: bool = Game.known_recipes.has(hover_id)
@@ -1100,7 +1112,7 @@ func _draw_book() -> void:
 		var y: float = r.position.y + 12.0
 		for l in lines:
 			y += float(l[1]) * 1.2
-			ui.draw_string(font_bold if int(l[1]) >= 28 else font_body, Vector2(r.position.x + 16, y), String(l[0]), HORIZONTAL_ALIGNMENT_LEFT, w - 32, int(l[1]), l[2])
+			ui.draw_string(font_bold if int(l[1]) >= 28 else font_body, Vector2(r.position.x + 16, y), String(l[0]), HORIZONTAL_ALIGNMENT_LEFT, w - 32, 22, l[2])
 			y += float(l[1]) * 0.3
 
 
@@ -1123,11 +1135,11 @@ func _draw_result() -> void:
 	ui.draw_texture_rect(ic, Rect2(Vector2(960 - 80, 210 + bob), Vector2(160, 160) * k), false)
 	var nm: String = RDB.name(result_id)
 	var sz: Vector2 = font_title.get_string_size(nm, HORIZONTAL_ALIGNMENT_LEFT, -1, 56)
-	ui.draw_string(font_title, Vector2(960 - sz.x / 2.0, 430), nm, HORIZONTAL_ALIGNMENT_LEFT, -1, 56, Color(rc if result_id != "murky" else PAPER, k))
+	ui.draw_string(font_title, Vector2(960 - sz.x / 2.0, 430), nm, HORIZONTAL_ALIGNMENT_LEFT, -1, 44, Color(rc if result_id != "murky" else PAPER, k))
 	var sub: String = RDB.RARITY_NAME[rr] if result_id != "murky" else ""
 	if result_new:
 		sub = "Новое зелье! · " + sub
 	var sz2: Vector2 = font_body.get_string_size(sub, HORIZONTAL_ALIGNMENT_LEFT, -1, 24)
-	ui.draw_string(font_body, Vector2(960 - sz2.x / 2.0, 470), sub, HORIZONTAL_ALIGNMENT_LEFT, -1, 24, Color("e8d090", k))
+	ui.draw_string(font_body, Vector2(960 - sz2.x / 2.0, 470), sub, HORIZONTAL_ALIGNMENT_LEFT, -1, 22, Color("e8d090", k))
 	var use: String = String(RDB.PRODUCTS[result_id]["use"])
-	ui.draw_multiline_string(font_body, Vector2(700, 515), use, HORIZONTAL_ALIGNMENT_CENTER, 520, 24, 3, Color(PAPER, k))
+	ui.draw_multiline_string(font_body, Vector2(700, 515), use, HORIZONTAL_ALIGNMENT_CENTER, 520, 22, 3, Color(PAPER, k))

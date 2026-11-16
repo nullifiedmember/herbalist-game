@@ -3,12 +3,13 @@ extends CanvasLayer
 
 const PX: float = 2.0
 const RDB = preload("res://recipes_db.gd")
+const U31 = preload("res://ui31.gd")
 const INK: Color = Color("3a2718")
 const INK_SOFT: Color = Color("6b4f36")
 
-var font_title: SystemFont
-var font_body: SystemFont
-var font_bold: SystemFont
+var font_title: Font
+var font_body: Font
+var font_bold: Font
 
 var clock_root: Control
 var sun_icon: TextureRect
@@ -29,13 +30,11 @@ var tex_moon: Texture2D
 
 func _ready() -> void:
 	layer = 5
-	font_title = SystemFont.new()
-	font_title.font_names = PackedStringArray(["Gabriola", "Palatino Linotype", "Georgia"])
-	font_body = SystemFont.new()
-	font_body.font_names = PackedStringArray(["Palatino Linotype", "Georgia"])
-	font_bold = SystemFont.new()
-	font_bold.font_names = PackedStringArray(["Palatino Linotype", "Georgia"])
-	font_bold.font_weight = 700
+	# v31: пиксельный шрифт во всей игре (ui31.gd): заголовки и жирный — толще, размеры — чёткие (кратные 11)
+	font_title = U31.title_font()
+	font_body = U31.pixel_font(400)
+	font_bold = U31.pixel_font(600)
+	U31.install(get_tree())
 	tex_sun = load("res://art/ui_sun.png")
 	tex_moon = load("res://art/ui_moon.png")
 	_build_clock()
@@ -58,12 +57,21 @@ func _draw_needs(nb: Control) -> void:
 		var lv: float = float(levels[i])
 		var n: int = int(ceil(lv * 10.0))
 		var warn: bool = i < 5 and lv > 0.8 and int(Time.get_ticks_msec() / 250) % 2 == 0
+		# v31: шкала в стиле яблока — цветной контур, свет сверху, пустые клетки как вдавленный пергамент
+		var c: Color = Color("e8605a") if warn else (cols[i] as Color)
+		var y0: float = 14.0 + i * 44.0
+		nb.draw_rect(Rect2(56, y0 - 4, 124, 28), Color("6e4636"))
+		nb.draw_rect(Rect2(58, y0 - 2, 120, 24), Color("e2cba0"))
+		nb.draw_rect(Rect2(58, y0 - 2, 120, 2), Color("c9ab7e"))
 		for k in range(10):
-			var r: Rect2 = Rect2(60 + k * 12, 14 + i * 44, 10, 20)
-			nb.draw_rect(r.grow(2), INK)
-			nb.draw_rect(r, Color("c4a478"))
+			var r: Rect2 = Rect2(60 + k * 12, y0, 10, 20)
 			if k < n:
-				nb.draw_rect(r, Color("d8503a") if warn else cols[i])
+				nb.draw_rect(r, c.darkened(0.42))
+				nb.draw_rect(r.grow(-2), c)
+				nb.draw_rect(Rect2(r.position + Vector2(2, 2), Vector2(6, 4)), c.lightened(0.35))
+				nb.draw_rect(Rect2(r.position + Vector2(2, 16), Vector2(6, 2)), c.darkened(0.18))
+			else:
+				nb.draw_rect(Rect2(r.position + Vector2(0, 4), Vector2(10, 14)), Color("d6bc90"))
 
 
 func panel(parent: Node, pos: Vector2, size: Vector2) -> NinePatchRect:
@@ -101,7 +109,7 @@ func _build_clock() -> void:
 	add_child(clock_root)
 	panel(clock_root, Vector2.ZERO, Vector2(384, 150 if Game.WIND_ENABLED else 116))
 	day_label = label(clock_root, "День 1", font_title, 52, INK, Vector2(26, 6))
-	time_label = label(clock_root, "08:00", font_bold, 28, INK_SOFT, Vector2(30, 62))
+	time_label = label(clock_root, "08:00", font_bold, 40, INK_SOFT, Vector2(30, 62))
 	wind_label = label(clock_root, "Ветер: штиль", font_bold, 24, INK_SOFT, Vector2(30, 104))
 	arc = Control.new()
 	arc.position = Vector2(0, 0)
@@ -122,8 +130,10 @@ func _build_hint() -> void:
 	var items: Array = [
 		["book", "icon_potionbook", "Книга травника"], ["craft", "icon_bottle", "Крафт"], ["build", "icon_log", "Мебель и комнаты"],
 		["map", "icon_scroll", "Карта"], ["quests", "icon_book_lore", "Задания"], ["chronicle", "icon_book_recipe", "Летопись"],
-		["skills", "icon_star_blade", "Навыки"],["kingdom", "icon_crown23", "Королевство"],
+		["skills", "icon_star_blade", "Навыки"],
 	]
+	if not Game.SOLO:
+		items.append(["kingdom", "icon_crown23", "Королевство"])
 	var cw: float = 74.0
 	var root: Control = Control.new()
 	root.position = Vector2(1920 - 24 - cw * items.size(), 20)
@@ -198,7 +208,7 @@ func _build_order() -> void:
 	ci.size = Vector2(20, 20)
 	ci.scale = Vector2(2, 2)
 	croot.add_child(ci)
-	coin_label = label(croot, "0", font_bold, 28, INK, Vector2(64, 10))
+	coin_label = label(croot, "0", font_bold, 40, INK, Vector2(64, 6))
 	# потребности: два значка с шкалами из блоков, без подписей
 	needs_root = Control.new()
 	needs_root.position = Vector2(1920 - 28 - 190, 100)
@@ -293,7 +303,7 @@ func _build_prompt() -> void:
 	key_labels.append([e, "interact", 26])
 	e.size = Vector2(50, 34)
 	e.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	prompt_label = label(prompt_root, "", font_body, 32, INK, Vector2(86, 14))
+	prompt_label = label(prompt_root, "", font_body, 22, INK, Vector2(86, 22))
 
 
 func _build_fade() -> void:
@@ -308,6 +318,8 @@ func _build_fade() -> void:
 	fade_label.modulate.a = 0.0
 
 
+const TOAST_MAX: float = 1000.0      # v31: левая кромка ≥ 888 — правее панели быстрого доступа
+const TOAST_BOTTOM: float = 1080.0 - 112.0
 const ARC_C: Vector2 = Vector2(290, 92)
 const ARC_R: float = 64.0
 
@@ -370,7 +382,7 @@ func set_prompt(text: String) -> void:
 		prompt_root.visible = false
 		return
 	prompt_label.text = text
-	var w: float = font_body.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 32).x + 116.0
+	var w: float = font_body.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 22).x + 116.0
 	w = ceilf(w / 2.0) * 2.0
 	prompt_panel.size = Vector2(w, 76) / PX
 	prompt_root.position = Vector2(roundf((1920.0 - w) / 2.0), 960)
@@ -381,10 +393,16 @@ func show_toast(text: String, icon: Texture2D) -> void:
 	var root: Control = Control.new()
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(root)
-	var w: float = font_bold.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 30).x + (110.0 if icon else 50.0)
+	# v31: ширина не больше TOAST_MAX — длинный текст переносится, плашка растёт вниз
+	var pad: float = 110.0 if icon else 50.0
+	var tw_full: float = font_bold.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 22).x
+	var w: float = minf(tw_full + pad, TOAST_MAX)
 	w = ceilf(w / 2.0) * 2.0
+	var lines: int = int(ceilf(tw_full / maxf(w - pad, 1.0) * 1.12)) if tw_full + pad > TOAST_MAX else 1
+	var h: float = 72.0 + float(maxi(lines, 1) - 1) * 24.0
 	root.set_meta("w", w)
-	panel(root, Vector2.ZERO, Vector2(w, 72))
+	root.set_meta("h", h)
+	panel(root, Vector2.ZERO, Vector2(w, h))
 	var x: float = 24.0
 	if icon:
 		var tr: TextureRect = TextureRect.new()
@@ -392,11 +410,15 @@ func show_toast(text: String, icon: Texture2D) -> void:
 		tr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tr.position = Vector2(14, 6)
+		tr.position = Vector2(14, (h - 60.0) / 2.0)
 		tr.size = Vector2(60, 60)
 		root.add_child(tr)
 		x = 84.0
-	label(root, text, font_bold, 30, INK, Vector2(x, 14))
+	var tl: Label = label(root, text, font_bold, 22, INK, Vector2(x, 24 if lines <= 1 else 14))
+	if lines > 1:
+		tl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		tl.custom_minimum_size = Vector2(w - x - 24.0, 0.0)
+		tl.size = Vector2(w - x - 24.0, h - 24.0)
 	toasts.push_front(root)
 	_layout_toasts()
 	root.modulate.a = 0.0
@@ -410,13 +432,16 @@ func show_toast(text: String, icon: Texture2D) -> void:
 
 
 func _layout_toasts() -> void:
-	var y: float = 1080.0 - 40.0 - 72.0
+	# v31: стопка справа над нижней кромкой — не налезает на панель быстрого доступа и полоску семян
+	var y: float = TOAST_BOTTOM
 	for i in range(toasts.size()):
 		var r: Control = toasts[i]
 		var w: float = float(r.get_meta("w", 300.0))
-		r.position = Vector2(1920.0 - 32.0 - w, y - i * 84.0)
-		if i > 4:
-			r.visible = false
+		var h: float = float(r.get_meta("h", 72.0))
+		y -= h
+		r.position = Vector2(1920.0 - 32.0 - w, y)
+		y -= 12.0
+		r.visible = i <= 4 and y > 300.0
 
 
 func fade_out(text: String) -> Tween:

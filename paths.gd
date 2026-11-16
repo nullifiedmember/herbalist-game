@@ -390,7 +390,7 @@ func extra_options(d: Node, opts: Array) -> Array:
 			if not Game.court.has(land) and Game.rep_tier(land) >= 4:
 				extra.append(["Стать придворной травницей", "pk_court"])
 		extra.append(["Пожертвовать в казну (50 монет)", "pk_donate"])
-	if role in ["кузнец", "стража", "заместитель"] and PDB.LAND_WEAPONS.has(land):
+	if not Game.SOLO and role in ["кузнец", "стража", "заместитель"] and PDB.LAND_WEAPONS.has(land):
 		if Game.smith_orders.has(land) and _can_deliver(Game.smith_orders[land]):
 			extra.append(["Сдать оружие для города", "sm_ask"])
 		else:
@@ -624,7 +624,7 @@ func _new_royal(land: String) -> Dictionary:
 	for k in Game.known_recipes.keys():
 		if String(k) != "murky":
 			pool.append(String(k))
-	for w in PDB.LAND_WEAPONS.get(land, []):
+	for w in ([] if Game.SOLO else PDB.LAND_WEAPONS.get(land, [])):
 		pool.append(String(w))
 	if pool.is_empty():
 		pool = ["heal_salve", "calm_tea", "mint_tea"]

@@ -160,7 +160,7 @@ func _build_ui() -> void:
 	p.position = Vector2(360, 90)
 	win_root.add_child(p)
 	hud.call("panel", p, Vector2.ZERO, Vector2(1200, 900))
-	hud.call("label", p, "Цели и календарь", hud.get("font_title"), 56, INK, Vector2(40, 16))
+	hud.call("label", p, "Календарь", hud.get("font_title"), 56, INK, Vector2(40, 16))
 	win_info = hud.call("label", p, "", hud.get("font_body"), 24, Color("7a5a3a"), Vector2(640, 40)) as Label
 	var sc: ScrollContainer = ScrollContainer.new()
 	sc.position = Vector2(40, 100)
@@ -219,8 +219,6 @@ func _refresh_window() -> void:
 	for c in win_list.get_children():
 		win_list.remove_child(c)
 		c.queue_free()
-	var total: int = GDB.LIST.size()
-	win_info.text = "Выполнено: %d из %d" % [Game.goals_done.size(), total]
 	# календарь
 	var id: String = EDB.for_day(Game.day)
 	win_list.add_child(_line("Сегодня, день %d: %s" % [Game.day, EDB.title(id)], 32, INK, true))
@@ -228,53 +226,10 @@ func _refresh_window() -> void:
 	var up: Array = EDB.upcoming(Game.day + 1, 3)
 	for u in up:
 		win_list.add_child(_line("День %d (через %d): %s" % [int(u[0]), int(u[0]) - Game.day, EDB.title(String(u[1]))], 24, Color("6a5038"), false))
-	var sep: Label = _line("— — —", 24, Color("a08a6a"), false)
-	win_list.add_child(sep)
-	# сначала невыполненные, потом выполненные
-	for pass_done in [false, true]:
-		for g in GDB.LIST:
-			var gd: Dictionary = g
-			var done: bool = Game.goals_done.has(String(gd["id"]))
-			if done != pass_done:
-				continue
-			var pr: Vector2i = GDB.progress(gd)
-			var box: VBoxContainer = VBoxContainer.new()
-			box.add_theme_constant_override("separation", 0)
-			var mark: String = "[готово] " if done else "• "
-			box.add_child(_line(mark + String(gd["name"]), 30, Color("2f6a2a") if done else INK, true))
-			box.add_child(_line(String(gd["desc"]), 23, Color("5a4028"), false))
-			if not done:
-				box.add_child(_line("Прогресс: %d из %d   ·   Награда: %s" % [pr.x, pr.y, _reward_text(gd)], 22, Color("8a6a1a"), false))
-			win_list.add_child(box)
 
 
-func _reward_text(g: Dictionary) -> String:
-	var parts: Array = []
-	if int(g.get("coins", 0)) > 0:
-		parts.append("%d монет" % int(g["coins"]))
-	for it in g.get("items", []):
-		parts.append("%s ×%d" % [preload("res://mats_db.gd").name(String(it[0])) if preload("res://mats_db.gd").has(String(it[0])) else String(it[0]), int(it[1])])
-	return ", ".join(parts)
 
-
-## Проверка целей: выданные награды больше не повторяются
+## Цели убраны из игры: список и награды не показываются и не выдаются.
+## goals_db.gd оставлен (не удалён), Game.goals_done не трогаем.
 func check_goals() -> void:
-	if Game.ui_open and not win_open:
-		return
-	for g in GDB.LIST:
-		var gd: Dictionary = g
-		var gid: String = String(gd["id"])
-		if Game.goals_done.has(gid) or not GDB.done(gd):
-			continue
-		Game.goals_done[gid] = Game.day
-		if int(gd.get("coins", 0)) > 0:
-			Game.add_coins(int(gd["coins"]))
-		for it in gd.get("items", []):
-			Game.add_item(String(it[0]), int(it[1]))
-		Game.toast.emit("Цель: %s" % String(gd["name"]), load("res://art/fx_heart.png"))
-		Game.chron("Цель выполнена: %s." % String(gd["name"]), "goal")
-		Sound.play("magic", -6.0)
-		if Game.goals_done.size() == GDB.LIST.size():
-			Game.toast.emit("Все цели выполнены. Ты — настоящая хозяйка леса и моря!", load("res://art/fx_heart.png"))
-	if win_open:
-		_refresh_window()
+	pass

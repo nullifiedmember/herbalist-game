@@ -407,6 +407,17 @@ func _ready() -> void:
 	s26.set_script(load("res://shops26.gd"))
 	add_child(s26)
 	s26.call("setup", self)
+	# v29: задний двор с грядками и грибными деревьями, погода с дождём
+	var by29: Node = Node.new()
+	by29.set_script(load("res://backyard29.gd"))
+	by29.name = "Backyard29"
+	add_child(by29)
+	by29.call("setup", self, hud)
+	var wx29: Node2D = Node2D.new()
+	wx29.set_script(load("res://weather29.gd"))
+	wx29.name = "Weather29"
+	add_child(wx29)
+	wx29.call("setup", self, hud)
 	if not from_save.is_empty():
 		_load_world_late(from_save)
 		Saves.pending_world = {}
@@ -694,6 +705,9 @@ func is_blocked(p: Vector2) -> bool:
 		return false
 	if inside:
 		return _in_blocked(p - IN_ORG)
+	if p.x > 80000.0 and p.x < 120000.0 and absf(p.y) < 5000.0:
+		var by29: Node = get_node_or_null("Backyard29")
+		return by29 == null or bool(by29.call("is_blocked", p))     # v29: задний двор
 	if p.y > 120000.0 and mine != null:
 		return bool(mine.call("is_blocked", p))
 	if p.x < -50000.0 and live != null:
@@ -702,8 +716,8 @@ func is_blocked(p: Vector2) -> bool:
 		return bool(sea.call("is_blocked", p))
 	if not Rect2(0, 0, LAY.W, LAY.H).has_point(p):
 		return bool(world.call("is_blocked", p))
-	if not LAY.WALK_RECT.has_point(p) and not _in_exit(p):
-		return true
+	if classic_yard and not LAY.WALK_RECT.has_point(p) and not _in_exit(p):
+		return true     # v29: в новой игре двор открыт со всех сторон (был невидимый барьер у дома)
 	if LAY.pond_value(p) < 0.06:
 		return true
 	for r in block_rects:
@@ -782,11 +796,15 @@ func _build_house_area() -> void:
 	if not home_in_yard():
 		# поляна вокруг дома: деревья и кусты мира тут не растут
 		world.call("reserve", Rect2(Game.home_pos + Vector2(-460, -330), Vector2(920, 720)))
+		# v30: огород справа от дома (backyard29.gd) — тоже без леса
+		world.call("reserve", yard30_rect())
 	# точка сортировки дома — у низа стены, чтобы героиня вплотную к стене была перед домом
 	var hs: Sprite2D = spr("house", LAY.HOUSE_POS + ho, 0.0, false, null, false)
 	hs.position.y -= 10.0
 	hs.offset.y += 10.0
 	add_caster(hs)
+	if world != null:
+		world.call("register_tall", hs)     # v31: дом прозрачнеет, когда заходишь за него; на нём не растут травы
 	_home_rect(Rect2(846, 226, 228, 124))
 	mark(LAY.HOUSE_POS + Vector2(0, -60), 150)
 	var door: Node2D = Node2D.new()
@@ -1630,6 +1648,9 @@ func _leave_special_states() -> void:
 		sea.call("set_diving", false)
 	if live != null and bool(live.get("active")):
 		live.call("set_active", false)
+	var by29l: Node = get_node_or_null("Backyard29")
+	if by29l != null and bool(by29l.get("active")):
+		by29l.set("active", false)
 	if mine != null and bool(mine.get("inside")):
 		mine.call("set_inside", false)
 	var lw: Node = get_tree().get_first_node_in_group("law18")
@@ -1728,8 +1749,10 @@ func _build_forest() -> void:
 			if p.y > 150.0 and p.y < 318.0 and absf(p.x - 960.0) < 210.0:
 				continue
 			var n: String = names[rng.randi_range(0, names.size() - 1)]
+			if yard30_rect().has_point(p):
+				continue     # v30: на огороде справа от дома лес не растёт
 			yard_trees.append(spr(n, p, 0.5, rng.randf() < 0.5))
-			if LAY.WALK_RECT.grow(20).has_point(p):
+			if LAY.WALK_RECT.grow(20).has_point(p) or Rect2(0, 0, LAY.W, LAY.H).has_point(p):
 				block_circle(p + Vector2(0, -4), 7)
 			elif not Rect2(0, 0, LAY.W, LAY.H).has_point(p):
 				world.call("add_block", p + Vector2(0, -4), 7.0)
@@ -1737,7 +1760,7 @@ func _build_forest() -> void:
 	# одиночные деревья на полянах
 	for p2 in [Vector2(300, 470), Vector2(1660, 470), Vector2(1700, 980), Vector2(250, 1130), Vector2(1560, 1130), Vector2(700, 1140)]:
 		var pv: Vector2 = p2
-		if LAY.is_busy(pv, 30.0):
+		if LAY.is_busy(pv, 30.0) or yard30_rect().has_point(pv):
 			continue
 		yard_trees.append(spr(["tree_blossom", "tree_autumn", "tree_d", "tree_c", "tree_a", "pine_a"][posmod(int(pv.x + pv.y), 6)], pv, 0.5))
 		block_circle(pv + Vector2(0, -4), 13)
@@ -1750,7 +1773,7 @@ func _build_forest() -> void:
 	var bx: float = 170.0
 	while bx < 1760.0:
 		var bp: Vector2 = Vector2(bx + rng.randf_range(-16, 16), 340.0 + rng.randf_range(-8, 10))
-		if absf(bp.x - 960.0) > 230.0 and free_spot(bp, 26):
+		if absf(bp.x - 960.0) > 230.0 and free_spot(bp, 26) and not yard30_rect().grow(20).has_point(bp):
 			bushes.append([spr(["bush_a", "bush_b", "bush_c", "bush_a"][rng.randi_range(0, 3)], bp, 0.6, rng.randf() < 0.5), bp])
 			mark(bp, 26)
 		bx += rng.randf_range(60, 110)
@@ -1762,6 +1785,11 @@ func _build_forest() -> void:
 				bushes.append([spr(["bush_a", "bush_b", "bush_c"][rng.randi_range(0, 2)], sp, 0.6, rng.randf() < 0.5), sp])
 				mark(sp, 26)
 			by += rng.randf_range(80, 140)
+
+
+## v30: огород справа от дома (backyard29.gd) с запасом — тут не сажаем лес и кусты
+func yard30_rect() -> Rect2:
+	return Rect2(Game.home_pos + Vector2(94, -380), Vector2(764, 420))
 
 
 func _rand_meadow(margin: float, r: float) -> Vector2:
@@ -2519,6 +2547,7 @@ func guest_sleep() -> void:
 	var tw: Tween = hud.call("fade_out", "Доброй ночи...")
 	await tw.finished
 	Game.next_day()
+	_sea_gifts()
 	_spawn_herbs()
 	_return_mop()
 	_return_net()
@@ -2553,6 +2582,14 @@ func _on_sleep() -> void:
 	await tw2.finished
 	Game.busy = false
 	_autosave()
+
+
+## v29: пока спишь, море приносит подарки: ракушки, стёклышки, иногда жемчужина
+func _sea_gifts() -> void:
+	var pool: Array = [["shell", 1.0], ["sea_glass", 0.6], ["starfish", 0.4], ["conch", 0.35], ["coral_piece", 0.25], ["sea_salt", 0.5], ["pearl", 0.06]]
+	for g in pool:
+		if randf() < float(g[1]) * 0.6:
+			Game.add_item(String(g[0]), 1)
 
 
 # ------------------------------------------------------------------ ранний доступ: сохранения
@@ -4083,7 +4120,6 @@ func _test_v22(fails: Array) -> void:
 	var HDB22 = preload("res://herbs_db.gd")
 	var RDB22 = preload("res://recipes_db.gd")
 	var EDB22 = preload("res://events_db.gd")
-	var GDB22 = preload("res://goals_db.gd")
 	if inside:
 		_set_inside(false, LAY.DOOR_POS + home_off() + Vector2(0, 40))
 	_leave_special_states()
@@ -4172,21 +4208,12 @@ func _test_v22(fails: Array) -> void:
 	Game.day = sell_day
 	_check(Game.stat("sell") >= 25.0, "в базарный день продажа выгоднее", fails)
 	Game.day = 4
-	# цели
+	# цели убраны: список и награды не выдаются
 	Game.goals_done.clear()
 	Game.counters["herbs"] = 11
-	var c_before: int = Game.coins
+	var c_goal: int = Game.coins
 	(get_node("V22") as Node).call("check_goals")
-	_check(Game.goals_done.has("herbs_10") and Game.coins >= c_before + 25, "цель «первая охапка» выполнена и оплачена", fails)
-	var c_mid: int = Game.coins
-	var done_mid: Dictionary = Game.goals_done.duplicate()
-	(get_node("V22") as Node).call("check_goals")
-	var new_pay: int = 0      # при втором вызове может выполниться ДРУГАЯ цель (например, «заработать монеты»)
-	for gnew in GDB22.LIST:
-		if Game.goals_done.has(String(gnew["id"])) and not done_mid.has(String(gnew["id"])):
-			new_pay += int((gnew as Dictionary).get("coins", 0))
-	_check(Game.coins == c_mid + new_pay, "награда не выдаётся второй раз", fails)
-	_check(GDB22.LIST.size() >= 18, "целей достаточно (%d)" % GDB22.LIST.size(), fails)
+	_check(Game.goals_done.is_empty() and Game.coins == c_goal, "цели не выдаются (убраны из игры)", fails)
 	Game.equip.clear()
 	Game.mermaid_t = 0.0
 	Game.day = 4
@@ -5899,6 +5926,8 @@ func _screenshot_mode(path: String) -> void:
 			await preload("res://test25.gd").new().shot(self, String(a23).substr(6))
 		if String(a23).begins_with("--v26ui="):
 			await preload("res://test26ui.gd").new().shot(self, String(a23).substr(8))
+		if String(a23).begins_with("--v29="):
+			await preload("res://test29.gd").new().shot(self, String(a23).substr(6))
 		if String(a23).begins_with("--v28="):
 			await preload("res://test28.gd").new().shot(self, String(a23).substr(6))
 		if String(a23).begins_with("--v26cats="):

@@ -17,11 +17,13 @@ const PY: float = 20.0
 const COLS: int = 16
 const ROWS: int = 7
 const GRID_Y: float = 664.0
-const GOLD: Color = Color("c8a96e")
-const GOLD_HI: Color = Color("f0d89a")
-const TXT: Color = Color("a89878")
-const MAGIC: Color = Color("8ea8ff")
-const BAD: Color = Color("d86a5a")
+# v31: окно в стиле яблока (пергамент + дерево) — тёмные чернила вместо светлого текста на камне
+const U31 = preload("res://ui31.gd")
+const GOLD: Color = Color("a0601e")
+const GOLD_HI: Color = Color("c86e14")
+const TXT: Color = Color("6b4f36")
+const MAGIC: Color = Color("3a62a8")
+const BAD: Color = Color("c0392b")
 
 # слот -> [прямоугольник, значок-силуэт пустого слота]
 const SLOTS: Dictionary = {
@@ -89,22 +91,22 @@ func setup(m: Node2D, h: CanvasLayer) -> void:
 	panel.size = Vector2(W, H)
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	root.add_child(panel)
-	_tex_rect(panel, "inv_bg", Vector2.ZERO, Vector2(W, H))
-	# герб и табличка с названием
-	_tex_rect(panel, "inv_crest", Vector2(W / 2.0 - 200, -34), Vector2(400, 100))
-	var plq: TextureRect = _tex_rect(panel, "inv_plaque", Vector2(W / 2.0 - 130, 46), Vector2(260, 44))
-	var title: Label = _label(plq, "Инвентарь", hud.get("font_title"), 34, Color("2a1c10"))
+	# v31: подробный фон (tools/ui31_inv.py): резная рама, вьюнок, травы чернилами, пояс, записка, лоток
+	_tex_rect(panel, "ui31_inv_bg", Vector2.ZERO, Vector2(W, H))
+	# v31: табличка с названием (дерево, пергамент, веточки) вместо золотого герба
+	var plq: TextureRect = _tex_rect(panel, "ui31_sign", Vector2(W / 2.0 - 130, 30), Vector2(260, 44))
+	var title: Label = _label(plq, "Инвентарь", hud.get("font_title"), 34, U31.INK)
 	title.size = Vector2(260, 44)
-	title.position = Vector2(0, -2)
+	title.position = Vector2(0, -7)     # v31: строка пиксельного шрифта выше таблички — поднимаем
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	var close_b: TextureButton = TextureButton.new()
-	close_b.texture_normal = _tex("inv_close")
+	close_b.texture_normal = _tex("ui31_close")
 	close_b.ignore_texture_size = true
 	close_b.stretch_mode = TextureButton.STRETCH_SCALE
 	close_b.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	close_b.position = Vector2(W - 54, 54)
-	close_b.size = Vector2(32, 32)
+	close_b.position = Vector2(W - 66, 30)
+	close_b.size = Vector2(32, 32) * 1.25
 	close_b.pressed.connect(close_inv)
 	panel.add_child(close_b)
 	for key in SLOTS.keys():
@@ -143,8 +145,9 @@ func setup(m: Node2D, h: CanvasLayer) -> void:
 	# свойства героини (сумма вещей) — справа от зелий
 	stats_l = RichTextLabel.new()
 	stats_l.bbcode_enabled = true
-	stats_l.position = Vector2(504 + XO, 514)
-	stats_l.size = Vector2(176, 126)
+	stats_l.position = Vector2(568, 520)     # v31: на листке в линейку, правее красного поля (фон ui31_inv_bg)
+	stats_l.size = Vector2(156, 112)
+	stats_l.add_theme_constant_override("line_separation", 0)   # строки ровно по линейкам листка (шаг 22 px)
 	stats_l.scroll_active = false
 	stats_l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	stats_l.add_theme_font_override("normal_font", hud.get("font_body"))
@@ -164,10 +167,9 @@ func setup(m: Node2D, h: CanvasLayer) -> void:
 	var sort_b: Button = Button.new()
 	sort_b.text = "Сортировать"
 	sort_b.focus_mode = Control.FOCUS_NONE
-	sort_b.position = Vector2(W - 170, GRID_Y - 34)
-	sort_b.size = Vector2(150, 28)
-	sort_b.add_theme_font_override("font", hud.get("font_body"))
-	sort_b.add_theme_font_size_override("font_size", 17)
+	U31.style_button(sort_b, hud.get("font_body"), 18)
+	sort_b.position = Vector2(W - 196, GRID_Y - 44)
+	sort_b.size = Vector2(168, 40)
 	sort_b.pressed.connect(func() -> void:
 		Game.sort_layout()
 		Sound.play("ui_click", -6.0))
@@ -179,14 +181,13 @@ func setup(m: Node2D, h: CanvasLayer) -> void:
 	over_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	over_box.visible = false
 	panel.add_child(over_box)
-	var ob: ColorRect = ColorRect.new()
-	ob.color = Color(0.25, 0.04, 0.03, 0.85)
-	ob.size = over_box.size
-	ob.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# v31: «не влезло» — та же рамка, пергамент с красноватым оттенком
+	var ob: NinePatchRect = U31.np("ui_panel", 12, 2.0, over_box.size)
+	ob.modulate = Color(1.0, 0.9, 0.86)
 	over_box.add_child(ob)
 	over_row = HFlowContainer.new()
-	over_row.position = Vector2(6, 6)
-	over_row.size = Vector2(128, 268)
+	over_row.position = Vector2(14, 14)
+	over_row.size = Vector2(112, 252)
 	over_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	over_box.add_child(over_row)
 	weight_c = Control.new()
@@ -201,13 +202,12 @@ func setup(m: Node2D, h: CanvasLayer) -> void:
 	tip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tip.z_index = 10
 	root.add_child(tip)
-	var tbg: ColorRect = ColorRect.new()
+	# v31: подсказка — тёмная ореховая дощечка в деревянной рамке (светлый текст item_info читается)
+	var tbg: NinePatchRect = U31.np("ui31_tip_x2", 12, 1.0, Vector2(64, 64))
 	tbg.name = "bg"
-	tbg.color = Color(0.03, 0.025, 0.02, 0.94)
-	tbg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tip.add_child(tbg)
 	tip_box = VBoxContainer.new()
-	tip_box.position = Vector2(14, 10)
+	tip_box.position = Vector2(18, 14)
 	tip_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tip_box.add_theme_constant_override("separation", 2)
 	tip.add_child(tip_box)
@@ -220,7 +220,7 @@ func setup(m: Node2D, h: CanvasLayer) -> void:
 	carry_icon.visible = false
 	carry_icon.z_index = 20
 	root.add_child(carry_icon)
-	Game.inventory_changed.connect(_refresh)
+	Game.inventory_changed.connect(_refresh_soon)
 	Game.equip_changed.connect(_refresh)
 	_refresh()
 
@@ -276,11 +276,11 @@ func _slot_frame(r: Rect2) -> Control:
 	panel.add_child(c)
 	var np: NinePatchRect = NinePatchRect.new()
 	np.name = "frame"
-	np.texture = _tex("inv_slot")
-	np.patch_margin_left = 5
-	np.patch_margin_top = 5
-	np.patch_margin_right = 5
-	np.patch_margin_bottom = 5
+	np.texture = _tex("ui31_islot")
+	np.patch_margin_left = 6
+	np.patch_margin_top = 6
+	np.patch_margin_right = 6
+	np.patch_margin_bottom = 6
 	np.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	np.size = r.size / 2.0
 	np.scale = Vector2(2, 2)
@@ -291,13 +291,13 @@ func _slot_frame(r: Rect2) -> Control:
 
 func _lock(parent: Control, size: Vector2) -> Control:
 	var l: ColorRect = ColorRect.new()
-	l.color = Color(0, 0, 0, 0.6)
-	l.position = Vector2(4, 4)
-	l.size = size - Vector2(8, 8)
+	l.color = Color(0.42, 0.29, 0.2, 0.32)
+	l.position = Vector2(6, 6)
+	l.size = size - Vector2(12, 12)
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(l)
 	var ch: TextureRect = _icon_rect(l, Vector2(28, 28))
-	ch.texture = _tex("inv_lock")
+	ch.texture = _tex("ui31_lock")
 	ch.position = (l.size - Vector2(28, 28)) / 2.0
 	return l
 
@@ -310,7 +310,7 @@ func _make_slot(key: String) -> void:
 	var sil: TextureRect = _icon_rect(c, Vector2(big, big))
 	sil.position = (r.size - Vector2(big, big)) / 2.0
 	sil.texture = IT.icon(String(SLOTS[key][1]))
-	sil.modulate = Color(0.32, 0.36, 0.38, 0.35)
+	sil.modulate = Color(0.5, 0.36, 0.24, 0.28)
 	var ic: TextureRect = _icon_rect(c, Vector2(big, big))
 	ic.position = sil.position
 	c.gui_input.connect(_slot_input.bind(key))
@@ -330,6 +330,22 @@ func _real(key: String) -> String:
 
 
 # ------------------------------------------------------------------ обновление
+
+var _refresh_pending: bool = false
+
+
+## v29: много сигналов подряд (сбор трав, пачка предметов) — перерисовка один раз за кадр, а не на каждый предмет
+func _refresh_soon() -> void:
+	if _refresh_pending:
+		return
+	_refresh_pending = true
+	_refresh_now.call_deferred()
+
+
+func _refresh_now() -> void:
+	_refresh_pending = false
+	_refresh()
+
 
 func _refresh() -> void:
 	if grid == null:
@@ -370,11 +386,12 @@ func _fill_grid() -> void:
 	bgc.size = grid.size
 	bgc.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	grid.add_child(bgc)
-	var cell_t: Texture2D = _tex("inv_cell")
+	var cell_t: Texture2D = _tex("ui31_cell")
+	var cell_l: Texture2D = _tex("ui31_cell_lock")
 	bgc.draw.connect(func() -> void:
 		for y in range(ROWS):
 			for x in range(COLS):
-				bgc.draw_texture_rect(cell_t, Rect2(x * CELL, y * CELL, CELL, CELL), false, Color.WHITE if y < open_rows else Color(0.4, 0.36, 0.36))
+				bgc.draw_texture_rect(cell_t if y < open_rows else cell_l, Rect2(x * CELL, y * CELL, CELL, CELL), false)
 		if carry_id != "" and carry_from_grid:
 			var tgt: Vector2i = _target_cell()
 			var sz: Vector2i = Game.rsize(carry_id, carry_rot)
@@ -395,7 +412,7 @@ func _fill_grid() -> void:
 		c.mouse_filter = Control.MOUSE_FILTER_STOP
 		grid.add_child(c)
 		var shade: ColorRect = ColorRect.new()
-		shade.color = Color(0.1, 0.16, 0.3, 0.35) if not IT.is_gear(id) else Color(0.25, 0.2, 0.08, 0.35)
+		shade.color = Color(0.55, 0.72, 0.42, 0.22) if not IT.is_gear(id) else Color(0.85, 0.6, 0.28, 0.22)
 		shade.position = Vector2(2, 2)
 		shade.size = c.size - Vector2(4, 4)
 		shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -418,10 +435,9 @@ func _fill_grid() -> void:
 			ic.rotation = PI / 2.0
 			ic.position = c.size / 2.0 - u / 2.0
 		if n > 1:
-			var l: Label = _label(c, str(n), hud.get("font_bold"), 18, Color("f4ecd8"))
-			l.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-			l.add_theme_constant_override("outline_size", 5)
-			l.position = Vector2(c.size.x - 8 - 9 * str(n).length(), c.size.y - 24)
+			var pn: Control = U31.pix_count(n, 2.0)
+			pn.position = Vector2(c.size.x - 2.0 - pn.size.x, c.size.y - 2.0 - pn.size.y)
+			c.add_child(pn)
 		c.gui_input.connect(_cell_input.bind(i))
 		c.mouse_entered.connect(func() -> void: _show_tip(id))
 		c.mouse_exited.connect(_hide_tip)
@@ -441,8 +457,9 @@ func _fill_grid() -> void:
 		oc.modulate = Color(1.0, 0.75, 0.7)
 		over_row.add_child(oc)
 		if int(Game.overflow[oid]) > 1:
-			var ol: Label = _label(oc, str(int(Game.overflow[oid])), hud.get("font_bold"), 14, Color("f4ecd8"))
-			ol.position = Vector2(22, 22)
+			var ol: Control = U31.pix_count(int(Game.overflow[oid]), 2.0)
+			ol.position = Vector2(40.0 - ol.size.x, 40.0 - ol.size.y)
+			oc.add_child(ol)
 
 
 ## Клетка, куда ляжет вещь из курсора (вещь — центром под мышью)
@@ -484,23 +501,23 @@ const STAT_NAMES: Dictionary = {
 
 
 func _fill_stats() -> void:
-	var s: String = "[color=#c8a96e]%s[/color]\n" % String(preload("res://scenarios_db.gd").get_s(Game.scenario)["name"])
+	var s: String = "[color=#a0601e]%s[/color]\n" % String(preload("res://scenarios_db.gd").get_s(Game.scenario)["name"])
 	for k in ["speed", "herb", "shroom", "seed", "sell", "buy", "brew", "reveal"]:
 		var v: float = Game.stat(String(k))
 		if absf(v) >= 1.0:
-			s += "[color=#8ea8ff]" + (String(STAT_NAMES[k]) % int(round(v))) + "[/color]\n"
+			s += "[color=#3a62a8]" + (String(STAT_NAMES[k]) % int(round(v))) + "[/color]\n"
 	for k2 in ["hunger", "thirst"]:
 		var v2: float = Game.stat(String(k2))
 		if v2 <= -1.0:
-			s += "[color=#8ea8ff]%s медленнее на %d%%[/color]\n" % ["Голод" if k2 == "hunger" else "Жажда", int(-v2)]
+			s += "[color=#3a62a8]%s медленнее на %d%%[/color]\n" % ["Голод" if k2 == "hunger" else "Жажда", int(-v2)]
 	if Game.stat("light") > 0.0:
-		s += "[color=#8ea8ff]Свет ночью[/color]\n"
+		s += "[color=#3a62a8]Свет ночью[/color]\n"
 	if Game.buff_t > 0.0:
-		s += "[color=#e8c860]Бодрость: %d с[/color]\n" % int(Game.buff_t)
+		s += "[color=#b8741e]Бодрость: %d с[/color]\n" % int(Game.buff_t)
 	if Game.pbuff_t > 0.0:
-		s += "[color=#e8c860]Зелье: %d с[/color]\n" % int(Game.pbuff_t)
+		s += "[color=#b8741e]Зелье: %d с[/color]\n" % int(Game.pbuff_t)
 	if Game.god_mode:
-		s += "[color=#ffd84a]Режим бога[/color]\n"
+		s += "[color=#c8641e]Режим бога[/color]\n"
 	stats_l.text = s
 
 
@@ -515,21 +532,19 @@ func _draw_weight() -> void:
 	var pk: Texture2D = IT.icon(Game.worn("pack")) if Game.worn("pack") != "" else _tex("icon_pack")
 	if pk != null:
 		weight_c.draw_texture_rect(pk, Rect2(0, 4, 32, 32), false)
-	weight_c.draw_rect(Rect2(x0 - 3 + shake, 9, full + 6, 22), Color("1a1410"))
-	weight_c.draw_rect(Rect2(x0 + shake, 12, full, 16), Color("2c2620"))
-	var f: float = clampf(w / maxf(1.0, cap * 1.5), 0.0, 1.0) * full
-	var col: Color = Color("b89048") if w < cap * 0.75 else (Color("d8a030") if w <= cap else Color("c83a2a"))
-	weight_c.draw_rect(Rect2(x0 + shake, 12, f, 16), col)
-	weight_c.draw_rect(Rect2(x0 + shake, 12, f, 4), col.lightened(0.3))
+	# v31: полоса на пергаменте: зелёная, на пределе — мёд, перегруз — красная
+	var col: Color = Color("7cb85a") if w < cap * 0.75 else (Color("e8b440") if w <= cap else Color("e05a4a"))
+	U31.draw_bar(weight_c, Rect2(x0 + shake, 12, full, 16), w / maxf(1.0, cap * 1.5), col)
 	var lx: float = x0 + full / 1.5
-	weight_c.draw_rect(Rect2(lx - 1 + shake, 6, 3, 28), GOLD_HI)
+	weight_c.draw_rect(Rect2(lx - 1 + shake, 4, 4, 32), Color("6e4636"))
+	weight_c.draw_rect(Rect2(lx + shake, 5, 2, 30), Color("f2c25a"))
 	var font: Font = hud.get("font_bold")
-	weight_c.draw_string(font, Vector2(x0 + full + 14, 28), "%d/%d" % [int(round(w)), int(cap)], HORIZONTAL_ALIGNMENT_LEFT, -1, 18, BAD if over else TXT)
+	weight_c.draw_string(font, Vector2(x0 + full + 14, 28), "%d/%d" % [int(round(w)), int(cap)], HORIZONTAL_ALIGNMENT_LEFT, -1, 22, BAD if over else TXT)
 	var coin: Texture2D = _tex("coin")
-	var cx: float = weight_c.size.x - 92.0
+	var cx: float = weight_c.size.x - 104.0
 	if coin != null:
-		weight_c.draw_texture_rect(coin, Rect2(cx, 8, 24, 24), false)
-	weight_c.draw_string(font, Vector2(cx + 30, 28), str(Game.coins), HORIZONTAL_ALIGNMENT_LEFT, -1, 20, GOLD)
+		weight_c.draw_texture_rect(coin, Rect2(cx, 0, 40, 40), false)    # v31: монета ровно ×2
+	weight_c.draw_string(font, Vector2(cx + 46, 28), str(Game.coins), HORIZONTAL_ALIGNMENT_LEFT, -1, 22, GOLD)
 
 
 # ------------------------------------------------------------------ подсказка о вещи
@@ -568,8 +583,8 @@ func _show_tip(id: String) -> void:
 	await get_tree().process_frame
 	if tip_id != id:
 		return
-	var bg: ColorRect = tip.get_node("bg")
-	bg.size = tip_box.size + Vector2(28, 20)
+	var bg: NinePatchRect = tip.get_node("bg")
+	bg.size = tip_box.size + Vector2(36, 28)
 	tip.visible = true
 
 
@@ -871,7 +886,7 @@ func _process(delta: float) -> void:
 		fr2.modulate = _hl("flask%d" % i)
 	if tip.visible:
 		var tp: Vector2 = mp + Vector2(24, 18)
-		var bs: Vector2 = (tip.get_node("bg") as ColorRect).size
+		var bs: Vector2 = (tip.get_node("bg") as Control).size
 		tp.x = minf(tp.x, 1920.0 - bs.x - 8.0)
 		if tp.x + bs.x > panel.position.x and mp.x > panel.position.x:
 			tp.x = mp.x - bs.x - 24.0
@@ -891,6 +906,6 @@ func _hl(key: String) -> Color:
 	var real: String = _real(key)
 	if carry_id != "":
 		if IT.fits(carry_id, real) and not (real.begins_with("flask") and int(real.substr(5)) >= Game.flask_slots()):
-			return Color(0.75, 1.25, 0.75) if hover_slot == key else Color(1.05, 1.15, 1.0)
-		return Color(1.2, 0.6, 0.55) if hover_slot == key else Color(0.7, 0.7, 0.7)
-	return Color(1.5, 1.3, 0.9) if hover_slot == key else Color.WHITE
+			return Color(0.8, 1.12, 0.72) if hover_slot == key else Color(0.92, 1.05, 0.88)
+		return Color(1.15, 0.7, 0.65) if hover_slot == key else Color(0.82, 0.8, 0.78)
+	return Color(1.1, 1.0, 0.74) if hover_slot == key else Color.WHITE

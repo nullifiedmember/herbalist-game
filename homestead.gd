@@ -106,7 +106,7 @@ func setup(m: Node2D, h: CanvasLayer, w: Node2D) -> void:
 	main.get("objects").add_child(post)
 	main.call("spr", "boundary_post", post.position, 0.0, false, null, true)
 	_block_circle(post.position + Vector2(0, -3), 6.0)
-	Game.inventory_changed.connect(_refresh)
+	Game.inventory_changed.connect(_refresh_soon)
 	Game.inventory_changed.connect(func() -> void: _pool_frame = -1)
 	_refresh()
 	# v28: обучение-задание от гида (tutq28.gd)
@@ -265,6 +265,36 @@ func _icon(tex: Texture2D, size: Vector2) -> TextureRect:
 	return tr
 
 
+## v31: число из пиксельных цифр ui31_dg_* (контуры соседних цифр сливаются в один)
+func _pix_count(n: int, k: float) -> Control:
+	var s: String = str(n)
+	var root: Control = Control.new()
+	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for i in range(s.length()):
+		var tr: TextureRect = TextureRect.new()
+		tr.texture = load("res://art/ui31_dg_%s.png" % s[i])
+		tr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		tr.size = Vector2(6, 8) * k
+		tr.position = Vector2(i * 5, 0) * k
+		tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		root.add_child(tr)
+	root.size = Vector2(s.length() * 5 + 1, 8) * k
+	return root
+
+
+## v31: бирка с номером ячейки (выбранная — медовая)
+func _hot_tag(i: int, sel: bool) -> TextureRect:
+	var tr: TextureRect = TextureRect.new()
+	tr.texture = load("res://art/ui31_tag_%d%s.png" % [i, "_sel" if sel else ""])
+	tr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	tr.size = Vector2(8, 10) * 2.0
+	tr.position = Vector2(-2, -2)
+	tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return tr
+
+
 func _num(text: String, size: int) -> Label:
 	var l: Label = Label.new()
 	l.text = text
@@ -301,9 +331,11 @@ func _slot(id: String, count: int, selected: bool, size: float) -> Control:
 		tr.position = Vector2(10, 10)
 		c.add_child(tr)
 		if count > 1:
-			var l: Label = _num(str(count), 24 if size > 70.0 else 18)
-			l.position = Vector2(size - (34 if size > 70.0 else 26), size - (36 if size > 70.0 else 28))
-			c.add_child(l)
+			# v31: пиксельные цифры счётчика в правом нижнем углу (k — размер пикселя)
+			var k: float = 3.0 if size > 70.0 else 2.0
+			var pn: Control = _pix_count(count, k)
+			pn.position = Vector2(size - 5.0 - pn.size.x, size - 5.0 - pn.size.y)
+			c.add_child(pn)
 		c.tooltip_text = IT.name(id)
 	return c
 
@@ -370,6 +402,22 @@ func _draw_weight() -> void:
 		weight_bar.draw_rect(Rect2(tx + shake, 26, 2, 6), Color(0, 0, 0, 0.25))
 
 
+var _refresh_pending: bool = false
+
+
+## v29: перерисовка панели быстрого доступа один раз за кадр
+func _refresh_soon() -> void:
+	if _refresh_pending:
+		return
+	_refresh_pending = true
+	_refresh_now.call_deferred()
+
+
+func _refresh_now() -> void:
+	_refresh_pending = false
+	_refresh()
+
+
 func _refresh() -> void:
 	if hot_box == null:
 		return
@@ -382,9 +430,7 @@ func _refresh() -> void:
 		if id != "" and Game.get_count(id) <= 0:
 			id = ""
 		var s: Control = _slot(id, Game.get_count(id) if id != "" else 0, i == Game.hot_sel, 64.0)
-		var num: Label = _num(str(i + 1), 14)
-		num.position = Vector2(6, 2)
-		s.add_child(num)
+		s.add_child(_hot_tag(i + 1, i == Game.hot_sel))
 		s.mouse_filter = Control.MOUSE_FILTER_STOP
 		s.gui_input.connect(func(ev: InputEvent) -> void:
 			if ev is InputEventMouseButton and (ev as InputEventMouseButton).pressed and (ev as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
@@ -1219,7 +1265,9 @@ func open_menu(kind: String, who: Node2D) -> void:
 				var tic: TextureRect = _icon(load("res://art/%s.png" % String(TAB_ICONS[tb])), Vector2(90, 66))
 				tic.position = Vector2(10, 8)
 				tbtn.add_child(tic)
-				tbtn.tooltip_text = {"furn": "Мебель", "wpn": "Оружие и удочка", "kingdom": "Королевство", "home": "Хозяйство", "work": "Мастерские", "trap": "Ловушки", "bird": "Для птиц", "deco": "Украшения", "wall": "Ограды и дорожки"}[tb]
+				if Game.SOLO and String(tb) == "wpn":
+					tic.texture = load("res://art/icon_hoe.png")
+				tbtn.tooltip_text = {"furn": "Мебель", "wpn": "Садовые инструменты и удочка" if Game.SOLO else "Оружие и удочка", "kingdom": "Королевство", "home": "Хозяйство", "work": "Мастерские", "trap": "Ловушки", "bird": "Для птиц", "deco": "Украшения", "wall": "Ограды и дорожки"}[tb]
 				tbtn.pressed.connect(func() -> void:
 					menu_tab = String(tb)
 					Sound.play("page", -10.0)
@@ -1232,6 +1280,8 @@ func open_menu(kind: String, who: Node2D) -> void:
 			for k in all_b.keys():
 				if String((all_b[k] as Array)[4]) != menu_tab or k == "workbench":
 					continue
+				if k == "plot" and Game.SOLO:
+					continue   # v29: старый огород убран — грядки теперь на заднем дворе
 				if k == "outhouse" and not Game.TOILET_ENABLED:
 					continue   # туалет убран из построек (нужды выключены)
 				var need: Dictionary = IT.build_need(String(k))

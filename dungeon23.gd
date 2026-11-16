@@ -53,7 +53,7 @@ func setup(m: Node2D, v: Node) -> void:
 	add_to_group("dungeon23")
 	process_priority = 100        # после main: свет подземелья поверх дневного
 	world = m.get("world")
-	if world != null:
+	if world != null and not Game.SOLO:     # v29: в одиночной игре входов в подземелья нет
 		(world.get("region_hooks") as Array).append(Callable(self, "_region_hook"))
 	swing = Sprite2D.new()
 	swing.visible = false
@@ -465,7 +465,7 @@ func _monsters_near(r: float) -> bool:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Game.ui_open or Game.busy:
+	if Game.ui_open or Game.busy or Game.SOLO:
 		return
 	var press: bool = false
 	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:

@@ -80,7 +80,7 @@ func handles(act: String) -> bool:
 
 func extra_options(d: Node, opts: Array) -> Array:
 	var npc: Node = d.get("npc")
-	if npc == null:
+	if npc == null or Game.SOLO:     # v29: нанимать работниц нельзя
 		return opts
 	if npc.has_meta("worker23"):
 		# работница: только приказы
@@ -238,7 +238,7 @@ func _process(delta: float) -> void:
 	if not spawned and t > 0.4:
 		spawned = true
 		_respawn_all()
-	if propose_t > 0.0:
+	if propose_t > 0.0 and not Game.SOLO:
 		propose_t -= delta
 		if propose_t <= 0.0:
 			propose()
@@ -582,7 +582,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey) or not event.pressed or event.echo:
 		return
 	var k: Key = (event as InputEventKey).physical_keycode
-	if KB.is_key("kingdom", k):
+	if KB.is_key("kingdom", k) and not Game.SOLO:
 		if win.visible:
 			close_window()
 		elif not Game.ui_open and not Game.busy:

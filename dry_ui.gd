@@ -334,7 +334,7 @@ func _draw() -> void:
 		var gi2: int = page * 4 + i2
 		if gi2 < hs.size():
 			var cnt: String = str(Game.get_count(String(hs[gi2])))
-			ui.draw_string(ThemeDB.fallback_font, _slot_rect(i2).position + Vector2(40, 190), cnt, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Color("f4e8c8"))
+			ui.draw_string(ThemeDB.fallback_font, _slot_rect(i2).position + Vector2(40, 190), cnt, HORIZONTAL_ALIGNMENT_LEFT, -1, 22, Color("f4e8c8"))
 	var pages: int = (hs.size() + 3) / 4
 	if pages > 1:
 		for pi in range(pages):

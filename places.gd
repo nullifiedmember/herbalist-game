@@ -85,11 +85,8 @@ func setup(m: Node2D) -> void:
 func _font(names: Array, bold: bool) -> Font:
 	var key: String = ",".join(names) + str(bold)
 	if not fonts.has(key):
-		var f: SystemFont = SystemFont.new()
-		f.font_names = PackedStringArray(names)
-		f.font_weight = 700 if bold else 400
-		f.antialiasing = TextServer.FONT_ANTIALIASING_GRAY
-		fonts[key] = f
+		# v31: пиксельный шрифт (ui31.gd) вместо системного
+		fonts[key] = preload("res://ui31.gd").pixel_font(600 if bold else 400)
 	return fonts[key]
 
 

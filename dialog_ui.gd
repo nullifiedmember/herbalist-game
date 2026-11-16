@@ -147,7 +147,7 @@ func _talk_menu() -> void:
 	# v17: вербовка — позвать с собой; у спутниц — свои вопросы
 	var rcn: Node = get_tree().get_first_node_in_group("recruit")
 	var tx: String = String(npc.get("tex_name"))
-	if rcn != null and bool(RECR.profile(tx, role, String(npc.get("land")))["can"]):
+	if rcn != null and not Game.SOLO and bool(RECR.profile(tx, role, String(npc.get("land")))["can"]):
 		if bool(rcn.call("is_follower", tx)):
 			for k in range(opts.size() - 1, -1, -1):
 				if String(opts[k][1]) in ["leader", "about"]:

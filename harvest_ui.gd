@@ -87,9 +87,14 @@ func _ready() -> void:
 ## v27: трава в земле — как в мире (herbw_* без кочки), иначе значок
 func _wicon(id: String) -> Texture2D:
 	if not tex.has("w_" + id):
+		# v27d: своя картинка для окна сбора — без земли и без пучков травы (tools/herb_harvest27.py)
+		var hp: String = "res://art/herbh_%s.png" % id
+		if ResourceLoader.exists(hp):
+			tex["w_" + id] = load(hp)
+			return tex["w_" + id]
 		var wp: String = "res://art/herbw_%s.png" % id
 		var wt: Texture2D = load(wp) if ResourceLoader.exists(wp) else null
-		tex["w_" + id] = wt if wt != null and wt.get_size() == Vector2(32, 48) else _icon(id)
+		tex["w_" + id] = _no_tufts(wt) if wt != null and wt.get_size() == Vector2(32, 48) else _icon(id)
 	return tex["w_" + id]
 
 
@@ -107,6 +112,57 @@ func _base_colors(src: Node) -> void:
 	var lum: float = (c.r + c.g + c.b) / 3.0
 	var tone: Color = Color(c.r / maxf(lum, 0.01), c.g / maxf(lum, 0.01), c.b / maxf(lum, 0.01)) * clampf(0.75 + lum * 0.45, 0.8, 1.05)
 	plant_tone = Color.WHITE.lerp(Color(tone.r, tone.g, tone.b, 1.0), 0.12)
+
+
+## v27c: убрать пучки травинок у земли, нарисованные в картинке травы (отдельные кусочки внизу) —
+## в окне сбора растение растёт прямо из земли одним стеблем. Картинки в мире не меняются.
+func _no_tufts(t2: Texture2D) -> Texture2D:
+	var im: Image = t2.get_image()
+	if im == null:
+		return t2
+	im = im.duplicate()
+	if im.is_compressed():
+		im.decompress()
+	im.convert(Image.FORMAT_RGBA8)
+	var w: int = im.get_width()
+	var h: int = im.get_height()
+	var low: int = 0
+	for y in range(h):
+		for x in range(w):
+			if im.get_pixel(x, y).a > 0.5:
+				low = y
+	# полупрозрачная тень-полоска под травой (она же склеивает пучки со стеблем) — убрать
+	for y in range(maxi(0, low - 2), h):
+		for x in range(w):
+			if im.get_pixel(x, y).a <= 0.5:
+				im.set_pixel(x, y, Color(0, 0, 0, 0))
+	var seen: Dictionary = {}
+	for y0 in range(h):
+		for x0 in range(w):
+			if seen.has(Vector2i(x0, y0)) or im.get_pixel(x0, y0).a <= 0.5:
+				continue
+			# связный кусочек (8 соседей)
+			var part: Array = []
+			var stack: Array = [Vector2i(x0, y0)]
+			seen[Vector2i(x0, y0)] = true
+			var top_y: int = y0
+			while not stack.is_empty():
+				var c: Vector2i = stack.pop_back()
+				part.append(c)
+				top_y = mini(top_y, c.y)
+				for dy in range(-1, 2):
+					for dx in range(-1, 2):
+						var n: Vector2i = c + Vector2i(dx, dy)
+						if n.x < 0 or n.y < 0 or n.x >= w or n.y >= h or seen.has(n):
+							continue
+						if im.get_pixel(n.x, n.y).a > 0.5:
+							seen[n] = true
+							stack.append(n)
+			# маленький кусочек целиком у самой земли — это пучок травы
+			if top_y >= low - 7 and part.size() < 40:
+				for c2 in part:
+					im.set_pixel(c2.x, c2.y, Color(0, 0, 0, 0))
+	return ImageTexture.create_from_image(im)
 
 
 ## v27c: нижняя непрозрачная строка картинки (где у травы начинается стебель)
@@ -484,7 +540,12 @@ func _process(delta: float) -> void:
 			if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 				held = false
 			if HDB.has(id, "sway"):
-				p["x"] = float(p["x0"]) + sin(t * 1.6 + float(p["fly"])) * 26.0
+				# v29: пока рука рядом или держит растение — оно стоит спокойно и не «убегает» (шалфей)
+				var sw: float = sin(t * 1.6 + float(p["fly"])) * 26.0
+				if grab == i or near < 150.0:
+					p["x0"] = float(p["x"]) - sw
+				else:
+					p["x"] = float(p["x0"]) + sw
 			if HDB.has(id, "shy") and lmb and near < 120.0 and mspeed > 1400.0 and grab != i:
 				p["hide"] = 2.0
 			if HDB.has(id, "dodge") and lmb and near < 110.0 and mspeed > 700.0 and float(p["dodge_cd"]) <= 0.0 and grab != i:
@@ -709,8 +770,9 @@ func _draw_ui() -> void:
 		var bi: Texture2D = _icon(String(basket[k]))
 		var bp: Vector2 = BASKET.position + Vector2(50.0 + float(k % 6) * 34.0, 40.0 - float(k / 6) * 16.0)
 		scene.draw_texture_rect(bi, Rect2(bp - Vector2(24, 60), Vector2(64, 96)), false)
-	scene.draw_texture_rect_region(tex["harvest_basket"], Rect2(BASKET.position + Vector2(0, 64), Vector2(BASKET.size.x, BASKET.size.y - 64)),
-		Rect2(0, 16, 76, 36))
+	# v29: передняя стенка корзинки начинается с самого края — трава за ней больше не просвечивает
+	scene.draw_texture_rect_region(tex["harvest_basket"], Rect2(BASKET.position + Vector2(0, 48), Vector2(BASKET.size.x, BASKET.size.y - 48)),
+		Rect2(0, 12, 76, 40))
 	# растения
 	for i in range(plants.size()):
 		var p: Dictionary = plants[i]
@@ -749,7 +811,7 @@ func _draw_ui() -> void:
 func _draw_plant(p: Dictionary, i: int) -> void:
 	var id: String = String(p["id"])
 	var st: String = String(p["state"])
-	var ic: Texture2D = _icon(id)
+	var ic: Texture2D = _wicon(id)
 	var r: Rect2 = _rect(p)
 	var mod: Color = Color.WHITE
 	var night: float = Game.night_factor()
@@ -791,22 +853,12 @@ func _draw_plant(p: Dictionary, i: int) -> void:
 	if st == "held" and HDB.has(id, "sticky") and float(p.get("stick", 0.0)) > 0.0:
 		scene.draw_line(_hand(), Vector2(r.get_center().x, r.position.y + 40), Color(1, 1, 0.8, 0.7), 2.0)
 	if st == "ground":
-		# v27c: стебель начинается прямо из бурой земли (без лунки): самый низ травы — на кромке почвы,
-		# чуть утоплен; спереди — травинки той же травы, что в окне (остаются на месте, даже когда тянут)
+		# v27c: стебель начинается прямо из бурой земли — без лунки и без травинок: самый низ травы на кромке почвы
 		var wic: Texture2D = _wicon(id)
 		var low: int = _low_row(wic)
 		var soil_y: float = GROUND_Y - 2.0 + 4.0      # кромка почвы + утопить на ~1 пиксель арта
 		var sh: float = (soil_y - float(p["lift"])) - (dst.position.y + (float(low) + 1.0) / float(wic.get_height()) * dst.size.y)
 		scene.draw_texture_rect(wic, Rect2(dst.position + Vector2(0, sh), dst.size), false, mod * plant_tone)
-		var g1: Color = Color("6aaa52").lerp(Color("1a2a1a"), night * 0.7)
-		var g2: Color = Color("4a8a3e").lerp(Color("142014"), night * 0.7)
-		var x0: float = float(p["x"])
-		for k in range(9):
-			var hs: float = fmod(float(k) * 0.618 + float(i) * 0.37, 1.0)
-			var bx: float = x0 - 44.0 + float(k) * 11.0 + hs * 4.0
-			var bh: float = 10.0 + hs * 14.0 - absf(float(k) - 4.0) * 1.5
-			scene.draw_rect(Rect2(bx, GROUND_Y - 2.0 - bh, 4, bh + 2.0), g1 if k % 2 == 0 else g2)
-		scene.draw_rect(Rect2(x0 - 46.0, GROUND_Y - 4.0, 92.0, 4.0), Color("3e6e34").lerp(Color("141e14"), night * 0.7))
 	else:
 		scene.draw_texture_rect(ic, dst, false, mod)
 	# огненные искры, свечение

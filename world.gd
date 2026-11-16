@@ -97,6 +97,54 @@ func reserve(r: Rect2) -> void:
 	reserved.append(r)
 
 
+## Места, где не растут дикие растения (огород)
+var no_plants: Array = []
+
+
+func ban_plants(r: Rect2) -> void:
+	no_plants.append(r)
+
+
+## Нельзя растить дикое растение: на огороде, в постройке, под крышей или кроной
+func plant_banned(p: Vector2) -> bool:
+	for r in no_plants:
+		if (r as Rect2).has_point(p):
+			return true
+	return under_crown(p)
+
+
+## Убрать уже выросшие деревья, кусты и цветы из области: спрайт, тень и преграду
+func clear_trees(r: Rect2) -> void:
+	for reg in built.keys():
+		var node: Node2D = built[reg]
+		for ch in node.get_children():
+			if not (ch is Sprite2D):
+				continue
+			var s: Sprite2D = ch
+			if s.texture == null or not r.has_point(s.position):
+				continue
+			var tp: String = s.texture.resource_path.get_file()
+			var small_plant: bool = tp.begins_with("flowers_") or tp.begins_with("mushrooms") or tp.begins_with("bush_") or tp.begins_with("rose_bush") or tp.begins_with("swamp_bush")
+			if s.texture.get_height() < 80 and not small_plant:
+				continue
+			# пара «дерево — тень»
+			var pairs: Array = casters.get(reg, [])
+			for i in range(pairs.size() - 1, -1, -1):
+				if pairs[i][0] == s:
+					if is_instance_valid(pairs[i][1]):
+						(pairs[i][1] as Node).queue_free()
+					pairs.remove_at(i)
+			# круглая преграда ствола
+			var bp: Vector2 = s.position + Vector2(0, -2)
+			for k in blocks.keys():
+				var arr: Array = blocks[k]
+				for j in range(arr.size() - 1, -1, -1):
+					var cv: Vector3 = arr[j]
+					if absf(cv.x - bp.x) < 0.5 and absf(cv.y - bp.y) < 0.5:
+						arr.remove_at(j)
+			s.queue_free()
+
+
 func is_blocked(p: Vector2) -> bool:
 	var m: float = 8.0
 	if p.x < WD.ORIGIN.x + m or p.y < WD.ORIGIN.y + m or p.x > WD.ORIGIN.x + WD.SIZE.x - m or p.y > WD.ORIGIN.y + WD.SIZE.y - m:

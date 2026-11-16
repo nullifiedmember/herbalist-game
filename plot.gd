@@ -94,6 +94,13 @@ func on_new_day() -> void:
 	refresh()
 
 
+## v29: дождь поливает грядку сам
+func rain29() -> void:
+	if crop != "" and not watered:
+		watered = true
+		refresh()
+
+
 ## Только для скриншотов и проверок.
 func debug_set(new_crop: String, new_stage: int, new_watered: bool) -> void:
 	crop = new_crop

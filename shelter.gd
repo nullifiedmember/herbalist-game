@@ -101,6 +101,10 @@ func _process(_delta: float) -> void:
 		var n: Node2D = nv
 		if n.get("follow") != null and not bool(n.get("follow")):
 			continue    # поселился в загоне
+		if n.get("yard") != null and bool(n.get("yard")):
+			continue    # гуляет у дома (v29)
+		if n.get("stay") != null and bool(n.get("stay")):
+			continue    # оставлен на месте (v29)
 		n.visible = pp.y < 90000.0 or pp.y > 120000.0
 		if n.global_position.distance_to(pp) > 620.0:
 			n.global_position = main.call("free_near", pp + Vector2(randf_range(-40, 40), randf_range(16, 40)))

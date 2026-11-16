@@ -149,11 +149,11 @@ func _process(delta: float) -> void:
 		# v24: и когда рядом поставили новый дом
 		crown_checked = true
 		crown_ver = int(w.get("tall_ver"))
-		var bad: bool = bool(w.call("under_crown", global_position))
+		var bad: bool = bool(w.call("plant_banned", global_position))
 		for sp in sprs:
 			if bad:
 				break
-			bad = bool(w.call("under_crown", (sp as Node2D).global_position))
+			bad = bool(w.call("plant_banned", (sp as Node2D).global_position))
 		if bad:
 			queue_free()
 			return
@@ -165,7 +165,7 @@ func _process(delta: float) -> void:
 		var vis: bool = not today.is_empty() and DB.hour_ok(String(today[0]), Game.hour())
 		if vis and not shown:
 			var w2: Node = get_tree().current_scene.get("world") if get_tree().current_scene != null else null
-			if w2 != null and bool(w2.call("under_crown", global_position)):
+			if w2 != null and bool(w2.call("plant_banned", global_position)):
 				queue_free()
 				return
 		if vis != shown:

@@ -51,11 +51,8 @@ func setup(h: CanvasLayer) -> void:
 	root = Control.new()
 	root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(root)
-	var dim: ColorRect = ColorRect.new()
-	dim.color = Color(0.10, 0.08, 0.14, 0.55)
-	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	root.add_child(dim)
+	# v32: живой фон-пейзаж справа (слои tools/menu32.py), меню — колонкой слева
+	_build_bg()
 	# падающие листья поверх
 	leaves = CPUParticles2D.new()
 	leaves.texture = load("res://art/fx_leaf.png")
@@ -75,31 +72,55 @@ func setup(h: CanvasLayer) -> void:
 	leaves.scale_amount_max = 4.0
 	root.add_child(leaves)
 	var p: Control = Control.new()
-	p.position = Vector2(660, 170)
+	p.position = Vector2.ZERO
 	root.add_child(p)
 	main_panel = p
-	hud.call("panel", p, Vector2.ZERO, Vector2(600, 740))
+	var pan: TextureRect = TextureRect.new()
+	pan.texture = load("res://art/menu32_panel.png")
+	pan.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	pan.scale = Vector2(2, 2)
+	pan.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	p.add_child(pan)
 	title = Label.new()
-	title.text = "Лесной травник"
+	title.text = "Лесной\nтравник"
 	title.add_theme_font_override("font", hud.get("font_title"))
 	title.add_theme_font_size_override("font_size", 86)
 	title.add_theme_color_override("font_color", INK)
+	title.add_theme_constant_override("line_spacing", -26)
+	title.scale = Vector2(2, 2)   # шрифт в игре один размера — логотип крупнее масштабом
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.position = Vector2(0, 30)
-	title.size = Vector2(600, 100)
+	title.position = Vector2(0, 14)
+	title.size = Vector2(280, 115)
 	p.add_child(title)
-	var leaf: TextureRect = TextureRect.new()
-	leaf.texture = load("res://art/potion_heal_salve.png")
-	leaf.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	leaf.position = Vector2(260, 140)
-	leaf.size = Vector2(80, 80)
-	leaf.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	leaf.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	p.add_child(leaf)
+	var sub: Label = Label.new()
+	sub.text = "уютная история о травах и лесе"
+	sub.add_theme_font_override("font", hud.get("font_body"))
+	sub.add_theme_font_size_override("font_size", 24)
+	sub.add_theme_color_override("font_color", Color("8a6a48"))
+	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	sub.position = Vector2(0, 268)
+	sub.size = Vector2(560, 34)
+	p.add_child(sub)
+	var foot: Label = Label.new()
+	foot.text = "ранний доступ"
+	foot.add_theme_font_override("font", hud.get("font_body"))
+	foot.add_theme_font_size_override("font_size", 20)
+	foot.add_theme_color_override("font_color", Color("a88a66"))
+	foot.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	foot.position = Vector2(0, 1030)
+	foot.size = Vector2(560, 30)
+	p.add_child(foot)
+	menu_mark = TextureRect.new()
+	menu_mark.texture = load("res://art/fx_leaf.png")
+	menu_mark.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	menu_mark.scale = Vector2(4, 4)
+	menu_mark.visible = false
+	menu_mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	p.add_child(menu_mark)
 	# кнопок много (особенно в режиме бога) — список листается колесом мыши
 	var box_scroll: ScrollContainer = ScrollContainer.new()
-	box_scroll.position = Vector2(80, 225)
-	box_scroll.size = Vector2(440, 480)
+	box_scroll.position = Vector2(80, 330)
+	box_scroll.size = Vector2(440, 680)
 	box_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	p.add_child(box_scroll)
 	box = VBoxContainer.new()
@@ -121,6 +142,13 @@ func setup(h: CanvasLayer) -> void:
 			v23.call("open_god"))
 	_button(box, "Настройки", _toggle_settings)
 	_button(box, "Выход", func() -> void: Saves.quit_game())
+	for ch in box.get_children():
+		_menu_hover(ch as Button)
+	sub_dim = ColorRect.new()
+	sub_dim.color = Color(0.16, 0.12, 0.22, 0.45)
+	sub_dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	sub_dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(sub_dim)
 	_build_newgame()
 	_build_slots()
 	_build_confirm()
@@ -667,6 +695,9 @@ func show_menu() -> void:
 
 func _play() -> void:
 	started = true
+	cel_drag = false
+	cel_hover = false
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	var m: Node = get_tree().current_scene
 	if m != null and m.has_method("save_world"):
 		m.set("playing", true)
@@ -680,6 +711,7 @@ func _play() -> void:
 
 ## v24: бег «нажать один раз» — переключаем здесь (меню живёт всегда)
 func _input(event: InputEvent) -> void:
+	_cel_input(event)
 	if KB.pressed("run", event) and bool(Saves.opt.get("run_toggle", false)) and not open:
 		KB.run_latched = not KB.run_latched
 
@@ -706,7 +738,260 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if open:
 		t += delta
-		title.position.y = 30.0 + sin(t * 1.4) * 4.0
+		title.position.y = 14.0 + sin(t * 1.4) * 4.0
+		_animate_bg(delta)
+
+
+# ------------------------------------------------------------------ v32: фон меню — день и ночь, солнце и луну можно таскать
+
+const BG_BASE: Vector2 = Vector2(-40, -20)     # холст 1000x560 ×2 = 2000x1120, по центру экрана 1920x1080
+const BG_CHIMNEY: Vector2 = Vector2(488, 270)  # труба дома (вывод tools/menu32.py)
+const CEL_X0: float = 640.0                    # дуга солнца/луны: восход слева, закат справа (экран)
+const CEL_X1: float = 2000.0
+const CEL_PEAK: float = 150.0
+const CEL_HORIZON: float = 860.0
+const CEL_GRAB: float = 84.0
+var bg: Control
+var bg_layers: Array = []      # [Control, глубина параллакса]
+var bg_tint: Array = []        # слои, которые темнеют ночью и теплеют на закате
+var bg_clouds: Array = []      # [TextureRect, скорость]
+var bg_birds: Array = []       # [Sprite2D, скорость, фаза, высота]
+var bg_par: Vector2 = Vector2.ZERO
+var bg_sky_day: TextureRect
+var bg_sky_dusk: TextureRect
+var bg_stars: TextureRect
+var bg_sun: TextureRect
+var bg_sun_glow: TextureRect
+var bg_rays: TextureRect
+var bg_moon: TextureRect
+var bg_moon_glow: TextureRect
+var bg_windows: TextureRect
+var cel_layer: Control
+var cel_moon: bool = false     # сейчас на небе луна
+var cel_p: float = 0.3         # где на дуге: 0 — восход, 1 — закат
+var cel_pos: Vector2 = Vector2.ZERO
+var cel_drag: bool = false
+var cel_hover: bool = false
+var menu_mark: TextureRect
+var sub_dim: ColorRect
+
+
+func _bg_layer(depth: float, tint: bool = false) -> Control:
+	var c: Control = Control.new()
+	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bg.add_child(c)
+	bg_layers.append([c, depth])
+	if tint:
+		bg_tint.append(c)
+	return c
+
+
+func _bg_tex(parent: Control, file: String, canvas_pos: Vector2 = Vector2.ZERO) -> TextureRect:
+	var r: TextureRect = TextureRect.new()
+	r.texture = load("res://art/" + file + ".png")
+	r.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	r.scale = Vector2(2, 2)
+	r.position = BG_BASE + canvas_pos * 2.0
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(r)
+	return r
+
+
+## Поставить картинку (масштаб ×2) центром в точку
+func _bg_center(r: TextureRect, c: Vector2) -> void:
+	r.position = (c - r.size).round()
+
+
+func _build_bg() -> void:
+	bg = Control.new()
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bg.clip_contents = true
+	root.add_child(bg)
+	var sky: Control = _bg_layer(0.05)
+	_bg_tex(sky, "menu32_sky_night")
+	bg_stars = _bg_tex(sky, "menu32_stars")
+	bg_sky_dusk = _bg_tex(sky, "menu32_sky_dusk")
+	bg_sky_day = _bg_tex(sky, "menu32_sky")
+	cel_layer = _bg_layer(0.10)
+	bg_sun_glow = _bg_tex(cel_layer, "menu32_sun_glow")
+	bg_moon_glow = _bg_tex(cel_layer, "menu32_moon_glow")
+	bg_rays = _bg_tex(cel_layer, "menu32_rays")
+	bg_rays.pivot_offset = bg_rays.size * 0.5
+	bg_sun = _bg_tex(cel_layer, "menu32_sun")
+	bg_moon = _bg_tex(cel_layer, "menu32_moon")
+	cel_pos = _cel_arc(cel_p)
+	var cl: Control = _bg_layer(0.16, true)
+	var cpos: Array = [Vector2(380, 60), Vector2(760, 170), Vector2(640, 40), Vector2(880, 90), Vector2(160, 130)]
+	for i in range(cpos.size()):
+		var c: TextureRect = _bg_tex(cl, "menu32_cloud_%d" % (i % 4), cpos[i])
+		bg_clouds.append([c, 7.0 + float(i % 3) * 4.0])
+	var birds: Control = _bg_layer(0.22, true)
+	for i in range(4):
+		var s: Sprite2D = Sprite2D.new()
+		s.texture = load("res://art/menu32_bird_0.png")
+		s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		s.scale = Vector2(2, 2) if i < 3 else Vector2(3, 3)
+		s.position = Vector2(700.0 + float(i) * 70.0 - (300.0 if i == 3 else 0.0), 360.0 + float(i % 2) * 34.0)
+		birds.add_child(s)
+		bg_birds.append([s, 46.0 + float(i) * 6.0, float(i) * 1.7, s.position.y])
+	_bg_tex(_bg_layer(0.28, true), "menu32_far")
+	_bg_tex(_bg_layer(0.45, true), "menu32_mid")
+	var nearl: Control = _bg_layer(0.75, true)
+	_bg_tex(nearl, "menu32_near")
+	var sm: CPUParticles2D = CPUParticles2D.new()
+	sm.texture = load("res://art/menu32_smoke.png")
+	sm.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	sm.position = BG_BASE + BG_CHIMNEY * 2.0
+	sm.amount = 14
+	sm.lifetime = 4.5
+	sm.preprocess = 5.0
+	sm.direction = Vector2(0.15, -1)
+	sm.spread = 8.0
+	sm.gravity = Vector2(7, -3)
+	sm.initial_velocity_min = 16.0
+	sm.initial_velocity_max = 24.0
+	sm.scale_amount_min = 1.4
+	sm.scale_amount_max = 2.2
+	var sc: Curve = Curve.new()
+	sc.add_point(Vector2(0, 0.6))
+	sc.add_point(Vector2(1, 1.6))
+	sm.scale_amount_curve = sc
+	var gr: Gradient = Gradient.new()
+	gr.set_color(0, Color(1, 1, 1, 0.85))
+	gr.set_color(1, Color(1, 1, 1, 0.0))
+	sm.color_ramp = gr
+	nearl.add_child(sm)
+	_bg_tex(_bg_layer(1.0, true), "menu32_front")
+	# свет в окнах — поверх затемнения, светится сам (сложение цветов)
+	var winl: Control = _bg_layer(0.75)
+	bg_windows = _bg_tex(winl, "menu32_windows")
+	var add_m: CanvasItemMaterial = CanvasItemMaterial.new()
+	add_m.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	bg_windows.material = add_m
+	# слой окон должен быть сразу над поляной, а не над передним деревом
+	bg.move_child(winl, nearl.get_index() + 1)
+	# для скриншотов: --menunight (луна), --menudusk (закат)
+	var ua: PackedStringArray = OS.get_cmdline_user_args()
+	if ua.has("--menunight"):
+		cel_moon = true
+		cel_p = 0.4
+	elif ua.has("--menudusk"):
+		cel_p = 0.9
+	cel_pos = _cel_arc(cel_p)
+
+
+## Точка дуги: p 0..1 слева направо, выше всего посередине
+func _cel_arc(p: float) -> Vector2:
+	return Vector2(lerpf(CEL_X0, CEL_X1, p), CEL_HORIZON - (CEL_HORIZON - CEL_PEAK) * sin(clampf(p, 0.0, 1.0) * PI))
+
+
+func _animate_bg(delta: float) -> void:
+	if bg == null:
+		return
+	# параллакс: слои плавно смещаются от мыши (дальние — меньше)
+	var vp: Vector2 = Vector2(1920, 1080)
+	var mp: Vector2 = get_viewport().get_mouse_position()
+	var want: Vector2 = ((mp - vp * 0.5) / (vp * 0.5)).clamp(Vector2(-1, -1), Vector2(1, 1)) * Vector2(-34, -16)
+	if cel_drag:
+		want = bg_par
+	bg_par = bg_par.lerp(want, 1.0 - exp(-3.0 * delta))
+	for l in bg_layers:
+		(l[0] as Control).position = (bg_par * float(l[1])).round()
+	# солнце и луна идут по дуге; за горизонтом одно сменяет другое (как в Террарии)
+	if cel_drag:
+		cel_p = clampf((cel_pos.x - CEL_X0) / (CEL_X1 - CEL_X0), 0.0, 1.0)
+	else:
+		cel_p += delta / (34.0 if cel_moon else 46.0)
+		if cel_p >= 1.0:
+			cel_p = 0.0
+			cel_moon = not cel_moon
+			cel_pos = _cel_arc(0.0)
+		cel_pos = cel_pos.lerp(_cel_arc(cel_p), 1.0 - exp(-4.0 * delta))
+	var body: TextureRect = bg_moon if cel_moon else bg_sun
+	bg_sun.visible = not cel_moon
+	bg_rays.visible = not cel_moon
+	bg_sun_glow.visible = not cel_moon
+	bg_moon.visible = cel_moon
+	bg_moon_glow.visible = cel_moon
+	_bg_center(body, cel_pos)
+	_bg_center(bg_moon_glow if cel_moon else bg_sun_glow, cel_pos)
+	bg_rays.position = (cel_pos - bg_rays.pivot_offset).round()
+	bg_rays.rotation += delta * 0.08
+	bg_rays.modulate.a = 0.8 + sin(t * 0.9) * 0.2
+	# свет: чем выше солнце — тем светлее; у горизонта закат; луна — ночь
+	var e: float = clampf((CEL_HORIZON - cel_pos.y) / (CEL_HORIZON - CEL_PEAK), 0.0, 1.0)
+	var light: float
+	if cel_moon:
+		light = 0.35 * (1.0 - smoothstep(0.0, 0.3, e))
+	else:
+		light = 0.35 + 0.65 * smoothstep(0.12, 0.5, e)
+	var day_a: float = smoothstep(0.45, 0.9, light)
+	var dusk_a: float = clampf(light / 0.35, 0.0, 1.0)
+	bg_sky_day.modulate.a = day_a
+	bg_sky_dusk.modulate.a = dusk_a
+	bg_stars.modulate.a = (1.0 - clampf(light / 0.3, 0.0, 1.0)) * (0.85 + 0.15 * sin(t * 2.3))
+	var land: Color = Color(0.40, 0.45, 0.72).lerp(Color(1.0, 0.80, 0.72), dusk_a).lerp(Color.WHITE, day_a)
+	for l2 in bg_tint:
+		(l2 as Control).modulate = land
+	bg_windows.modulate.a = clampf(1.0 - light / 0.55, 0.0, 1.0)
+	leaves.modulate = land
+	for c in bg_clouds:
+		var r: TextureRect = c[0]
+		r.position.x += float(c[1]) * delta
+		if r.position.x > 2000.0:
+			r.position.x = -r.size.x * 2.0 - 40.0
+	for b in bg_birds:
+		var s: Sprite2D = b[0]
+		s.visible = light > 0.3
+		s.position.x += float(b[1]) * delta
+		if s.position.x > 2040.0:
+			s.position.x = 560.0
+			b[3] = 300.0 + randf() * 200.0
+		s.position.y = float(b[3]) + sin(t * 1.3 + float(b[2])) * 12.0
+		var fr: int = int((t + float(b[2])) * 5.0) % 2
+		s.texture = load("res://art/menu32_bird_%d.png" % fr)
+	sub_dim.visible = not main_panel.visible
+	# курсор-рука над солнцем/луной
+	var hov: bool = cel_drag or (main_panel.visible and (mp - cel_layer.position).distance_to(cel_pos) < CEL_GRAB)
+	if hov != cel_hover:
+		cel_hover = hov
+		Input.set_default_cursor_shape(Input.CURSOR_DRAG if hov else Input.CURSOR_ARROW)
+
+
+## Солнце/луну хватают мышкой и тащат; отпустил за горизонтом — на небо выходит другое светило
+func _cel_input(event: InputEvent) -> void:
+	if bg == null or not open or not main_panel.visible:
+		return
+	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+		var mb: InputEventMouseButton = event
+		var lp: Vector2 = mb.position - cel_layer.position
+		if mb.pressed and lp.distance_to(cel_pos) < CEL_GRAB:
+			cel_drag = true
+			Sound.play("ui_click", -6.0)
+			get_viewport().set_input_as_handled()
+		elif not mb.pressed and cel_drag:
+			cel_drag = false
+			if cel_pos.y > CEL_HORIZON - 70.0:
+				cel_moon = not cel_moon
+				cel_p = 0.0
+				cel_pos = Vector2(CEL_X0, CEL_HORIZON + 120.0)
+			get_viewport().set_input_as_handled()
+	elif event is InputEventMouseMotion and cel_drag:
+		cel_pos = ((event as InputEventMouseMotion).position - cel_layer.position).clamp(Vector2(560, 40), Vector2(2000, 1000))
+		get_viewport().set_input_as_handled()
+
+
+## Пункт главного меню: текст слева, при наведении — листик-указатель и сдвиг вправо
+func _menu_hover(b: Button) -> void:
+	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	b.mouse_entered.connect(func() -> void:
+		menu_mark.visible = true
+		menu_mark.global_position = b.global_position + Vector2(-42, b.size.y * 0.5 - 14)
+		b.position.x = 10.0)
+	b.mouse_exited.connect(func() -> void:
+		menu_mark.visible = false
+		b.position.x = 0.0)
 
 
 # ------------------------------------------------------------------ ранний доступ: продолжить, ячейки, подтверждение

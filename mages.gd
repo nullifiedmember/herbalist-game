@@ -60,12 +60,13 @@ func build_valley(node: Node2D, r: Vector2i) -> void:
 	world.call("reserve", Rect2(MIMIC - Vector2(140, 160), Vector2(280, 240)))
 	for cp in [MIMIC + Vector2(-60, -20), MIMIC + Vector2(50, 10)]:
 		_crystal(node, r, cp)
-	var m: Node2D = Node2D.new()
-	m.set_script(load("res://mimic.gd"))
-	node.add_child(m)
-	m.call("setup", MIMIC)
-	main.call("add_caster", m.get("spr") as Sprite2D, true)
-	world.call("add_block", MIMIC + Vector2(0, -6), 14.0)
+	if not Game.SOLO:     # v29: кусачий мимик — враг, пока убран
+		var m: Node2D = Node2D.new()
+		m.set_script(load("res://mimic.gd"))
+		node.add_child(m)
+		m.call("setup", MIMIC)
+		main.call("add_caster", m.get("spr") as Sprite2D, true)
+		world.call("add_block", MIMIC + Vector2(0, -6), 14.0)
 	for k2 in range(8):
 		var q: Vector2 = Vector2(rng.randf_range(7740, 9540), rng.randf_range(-3780, -2630))
 		if bool(world.call("free_at", q, 30.0, 30.0)):

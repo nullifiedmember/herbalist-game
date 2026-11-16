@@ -77,6 +77,8 @@ const GEAR_BASE: Dictionary = {
 	"knife": {"name": "Нож грибника", "slot": "tool", "w": 0.5, "price": 18, "stats": {"shroom": 40}, "desc": "Гриб срезан, грибница цела — рядом вырастет второй."},
 	"trowel": {"name": "Садовый совок", "slot": "tool", "w": 1.0, "price": 16, "stats": {"seed": 35}, "desc": "Выкапывает дикие травы с семенами."},
 	"pickaxe": {"name": "Кирка", "slot": "tool", "w": 3.0, "price": 42, "stats": {}, "desc": "Ломает огромные валуны и добывает руду. Большие камни тоже крошит."},
+	"hoe": {"name": "Мотыга", "slot": "tool", "w": 1.5, "price": 20, "stats": {}, "desc": "Вскапывает грядки на заднем дворе. Можно вести мышью по грядкам — вскопает подряд."},
+	"watering_can": {"name": "Лейка", "slot": "tool", "w": 1.2, "price": 18, "stats": {}, "desc": "Набери воды у колодца или в дождевой бочке. Хватает на 10 грядок."},
 	"shovel": {"name": "Лопата", "slot": "tool", "w": 2.5, "price": 28, "stats": {"seed": 25, "herb": 10}, "desc": "Тяжёлая, но с ней и корни, и семена."},
 	# ---- вторая рука
 	"lantern_hand": {"name": "Ручной фонарь", "slot": "off", "w": 1.5, "price": 26, "stats": {"light": 1}, "desc": "Светит вокруг ночью."},
@@ -304,6 +306,7 @@ const TREE_NAMES: Dictionary = {
 	"tree_a": "дуб", "tree_b": "липа", "tree_c": "вяз", "tree_d": "ясень", "pine_a": "сосна", "pine_b": "ель",
 	"tree_blossom": "сакура", "tree_autumn": "клён", "tree_autumn2": "рябина", "tree_apple": "яблоня",
 	"tree_birch": "берёза", "tree_unicorn": "розовое древо", "dead_tree_a": "сухое дерево", "dead_tree_b": "сухое дерево",
+	"palm": "пальма", "palm_b": "пальма",
 }
 
 

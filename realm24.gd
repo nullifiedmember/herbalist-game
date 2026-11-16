@@ -27,7 +27,7 @@ func setup(m: Node2D) -> void:
 	main = m
 	add_to_group("realm24")
 	# врата в обычном мире
-	for k in GATES.keys():
+	for k in ([] if Game.SOLO else GATES.keys()):     # v29: врат в Ад и Рай пока нет
 		var g: Node2D = Node2D.new()
 		g.set_script(load("res://realm_gate24.gd"))
 		g.position = GATES[k]

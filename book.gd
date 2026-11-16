@@ -17,10 +17,10 @@ const CIRCLE_C: Vector2 = Vector2(583, 480)
 
 var root: Control
 var ink: Control
-var font_title: SystemFont
-var font_body: SystemFont
-var font_italic: SystemFont
-var font_bold: SystemFont
+var font_title: Font
+var font_body: Font
+var font_italic: Font
+var font_bold: Font
 
 var title_l: Label
 var latin_l: Label
@@ -52,22 +52,27 @@ var tex_cache: Dictionary = {}
 
 func _ready() -> void:
 	layer = 10
-	font_title = SystemFont.new()
-	font_title.font_names = PackedStringArray(["Gabriola", "Palatino Linotype", "Georgia"])
-	font_body = SystemFont.new()
-	font_body.font_names = PackedStringArray(["Palatino Linotype", "Georgia"])
-	font_italic = SystemFont.new()
-	font_italic.font_names = PackedStringArray(["Palatino Linotype", "Georgia"])
-	font_italic.font_italic = true
-	font_bold = SystemFont.new()
-	font_bold.font_names = PackedStringArray(["Palatino Linotype", "Georgia"])
-	font_bold.font_weight = 700
+	# v31: пиксельный шрифт (ui31.gd); курсив — тот же шрифт (у пиксельного нет курсива)
+	font_title = preload("res://ui31.gd").title_font()
+	font_body = preload("res://ui31.gd").pixel_font(400)
+	font_italic = preload("res://ui31.gd").pixel_font(400)
+	font_bold = preload("res://ui31.gd").pixel_font(600)
 	for id in DB.ORDER:
 		tex_cache[id] = DB.icon(id)
 	for sid in DB.SEEDS:
 		tex_cache["seed_" + sid] = DB.seed_icon(sid)
 	_build()
 	root.visible = false
+
+
+## v31: строки под описанием идут друг за другом — «Где растёт» и заметки не налезают на длинное описание
+func _process(_delta: float) -> void:
+	if root == null or not root.visible or desc_l == null:
+		return
+	var dy: float = desc_l.position.y + float(desc_l.get_line_count()) * float(desc_l.get_line_height()) + 8.0
+	where_l.position.y = maxf(836.0, dy)
+	var wy: float = where_l.position.y + float(where_l.get_line_count()) * float(where_l.get_line_height()) + 6.0
+	notes_l.position.y = maxf(886.0, wy)
 
 
 func lbl(text: String, font: Font, size: int, color: Color, pos: Vector2, w: float, h: float = 0.0) -> Label:

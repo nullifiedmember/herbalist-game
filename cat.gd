@@ -22,6 +22,10 @@ var snaps: int = 0                       # сколько раз догонял 
 var skin: String = ""                    # v19: окрас кошки из приюта (cat_lost_<окрас>); "" — свой чёрный кот
 var is_pet: bool = false                 # кошка из приюта
 var keep: float = 56.0
+var yard: bool = false                   # v29: гуляет возле дома
+var yard_home: Vector2 = Vector2.ZERO
+var yard_goal: Vector2 = Vector2.INF
+var stay: bool = false                   # v29: оставлен на месте — сидит, где велели, пока не позовёшь
 const CAT_K: float = 0.6667              # кот уменьшен вместе с героиней
 const WALK: float = 58.0
 const RUN: float = 118.0
@@ -71,7 +75,7 @@ func _process(delta: float) -> void:
 	if hidden_now:
 		last_pp = pp
 		return
-	if last_pp == Vector2.INF or pp.distance_to(last_pp) > 400.0:
+	if not stay and not yard and (last_pp == Vector2.INF or pp.distance_to(last_pp) > 400.0):
 		# перенеслась (дом, гости, телепорт): кот тут как тут
 		if last_pp != Vector2.INF or global_position.distance_to(pp) > SNAP_DIST:
 			snap_to(pp)
@@ -81,11 +85,15 @@ func _process(delta: float) -> void:
 		still_t = 0.0
 	last_pp = pp
 	var dist: float = global_position.distance_to(pp)
-	if dist > SNAP_DIST or (stuck_t > 2.2 and dist > 140.0):
+	if not stay and not yard and (dist > SNAP_DIST or (stuck_t > 2.2 and dist > 140.0)):
 		snap_to(pp)
 		dist = global_position.distance_to(pp)
 	moving = false
 	if pet_t > 0.0:
+		pass
+	elif yard:
+		_yard_walk(delta)
+	elif stay:
 		pass
 	elif state == "nap":
 		# уснул на подушке; героиня ушла или проснулись — снова за ней
@@ -119,6 +127,27 @@ func _process(delta: float) -> void:
 		if heart_cd <= 0.0:
 			heart_cd = 0.7
 			Game.fx.emit(global_position + Vector2(randf_range(-8, 3), -35), "heart")
+
+
+## v29: бродит по двору: идёт к случайной точке у дома, стоит, снова идёт
+func _yard_walk(delta: float) -> void:
+	if yard_goal == Vector2.INF:
+		still_t = 0.0
+		var a: float = randf() * TAU
+		yard_goal = yard_home + Vector2(cos(a), sin(a) * 0.7) * randf_range(20.0, 150.0)
+		pause_t = randf_range(1.0, 4.0)
+	if pause_t > 0.0:
+		pause_t -= delta
+		return
+	var to: Vector2 = yard_goal - global_position
+	if to.length() < 4.0 or stuck_t > 1.0:
+		yard_goal = Vector2.INF
+		stuck_t = 0.0
+		return
+	_step(to.normalized(), WALK, delta)
+
+
+var pause_t: float = 0.0
 
 
 func _sleeping() -> bool:
@@ -188,10 +217,40 @@ func _say(text: String) -> void:
 
 
 func get_prompt() -> String:
-	return "Погладить кота"
+	return "Кот" if not stay else "Кот (ждёт здесь)"
 
 
+## v29: E — меню: погладить, оставить здесь или позвать с собой
 func interact() -> void:
+	var v24n: Node = get_tree().get_first_node_in_group("v24")
+	if v24n == null:
+		_pet()
+		return
+	var opts: Array = [["Погладить", func() -> void: _pet()]]
+	if not yard:
+		opts.append(["Гуляй у дома", func() -> void:
+			yard = true
+			stay = false
+			yard_home = preload("res://world_layout.gd").DOOR_POS + (main.call("home_off") as Vector2) + Vector2(randf_range(-60, 60), 90)
+			global_position = main.call("free_near", yard_home)
+			yard_goal = Vector2.INF
+			_say("Мур!")
+			Game.toast.emit("Гуляет возле дома", load("res://art/fx_heart.png"))])
+	if stay or yard:
+		opts.append(["Пойдём со мной", func() -> void:
+			stay = false
+			yard = false
+			_say("Мяу!")])
+	else:
+		opts.append(["Сиди здесь", func() -> void:
+			stay = true
+			state = "follow"
+			_say("Мур.")])
+	opts.append(["Ничего", func() -> void: pass])
+	v24n.call("talk_menu", load("res://art/fx_heart.png"), "Кот", "", opts)
+
+
+func _pet() -> void:
 	awake = 6.0
 	pet_t = 3.8
 	heart_cd = 0.0

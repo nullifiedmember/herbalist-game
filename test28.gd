@@ -112,6 +112,23 @@ func run(main: Node2D, f: Array) -> void:
 	var hud: Node = m.get("hud")
 	ck(hud.has_method("_press_action"), "значки меню нажимаются мышью")
 	Game.ui_open = false
+	# ---- v29: бутылочка, пальма, море во сне, дом на карте, поворот в сундуке, кот, голос
+	Game.equip["flask0"] = "calm_tea"
+	var bt29: int = Game.get_count("bottle")
+	if Game.flask_slots() > 0 and Game.drink_flask(0):
+		ck(Game.get_count("bottle") == bt29 + 1, "после зелья осталась пустая бутылочка")
+	ck(IT.is_tree_tex("palm") and IT.is_tree_tex("palm_b"), "пальму можно рубить")
+	ck(m.has_method("_sea_gifts"), "во сне море приносит подарки")
+	ck(ResourceLoader.exists("res://audio/hero_sigh.wav") and ResourceLoader.exists("res://audio/hero_giggle.wav"), "у героини есть голос")
+	var cu29: Node = tree.get_first_node_in_group("chest_ui")
+	ck(cu29 == null or cu29.has_method("_carry_rot_any"), "в сундуке вещи поворачиваются (R)")
+	var ct29: Node = tree.get_first_node_in_group("companion_cat")
+	ck(ct29 != null and ct29.get("stay") == false, "кота можно оставить на месте")
+	var an29: Node = preload("res://animal.gd").new()
+	ck(an29.has_method("is_tamed") and an29.get("stay") == false and an29.has_method("_send_home"), "прирученных можно оставить и отправить гулять у дома")
+	an29.free()
+	var mu29: Node =tree.get_first_node_in_group("map_ui")
+	ck(mu29 == null or mu29.has_method("_draw_home"), "дом отмечен на карте")
 
 
 ## Скриншот: --v28=tables (столы рядом с героиней, панель задания, красная подсветка сноса)

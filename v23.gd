@@ -224,6 +224,8 @@ func open_skills() -> void:
 	for c in skills_box.get_children():
 		c.queue_free()
 	for key in Game.SKILL_ORDER:
+		if Game.SOLO and key in ["combat", "lead"]:
+			continue     # v29: драки и работниц пока нет
 		var sk: Array = Game.SKILLS[key]
 		var lv: int = Game.skill_level(String(key))
 		var row: HBoxContainer = HBoxContainer.new()
@@ -418,7 +420,7 @@ func _spawn_ground(id: String, n: int, at: Vector2) -> void:
 
 func bench_tabs() -> Array:
 	var out: Array = ["furn", "wpn"]
-	if not Game.kingdom.is_empty() or Game.god_mode:
+	if not Game.SOLO and (not Game.kingdom.is_empty() or Game.god_mode):
 		out.append("kingdom")
 	return out
 
@@ -475,7 +477,11 @@ func bench_cards(tab: String) -> Array:
 		"wpn":
 			var rn: Dictionary = {"stick": 2, "twine": 1}
 			out.append([IT.icon("rod"), hs.call("_need_costs", rn), "Удочка\n" + String(hs.call("_need_text", rn)), "v23:rod", not bool(hs.call("_can_pay", rn))])
-			for wid in V.WEAPON_ORDER:
+			# v29: садовые инструменты для заднего дворика
+			for tl in TOOLS29.keys():
+				var tn: Dictionary = TOOLS29[tl]
+				out.append([IT.icon(String(tl)), hs.call("_need_costs", tn), IT.name(String(tl)) + "\n" + String(hs.call("_need_text", tn)), "v23:" + String(tl), not bool(hs.call("_can_pay", tn))])
+			for wid in ([] if Game.SOLO else V.WEAPON_ORDER):     # v29: оружия в одиночной игре нет
 				if String(V.WEAPONS[wid]["mat"]) == "legend":
 					continue      # легендарное — только из подземелий
 				var need2: Dictionary = wpn_need(String(wid))
@@ -489,6 +495,9 @@ func bench_cards(tab: String) -> Array:
 	return out
 
 
+const TOOLS29: Dictionary = {"hoe": {"stick": 2, "stone_s": 2}, "watering_can": {"stick": 1, "clay": 3}}
+
+
 func bench_craft(key: String) -> bool:
 	var hs: Node = get_tree().get_first_node_in_group("homestead")
 	var need: Dictionary = {}
@@ -496,6 +505,9 @@ func bench_craft(key: String) -> bool:
 	if key == "rod":
 		need = {"stick": 2, "twine": 1}
 		item = "rod"
+	elif TOOLS29.has(key):
+		need = TOOLS29[key]
+		item = key
 	elif key.begins_with("furn:"):
 		need = furn_need(key.substr(5))
 		item = key

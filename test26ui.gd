@@ -16,6 +16,24 @@ func shot(m: Node2D, what: String) -> void:
 			ids.append(p)
 		k += 1
 	ids.append_array(["food_apple", "food_bread", "mint", "porcini", "ore_mana", "stone_m", "log", "sickle", "wpn_sword_wood", "minnow", "book_magic_herb", "bark_tree_a"])
+	if kind == "hotbar":
+		# v31: панель быстрого доступа с вещами и счётчиками (1, 2, 12, 99)
+		var hb: Array = ["hoe", "mint", "log", "food_apple", "stone_m", "sickle", "", "porcini", "minnow"]
+		var cnt: Array = [1, 12, 99, 3, 7, 1, 0, 24, 2]
+		for i in range(9):
+			if String(hb[i]) != "":
+				Game.add_item(String(hb[i]), int(cnt[i]))
+			Game.hotbar[i] = String(hb[i])
+		Game.hot_sel = 1
+		var hs: Node = tree.get_first_node_in_group("homestead")
+		if hs == null:
+			for n in m.get_children():
+				if n.has_method("_refresh_soon"):
+					hs = n
+		if hs:
+			hs.call("_refresh")
+		await tree.create_timer(0.6).timeout
+		return
 	if kind == "bag":
 		for id in ids.slice(0, 30):
 			Game.add_item(String(id), 2)
