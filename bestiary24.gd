@@ -55,10 +55,12 @@ func dump(dir: String) -> int:
 	secs.append(_birds())
 	secs.append(_fish())
 	secs.append(_insects())
-	secs.append(_monsters())
+	if not Game.SOLO:
+		secs.append(_monsters())
 	secs.append(_people())
 	secs.append(_mats())
-	secs.append(_weapons())
+	if not Game.SOLO:
+		secs.append(_weapons())
 	secs.append(_spells())
 	secs.append(_furniture())
 	secs.append(_nature27())
@@ -459,7 +461,7 @@ func _mats() -> Dictionary:
 	# v26: магазины королевства — жители приходят и покупают сами
 	var shop_ents: Array = []
 	var S26 = preload("res://shops26.gd")
-	for sk in S26.KINDS.keys():
+	for sk in ([] if Game.SOLO else S26.KINDS.keys()):
 		var sd: Array = S26.KINDS[sk]
 		var kb: Array = IT.KBUILD[sk]
 		var need_t: Array = []
@@ -467,7 +469,8 @@ func _mats() -> Dictionary:
 			need_t.append("%s ×%d" % [_nm(String(x2)), int(kb[6][x2])])
 		shop_ents.append(_e("shop26_" + String(sk), String(sd[0]), _img("shop26_" + String(sk), load("res://art/%s.png" % String(kb[1]))), "магазин королевства",
 			["Строится на верстаке (вкладка с короной): " + ", ".join(need_t), "Жители сами приходят и платят в рабочие часы (8–21). Товар кладут из сумки или подвозят из сундуков базы; выручка копится в кассе."]))
-	groups.append({"title": "Магазины королевства", "entries": shop_ents})
+	if not shop_ents.is_empty():
+		groups.append({"title": "Магазины королевства", "entries": shop_ents})
 	return {"id": "mats", "title": "Материалы и мастерские", "icon": _img("mat_plank_tree_a", MT.icon("plank_tree_a")),
 		"intro": "Дерево, камень, руды, ткани, шерсть, перья, краски и магическая пыль — из них строят и мастерят.", "groups": groups}
 

@@ -5742,7 +5742,7 @@
 							"voice": "snd/av_squirrel_0.wav",
 							"voice_pet": "snd/av_squirrel_pet.wav",
 							"walk": "img/walk_animal_squirrel.png",
-							"walk_h": 54,
+							"walk_h": 62,
 							"walk_n": 4,
 							"walk_w": 70
 						},
@@ -6340,9 +6340,9 @@
 							"voice": "snd/av_lop_rabbit_0.wav",
 							"voice_pet": "snd/av_lop_rabbit_pet.wav",
 							"walk": "img/walk_animal_lop_rabbit.png",
-							"walk_h": 46,
+							"walk_h": 64,
 							"walk_n": 4,
-							"walk_w": 60
+							"walk_w": 54
 						},
 						{
 							"id": "dog",
@@ -6572,7 +6572,7 @@
 							"walk": "img/walk_animal_capybara.png",
 							"walk_h": 52,
 							"walk_n": 4,
-							"walk_w": 80
+							"walk_w": 72
 						},
 						{
 							"id": "turtle",
@@ -6846,9 +6846,9 @@
 							"voice": "snd/av_red_panda_0.wav",
 							"voice_pet": "snd/av_red_panda_pet.wav",
 							"walk": "img/walk_animal_red_panda.png",
-							"walk_h": 54,
+							"walk_h": 58,
 							"walk_n": 4,
-							"walk_w": 72
+							"walk_w": 82
 						},
 						{
 							"id": "tanuki",
@@ -8202,7 +8202,7 @@
 								"Перо стоит 2 мон."
 							],
 							"walk": "img/walk_bird_sparrow.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 22
 						},
@@ -8221,7 +8221,7 @@
 								"Перо стоит 3 мон."
 							],
 							"walk": "img/walk_bird_great_tit.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 24
 						},
@@ -8240,7 +8240,7 @@
 								"Перо стоит 3 мон."
 							],
 							"walk": "img/walk_bird_blue_tit.png",
-							"walk_h": 21,
+							"walk_h": 22,
 							"walk_n": 4,
 							"walk_w": 22
 						},
@@ -8259,7 +8259,7 @@
 								"Перо стоит 3 мон."
 							],
 							"walk": "img/walk_bird_robin.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 23
 						},
@@ -8278,7 +8278,7 @@
 								"Перо стоит 3 мон."
 							],
 							"walk": "img/walk_bird_chaffinch.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 23
 						},
@@ -8297,7 +8297,7 @@
 								"Перо стоит 6 мон."
 							],
 							"walk": "img/walk_bird_goldfinch.png",
-							"walk_h": 21,
+							"walk_h": 22,
 							"walk_n": 4,
 							"walk_w": 21
 						},
@@ -8316,7 +8316,7 @@
 								"Перо стоит 5 мон."
 							],
 							"walk": "img/walk_bird_bullfinch.png",
-							"walk_h": 23,
+							"walk_h": 24,
 							"walk_n": 4,
 							"walk_w": 26
 						},
@@ -8335,7 +8335,7 @@
 								"Перо стоит 4 мон."
 							],
 							"walk": "img/walk_bird_wren.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 23
 						},
@@ -8354,7 +8354,7 @@
 								"Перо стоит 8 мон."
 							],
 							"walk": "img/walk_bird_nightingale.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 26
 						},
@@ -8373,7 +8373,7 @@
 								"Перо стоит 4 мон."
 							],
 							"walk": "img/walk_bird_lark.png",
-							"walk_h": 23,
+							"walk_h": 24,
 							"walk_n": 4,
 							"walk_w": 23
 						},
@@ -8392,7 +8392,7 @@
 								"Перо стоит 4 мон."
 							],
 							"walk": "img/walk_bird_swallow.png",
-							"walk_h": 20,
+							"walk_h": 21,
 							"walk_n": 4,
 							"walk_w": 27
 						},
@@ -8411,7 +8411,7 @@
 								"Перо стоит 3 мон."
 							],
 							"walk": "img/walk_bird_starling.png",
-							"walk_h": 23,
+							"walk_h": 24,
 							"walk_n": 4,
 							"walk_w": 25
 						},
@@ -8430,7 +8430,7 @@
 								"Перо стоит 4 мон."
 							],
 							"walk": "img/walk_bird_thrush.png",
-							"walk_h": 23,
+							"walk_h": 24,
 							"walk_n": 4,
 							"walk_w": 27
 						},
@@ -8449,7 +8449,7 @@
 								"Перо стоит 4 мон."
 							],
 							"walk": "img/walk_bird_blackbird.png",
-							"walk_h": 23,
+							"walk_h": 24,
 							"walk_n": 4,
 							"walk_w": 30
 						},
@@ -8468,7 +8468,7 @@
 								"Перо стоит 3 мон."
 							],
 							"walk": "img/walk_bird_wagtail.png",
-							"walk_h": 21,
+							"walk_h": 22,
 							"walk_n": 4,
 							"walk_w": 26
 						},
@@ -8487,7 +8487,7 @@
 								"Перо стоит 10 мон."
 							],
 							"walk": "img/walk_bird_oriole.png",
-							"walk_h": 23,
+							"walk_h": 24,
 							"walk_n": 4,
 							"walk_w": 27
 						},
@@ -8506,7 +8506,7 @@
 								"Перо стоит 7 мон."
 							],
 							"walk": "img/walk_bird_waxwing.png",
-							"walk_h": 24,
+							"walk_h": 25,
 							"walk_n": 4,
 							"walk_w": 26
 						},
@@ -8525,7 +8525,7 @@
 								"Перо стоит 12 мон."
 							],
 							"walk": "img/walk_bird_kingfisher.png",
-							"walk_h": 20,
+							"walk_h": 21,
 							"walk_n": 4,
 							"walk_w": 23
 						},
@@ -8544,7 +8544,7 @@
 								"Перо стоит 9 мон."
 							],
 							"walk": "img/walk_bird_hoopoe.png",
-							"walk_h": 33,
+							"walk_h": 34,
 							"walk_n": 4,
 							"walk_w": 32
 						},
@@ -8563,7 +8563,7 @@
 								"Перо стоит 6 мон."
 							],
 							"walk": "img/walk_bird_jay.png",
-							"walk_h": 26,
+							"walk_h": 27,
 							"walk_n": 4,
 							"walk_w": 32
 						},
@@ -8582,7 +8582,7 @@
 								"Перо стоит 4 мон."
 							],
 							"walk": "img/walk_bird_magpie.png",
-							"walk_h": 25,
+							"walk_h": 26,
 							"walk_n": 4,
 							"walk_w": 37
 						},
@@ -8601,7 +8601,7 @@
 								"Перо стоит 2 мон."
 							],
 							"walk": "img/walk_bird_crow.png",
-							"walk_h": 26,
+							"walk_h": 27,
 							"walk_n": 4,
 							"walk_w": 36
 						},
@@ -8620,7 +8620,7 @@
 								"Перо стоит 8 мон."
 							],
 							"walk": "img/walk_bird_raven.png",
-							"walk_h": 28,
+							"walk_h": 29,
 							"walk_n": 4,
 							"walk_w": 41
 						},
@@ -8639,7 +8639,7 @@
 								"Перо стоит 7 мон."
 							],
 							"walk": "img/walk_bird_cuckoo.png",
-							"walk_h": 24,
+							"walk_h": 25,
 							"walk_n": 4,
 							"walk_w": 32
 						},
@@ -8658,7 +8658,7 @@
 								"Перо стоит 5 мон."
 							],
 							"walk": "img/walk_bird_woodpecker.png",
-							"walk_h": 26,
+							"walk_h": 27,
 							"walk_n": 4,
 							"walk_w": 26
 						},
@@ -8677,7 +8677,7 @@
 								"Перо стоит 3 мон."
 							],
 							"walk": "img/walk_bird_dove.png",
-							"walk_h": 23,
+							"walk_h": 24,
 							"walk_n": 4,
 							"walk_w": 27
 						},
@@ -8696,7 +8696,7 @@
 								"Перо стоит 9 мон."
 							],
 							"walk": "img/walk_bird_pheasant.png",
-							"walk_h": 28,
+							"walk_h": 29,
 							"walk_n": 4,
 							"walk_w": 39
 						},
@@ -8715,7 +8715,7 @@
 								"Перо стоит 4 мон."
 							],
 							"walk": "img/walk_bird_quail.png",
-							"walk_h": 24,
+							"walk_h": 25,
 							"walk_n": 4,
 							"walk_w": 24
 						},
@@ -8734,7 +8734,7 @@
 								"Перо стоит 5 мон."
 							],
 							"walk": "img/walk_bird_partridge.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 22
 						},
@@ -8753,7 +8753,7 @@
 								"Перо стоит 8 мон."
 							],
 							"walk": "img/walk_bird_heron.png",
-							"walk_h": 55,
+							"walk_h": 56,
 							"walk_n": 4,
 							"walk_w": 37
 						},
@@ -8772,7 +8772,7 @@
 								"Перо стоит 18 мон."
 							],
 							"walk": "img/walk_bird_crane.png",
-							"walk_h": 53,
+							"walk_h": 54,
 							"walk_n": 4,
 							"walk_w": 39
 						},
@@ -8791,7 +8791,7 @@
 								"Перо стоит 14 мон."
 							],
 							"walk": "img/walk_bird_swan.png",
-							"walk_h": 50,
+							"walk_h": 51,
 							"walk_n": 4,
 							"walk_w": 43
 						},
@@ -8810,7 +8810,7 @@
 								"Перо стоит 5 мон."
 							],
 							"walk": "img/walk_bird_goose.png",
-							"walk_h": 37,
+							"walk_h": 38,
 							"walk_n": 4,
 							"walk_w": 33
 						},
@@ -8829,7 +8829,7 @@
 								"Перо стоит 3 мон."
 							],
 							"walk": "img/walk_bird_gull.png",
-							"walk_h": 26,
+							"walk_h": 27,
 							"walk_n": 4,
 							"walk_w": 31
 						},
@@ -8848,7 +8848,7 @@
 								"Перо стоит 3 мон."
 							],
 							"walk": "img/walk_bird_sandpiper.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 22
 						},
@@ -8867,7 +8867,7 @@
 								"Перо стоит 11 мон."
 							],
 							"walk": "img/walk_bird_bee_eater.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 27
 						},
@@ -8886,7 +8886,7 @@
 								"Перо стоит 6 мон."
 							],
 							"walk": "img/walk_bird_crossbill.png",
-							"walk_h": 23,
+							"walk_h": 24,
 							"walk_n": 4,
 							"walk_w": 25
 						},
@@ -8905,7 +8905,7 @@
 								"Перо стоит 4 мон."
 							],
 							"walk": "img/walk_bird_nuthatch.png",
-							"walk_h": 21,
+							"walk_h": 22,
 							"walk_n": 4,
 							"walk_w": 21
 						},
@@ -8924,7 +8924,7 @@
 								"Перо стоит 6 мон."
 							],
 							"walk": "img/walk_bird_white_eye.png",
-							"walk_h": 20,
+							"walk_h": 21,
 							"walk_n": 4,
 							"walk_w": 21
 						},
@@ -8943,7 +8943,7 @@
 								"Перо стоит 9 мон."
 							],
 							"walk": "img/walk_bird_rosefinch.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 23
 						},
@@ -8962,7 +8962,7 @@
 								"Перо стоит 12 мон."
 							],
 							"walk": "img/walk_bird_mandarin_duck.png",
-							"walk_h": 26,
+							"walk_h": 27,
 							"walk_n": 4,
 							"walk_w": 26
 						},
@@ -8981,7 +8981,7 @@
 								"Перо стоит 9 мон."
 							],
 							"walk": "img/walk_bird_nightjar.png",
-							"walk_h": 21,
+							"walk_h": 22,
 							"walk_n": 4,
 							"walk_w": 28
 						}
@@ -9005,7 +9005,7 @@
 								"Перо стоит 6 мон."
 							],
 							"walk": "img/walk_bird_tawny_owl.png",
-							"walk_h": 27,
+							"walk_h": 28,
 							"walk_n": 4,
 							"walk_w": 22
 						},
@@ -9024,7 +9024,7 @@
 								"Перо стоит 12 мон."
 							],
 							"walk": "img/walk_bird_eagle_owl.png",
-							"walk_h": 34,
+							"walk_h": 35,
 							"walk_n": 4,
 							"walk_w": 27
 						},
@@ -9043,7 +9043,7 @@
 								"Перо стоит 8 мон."
 							],
 							"walk": "img/walk_bird_barn_owl.png",
-							"walk_h": 27,
+							"walk_h": 28,
 							"walk_n": 4,
 							"walk_w": 22
 						},
@@ -9062,7 +9062,7 @@
 								"Перо стоит 7 мон."
 							],
 							"walk": "img/walk_bird_scops_owl.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 18
 						},
@@ -9081,7 +9081,7 @@
 								"Перо стоит 16 мон."
 							],
 							"walk": "img/walk_bird_snowy_owl.png",
-							"walk_h": 30,
+							"walk_h": 31,
 							"walk_n": 4,
 							"walk_w": 25
 						}
@@ -9105,7 +9105,7 @@
 								"Перо стоит 60 мон."
 							],
 							"walk": "img/walk_bird_firebird.png",
-							"walk_h": 44,
+							"walk_h": 45,
 							"walk_n": 4,
 							"walk_w": 104
 						},
@@ -9124,7 +9124,7 @@
 								"Перо стоит 30 мон."
 							],
 							"walk": "img/walk_bird_moon_finch.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 23
 						},
@@ -9143,7 +9143,7 @@
 								"Перо стоит 26 мон."
 							],
 							"walk": "img/walk_bird_fairy_wren.png",
-							"walk_h": 22,
+							"walk_h": 23,
 							"walk_n": 4,
 							"walk_w": 23
 						},
@@ -9162,7 +9162,7 @@
 								"Перо стоит 34 мон."
 							],
 							"walk": "img/walk_bird_shadow_crow.png",
-							"walk_h": 27,
+							"walk_h": 28,
 							"walk_n": 4,
 							"walk_w": 36
 						}
@@ -9790,384 +9790,6 @@
 			"id": "insects",
 			"intro": "Одни помогают огороду, другие вредят. Пойманных можно бросить в котёл.",
 			"title": "Насекомые"
-		},
-		{
-			"groups": [
-				{
-					"entries": [
-						{
-							"id": "slime",
-							"img": "img/mon_slime.png",
-							"name": "Слизень",
-							"sub": "пещеры",
-							"tags": [],
-							"text": [
-								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
-								"Сила: 18   ·   Удар: 4   ·   Скорость: 30"
-							],
-							"walk": "img/walk_mon_slime.png",
-							"walk_h": 22,
-							"walk_n": 4,
-							"walk_w": 30
-						},
-						{
-							"id": "slime_blue",
-							"img": "img/mon_slime_blue.png",
-							"name": "Ледяной слизень",
-							"sub": "ледяные пещеры",
-							"tags": [],
-							"text": [
-								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
-								"Сила: 24   ·   Удар: 5   ·   Скорость: 28"
-							],
-							"walk": "img/walk_mon_slime_blue.png",
-							"walk_h": 22,
-							"walk_n": 4,
-							"walk_w": 30
-						},
-						{
-							"id": "slime_pink",
-							"img": "img/mon_slime_pink.png",
-							"name": "Желейный слизень",
-							"sub": "луговые норы",
-							"tags": [],
-							"text": [
-								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
-								"Сила: 22   ·   Удар: 4   ·   Скорость: 32"
-							],
-							"walk": "img/walk_mon_slime_pink.png",
-							"walk_h": 22,
-							"walk_n": 4,
-							"walk_w": 30
-						},
-						{
-							"id": "slime_sand",
-							"img": "img/mon_slime_sand.png",
-							"name": "Песчаный слизень",
-							"sub": "песчаные гробницы",
-							"tags": [],
-							"text": [
-								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
-								"Сила: 22   ·   Удар: 5   ·   Скорость: 30"
-							],
-							"walk": "img/walk_mon_slime_sand.png",
-							"walk_h": 22,
-							"walk_n": 4,
-							"walk_w": 30
-						},
-						{
-							"id": "mushroom",
-							"img": "img/mon_mushroom.png",
-							"name": "Грибочек-драчун",
-							"sub": "лесные подземелья",
-							"tags": [],
-							"text": [
-								"Проделка: Пускает сонные споры — героиня задрёмывает на месте.",
-								"Сила: 20   ·   Удар: 5   ·   Скорость: 34"
-							],
-							"walk": "img/walk_mon_mushroom.png",
-							"walk_h": 23,
-							"walk_n": 4,
-							"walk_w": 22
-						},
-						{
-							"id": "mushroom_blue",
-							"img": "img/mon_mushroom_blue.png",
-							"name": "Светогриб",
-							"sub": "болотные гроты",
-							"tags": [],
-							"text": [
-								"Проделка: Пускает сонные споры — героиня задрёмывает на месте.",
-								"Сила: 26   ·   Удар: 6   ·   Скорость: 32"
-							],
-							"walk": "img/walk_mon_mushroom_blue.png",
-							"walk_h": 23,
-							"walk_n": 4,
-							"walk_w": 22
-						},
-						{
-							"id": "skeleton",
-							"img": "img/mon_skeleton.png",
-							"name": "Скелетик-задира",
-							"sub": "склепы",
-							"tags": [],
-							"text": [
-								"Проделка: Ворует вещь из сумки и удирает. Догони и победи — вернёт.",
-								"Сила: 30   ·   Удар: 6   ·   Скорость: 36"
-							],
-							"walk": "img/walk_mon_skeleton.png",
-							"walk_h": 28,
-							"walk_n": 4,
-							"walk_w": 24
-						},
-						{
-							"id": "ghost",
-							"img": "img/mon_ghost.png",
-							"name": "Привиденьице",
-							"sub": "склепы",
-							"tags": [],
-							"text": [
-								"Проделка: Пугает — пару секунд всё управление наоборот.",
-								"Сила: 22   ·   Удар: 6   ·   Скорость: 44"
-							],
-							"walk": "img/walk_mon_ghost.png",
-							"walk_h": 22,
-							"walk_n": 4,
-							"walk_w": 22
-						},
-						{
-							"id": "golem",
-							"img": "img/mon_golem.png",
-							"name": "Каменный голем",
-							"sub": "пещеры",
-							"tags": [],
-							"text": [
-								"Проделка: Швыряет в сторону и оглушает.",
-								"Сила: 60   ·   Удар: 9   ·   Скорость: 22"
-							],
-							"walk": "img/walk_mon_golem.png",
-							"walk_h": 36,
-							"walk_n": 4,
-							"walk_w": 40
-						},
-						{
-							"id": "crystal_golem",
-							"img": "img/mon_crystal_golem.png",
-							"name": "Хрустальный голем",
-							"sub": "хрустальные пещеры",
-							"tags": [],
-							"text": [
-								"Проделка: Швыряет в сторону и оглушает.",
-								"Сила: 70   ·   Удар: 10   ·   Скорость: 24"
-							],
-							"walk": "img/walk_mon_crystal_golem.png",
-							"walk_h": 42,
-							"walk_n": 4,
-							"walk_w": 40
-						},
-						{
-							"id": "ice_imp",
-							"img": "img/mon_ice_imp.png",
-							"name": "Ледяной бесёнок",
-							"sub": "ледяные пещеры",
-							"tags": [],
-							"text": [
-								"Проделка: Ворует монетки и удирает.",
-								"Сила: 26   ·   Удар: 6   ·   Скорость: 46"
-							],
-							"walk": "img/walk_mon_ice_imp.png",
-							"walk_h": 30,
-							"walk_n": 4,
-							"walk_w": 28
-						},
-						{
-							"id": "scarab",
-							"img": "img/mon_scarab.png",
-							"name": "Жук-скарабей",
-							"sub": "песчаные гробницы",
-							"tags": [],
-							"text": [
-								"Проделка: Облепляет липкой паутинкой — героиня еле идёт.",
-								"Сила: 26   ·   Удар: 6   ·   Скорость: 40"
-							],
-							"walk": "img/walk_mon_scarab.png",
-							"walk_h": 25,
-							"walk_n": 4,
-							"walk_w": 33
-						},
-						{
-							"id": "frog",
-							"img": "img/mon_frog.png",
-							"name": "Болотная жаба",
-							"sub": "болотные гроты",
-							"tags": [],
-							"text": [
-								"Проделка: Длинным языком притягивает к себе.",
-								"Сила: 30   ·   Удар: 6   ·   Скорость: 38"
-							],
-							"walk": "img/walk_mon_frog.png",
-							"walk_h": 20,
-							"walk_n": 4,
-							"walk_w": 19
-						},
-						{
-							"id": "bat_m",
-							"img": "img/mon_bat_m.png",
-							"name": "Нетопырь",
-							"sub": "пещеры",
-							"tags": [],
-							"text": [
-								"Проделка: Мельтешит перед лицом — управление на миг наоборот.",
-								"Сила: 14   ·   Удар: 4   ·   Скорость: 60"
-							],
-							"walk": "img/walk_mon_bat_m.png",
-							"walk_h": 15,
-							"walk_n": 4,
-							"walk_w": 32
-						},
-						{
-							"id": "spiderling",
-							"img": "img/mon_spiderling.png",
-							"name": "Паучок",
-							"sub": "лесные подземелья",
-							"tags": [],
-							"text": [
-								"Проделка: Облепляет липкой паутинкой — героиня еле идёт.",
-								"Сила: 20   ·   Удар: 5   ·   Скорость: 50"
-							],
-							"walk": "img/walk_mon_spiderling.png",
-							"walk_h": 15,
-							"walk_n": 4,
-							"walk_w": 24
-						},
-						{
-							"id": "salamander",
-							"img": "img/mon_salamander.png",
-							"name": "Саламандра",
-							"sub": "lava",
-							"tags": [],
-							"text": [
-								"Проделка: Длинным языком притягивает к себе.",
-								"Сила: 34   ·   Удар: 7   ·   Скорость: 42"
-							],
-							"walk": "img/walk_mon_salamander.png",
-							"walk_h": 18,
-							"walk_n": 4,
-							"walk_w": 39
-						},
-						{
-							"id": "wisp",
-							"img": "img/mon_wisp.png",
-							"name": "Блуждающий огонёк",
-							"sub": "elven",
-							"tags": [],
-							"text": [
-								"Проделка: Пугает — пару секунд всё управление наоборот.",
-								"Сила: 18   ·   Удар: 5   ·   Скорость: 52"
-							],
-							"walk": "img/walk_mon_wisp.png",
-							"walk_h": 19,
-							"walk_n": 4,
-							"walk_w": 13
-						},
-						{
-							"id": "imp",
-							"img": "img/mon_imp.png",
-							"name": "Бесёнок",
-							"sub": "Ад",
-							"tags": [],
-							"text": [
-								"Проделка: Ворует монетки и удирает.",
-								"Сила: 36   ·   Удар: 7   ·   Скорость: 50"
-							],
-							"walk": "img/walk_mon_imp.png",
-							"walk_h": 30,
-							"walk_n": 4,
-							"walk_w": 28
-						},
-						{
-							"id": "demon",
-							"img": "img/mon_demon.png",
-							"name": "Демон",
-							"sub": "Ад",
-							"tags": [],
-							"text": [
-								"Проделка: Ворует монетки и хохочет.",
-								"Сила: 80   ·   Удар: 11   ·   Скорость: 38"
-							],
-							"walk": "img/walk_mon_demon.png",
-							"walk_h": 38,
-							"walk_n": 4,
-							"walk_w": 34
-						},
-						{
-							"id": "hellhound",
-							"img": "img/mon_hellhound.png",
-							"name": "Адская гончая",
-							"sub": "Ад",
-							"tags": [],
-							"text": [
-								"Проделка: Ворует еду из сумки и удирает.",
-								"Сила: 60   ·   Удар: 10   ·   Скорость: 62"
-							],
-							"walk": "img/walk_mon_hellhound.png",
-							"walk_h": 30,
-							"walk_n": 4,
-							"walk_w": 43
-						}
-					],
-					"title": "Монстры подземелий"
-				},
-				{
-					"entries": [
-						{
-							"id": "slime_king",
-							"img": "img/mon_slime_king.png",
-							"name": "Король Слизней",
-							"sub": "логово (главный монстр)",
-							"tags": [],
-							"text": [
-								"Проделка: Облепляет слизью — героиня еле идёт несколько секунд.",
-								"Сила: 160   ·   Удар: 9   ·   Скорость: 22"
-							],
-							"walk": "img/walk_mon_slime_king.png",
-							"walk_h": 41,
-							"walk_n": 4,
-							"walk_w": 52
-						},
-						{
-							"id": "devil",
-							"img": "img/mon_devil.png",
-							"name": "Дьявол",
-							"sub": "boss_hell",
-							"tags": [],
-							"text": [
-								"Проделка: Ворует монетки и хохочет.",
-								"Сила: 400   ·   Удар: 14   ·   Скорость: 34"
-							],
-							"walk": "img/walk_mon_devil.png",
-							"walk_h": 54,
-							"walk_n": 4,
-							"walk_w": 41
-						},
-						{
-							"id": "golem_king",
-							"img": "img/mon_golem_king.png",
-							"name": "Древний Голем",
-							"sub": "логово (главный монстр)",
-							"tags": [],
-							"text": [
-								"Проделка: Швыряет в сторону и оглушает.",
-								"Сила: 260   ·   Удар: 12   ·   Скорость: 20"
-							],
-							"walk": "img/walk_mon_golem_king.png",
-							"walk_h": 59,
-							"walk_n": 4,
-							"walk_w": 56
-						},
-						{
-							"id": "lich",
-							"img": "img/mon_lich.png",
-							"name": "Сонный Лич",
-							"sub": "логово (главный монстр)",
-							"tags": [],
-							"text": [
-								"Проделка: Ворует вещь из сумки и удирает. Догони и победи — вернёт.",
-								"Сила: 220   ·   Удар: 11   ·   Скорость: 30"
-							],
-							"walk": "img/walk_mon_lich.png",
-							"walk_h": 40,
-							"walk_n": 4,
-							"walk_w": 31
-						}
-					],
-					"title": "Главные монстры"
-				}
-			],
-			"icon": "img/mon_slime.png",
-			"id": "monsters",
-			"intro": "Живут в подземельях и в Аду. Битвы без крови: побеждённый монстр исчезает облачком звёздочек. Если совсем без сил — монстры утащат часть вещей в свой тайник, а найти его можно в сундуке подземелья.",
-			"title": "Монстры"
 		},
 		{
 			"groups": [
@@ -17672,3666 +17294,12 @@
 					],
 					"small": true,
 					"title": "Что делают в мастерских"
-				},
-				{
-					"entries": [
-						{
-							"id": "shop26_kg_shop_potion",
-							"img": "img/shop26_kg_shop_potion.png",
-							"name": "Лавка зелий",
-							"sub": "магазин королевства",
-							"tags": [],
-							"text": [
-								"Строится на верстаке (вкладка с короной): @plank ×10, Бревно ×4, Стекло ×2",
-								"Жители сами приходят и платят в рабочие часы (8–21). Товар кладут из сумки или подвозят из сундуков базы; выручка копится в кассе."
-							]
-						},
-						{
-							"id": "shop26_kg_shop_food",
-							"img": "img/shop26_kg_shop_food.png",
-							"name": "Лавка снеди",
-							"sub": "магазин королевства",
-							"tags": [],
-							"text": [
-								"Строится на верстаке (вкладка с короной): @plank ×10, Бревно ×4, Красная ткань ×1",
-								"Жители сами приходят и платят в рабочие часы (8–21). Товар кладут из сумки или подвозят из сундуков базы; выручка копится в кассе."
-							]
-						},
-						{
-							"id": "shop26_kg_shop_smith",
-							"img": "img/shop26_kg_shop_smith.png",
-							"name": "Лавка кованого",
-							"sub": "магазин королевства",
-							"tags": [],
-							"text": [
-								"Строится на верстаке (вкладка с короной): @plank ×16, Средний камень ×8, Железный брусок ×2",
-								"Жители сами приходят и платят в рабочие часы (8–21). Товар кладут из сумки или подвозят из сундуков базы; выручка копится в кассе."
-							]
-						},
-						{
-							"id": "shop26_kg_shop_general",
-							"img": "img/shop26_kg_shop_general.png",
-							"name": "Лавка трав и руд",
-							"sub": "магазин королевства",
-							"tags": [],
-							"text": [
-								"Строится на верстаке (вкладка с короной): @plank ×16, Бревно ×6, Средний камень ×4",
-								"Жители сами приходят и платят в рабочие часы (8–21). Товар кладут из сумки или подвозят из сундуков базы; выручка копится в кассе."
-							]
-						}
-					],
-					"title": "Магазины королевства"
 				}
 			],
 			"icon": "img/mat_plank_tree_a.png",
 			"id": "mats",
 			"intro": "Дерево, камень, руды, ткани, шерсть, перья, краски и магическая пыль — из них строят и мастерят.",
 			"title": "Материалы и мастерские"
-		},
-		{
-			"groups": [
-				{
-					"entries": [
-						{
-							"id": "wpn_sword_wood",
-							"img": "img/wpn_wpn_sword_wood.png",
-							"name": "Деревянный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · вблизи · ступень 1",
-								"Цена: 11 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_bone",
-							"img": "img/wpn_wpn_sword_bone.png",
-							"name": "Костяной меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · вблизи · ступень 1",
-								"Цена: 16 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_copper",
-							"img": "img/wpn_wpn_sword_copper.png",
-							"name": "Медный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 9 · вблизи · ступень 1",
-								"Цена: 22 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_bronze",
-							"img": "img/wpn_wpn_sword_bronze.png",
-							"name": "Бронзовый меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 2",
-								"Цена: 33 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_iron",
-							"img": "img/wpn_wpn_sword_iron.png",
-							"name": "Железный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · вблизи · ступень 2",
-								"Цена: 47 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_steel",
-							"img": "img/wpn_wpn_sword_steel.png",
-							"name": "Стальной меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 3",
-								"Цена: 73 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_silver",
-							"img": "img/wpn_wpn_sword_silver.png",
-							"name": "Серебряный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 110 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_gold",
-							"img": "img/wpn_wpn_sword_gold.png",
-							"name": "Золотой меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 165 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_crystal",
-							"img": "img/wpn_wpn_sword_crystal.png",
-							"name": "Хрустальный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 201 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_frost",
-							"img": "img/wpn_wpn_sword_frost.png",
-							"name": "Морозный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 238 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_ember",
-							"img": "img/wpn_wpn_sword_ember.png",
-							"name": "Огненный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 18 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 256 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_verdant",
-							"img": "img/wpn_wpn_sword_verdant.png",
-							"name": "Живой меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 238 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_moonsilver",
-							"img": "img/wpn_wpn_sword_moonsilver.png",
-							"name": "Лунный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 311 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_void",
-							"img": "img/wpn_wpn_sword_void.png",
-							"name": "Бездонный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 366 мон."
-							]
-						},
-						{
-							"id": "wpn_sword_star",
-							"img": "img/wpn_wpn_sword_star.png",
-							"name": "Звёздный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 23 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 476 мон."
-							]
-						},
-						{
-							"id": "lgd_dawn",
-							"img": "img/wpn_lgd_dawn.png",
-							"name": "Клинок Рассвета",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 32 · вблизи · ступень 7",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 900 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Мечи"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_dagger_wood",
-							"img": "img/wpn_wpn_dagger_wood.png",
-							"name": "Деревянный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 4 · вблизи · ступень 1",
-								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_bone",
-							"img": "img/wpn_wpn_dagger_bone.png",
-							"name": "Костяной кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 5 · вблизи · ступень 1",
-								"Цена: 13 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_copper",
-							"img": "img/wpn_wpn_dagger_copper.png",
-							"name": "Медный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 5 · вблизи · ступень 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_bronze",
-							"img": "img/wpn_wpn_dagger_bronze.png",
-							"name": "Бронзовый кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · вблизи · ступень 2",
-								"Цена: 27 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_iron",
-							"img": "img/wpn_wpn_dagger_iron.png",
-							"name": "Железный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · вблизи · ступень 2",
-								"Цена: 39 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_steel",
-							"img": "img/wpn_wpn_dagger_steel.png",
-							"name": "Стальной кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · вблизи · ступень 3",
-								"Цена: 60 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_silver",
-							"img": "img/wpn_wpn_dagger_silver.png",
-							"name": "Серебряный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 9 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 90 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_gold",
-							"img": "img/wpn_wpn_dagger_gold.png",
-							"name": "Золотой кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 135 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_crystal",
-							"img": "img/wpn_wpn_dagger_crystal.png",
-							"name": "Хрустальный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 165 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_frost",
-							"img": "img/wpn_wpn_dagger_frost.png",
-							"name": "Морозный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 195 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_ember",
-							"img": "img/wpn_wpn_dagger_ember.png",
-							"name": "Огненный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 210 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_verdant",
-							"img": "img/wpn_wpn_dagger_verdant.png",
-							"name": "Живой кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 195 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_moonsilver",
-							"img": "img/wpn_wpn_dagger_moonsilver.png",
-							"name": "Лунный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 255 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_void",
-							"img": "img/wpn_wpn_dagger_void.png",
-							"name": "Бездонный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 300 мон."
-							]
-						},
-						{
-							"id": "wpn_dagger_star",
-							"img": "img/wpn_wpn_dagger_star.png",
-							"name": "Звёздный кинжал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 390 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Кинжалы"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_greatsword_wood",
-							"img": "img/wpn_wpn_greatsword_wood.png",
-							"name": "Деревянный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · вблизи · ступень 1",
-								"Цена: 15 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_bone",
-							"img": "img/wpn_wpn_greatsword_bone.png",
-							"name": "Костяной двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 1",
-								"Цена: 22 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_copper",
-							"img": "img/wpn_wpn_greatsword_copper.png",
-							"name": "Медный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · вблизи · ступень 1",
-								"Цена: 30 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_bronze",
-							"img": "img/wpn_wpn_greatsword_bronze.png",
-							"name": "Бронзовый двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 18 · вблизи · ступень 2",
-								"Цена: 45 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_iron",
-							"img": "img/wpn_wpn_greatsword_iron.png",
-							"name": "Железный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · вблизи · ступень 2",
-								"Цена: 65 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_steel",
-							"img": "img/wpn_wpn_greatsword_steel.png",
-							"name": "Стальной двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 24 · вблизи · ступень 3",
-								"Цена: 100 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_silver",
-							"img": "img/wpn_wpn_greatsword_silver.png",
-							"name": "Серебряный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 26 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 150 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_gold",
-							"img": "img/wpn_wpn_greatsword_gold.png",
-							"name": "Золотой двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 25 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 225 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_crystal",
-							"img": "img/wpn_wpn_greatsword_crystal.png",
-							"name": "Хрустальный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 29 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 275 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_frost",
-							"img": "img/wpn_wpn_greatsword_frost.png",
-							"name": "Морозный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 31 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 325 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_ember",
-							"img": "img/wpn_wpn_greatsword_ember.png",
-							"name": "Огненный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 32 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 350 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_verdant",
-							"img": "img/wpn_wpn_greatsword_verdant.png",
-							"name": "Живой двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 31 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 325 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_moonsilver",
-							"img": "img/wpn_wpn_greatsword_moonsilver.png",
-							"name": "Лунный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 34 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 425 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_void",
-							"img": "img/wpn_wpn_greatsword_void.png",
-							"name": "Бездонный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 38 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 500 мон."
-							]
-						},
-						{
-							"id": "wpn_greatsword_star",
-							"img": "img/wpn_wpn_greatsword_star.png",
-							"name": "Звёздный двуручный меч",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 41 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 650 мон."
-							]
-						},
-						{
-							"id": "lgd_dragon",
-							"img": "img/wpn_lgd_dragon.png",
-							"name": "Драконий Зуб",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 40 · вблизи · ступень 7",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 1300 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Двуручные мечи"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_rapier_wood",
-							"img": "img/wpn_wpn_rapier_wood.png",
-							"name": "Деревянная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · вблизи · ступень 1",
-								"Цена: 10 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_bone",
-							"img": "img/wpn_wpn_rapier_bone.png",
-							"name": "Костяная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · вблизи · ступень 1",
-								"Цена: 15 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_copper",
-							"img": "img/wpn_wpn_rapier_copper.png",
-							"name": "Медная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · вблизи · ступень 1",
-								"Цена: 21 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_bronze",
-							"img": "img/wpn_wpn_rapier_bronze.png",
-							"name": "Бронзовая рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 9 · вблизи · ступень 2",
-								"Цена: 31 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_iron",
-							"img": "img/wpn_wpn_rapier_iron.png",
-							"name": "Железная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 2",
-								"Цена: 45 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_steel",
-							"img": "img/wpn_wpn_rapier_steel.png",
-							"name": "Стальная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · вблизи · ступень 3",
-								"Цена: 70 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_silver",
-							"img": "img/wpn_wpn_rapier_silver.png",
-							"name": "Серебряная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 105 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_gold",
-							"img": "img/wpn_wpn_rapier_gold.png",
-							"name": "Золотая рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 157 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_crystal",
-							"img": "img/wpn_wpn_rapier_crystal.png",
-							"name": "Хрустальная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 192 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_frost",
-							"img": "img/wpn_wpn_rapier_frost.png",
-							"name": "Морозная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 227 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_ember",
-							"img": "img/wpn_wpn_rapier_ember.png",
-							"name": "Огненная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 245 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_verdant",
-							"img": "img/wpn_wpn_rapier_verdant.png",
-							"name": "Живая рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 227 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_moonsilver",
-							"img": "img/wpn_wpn_rapier_moonsilver.png",
-							"name": "Лунная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 297 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_void",
-							"img": "img/wpn_wpn_rapier_void.png",
-							"name": "Бездонная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 350 мон."
-							]
-						},
-						{
-							"id": "wpn_rapier_star",
-							"img": "img/wpn_wpn_rapier_star.png",
-							"name": "Звёздная рапира",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 455 мон."
-							]
-						},
-						{
-							"id": "lgd_frost",
-							"img": "img/wpn_lgd_frost.png",
-							"name": "Вечная Зима",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 31 · вблизи · ступень 7",
-								"Особое: Мороз: замедляет",
-								"Цена: 950 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Рапиры"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_katana_wood",
-							"img": "img/wpn_wpn_katana_wood.png",
-							"name": "Деревянная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 9 · вблизи · ступень 1",
-								"Цена: 12 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_bone",
-							"img": "img/wpn_wpn_katana_bone.png",
-							"name": "Костяная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_copper",
-							"img": "img/wpn_wpn_katana_copper.png",
-							"name": "Медная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · вблизи · ступень 1",
-								"Цена: 24 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_bronze",
-							"img": "img/wpn_wpn_katana_bronze.png",
-							"name": "Бронзовая катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · вблизи · ступень 2",
-								"Цена: 37 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_iron",
-							"img": "img/wpn_wpn_katana_iron.png",
-							"name": "Железная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · вблизи · ступень 2",
-								"Цена: 54 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_steel",
-							"img": "img/wpn_wpn_katana_steel.png",
-							"name": "Стальная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 18 · вблизи · ступень 3",
-								"Цена: 83 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_silver",
-							"img": "img/wpn_wpn_katana_silver.png",
-							"name": "Серебряная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 124 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_gold",
-							"img": "img/wpn_wpn_katana_gold.png",
-							"name": "Золотая катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 18 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 187 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_crystal",
-							"img": "img/wpn_wpn_katana_crystal.png",
-							"name": "Хрустальная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 229 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_frost",
-							"img": "img/wpn_wpn_katana_frost.png",
-							"name": "Морозная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 270 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_ember",
-							"img": "img/wpn_wpn_katana_ember.png",
-							"name": "Огненная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 23 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 291 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_verdant",
-							"img": "img/wpn_wpn_katana_verdant.png",
-							"name": "Живая катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 270 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_moonsilver",
-							"img": "img/wpn_wpn_katana_moonsilver.png",
-							"name": "Лунная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 25 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 354 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_void",
-							"img": "img/wpn_wpn_katana_void.png",
-							"name": "Бездонная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 27 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 416 мон."
-							]
-						},
-						{
-							"id": "wpn_katana_star",
-							"img": "img/wpn_wpn_katana_star.png",
-							"name": "Звёздная катана",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 30 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 541 мон."
-							]
-						},
-						{
-							"id": "lgd_sakura",
-							"img": "img/wpn_lgd_sakura.png",
-							"name": "Сакура-но-Кадзэ",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 33 · вблизи · ступень 7",
-								"Особое: Удача: больше добычи",
-								"Цена: 1000 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Катаны"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_axe_wood",
-							"img": "img/wpn_wpn_axe_wood.png",
-							"name": "Деревянный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 1",
-								"Цена: 13 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_bone",
-							"img": "img/wpn_wpn_axe_bone.png",
-							"name": "Костяной боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · вблизи · ступень 1",
-								"Цена: 19 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_copper",
-							"img": "img/wpn_wpn_axe_copper.png",
-							"name": "Медный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · вблизи · ступень 1",
-								"Цена: 26 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_bronze",
-							"img": "img/wpn_wpn_axe_bronze.png",
-							"name": "Бронзовый боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 2",
-								"Цена: 39 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_iron",
-							"img": "img/wpn_wpn_axe_iron.png",
-							"name": "Железный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · вблизи · ступень 2",
-								"Цена: 56 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_steel",
-							"img": "img/wpn_wpn_axe_steel.png",
-							"name": "Стальной боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 3",
-								"Цена: 86 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_silver",
-							"img": "img/wpn_wpn_axe_silver.png",
-							"name": "Серебряный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 20 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 130 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_gold",
-							"img": "img/wpn_wpn_axe_gold.png",
-							"name": "Золотой боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 20 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 195 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_crystal",
-							"img": "img/wpn_wpn_axe_crystal.png",
-							"name": "Хрустальный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 238 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_frost",
-							"img": "img/wpn_wpn_axe_frost.png",
-							"name": "Морозный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 24 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 281 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_ember",
-							"img": "img/wpn_wpn_axe_ember.png",
-							"name": "Огненный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 24 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 303 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_verdant",
-							"img": "img/wpn_wpn_axe_verdant.png",
-							"name": "Живой боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 24 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 281 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_moonsilver",
-							"img": "img/wpn_wpn_axe_moonsilver.png",
-							"name": "Лунный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 27 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 368 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_void",
-							"img": "img/wpn_wpn_axe_void.png",
-							"name": "Бездонный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 29 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 433 мон."
-							]
-						},
-						{
-							"id": "wpn_axe_star",
-							"img": "img/wpn_wpn_axe_star.png",
-							"name": "Звёздный боевой топор",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 32 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 563 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Топоры"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_hammer_wood",
-							"img": "img/wpn_wpn_hammer_wood.png",
-							"name": "Деревянный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · вблизи · ступень 1",
-								"Цена: 13 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_bone",
-							"img": "img/wpn_wpn_hammer_bone.png",
-							"name": "Костяной молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · вблизи · ступень 1",
-								"Цена: 20 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_copper",
-							"img": "img/wpn_wpn_hammer_copper.png",
-							"name": "Медный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 1",
-								"Цена: 27 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_bronze",
-							"img": "img/wpn_wpn_hammer_bronze.png",
-							"name": "Бронзовый молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · вблизи · ступень 2",
-								"Цена: 41 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_iron",
-							"img": "img/wpn_wpn_hammer_iron.png",
-							"name": "Железный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 18 · вблизи · ступень 2",
-								"Цена: 60 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_steel",
-							"img": "img/wpn_wpn_hammer_steel.png",
-							"name": "Стальной молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · вблизи · ступень 3",
-								"Цена: 93 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_silver",
-							"img": "img/wpn_wpn_hammer_silver.png",
-							"name": "Серебряный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 23 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 139 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_gold",
-							"img": "img/wpn_wpn_hammer_gold.png",
-							"name": "Золотой молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 209 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_crystal",
-							"img": "img/wpn_wpn_hammer_crystal.png",
-							"name": "Хрустальный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 26 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 256 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_frost",
-							"img": "img/wpn_wpn_hammer_frost.png",
-							"name": "Морозный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 27 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 303 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_ember",
-							"img": "img/wpn_wpn_hammer_ember.png",
-							"name": "Огненный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 28 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 326 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_verdant",
-							"img": "img/wpn_wpn_hammer_verdant.png",
-							"name": "Живой молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 27 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 303 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_moonsilver",
-							"img": "img/wpn_wpn_hammer_moonsilver.png",
-							"name": "Лунный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 30 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 396 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_void",
-							"img": "img/wpn_wpn_hammer_void.png",
-							"name": "Бездонный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 34 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 466 мон."
-							]
-						},
-						{
-							"id": "wpn_hammer_star",
-							"img": "img/wpn_wpn_hammer_star.png",
-							"name": "Звёздный молот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 37 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 606 мон."
-							]
-						},
-						{
-							"id": "lgd_hearth",
-							"img": "img/wpn_lgd_hearth.png",
-							"name": "Молот Очага",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 36 · вблизи · ступень 7",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 950 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Молоты"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_mace_wood",
-							"img": "img/wpn_wpn_mace_wood.png",
-							"name": "Деревянная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · вблизи · ступень 1",
-								"Цена: 12 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_bone",
-							"img": "img/wpn_wpn_mace_bone.png",
-							"name": "Костяная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_copper",
-							"img": "img/wpn_wpn_mace_copper.png",
-							"name": "Медная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · вблизи · ступень 1",
-								"Цена: 24 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_bronze",
-							"img": "img/wpn_wpn_mace_bronze.png",
-							"name": "Бронзовая булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · вблизи · ступень 2",
-								"Цена: 36 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_iron",
-							"img": "img/wpn_wpn_mace_iron.png",
-							"name": "Железная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 2",
-								"Цена: 52 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_steel",
-							"img": "img/wpn_wpn_mace_steel.png",
-							"name": "Стальная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · вблизи · ступень 3",
-								"Цена: 80 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_silver",
-							"img": "img/wpn_wpn_mace_silver.png",
-							"name": "Серебряная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 120 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_gold",
-							"img": "img/wpn_wpn_mace_gold.png",
-							"name": "Золотая булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 180 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_crystal",
-							"img": "img/wpn_wpn_mace_crystal.png",
-							"name": "Хрустальная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 220 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_frost",
-							"img": "img/wpn_wpn_mace_frost.png",
-							"name": "Морозная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 20 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 260 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_ember",
-							"img": "img/wpn_wpn_mace_ember.png",
-							"name": "Огненная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 280 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_verdant",
-							"img": "img/wpn_wpn_mace_verdant.png",
-							"name": "Живая булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 20 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 260 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_moonsilver",
-							"img": "img/wpn_wpn_mace_moonsilver.png",
-							"name": "Лунная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 23 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 340 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_void",
-							"img": "img/wpn_wpn_mace_void.png",
-							"name": "Бездонная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 25 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 400 мон."
-							]
-						},
-						{
-							"id": "wpn_mace_star",
-							"img": "img/wpn_wpn_mace_star.png",
-							"name": "Звёздная булава",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 28 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 520 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Булавы"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_spear_wood",
-							"img": "img/wpn_wpn_spear_wood.png",
-							"name": "Деревянное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · вблизи · ступень 1",
-								"Цена: 11 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_bone",
-							"img": "img/wpn_wpn_spear_bone.png",
-							"name": "Костяное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 9 · вблизи · ступень 1",
-								"Цена: 17 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_copper",
-							"img": "img/wpn_wpn_spear_copper.png",
-							"name": "Медное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 1",
-								"Цена: 23 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_bronze",
-							"img": "img/wpn_wpn_spear_bronze.png",
-							"name": "Бронзовое копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · вблизи · ступень 2",
-								"Цена: 34 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_iron",
-							"img": "img/wpn_wpn_spear_iron.png",
-							"name": "Железное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · вблизи · ступень 2",
-								"Цена: 49 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_steel",
-							"img": "img/wpn_wpn_spear_steel.png",
-							"name": "Стальное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · вблизи · ступень 3",
-								"Цена: 76 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_silver",
-							"img": "img/wpn_wpn_spear_silver.png",
-							"name": "Серебряное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 114 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_gold",
-							"img": "img/wpn_wpn_spear_gold.png",
-							"name": "Золотое копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 172 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_crystal",
-							"img": "img/wpn_wpn_spear_crystal.png",
-							"name": "Хрустальное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 18 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 210 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_frost",
-							"img": "img/wpn_wpn_spear_frost.png",
-							"name": "Морозное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 249 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_ember",
-							"img": "img/wpn_wpn_spear_ember.png",
-							"name": "Огненное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 268 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_verdant",
-							"img": "img/wpn_wpn_spear_verdant.png",
-							"name": "Живое копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 249 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_moonsilver",
-							"img": "img/wpn_wpn_spear_moonsilver.png",
-							"name": "Лунное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 325 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_void",
-							"img": "img/wpn_wpn_spear_void.png",
-							"name": "Бездонное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 23 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 383 мон."
-							]
-						},
-						{
-							"id": "wpn_spear_star",
-							"img": "img/wpn_wpn_spear_star.png",
-							"name": "Звёздное копьё",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 25 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 498 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Копья"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_trident_wood",
-							"img": "img/wpn_wpn_trident_wood.png",
-							"name": "Деревянный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · вблизи · ступень 1",
-								"Цена: 12 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_bone",
-							"img": "img/wpn_wpn_trident_bone.png",
-							"name": "Костяной трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_copper",
-							"img": "img/wpn_wpn_trident_copper.png",
-							"name": "Медный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · вблизи · ступень 1",
-								"Цена: 24 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_bronze",
-							"img": "img/wpn_wpn_trident_bronze.png",
-							"name": "Бронзовый трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · вблизи · ступень 2",
-								"Цена: 36 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_iron",
-							"img": "img/wpn_wpn_trident_iron.png",
-							"name": "Железный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 2",
-								"Цена: 52 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_steel",
-							"img": "img/wpn_wpn_trident_steel.png",
-							"name": "Стальной трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · вблизи · ступень 3",
-								"Цена: 80 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_silver",
-							"img": "img/wpn_wpn_trident_silver.png",
-							"name": "Серебряный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 120 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_gold",
-							"img": "img/wpn_wpn_trident_gold.png",
-							"name": "Золотой трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 180 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_crystal",
-							"img": "img/wpn_wpn_trident_crystal.png",
-							"name": "Хрустальный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 220 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_frost",
-							"img": "img/wpn_wpn_trident_frost.png",
-							"name": "Морозный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 20 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 260 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_ember",
-							"img": "img/wpn_wpn_trident_ember.png",
-							"name": "Огненный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 280 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_verdant",
-							"img": "img/wpn_wpn_trident_verdant.png",
-							"name": "Живой трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 20 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 260 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_moonsilver",
-							"img": "img/wpn_wpn_trident_moonsilver.png",
-							"name": "Лунный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 23 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 340 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_void",
-							"img": "img/wpn_wpn_trident_void.png",
-							"name": "Бездонный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 25 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 400 мон."
-							]
-						},
-						{
-							"id": "wpn_trident_star",
-							"img": "img/wpn_wpn_trident_star.png",
-							"name": "Звёздный трезубец",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 28 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 520 мон."
-							]
-						},
-						{
-							"id": "lgd_tide",
-							"img": "img/wpn_lgd_tide.png",
-							"name": "Трезубец Прилива",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 30 · вблизи · ступень 7",
-								"Особое: Мороз: замедляет",
-								"Цена: 800 мон."
-							]
-						},
-						{
-							"id": "lgd_hell",
-							"img": "img/wpn_lgd_hell.png",
-							"name": "Вилы Владыки Ада",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 42 · вблизи · ступень 7",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 1600 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Трезубцы"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_scythe_wood",
-							"img": "img/wpn_wpn_scythe_wood.png",
-							"name": "Деревянная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 1",
-								"Цена: 13 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_bone",
-							"img": "img/wpn_wpn_scythe_bone.png",
-							"name": "Костяная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · вблизи · ступень 1",
-								"Цена: 20 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_copper",
-							"img": "img/wpn_wpn_scythe_copper.png",
-							"name": "Медная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 1",
-								"Цена: 27 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_bronze",
-							"img": "img/wpn_wpn_scythe_bronze.png",
-							"name": "Бронзовая коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · вблизи · ступень 2",
-								"Цена: 40 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_iron",
-							"img": "img/wpn_wpn_scythe_iron.png",
-							"name": "Железная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · вблизи · ступень 2",
-								"Цена: 58 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_steel",
-							"img": "img/wpn_wpn_scythe_steel.png",
-							"name": "Стальная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 20 · вблизи · ступень 3",
-								"Цена: 90 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_silver",
-							"img": "img/wpn_wpn_scythe_silver.png",
-							"name": "Серебряная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 135 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_gold",
-							"img": "img/wpn_wpn_scythe_gold.png",
-							"name": "Золотая коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 202 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_crystal",
-							"img": "img/wpn_wpn_scythe_crystal.png",
-							"name": "Хрустальная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 24 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 247 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_frost",
-							"img": "img/wpn_wpn_scythe_frost.png",
-							"name": "Морозная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 26 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 292 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_ember",
-							"img": "img/wpn_wpn_scythe_ember.png",
-							"name": "Огненная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 26 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 315 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_verdant",
-							"img": "img/wpn_wpn_scythe_verdant.png",
-							"name": "Живая коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 26 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 292 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_moonsilver",
-							"img": "img/wpn_wpn_scythe_moonsilver.png",
-							"name": "Лунная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 28 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 382 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_void",
-							"img": "img/wpn_wpn_scythe_void.png",
-							"name": "Бездонная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 32 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 450 мон."
-							]
-						},
-						{
-							"id": "wpn_scythe_star",
-							"img": "img/wpn_wpn_scythe_star.png",
-							"name": "Звёздная коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 34 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 585 мон."
-							]
-						},
-						{
-							"id": "lgd_moon",
-							"img": "img/wpn_lgd_moon.png",
-							"name": "Лунная Коса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 34 · вблизи · ступень 7",
-								"Особое: Сон: усыпляет",
-								"Цена: 1000 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Косы"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_club_wood",
-							"img": "img/wpn_wpn_club_wood.png",
-							"name": "Деревянная дубинка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · вблизи · ступень 1",
-								"Цена: 10 мон."
-							]
-						},
-						{
-							"id": "wpn_club_bone",
-							"img": "img/wpn_wpn_club_bone.png",
-							"name": "Костяная дубинка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · вблизи · ступень 1",
-								"Цена: 14 мон."
-							]
-						},
-						{
-							"id": "wpn_club_copper",
-							"img": "img/wpn_wpn_club_copper.png",
-							"name": "Медная дубинка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · вблизи · ступень 1",
-								"Цена: 20 мон."
-							]
-						},
-						{
-							"id": "wpn_club_iron",
-							"img": "img/wpn_wpn_club_iron.png",
-							"name": "Железная дубинка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 9 · вблизи · ступень 2",
-								"Цена: 43 мон."
-							]
-						},
-						{
-							"id": "wpn_club_candy",
-							"img": "img/wpn_wpn_club_candy.png",
-							"name": "Леденцовая дубинка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 2",
-								"Особое: Смех: монстры смеются и не дерутся",
-								"Цена: 66 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Дубинки"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_flail_wood",
-							"img": "img/wpn_wpn_flail_wood.png",
-							"name": "Деревянный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 9 · вблизи · ступень 1",
-								"Цена: 12 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_bone",
-							"img": "img/wpn_wpn_flail_bone.png",
-							"name": "Костяной цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_copper",
-							"img": "img/wpn_wpn_flail_copper.png",
-							"name": "Медный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · вблизи · ступень 1",
-								"Цена: 24 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_bronze",
-							"img": "img/wpn_wpn_flail_bronze.png",
-							"name": "Бронзовый цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · вблизи · ступень 2",
-								"Цена: 37 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_iron",
-							"img": "img/wpn_wpn_flail_iron.png",
-							"name": "Железный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · вблизи · ступень 2",
-								"Цена: 54 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_steel",
-							"img": "img/wpn_wpn_flail_steel.png",
-							"name": "Стальной цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 18 · вблизи · ступень 3",
-								"Цена: 83 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_silver",
-							"img": "img/wpn_wpn_flail_silver.png",
-							"name": "Серебряный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 124 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_gold",
-							"img": "img/wpn_wpn_flail_gold.png",
-							"name": "Золотой цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 18 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 187 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_crystal",
-							"img": "img/wpn_wpn_flail_crystal.png",
-							"name": "Хрустальный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · вблизи · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 229 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_frost",
-							"img": "img/wpn_wpn_flail_frost.png",
-							"name": "Морозный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 270 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_ember",
-							"img": "img/wpn_wpn_flail_ember.png",
-							"name": "Огненный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 23 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 291 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_verdant",
-							"img": "img/wpn_wpn_flail_verdant.png",
-							"name": "Живой цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · вблизи · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 270 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_moonsilver",
-							"img": "img/wpn_wpn_flail_moonsilver.png",
-							"name": "Лунный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 25 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 354 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_void",
-							"img": "img/wpn_wpn_flail_void.png",
-							"name": "Бездонный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 27 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 416 мон."
-							]
-						},
-						{
-							"id": "wpn_flail_star",
-							"img": "img/wpn_wpn_flail_star.png",
-							"name": "Звёздный цеп",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 30 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 541 мон."
-							]
-						},
-						{
-							"id": "lgd_gold",
-							"img": "img/wpn_lgd_gold.png",
-							"name": "Цеп Скупого Короля",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 30 · вблизи · ступень 7",
-								"Особое: Удача: больше добычи",
-								"Цена: 1200 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Цепы"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_whip_wood",
-							"img": "img/wpn_wpn_whip_wood.png",
-							"name": "Деревянный хлыст",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 5 · вблизи · ступень 1",
-								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "wpn_whip_copper",
-							"img": "img/wpn_wpn_whip_copper.png",
-							"name": "Медный хлыст",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · вблизи · ступень 1",
-								"Цена: 19 мон."
-							]
-						},
-						{
-							"id": "wpn_whip_iron",
-							"img": "img/wpn_wpn_whip_iron.png",
-							"name": "Железный хлыст",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · вблизи · ступень 2",
-								"Цена: 41 мон."
-							]
-						},
-						{
-							"id": "wpn_whip_silver",
-							"img": "img/wpn_wpn_whip_silver.png",
-							"name": "Серебряный хлыст",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 95 мон."
-							]
-						},
-						{
-							"id": "wpn_whip_ember",
-							"img": "img/wpn_wpn_whip_ember.png",
-							"name": "Огненный хлыст",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 221 мон."
-							]
-						},
-						{
-							"id": "wpn_whip_void",
-							"img": "img/wpn_wpn_whip_void.png",
-							"name": "Бездонный хлыст",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · вблизи · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 316 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Кнуты"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_staff_wood",
-							"img": "img/wpn_wpn_staff_wood.png",
-							"name": "Деревянный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · издалека · ступень 1",
-								"Цена: 10 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_bone",
-							"img": "img/wpn_wpn_staff_bone.png",
-							"name": "Костяной посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · издалека · ступень 1",
-								"Цена: 15 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_copper",
-							"img": "img/wpn_wpn_staff_copper.png",
-							"name": "Медный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · издалека · ступень 1",
-								"Цена: 21 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_iron",
-							"img": "img/wpn_wpn_staff_iron.png",
-							"name": "Железный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · издалека · ступень 2",
-								"Цена: 45 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_silver",
-							"img": "img/wpn_wpn_staff_silver.png",
-							"name": "Серебряный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · издалека · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 105 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_gold",
-							"img": "img/wpn_wpn_staff_gold.png",
-							"name": "Золотой посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · издалека · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 157 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_crystal",
-							"img": "img/wpn_wpn_staff_crystal.png",
-							"name": "Хрустальный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · издалека · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 192 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_frost",
-							"img": "img/wpn_wpn_staff_frost.png",
-							"name": "Морозный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · издалека · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 227 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_ember",
-							"img": "img/wpn_wpn_staff_ember.png",
-							"name": "Огненный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · издалека · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 245 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_verdant",
-							"img": "img/wpn_wpn_staff_verdant.png",
-							"name": "Живой посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · издалека · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 227 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_moonsilver",
-							"img": "img/wpn_wpn_staff_moonsilver.png",
-							"name": "Лунный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · издалека · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 297 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_void",
-							"img": "img/wpn_wpn_staff_void.png",
-							"name": "Бездонный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · издалека · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 350 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_star",
-							"img": "img/wpn_wpn_staff_star.png",
-							"name": "Звёздный посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · издалека · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 455 мон."
-							]
-						},
-						{
-							"id": "wpn_staff_candy",
-							"img": "img/wpn_wpn_staff_candy.png",
-							"name": "Леденцовый посох",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · издалека · ступень 2",
-								"Особое: Смех: монстры смеются и не дерутся",
-								"Цена: 70 мон."
-							]
-						},
-						{
-							"id": "lgd_whisper",
-							"img": "img/wpn_lgd_whisper.png",
-							"name": "Посох Шёпота Леса",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 28 · издалека · ступень 7",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 850 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Посохи"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_wand_wood",
-							"img": "img/wpn_wpn_wand_wood.png",
-							"name": "Деревянный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 5 · издалека · ступень 1",
-								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_bone",
-							"img": "img/wpn_wpn_wand_bone.png",
-							"name": "Костяной жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · издалека · ступень 1",
-								"Цена: 14 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_copper",
-							"img": "img/wpn_wpn_wand_copper.png",
-							"name": "Медный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · издалека · ступень 1",
-								"Цена: 19 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_silver",
-							"img": "img/wpn_wpn_wand_silver.png",
-							"name": "Серебряный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · издалека · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 95 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_gold",
-							"img": "img/wpn_wpn_wand_gold.png",
-							"name": "Золотой жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · издалека · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 142 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_crystal",
-							"img": "img/wpn_wpn_wand_crystal.png",
-							"name": "Хрустальный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · издалека · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 174 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_frost",
-							"img": "img/wpn_wpn_wand_frost.png",
-							"name": "Морозный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · издалека · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 205 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_ember",
-							"img": "img/wpn_wpn_wand_ember.png",
-							"name": "Огненный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · издалека · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 221 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_verdant",
-							"img": "img/wpn_wpn_wand_verdant.png",
-							"name": "Живой жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · издалека · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 205 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_moonsilver",
-							"img": "img/wpn_wpn_wand_moonsilver.png",
-							"name": "Лунный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · издалека · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 269 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_void",
-							"img": "img/wpn_wpn_wand_void.png",
-							"name": "Бездонный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · издалека · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 316 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_star",
-							"img": "img/wpn_wpn_wand_star.png",
-							"name": "Звёздный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · издалека · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 411 мон."
-							]
-						},
-						{
-							"id": "wpn_wand_candy",
-							"img": "img/wpn_wpn_wand_candy.png",
-							"name": "Леденцовый жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · издалека · ступень 2",
-								"Особое: Смех: монстры смеются и не дерутся",
-								"Цена: 63 мон."
-							]
-						},
-						{
-							"id": "lgd_void",
-							"img": "img/wpn_lgd_void.png",
-							"name": "Пустотный Жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 27 · издалека · ступень 7",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 950 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Палочки"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_bow_wood",
-							"img": "img/wpn_wpn_bow_wood.png",
-							"name": "Деревянный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · издалека · ступень 1",
-								"Цена: 10 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_bone",
-							"img": "img/wpn_wpn_bow_bone.png",
-							"name": "Костяной лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · издалека · ступень 1",
-								"Цена: 15 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_copper",
-							"img": "img/wpn_wpn_bow_copper.png",
-							"name": "Медный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · издалека · ступень 1",
-								"Цена: 21 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_iron",
-							"img": "img/wpn_wpn_bow_iron.png",
-							"name": "Железный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · издалека · ступень 2",
-								"Цена: 45 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_steel",
-							"img": "img/wpn_wpn_bow_steel.png",
-							"name": "Стальной лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · издалека · ступень 3",
-								"Цена: 70 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_silver",
-							"img": "img/wpn_wpn_bow_silver.png",
-							"name": "Серебряный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · издалека · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 105 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_gold",
-							"img": "img/wpn_wpn_bow_gold.png",
-							"name": "Золотой лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · издалека · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 157 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_crystal",
-							"img": "img/wpn_wpn_bow_crystal.png",
-							"name": "Хрустальный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · издалека · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 192 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_frost",
-							"img": "img/wpn_wpn_bow_frost.png",
-							"name": "Морозный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · издалека · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 227 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_ember",
-							"img": "img/wpn_wpn_bow_ember.png",
-							"name": "Огненный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · издалека · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 245 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_verdant",
-							"img": "img/wpn_wpn_bow_verdant.png",
-							"name": "Живой лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · издалека · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 227 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_moonsilver",
-							"img": "img/wpn_wpn_bow_moonsilver.png",
-							"name": "Лунный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 17 · издалека · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 297 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_void",
-							"img": "img/wpn_wpn_bow_void.png",
-							"name": "Бездонный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · издалека · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 350 мон."
-							]
-						},
-						{
-							"id": "wpn_bow_star",
-							"img": "img/wpn_wpn_bow_star.png",
-							"name": "Звёздный лук",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 21 · издалека · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 455 мон."
-							]
-						},
-						{
-							"id": "lgd_star",
-							"img": "img/wpn_lgd_star.png",
-							"name": "Звездопад",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 30 · издалека · ступень 7",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 1100 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Луки"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_crossbow_wood",
-							"img": "img/wpn_wpn_crossbow_wood.png",
-							"name": "Деревянный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 10 · издалека · ступень 1",
-								"Цена: 13 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_bone",
-							"img": "img/wpn_wpn_crossbow_bone.png",
-							"name": "Костяной арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · издалека · ступень 1",
-								"Цена: 19 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_copper",
-							"img": "img/wpn_wpn_crossbow_copper.png",
-							"name": "Медный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 13 · издалека · ступень 1",
-								"Цена: 26 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_bronze",
-							"img": "img/wpn_wpn_crossbow_bronze.png",
-							"name": "Бронзовый арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · издалека · ступень 2",
-								"Цена: 39 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_iron",
-							"img": "img/wpn_wpn_crossbow_iron.png",
-							"name": "Железный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 16 · издалека · ступень 2",
-								"Цена: 56 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_steel",
-							"img": "img/wpn_wpn_crossbow_steel.png",
-							"name": "Стальной арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 19 · издалека · ступень 3",
-								"Цена: 86 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_silver",
-							"img": "img/wpn_wpn_crossbow_silver.png",
-							"name": "Серебряный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 20 · издалека · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 130 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_gold",
-							"img": "img/wpn_wpn_crossbow_gold.png",
-							"name": "Золотой арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 20 · издалека · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 195 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_crystal",
-							"img": "img/wpn_wpn_crossbow_crystal.png",
-							"name": "Хрустальный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · издалека · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 238 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_frost",
-							"img": "img/wpn_wpn_crossbow_frost.png",
-							"name": "Морозный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 24 · издалека · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 281 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_ember",
-							"img": "img/wpn_wpn_crossbow_ember.png",
-							"name": "Огненный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 24 · издалека · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 303 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_verdant",
-							"img": "img/wpn_wpn_crossbow_verdant.png",
-							"name": "Живой арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 24 · издалека · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 281 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_moonsilver",
-							"img": "img/wpn_wpn_crossbow_moonsilver.png",
-							"name": "Лунный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 27 · издалека · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 368 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_void",
-							"img": "img/wpn_wpn_crossbow_void.png",
-							"name": "Бездонный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 29 · издалека · ступень 5",
-								"Особое: Пустота: пробивает защиту",
-								"Цена: 433 мон."
-							]
-						},
-						{
-							"id": "wpn_crossbow_star",
-							"img": "img/wpn_wpn_crossbow_star.png",
-							"name": "Звёздный арбалет",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 32 · издалека · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 563 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Арбалеты"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_boomerang_wood",
-							"img": "img/wpn_wpn_boomerang_wood.png",
-							"name": "Деревянный бумеранг",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · издалека · ступень 1",
-								"Цена: 10 мон."
-							]
-						},
-						{
-							"id": "wpn_boomerang_bone",
-							"img": "img/wpn_wpn_boomerang_bone.png",
-							"name": "Костяной бумеранг",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · издалека · ступень 1",
-								"Цена: 14 мон."
-							]
-						},
-						{
-							"id": "wpn_boomerang_copper",
-							"img": "img/wpn_wpn_boomerang_copper.png",
-							"name": "Медный бумеранг",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · издалека · ступень 1",
-								"Цена: 20 мон."
-							]
-						},
-						{
-							"id": "wpn_boomerang_iron",
-							"img": "img/wpn_wpn_boomerang_iron.png",
-							"name": "Железный бумеранг",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 9 · издалека · ступень 2",
-								"Цена: 43 мон."
-							]
-						},
-						{
-							"id": "wpn_boomerang_gold",
-							"img": "img/wpn_wpn_boomerang_gold.png",
-							"name": "Золотой бумеранг",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · издалека · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 150 мон."
-							]
-						},
-						{
-							"id": "wpn_boomerang_ember",
-							"img": "img/wpn_wpn_boomerang_ember.png",
-							"name": "Огненный бумеранг",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · издалека · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 233 мон."
-							]
-						},
-						{
-							"id": "wpn_boomerang_frost",
-							"img": "img/wpn_wpn_boomerang_frost.png",
-							"name": "Морозный бумеранг",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · издалека · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 216 мон."
-							]
-						},
-						{
-							"id": "wpn_boomerang_star",
-							"img": "img/wpn_wpn_boomerang_star.png",
-							"name": "Звёздный бумеранг",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 18 · издалека · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 433 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Бумеранги"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_slingshot_wood",
-							"img": "img/wpn_wpn_slingshot_wood.png",
-							"name": "Деревянная рогатка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 4 · издалека · ступень 1",
-								"Цена: 8 мон."
-							]
-						},
-						{
-							"id": "wpn_slingshot_bone",
-							"img": "img/wpn_wpn_slingshot_bone.png",
-							"name": "Костяная рогатка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 4 · издалека · ступень 1",
-								"Цена: 12 мон."
-							]
-						},
-						{
-							"id": "wpn_slingshot_copper",
-							"img": "img/wpn_wpn_slingshot_copper.png",
-							"name": "Медная рогатка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 4 · издалека · ступень 1",
-								"Цена: 17 мон."
-							]
-						},
-						{
-							"id": "wpn_slingshot_iron",
-							"img": "img/wpn_wpn_slingshot_iron.png",
-							"name": "Железная рогатка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · издалека · ступень 2",
-								"Цена: 36 мон."
-							]
-						},
-						{
-							"id": "wpn_slingshot_gold",
-							"img": "img/wpn_wpn_slingshot_gold.png",
-							"name": "Золотая рогатка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · издалека · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 127 мон."
-							]
-						},
-						{
-							"id": "wpn_slingshot_verdant",
-							"img": "img/wpn_wpn_slingshot_verdant.png",
-							"name": "Живая рогатка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · издалека · ступень 4",
-								"Особое: Жизнь: лечит при ударе",
-								"Цена: 184 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Рогатки"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_pillow_candy",
-							"img": "img/wpn_wpn_pillow_candy.png",
-							"name": "Леденцовая боевая подушка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 5 · вблизи · ступень 2",
-								"Особое: Смех: монстры смеются и не дерутся",
-								"Цена: 53 мон."
-							]
-						},
-						{
-							"id": "wpn_pillow_wood",
-							"img": "img/wpn_wpn_pillow_wood.png",
-							"name": "Деревянная боевая подушка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 3 · вблизи · ступень 1",
-								"Цена: 8 мон."
-							]
-						},
-						{
-							"id": "wpn_pillow_silver",
-							"img": "img/wpn_wpn_pillow_silver.png",
-							"name": "Серебряная боевая подушка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · вблизи · ступень 3",
-								"Особое: Свет: монстры засыпают",
-								"Цена: 80 мон."
-							]
-						},
-						{
-							"id": "wpn_pillow_gold",
-							"img": "img/wpn_wpn_pillow_gold.png",
-							"name": "Золотая боевая подушка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 120 мон."
-							]
-						},
-						{
-							"id": "wpn_pillow_star",
-							"img": "img/wpn_wpn_pillow_star.png",
-							"name": "Звёздная боевая подушка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 9 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 346 мон."
-							]
-						},
-						{
-							"id": "lgd_fluff",
-							"img": "img/wpn_lgd_fluff.png",
-							"name": "Подушка Тысячи Снов",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 22 · вблизи · ступень 7",
-								"Особое: Сон: усыпляет",
-								"Цена: 700 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Подушки"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_squeaky_candy",
-							"img": "img/wpn_wpn_squeaky_candy.png",
-							"name": "Леденцовый пищащий молоток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · вблизи · ступень 2",
-								"Особое: Смех: монстры смеются и не дерутся",
-								"Цена: 60 мон."
-							]
-						},
-						{
-							"id": "wpn_squeaky_wood",
-							"img": "img/wpn_wpn_squeaky_wood.png",
-							"name": "Деревянный пищащий молоток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 4 · вблизи · ступень 1",
-								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "wpn_squeaky_gold",
-							"img": "img/wpn_wpn_squeaky_gold.png",
-							"name": "Золотой пищащий молоток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 135 мон."
-							]
-						},
-						{
-							"id": "wpn_squeaky_star",
-							"img": "img/wpn_wpn_squeaky_star.png",
-							"name": "Звёздный пищащий молоток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 390 мон."
-							]
-						},
-						{
-							"id": "lgd_purr",
-							"img": "img/wpn_lgd_purr.png",
-							"name": "Мурчалка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 26 · вблизи · ступень 7",
-								"Особое: Смех: монстры смеются и не дерутся",
-								"Цена: 600 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Пищалки"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_bubble_candy",
-							"img": "img/wpn_wpn_bubble_candy.png",
-							"name": "Леденцовый пузырный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · издалека · ступень 2",
-								"Особое: Смех: монстры смеются и не дерутся",
-								"Цена: 56 мон."
-							]
-						},
-						{
-							"id": "wpn_bubble_crystal",
-							"img": "img/wpn_wpn_bubble_crystal.png",
-							"name": "Хрустальный пузырный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · издалека · ступень 4",
-								"Особое: Мана: быстрее заклинания",
-								"Цена: 155 мон."
-							]
-						},
-						{
-							"id": "wpn_bubble_frost",
-							"img": "img/wpn_wpn_bubble_frost.png",
-							"name": "Морозный пузырный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 8 · издалека · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 184 мон."
-							]
-						},
-						{
-							"id": "wpn_bubble_star",
-							"img": "img/wpn_wpn_bubble_star.png",
-							"name": "Звёздный пузырный жезл",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 12 · издалека · ступень 6",
-								"Особое: Звёзды: удар по кругу",
-								"Цена: 368 мон."
-							]
-						},
-						{
-							"id": "lgd_bubble",
-							"img": "img/wpn_lgd_bubble.png",
-							"name": "Королевский Пузырь",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 24 · издалека · ступень 7",
-								"Особое: Смех: монстры смеются и не дерутся",
-								"Цена: 750 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Пузырьковые жезлы"
-				},
-				{
-					"entries": [
-						{
-							"id": "wpn_fan_wood",
-							"img": "img/wpn_wpn_fan_wood.png",
-							"name": "Деревянный боевой веер",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · вблизи · ступень 1",
-								"Цена: 10 мон."
-							]
-						},
-						{
-							"id": "wpn_fan_bone",
-							"img": "img/wpn_wpn_fan_bone.png",
-							"name": "Костяной боевой веер",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 6 · вблизи · ступень 1",
-								"Цена: 14 мон."
-							]
-						},
-						{
-							"id": "wpn_fan_copper",
-							"img": "img/wpn_wpn_fan_copper.png",
-							"name": "Медный боевой веер",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 7 · вблизи · ступень 1",
-								"Цена: 20 мон."
-							]
-						},
-						{
-							"id": "wpn_fan_steel",
-							"img": "img/wpn_wpn_fan_steel.png",
-							"name": "Стальной боевой веер",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · вблизи · ступень 3",
-								"Цена: 66 мон."
-							]
-						},
-						{
-							"id": "wpn_fan_gold",
-							"img": "img/wpn_wpn_fan_gold.png",
-							"name": "Золотой боевой веер",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 11 · вблизи · ступень 3",
-								"Особое: Удача: больше добычи",
-								"Цена: 150 мон."
-							]
-						},
-						{
-							"id": "wpn_fan_frost",
-							"img": "img/wpn_wpn_fan_frost.png",
-							"name": "Морозный боевой веер",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 4",
-								"Особое: Мороз: замедляет",
-								"Цена: 216 мон."
-							]
-						},
-						{
-							"id": "wpn_fan_ember",
-							"img": "img/wpn_wpn_fan_ember.png",
-							"name": "Огненный боевой веер",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 14 · вблизи · ступень 4",
-								"Особое: Огонь: жжёт сильнее",
-								"Цена: 233 мон."
-							]
-						},
-						{
-							"id": "wpn_fan_moonsilver",
-							"img": "img/wpn_wpn_fan_moonsilver.png",
-							"name": "Лунный боевой веер",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Удар 15 · вблизи · ступень 5",
-								"Особое: Сон: усыпляет",
-								"Цена: 283 мон."
-							]
-						}
-					],
-					"small": true,
-					"title": "Веера"
-				}
-			],
-			"icon": "img/wpn_wpn_sword_wood.png",
-			"id": "weapons",
-			"intro": "Парадное и турнирное оружие — игра без крови. Им гоняют монстров в подземельях.",
-			"title": "Оружие"
 		},
 		{
 			"groups": [
@@ -23823,6 +19791,176 @@
 			"id": "nature27",
 			"intro": "Деревья и цветы мира в стиле яблока. Травы, которые можно собрать, — в разделе «Травы» (маленькая картинка — как трава растёт в мире).",
 			"title": "Деревья и луговые цветы"
+		},
+		{
+			"groups": [
+				{
+					"entries": [
+						{
+							"id": "backyard29",
+							"img": "img/g29_by29_big_tree.png",
+							"name": "Огород у дома",
+							"sub": "место у дома, справа",
+							"tags": [],
+							"text": [
+								"Справа от дома, за штакетником. Вход — открытая арка с вьюнком, просто проходишь — без перехода.",
+								"Внутри — старое дерево с дуплом и трутовиками, 3 лунки для грибных деревьев, дождевая бочка.",
+								"Грядки делаешь сама где хочешь: огород можно устроить как удобно. Пугала, ульи, компост — ставятся через B."
+							]
+						},
+						{
+							"id": "by29_soil",
+							"img": "img/g29_by29_soil_till.png",
+							"name": "Грядка",
+							"sub": "мотыга → вскопано → семя → полив → урожай",
+							"tags": [],
+							"text": [
+								"Мотыга в руке — ЛКМ по траве внутри забора: новая грядка (встаёт по сетке, чтобы ряды были ровные). Зелёная тень — тут можно.",
+								"Мотыгой по пустой грядке (ЛКМ или E) — засыпать её обратно. Засеянную не засыпать — сначала собери.",
+								"Политая грядка темнеет; за ночь растение подрастает. Три ночи — трава созрела (качается).",
+								"Урожай: 2 травы (+1 за ровную борозду, +1 если рядом пугало), часто возвращается семечко."
+							]
+						},
+						{
+							"id": "by29_sow",
+							"img": "img/g29_by29_sprout_0.png",
+							"name": "Посев взмахом",
+							"sub": "весёлая механика",
+							"tags": [],
+							"text": [
+								"Зажми ЛКМ и веди по вскопанным грядкам — семена летят дугой из руки, каждая грядка звенит нотой выше (до-ре-ми…).",
+								"4 и больше грядок одного ряда за один взмах — «Ровная борозда!»: урожай этих грядок больше.",
+								"Мотыгой тоже можно вести мышью — копает целый ряд. Семена выбирают на полоске внизу (там же вода в лейке)."
+							]
+						},
+						{
+							"id": "scarecrow30",
+							"img": "img/g29_b20_scarecrow.png",
+							"name": "Пугало на огороде",
+							"sub": "постройка (B → Хозяйство)",
+							"tags": [],
+							"text": [
+								"Поставь пугало рядом с грядками — птицы не трогают урожай: +1 трава с каждой грядки поблизости."
+							]
+						},
+						{
+							"id": "by29_mtree",
+							"img": "img/g29_by29_mt_2.png",
+							"name": "Грибное дерево",
+							"sub": "саженец → деревце → дерево с грибами",
+							"tags": [],
+							"text": [
+								"Возьми саженец в руку и нажми E у лунки. Через 2 ночи — деревце, через 4 — взрослое дерево (после дождя вдвое быстрее).",
+								"Возьми в руку любой гриб и нажми E у взрослого дерева — грибница прививается.",
+								"Каждое утро на стволе вырастает 1–2 гриба этого вида (после дождя больше), до 4 штук. Собрать — E или клик."
+							]
+						},
+						{
+							"id": "by29_barrel",
+							"img": "img/g29_by29_barrel_full.png",
+							"name": "Дождевая бочка",
+							"sub": "вода для лейки",
+							"tags": [],
+							"text": [
+								"Наполняется дождём (+4 за час дождя, до 40). С лейкой в руке E — набрать воды."
+							]
+						}
+					],
+					"title": "Задний двор"
+				},
+				{
+					"entries": [
+						{
+							"id": "hoe",
+							"img": "img/g29_gear_hoe.png",
+							"name": "Мотыга",
+							"sub": "инструмент",
+							"tags": [],
+							"text": [
+								"Копает новые грядки на огороде у дома и засыпает пустые.",
+								"Есть с начала игры; ещё одну можно сделать на верстаке: 2 палки + 2 камушка."
+							]
+						},
+						{
+							"id": "watering_can",
+							"img": "img/g29_gear_watering_can.png",
+							"name": "Лейка",
+							"sub": "инструмент",
+							"tags": [],
+							"text": [
+								"Вмещает 10 поливов — вода не бесконечная.",
+								"Наполнить: у колодца у дома или в дождевой бочке (с лейкой в руке E).",
+								"На верстаке: палка + 3 глины."
+							]
+						}
+					],
+					"title": "Садовые инструменты"
+				},
+				{
+					"entries": [
+						{
+							"id": "wx29_clear",
+							"img": "img/g29_wx29_clear.png",
+							"name": "Ясно",
+							"sub": "погода",
+							"tags": [],
+							"text": [
+								"Солнце, обычный день.",
+								"Погода меняется каждые 2–6 часов; значок и название — у часов."
+							]
+						},
+						{
+							"id": "wx29_cloudy",
+							"img": "img/g29_wx29_cloudy.png",
+							"name": "Облачно",
+							"sub": "погода",
+							"tags": [],
+							"text": [
+								"Небо темнее; после облаков часто идёт дождь.",
+								"Погода меняется каждые 2–6 часов; значок и название — у часов."
+							]
+						},
+						{
+							"id": "wx29_rain",
+							"img": "img/g29_wx29_rain.png",
+							"name": "Дождь",
+							"sub": "погода",
+							"tags": [],
+							"text": [
+								"Сам поливает все грядки, наполняет бочку. После дождливого дня растения растут быстрее, а на грибных деревьях больше грибов.",
+								"Погода меняется каждые 2–6 часов; значок и название — у часов."
+							]
+						},
+						{
+							"id": "wx29_storm",
+							"img": "img/g29_wx29_storm.png",
+							"name": "Гроза",
+							"sub": "погода",
+							"tags": [],
+							"text": [
+								"Сильный дождь, вспышки молний и гром. Поливает как дождь.",
+								"Погода меняется каждые 2–6 часов; значок и название — у часов."
+							]
+						},
+						{
+							"id": "wx29_fog",
+							"img": "img/g29_wx29_fog.png",
+							"name": "Туман",
+							"sub": "погода",
+							"tags": [],
+							"text": [
+								"Бывает утром и вечером: всё в белой дымке.",
+								"Погода меняется каждые 2–6 часов; значок и название — у часов."
+							]
+						}
+					],
+					"title": "Погода"
+				}
+			],
+			"icon": "img/g29_by29_big_tree.png",
+			"id": "garden29",
+			"intro": "Свой сад за домом: грядки, посев взмахом, лейка, грибные деревья. Дождь помогает растениям.",
+			"title": "Задний двор и погода"
 		}
 	],
 	"title": "Бестиарий «Лесного травника»"
