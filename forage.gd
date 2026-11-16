@@ -20,7 +20,7 @@ func setup(at: Vector2, opts: Array) -> void:
 	key = "%d,%d" % [int(at.x), int(at.y)]
 	spr = Sprite2D.new()
 	spr.centered = false
-	spr.offset = Vector2(-12, -22)
+	spr.offset = Vector2(-16, -30)   # грибы 32x32 (было 24x24)
 	add_child(spr)
 	spr.visible = false
 

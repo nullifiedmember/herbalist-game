@@ -670,7 +670,7 @@ func _start_new_game() -> void:
 	get_tree().paused = false
 	Sound.mode = "game"
 	Sound.cur_track = ""
-	get_tree().reload_current_scene()
+	Loader.reload()
 
 
 func show_menu() -> void:
@@ -740,12 +740,31 @@ func _process(delta: float) -> void:
 		t += delta
 		title.position.y = 14.0 + sin(t * 1.4) * 4.0
 		_animate_bg(delta)
+		_animate_fish(delta)
+		_animate_smoke(delta)
+		_animate_walkers(delta)
+		_menu_shot()
+
+
+## Для проверки: --menushot=путь.png — снимок меню через 3.4 с (рыба уже прыгает) и выход
+func _menu_shot() -> void:
+	for a in OS.get_cmdline_user_args():
+		var s: String = String(a)
+		var at: float = 1.95 if OS.get_cmdline_user_args().has("--menufish") else 3.4
+		for a2 in OS.get_cmdline_user_args():
+			if String(a2).begins_with("--menushotat="):
+				at = String(a2).substr(13).to_float()
+		if s.begins_with("--menushot=") and t > at and not has_meta("shot_done"):
+			set_meta("shot_done", true)
+			get_viewport().get_texture().get_image().save_png(s.substr(11))
+			get_tree().quit()
 
 
 # ------------------------------------------------------------------ v32: фон меню — день и ночь, солнце и луну можно таскать
 
 const BG_BASE: Vector2 = Vector2(-40, -20)     # холст 1000x560 ×2 = 2000x1120, по центру экрана 1920x1080
-const BG_CHIMNEY: Vector2 = Vector2(488, 270)  # труба дома (вывод tools/menu32.py)
+const BG_CHIMNEY: Vector2 = Vector2(488, 282)  # труба дома (вывод tools/menu32.py)
+const CHIMNEY_FRONT: Vector2 = Vector2(472, 276)  # угол картинки menu32_chimney_front (вывод tools/menu32.py)
 const CEL_X0: float = 640.0                    # дуга солнца/луны: восход слева, закат справа (экран)
 const CEL_X1: float = 2000.0
 const CEL_PEAK: float = 150.0
@@ -763,6 +782,9 @@ var bg_stars: TextureRect
 var bg_sun: TextureRect
 var bg_sun_glow: TextureRect
 var bg_rays: TextureRect
+var bg_rays_in: TextureRect    # v36: второй слой коротких лучей — крутится навстречу
+var sparkles: Array = []       # v36: искорки у концов лучей {n, off, age}
+var sparkle_wait: float = 0.6
 var bg_moon: TextureRect
 var bg_moon_glow: TextureRect
 var bg_windows: TextureRect
@@ -773,6 +795,9 @@ var cel_pos: Vector2 = Vector2.ZERO
 var cel_drag: bool = false
 var cel_hover: bool = false
 var menu_mark: TextureRect
+var pond_layer: Control
+var fish_fx: Array = []        # прыгающие рыбы, круги и капли пруда
+var fish_wait: float = 1.5
 var sub_dim: ColorRect
 
 
@@ -818,50 +843,47 @@ func _build_bg() -> void:
 	bg_moon_glow = _bg_tex(cel_layer, "menu32_moon_glow")
 	bg_rays = _bg_tex(cel_layer, "menu32_rays")
 	bg_rays.pivot_offset = bg_rays.size * 0.5
+	bg_rays_in = _bg_tex(cel_layer, "menu32_rays_inner")
+	bg_rays_in.pivot_offset = bg_rays_in.size * 0.5
 	bg_sun = _bg_tex(cel_layer, "menu32_sun")
 	bg_moon = _bg_tex(cel_layer, "menu32_moon")
 	cel_pos = _cel_arc(cel_p)
+	# v35: стаи вдалеке — за облаками, в дымке
+	flock_layer = _bg_layer(0.14, true)
 	var cl: Control = _bg_layer(0.16, true)
 	var cpos: Array = [Vector2(380, 60), Vector2(760, 170), Vector2(640, 40), Vector2(880, 90), Vector2(160, 130)]
+	var force_heaven: bool = OS.get_cmdline_user_args().has("--menuheaven")
 	for i in range(cpos.size()):
 		var c: TextureRect = _bg_tex(cl, "menu32_cloud_%d" % (i % 4), cpos[i])
-		bg_clouds.append([c, 7.0 + float(i % 3) * 4.0])
-	var birds: Control = _bg_layer(0.22, true)
-	for i in range(4):
-		var s: Sprite2D = Sprite2D.new()
-		s.texture = load("res://art/menu32_bird_0.png")
-		s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		s.scale = Vector2(2, 2) if i < 3 else Vector2(3, 3)
-		s.position = Vector2(700.0 + float(i) * 70.0 - (300.0 if i == 3 else 0.0), 360.0 + float(i % 2) * 34.0)
-		birds.add_child(s)
-		bg_birds.append([s, 46.0 + float(i) * 6.0, float(i) * 1.7, s.position.y])
+		# [картинка, скорость, обычная текстура, обычная высота, рай?]
+		bg_clouds.append([c, 7.0 + float(i % 3) * 4.0, c.texture, c.position.y, false])
+	if force_heaven:
+		_make_heaven(bg_clouds[1])
+	# v35: птицы из игры прилетают по одной из-за края экрана (сначала небо пустое)
+	bird_layer = _bg_layer(0.22, true)
 	_bg_tex(_bg_layer(0.28, true), "menu32_far")
 	_bg_tex(_bg_layer(0.45, true), "menu32_mid")
 	var nearl: Control = _bg_layer(0.75, true)
 	_bg_tex(nearl, "menu32_near")
-	var sm: CPUParticles2D = CPUParticles2D.new()
-	sm.texture = load("res://art/menu32_smoke.png")
-	sm.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	sm.position = BG_BASE + BG_CHIMNEY * 2.0
-	sm.amount = 14
-	sm.lifetime = 4.5
-	sm.preprocess = 5.0
-	sm.direction = Vector2(0.15, -1)
-	sm.spread = 8.0
-	sm.gravity = Vector2(7, -3)
-	sm.initial_velocity_min = 16.0
-	sm.initial_velocity_max = 24.0
-	sm.scale_amount_min = 1.4
-	sm.scale_amount_max = 2.2
-	var sc: Curve = Curve.new()
-	sc.add_point(Vector2(0, 0.6))
-	sc.add_point(Vector2(1, 1.6))
-	sm.scale_amount_curve = sc
-	var gr: Gradient = Gradient.new()
-	gr.set_color(0, Color(1, 1, 1, 0.85))
-	gr.set_color(1, Color(1, 1, 1, 0.0))
-	sm.color_ramp = gr
-	nearl.add_child(sm)
+	pond_layer = nearl
+	# v34: тени от солнца (три варианта — солнце слева/сверху/справа, смешиваются по положению солнца)
+	for nm in ["left", "mid", "right"]:
+		var shr: TextureRect = _bg_tex(nearl, "menu32_shadow_" + nm)
+		shr.modulate.a = 0.0
+		bg_shadows.append(shr)
+	# v34: пиксельный дым — клубы ×2 ровно по пикселям, без размытия и дробного масштаба
+	smoke_layer = Control.new()
+	smoke_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	nearl.add_child(smoke_layer)
+	# v36: верх трубы поверх дыма — клубы рождаются внутри и выходят ИЗ трубы
+	_bg_tex(nearl, "menu32_chimney_front", CHIMNEY_FRONT)
+	# v34: звери из игры гуляют у кромки леса (маленькие, под масштаб дома)
+	animal_layer = Control.new()
+	animal_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	nearl.add_child(animal_layer)
+	for i in range(3):
+		_spawn_walker(randf_range(700.0, 1800.0))
+	_build_menu_flowers(nearl)
 	_bg_tex(_bg_layer(1.0, true), "menu32_front")
 	# свет в окнах — поверх затемнения, светится сам (сложение цветов)
 	var winl: Control = _bg_layer(0.75)
@@ -881,6 +903,394 @@ func _build_bg() -> void:
 	cel_pos = _cel_arc(cel_p)
 
 
+# ------------------------------------------------------------------ v37: цветы из игры на поляне меню
+
+const MENU_FLOWERS: Array = ["chamomile", "poppy", "cornflower", "dandelion", "calendula", "lavender", "heather", "clover", "pink_clover", "lily_valley", "star_bell", "yarrow", "st_john", "sunflower_gold", "valerian", "arnica"]
+
+
+func _dist_seg(p: Vector2, a: Vector2, b: Vector2) -> float:
+	var ab: Vector2 = b - a
+	var k: float = clampf((p - a).dot(ab) / ab.length_squared(), 0.0, 1.0)
+	return p.distance_to(a + ab * k)
+
+
+## Можно ли посадить цветок сюда (не в пруд, не на тропинку)
+func _flower_ok(p: Vector2, placed: Array) -> bool:
+	var d: Vector2 = (p - Vector2(1312, 948)) / Vector2(250, 165)
+	if d.length() < 1.0:
+		return false
+	if absf(p.x - 866.0) < 58.0:
+		return false
+	if _dist_seg(p, Vector2(890, 845), Vector2(1140, 920)) < 50.0:
+		return false
+	if _dist_seg(p, Vector2(590, 990), Vector2(850, 1015)) < 46.0:
+		return false
+	for q in placed:
+		if absf((q as Vector2).x - p.x) < 40.0 and absf((q as Vector2).y - p.y) < 22.0:
+			return false
+	return true
+
+
+## Полянка: цветы кучками по 2–4 одного вида, качаются на ветру (шейдер wind из игры)
+func _build_menu_flowers(parent: Control) -> void:
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = 3707
+	var wind_m: ShaderMaterial = ShaderMaterial.new()
+	wind_m.shader = load("res://wind.gdshader")
+	wind_m.set_shader_parameter("strength", 1.6)
+	wind_m.set_shader_parameter("speed", 1.6)
+	var spots: Array = []
+	var tries: int = 0
+	while spots.size() < 48 and tries < 4000:
+		tries += 1
+		var c: Vector2 = Vector2(rng.randf_range(600.0, 1900.0), rng.randf_range(880.0, 1090.0))
+		var kind: String = String(MENU_FLOWERS[rng.randi() % MENU_FLOWERS.size()])
+		for j in range(rng.randi_range(2, 4)):
+			var p: Vector2 = (c + Vector2(rng.randf_range(-46.0, 46.0), rng.randf_range(-16.0, 16.0))) / 2.0
+			p = p.round() * 2.0
+			if _flower_ok(p, spots.map(func(s): return s[0])):
+				spots.append([p, kind, rng.randf() < 0.5])
+	spots.sort_custom(func(a, b): return (a[0] as Vector2).y < (b[0] as Vector2).y)
+	for s in spots:
+		var f: Sprite2D = Sprite2D.new()
+		f.texture = load("res://art/herbw_%s.png" % String(s[1]))
+		f.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		f.centered = false
+		f.offset = Vector2(-16, -45)
+		f.scale = Vector2(2, 2)
+		f.flip_h = bool(s[2])
+		f.position = s[0]
+		f.material = wind_m
+		parent.add_child(f)
+
+
+# ------------------------------------------------------------------ v33: рыба плещется в пруду
+
+const POND_SCREEN: Vector2 = Vector2(1324, 950)   # центр воды пруда (экран; пруд — из ground.png игры)
+const POND_HALF: Vector2 = Vector2(120, 46)       # где можно выпрыгнуть (экранные пиксели)
+const FISH_TEX: Array = ["fish_crucian", "fish_golden", "fish_minnow", "fish_perch"]
+# v35: все дневные летающие птицы игры (жар-птица — редкая гостья)
+const MENU_BIRDS: Array = ["sparrow", "great_tit", "blue_tit", "robin", "chaffinch", "goldfinch", "bullfinch", "wren", "lark", "swallow", "starling", "thrush", "blackbird", "wagtail", "oriole", "waxwing", "kingfisher", "hoopoe", "jay", "magpie", "crow", "raven", "cuckoo", "woodpecker", "dove", "gull", "sandpiper", "bee_eater", "crossbill", "nuthatch", "white_eye", "rosefinch", "fairy_wren"]
+const FLOCK_BIRDS: Array = ["starling", "swallow", "gull", "crow"]
+const HEAVEN_CHANCE: float = 0.08     # облако-рай: 1 из ~12 выплывающих облаков
+var flock_layer: Control
+var bird_layer: Control
+var sky_birds: Array = []      # {n, x, y, v, ph, flap}
+var bird_wait: float = 2.0
+var flock_wait: float = 12.0
+
+
+## Облако становится «раем»: другая картинка (выше — ворота и сияние), тело облака на той же высоте
+func _make_heaven(c: Array) -> void:
+	var r: TextureRect = c[0]
+	r.texture = load("res://art/menu32_cloud_heaven.png")
+	r.size = Vector2.ZERO
+	r.position.y = float(c[3]) - 92.0
+	c[4] = true
+
+
+func _new_bird(tex: String, x: float, y: float, v: float, sc: float, parent: Control) -> Dictionary:
+	var s: Sprite2D = Sprite2D.new()
+	s.texture = load(tex)
+	s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	s.hframes = 5                       # 0..3 взмах, 4 — парение (крылья раскрыты)
+	s.scale = Vector2(sc, sc)
+	s.flip_h = v < 0.0                  # в листе птица летит вправо
+	s.position = Vector2(x, y).round()
+	parent.add_child(s)
+	return {"n": s, "x": x, "y": y, "v": v, "ph": randf() * 6.0, "flap": randf_range(0.8, 1.6), "wave": randf_range(6.0, 16.0)}
+
+
+## Птицы: днём прилетают по одной (небо наполняется постепенно), летят со взмахами и планируют;
+## ночью новые не прилетают — оставшиеся улетают за край. Иногда сзади проходит стая.
+func _animate_birds(delta: float, light: float) -> void:
+	if bird_layer == null:
+		return
+	var day: bool = light > 0.45
+	bird_wait -= delta
+	if bird_wait <= 0.0:
+		bird_wait = randf_range(1.6, 4.0)
+		if day and sky_birds.size() < 7:
+			var dir: float = 1.0 if randf() < 0.6 else -1.0
+			var id: String = "firebird" if randf() < 0.03 else String(MENU_BIRDS[randi() % MENU_BIRDS.size()])
+			var x0: float = 560.0 if dir > 0.0 else 1990.0
+			sky_birds.append(_new_bird("res://art/menu32_fly_%s.png" % id, x0, randf_range(110.0, 470.0), dir * randf_range(80.0, 150.0), 2.0, bird_layer))
+	flock_wait -= delta
+	if flock_wait <= 0.0:
+		flock_wait = randf_range(22.0, 45.0)
+		if day:
+			var fid: String = String(FLOCK_BIRDS[randi() % FLOCK_BIRDS.size()])
+			var fdir: float = 1.0 if randf() < 0.5 else -1.0
+			var fv: float = fdir * randf_range(55.0, 70.0)
+			var fx: float = 540.0 if fdir > 0.0 else 2010.0
+			var fy: float = randf_range(300.0, 440.0)
+			var n: int = randi_range(6, 11)
+			var vee: bool = fid == "gull" or randf() < 0.4      # клином или врассыпную
+			for i in range(n):
+				var off: Vector2
+				if vee:
+					var k: int = (i + 1) / 2
+					off = Vector2(-fdir * float(k) * 22.0, float(k) * (11.0 if i % 2 else -11.0))
+				else:
+					off = Vector2(randf_range(-90.0, 0.0) * fdir, randf_range(-30.0, 30.0))
+				var b: Dictionary = _new_bird("res://art/menu32_flock_%s.png" % fid, fx + off.x, fy + off.y, fv, 2.0, flock_layer)
+				(b["n"] as Sprite2D).modulate = Color(0.78, 0.84, 0.96, 0.85)     # в дымке
+				b["wave"] = 3.0
+				b["flock"] = true
+				sky_birds.append(b)
+	var dead: Array = []
+	for b in sky_birds:
+		var s: Sprite2D = b["n"]
+		b["ph"] = float(b["ph"]) + delta
+		var ph: float = float(b["ph"])
+		b["x"] = float(b["x"]) + float(b["v"]) * delta
+		# машет крыльями, потом планирует: крылья раскрыты и застыли (кадр 4), и так по кругу;
+		# стая тоже иногда парит, но короче
+		var glide_t: float = 0.7 if b.has("flock") else 1.4
+		var cyc: float = fmod(ph, float(b["flap"]) + glide_t)
+		if cyc < float(b["flap"]):
+			s.frame = int(ph * 12.0) % 4
+		else:
+			s.frame = 4
+		var yy: float = float(b["y"]) + sin(ph * 1.4) * float(b["wave"])
+		s.position = (Vector2(float(b["x"]), yy) / 2.0).round() * 2.0
+		if float(b["x"]) < 480.0 or float(b["x"]) > 2080.0:
+			dead.append(b)
+	for d in dead:
+		(d["n"] as Node).queue_free()
+		sky_birds.erase(d)
+const MENU_WALKERS: Array = [["rabbit", 70.0], ["fox", 90.0], ["deer", 80.0], ["hedgehog", 26.0], ["squirrel", 85.0]]
+var bg_shadows: Array = []     # тени: солнце слева / сверху / справа
+var smoke_layer: Control
+var smoke_puffs: Array = []
+var smoke_wait: float = 0.0
+var animal_layer: Control
+var walkers: Array = []
+var walker_wait: float = 4.0
+
+
+func _fish_node(tex_name: String, at: Vector2, sc: float = 2.0) -> Sprite2D:
+	var s: Sprite2D = Sprite2D.new()
+	s.texture = load("res://art/" + tex_name + ".png")
+	s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	s.scale = Vector2(sc, sc)
+	s.position = at.round()
+	pond_layer.add_child(s)
+	return s
+
+
+## Пиксельный дым из трубы: клуб растёт по кадрам (0..3), поднимается рывками по 2 px, тает ступенями
+func _animate_smoke(delta: float) -> void:
+	if smoke_layer == null:
+		return
+	smoke_wait -= delta
+	if smoke_wait <= 0.0:
+		smoke_wait = randf_range(0.32, 0.45)
+		var s: Sprite2D = Sprite2D.new()
+		s.texture = load("res://art/menu32_smoke_0.png")
+		s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		s.scale = Vector2(2, 2)
+		smoke_layer.add_child(s)
+		smoke_puffs.append({"n": s, "age": 0.0, "dx": randf_range(-1.5, 1.5)})
+	var dead: Array = []
+	for p in smoke_puffs:
+		var n: Sprite2D = p["n"]
+		p["age"] = float(p["age"]) + delta
+		var age: float = float(p["age"])
+		if age > 4.4:
+			dead.append(p)
+			continue
+		n.texture = load("res://art/menu32_smoke_%d.png" % mini(3, int(age / 0.9)))
+		# v36: клуб рождается внутри трубы (на 16 px ниже края) и поднимается прямо вверх;
+		# в сторону его начинает сносить только после выхода из трубы
+		var out: float = maxf(0.0, age - 0.8)
+		var off: Vector2 = Vector2(float(p["dx"]) + out * 10.0 + sin(age * 1.7 + float(p["dx"])) * 5.0 * clampf(out, 0.0, 1.0), 16.0 - age * 20.0)
+		n.position = ((BG_BASE + BG_CHIMNEY * 2.0 + off) / 2.0).round() * 2.0
+		n.modulate.a = [0.95, 0.8, 0.6, 0.4, 0.2][mini(4, int(age / 0.9))]
+	for d in dead:
+		(d["n"] as Node).queue_free()
+		smoke_puffs.erase(d)
+
+
+## Зверь из игры проходит по поляне у кромки леса — слева направо или наоборот
+func _spawn_walker(x0: float = -1.0) -> void:
+	var e: Array = MENU_WALKERS[randi() % MENU_WALKERS.size()]
+	var s: Sprite2D = Sprite2D.new()
+	s.texture = load("res://art/menu32_walk_%s.png" % String(e[0]))
+	s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	s.hframes = 4
+	s.scale = Vector2(2, 2)
+	s.centered = false
+	s.offset = Vector2(-float(s.texture.get_width()) / 8.0, -float(s.texture.get_height()))
+	var dir: float = 1.0 if randf() < 0.5 else -1.0
+	s.flip_h = dir > 0.0                 # в листе зверь смотрит влево
+	var x: float = x0 if x0 >= 0.0 else (560.0 if dir > 0.0 else 1980.0)
+	s.position = (Vector2(x, randf_range(800.0, 814.0)) / 2.0).round() * 2.0
+	animal_layer.add_child(s)
+	walkers.append({"n": s, "x": x, "v": float(e[1]) * dir * randf_range(0.85, 1.15), "ph": randf() * 4.0, "stop": randf_range(2.0, 7.0)})
+
+
+func _animate_walkers(delta: float) -> void:
+	if animal_layer == null:
+		return
+	walker_wait -= delta
+	if walker_wait <= 0.0:
+		walker_wait = randf_range(5.0, 9.0)
+		if walkers.size() < 4:
+			_spawn_walker()
+	var dead: Array = []
+	for w in walkers:
+		var n: Sprite2D = w["n"]
+		w["stop"] = float(w["stop"]) - delta
+		var st: float = float(w["stop"])
+		if st < 0.0 and st > -1.6:          # постоял, огляделся — и дальше
+			n.frame = 0
+			continue
+		if st <= -1.6:
+			w["stop"] = randf_range(3.0, 8.0)
+		w["ph"] = float(w["ph"]) + delta
+		w["x"] = float(w["x"]) + float(w["v"]) * delta
+		n.position.x = roundf(float(w["x"]) / 2.0) * 2.0      # шаг ровно по пикселю картинки (×2)
+		n.frame = int(float(w["ph"]) * absf(float(w["v"])) * 0.12) % 4
+		if n.position.x < 520.0 or n.position.x > 2020.0:
+			dead.append(w)
+	for d in dead:
+		(d["n"] as Node).queue_free()
+		walkers.erase(d)
+
+
+func _ring_at(at: Vector2) -> void:
+	var r: Sprite2D = _fish_node("menu32_ring_0", at)
+	fish_fx.append({"kind": "ring", "n": r, "age": 0.0})
+
+
+func _drops_at(at: Vector2, count: int) -> void:
+	for i in range(count):
+		var d: Sprite2D = _fish_node("menu32_drop", at)
+		var a: float = randf_range(-PI * 0.85, -PI * 0.15)
+		var v: Vector2 = Vector2(cos(a), sin(a)) * randf_range(60.0, 120.0)
+		fish_fx.append({"kind": "drop", "n": d, "age": 0.0, "v": v})
+
+
+## Место в воде: тёмное пятно с кольцом (видно всё время прыжка) + всплеск-столбик
+func _hole_at(at: Vector2, life: float) -> void:
+	var h: Sprite2D = _fish_node("menu32_hole_0", at)
+	fish_fx.append({"kind": "hole", "n": h, "age": 0.0, "life": life})
+	var s: Sprite2D = _fish_node("menu32_splash_0", at + Vector2(0, -12))
+	fish_fx.append({"kind": "splash", "n": s, "age": 0.0})
+
+
+func _fish_jump() -> void:
+	var dir: float = 1.0 if randf() < 0.5 else -1.0
+	var span: float = randf_range(50.0, 80.0) * dir
+	# старт и место нырка — оба внутри воды
+	var p: Vector2 = POND_SCREEN + Vector2(randf_range(-1.0, 1.0) * (POND_HALF.x - 80.0) - span * 0.5, randf_range(-1.0, 1.0) * POND_HALF.y * 0.7)
+	p = (p / 2.0).round() * 2.0
+	var f: Sprite2D = _fish_node(String(FISH_TEX[randi() % FISH_TEX.size()]), p, 1.0)   # v34: рыбы в 2 раза меньше
+	f.visible = false
+	var dur: float = randf_range(0.85, 1.1)
+	fish_fx.append({"kind": "fish", "n": f, "age": 0.0, "dur": dur, "p": p, "span": span, "h": randf_range(44.0, 70.0), "dir": dir, "land": false})
+	_hole_at(p, dur * 0.35)               # v36: пятно старта гаснет, пока рыба в воздухе — к нырку одно бульканье
+	_ring_at(p)
+	_drops_at(p, 4)
+	pond_layer.move_child(f, -1)          # рыба поверх пятна и брызг
+
+
+func _animate_fish(delta: float) -> void:
+	if pond_layer == null:
+		return
+	fish_wait -= delta
+	if fish_wait <= 0.0:
+		fish_wait = randf_range(1.8, 4.2)
+		_fish_jump()
+	var dead: Array = []
+	for e in fish_fx:
+		var n: Sprite2D = e["n"]
+		e["age"] = float(e["age"]) + delta
+		var age: float = float(e["age"])
+		match String(e["kind"]):
+			"ring":
+				var fr: int = int(age / 0.2)
+				if fr > 3:
+					dead.append(e)
+					continue
+				n.texture = load("res://art/menu32_ring_%d.png" % fr)
+			"hole":
+				var life: float = float(e["life"])
+				if age > life:
+					dead.append(e)
+					continue
+				n.texture = load("res://art/menu32_hole_%d.png" % mini(2, int(age / 0.18)))
+				n.modulate.a = 1.0 if age < life - 0.3 else 0.5
+			"splash":
+				var sf: int = int(age / 0.1)
+				if sf > 2:
+					dead.append(e)
+					continue
+				n.texture = load("res://art/menu32_splash_%d.png" % sf)
+			"drop":
+				var v: Vector2 = e["v"]
+				v.y += 340.0 * delta
+				e["v"] = v
+				n.position += v * delta
+				n.modulate.a = clampf(1.0 - age / 0.7, 0.0, 1.0)
+				if age > 0.7:
+					dead.append(e)
+			"fish":
+				var dur: float = float(e["dur"])
+				var s: float = age / dur
+				if s >= 1.0:
+					var lp: Vector2 = (Vector2(float(e["p"].x) + float(e["span"]), float(e["p"].y)) / 2.0).round() * 2.0
+					_hole_at(lp, 0.7)              # место, куда рыба нырнула
+					_ring_at(lp)
+					_drops_at(lp, 4)
+					dead.append(e)
+					continue
+				var p0: Vector2 = e["p"]
+				var x: float = float(e["span"]) * s
+				var y: float = -float(e["h"]) * 4.0 * s * (1.0 - s)
+				n.position = ((p0 + Vector2(x, y)) / 2.0).round() * 2.0
+				# нос по движению: вверх — смотрит вверх, вниз — в воду
+				var vy: float = -float(e["h"]) * 4.0 * (1.0 - 2.0 * s)
+				var vx: float = float(e["span"])
+				n.flip_h = float(e["dir"]) < 0.0
+				var ang: float = atan2(vy, absf(vx))
+				n.rotation = ang * float(e["dir"])
+				n.visible = s > 0.04 and s < 0.97
+
+	for d in dead:
+		(d["n"] as Node).queue_free()
+		fish_fx.erase(d)
+
+
+## v36: искорки вспыхивают у концов лучей и гаснут (точка → крестик → звёздочка → крестик → точка)
+func _animate_sparkles(delta: float) -> void:
+	sparkle_wait -= delta
+	if sparkle_wait <= 0.0:
+		sparkle_wait = randf_range(0.35, 0.9)
+		if not cel_moon and sparkles.size() < 4:
+			var s: Sprite2D = Sprite2D.new()
+			s.texture = load("res://art/menu32_sparkle_0.png")
+			s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			s.scale = Vector2(2, 2)
+			cel_layer.add_child(s)
+			var a: float = randf() * TAU
+			sparkles.append({"n": s, "off": Vector2(cos(a), sin(a)) * randf_range(96.0, 190.0), "age": 0.0})
+	var dead: Array = []
+	for e in sparkles:
+		var n: Sprite2D = e["n"]
+		e["age"] = float(e["age"]) + delta
+		var fr: int = int(float(e["age"]) / 0.12)
+		if fr > 4 or cel_moon:
+			dead.append(e)
+			continue
+		n.texture = load("res://art/menu32_sparkle_%d.png" % [0, 1, 2, 1, 0][fr])
+		n.position = ((cel_pos + (e["off"] as Vector2)) / 2.0).round() * 2.0
+	for d in dead:
+		(d["n"] as Node).queue_free()
+		sparkles.erase(d)
+
+
 ## Точка дуги: p 0..1 слева направо, выше всего посередине
 func _cel_arc(p: float) -> Vector2:
 	return Vector2(lerpf(CEL_X0, CEL_X1, p), CEL_HORIZON - (CEL_HORIZON - CEL_PEAK) * sin(clampf(p, 0.0, 1.0) * PI))
@@ -889,10 +1299,10 @@ func _cel_arc(p: float) -> Vector2:
 func _animate_bg(delta: float) -> void:
 	if bg == null:
 		return
-	# параллакс: слои плавно смещаются от мыши (дальние — меньше)
+	# v33: всё в одной плоскости — слои не смещаются друг относительно друга (параллакс убран, деревья не «летают»)
 	var vp: Vector2 = Vector2(1920, 1080)
 	var mp: Vector2 = get_viewport().get_mouse_position()
-	var want: Vector2 = ((mp - vp * 0.5) / (vp * 0.5)).clamp(Vector2(-1, -1), Vector2(1, 1)) * Vector2(-34, -16)
+	var want: Vector2 = ((mp - vp * 0.5) / (vp * 0.5)).clamp(Vector2(-1, -1), Vector2(1, 1)) * Vector2(0, 0)
 	if cel_drag:
 		want = bg_par
 	bg_par = bg_par.lerp(want, 1.0 - exp(-3.0 * delta))
@@ -917,8 +1327,13 @@ func _animate_bg(delta: float) -> void:
 	_bg_center(body, cel_pos)
 	_bg_center(bg_moon_glow if cel_moon else bg_sun_glow, cel_pos)
 	bg_rays.position = (cel_pos - bg_rays.pivot_offset).round()
-	bg_rays.rotation += delta * 0.08
-	bg_rays.modulate.a = 0.8 + sin(t * 0.9) * 0.2
+	bg_rays.rotation += delta * 0.05
+	bg_rays.modulate.a = 0.78 + sin(t * 0.9) * 0.18
+	bg_rays_in.visible = not cel_moon
+	bg_rays_in.position = (cel_pos - bg_rays_in.pivot_offset).round()
+	bg_rays_in.rotation -= delta * 0.09
+	bg_rays_in.modulate.a = 0.75 + sin(t * 1.3 + 1.7) * 0.25
+	_animate_sparkles(delta)
 	# свет: чем выше солнце — тем светлее; у горизонта закат; луна — ночь
 	var e: float = clampf((CEL_HORIZON - cel_pos.y) / (CEL_HORIZON - CEL_PEAK), 0.0, 1.0)
 	var light: float
@@ -935,22 +1350,32 @@ func _animate_bg(delta: float) -> void:
 	for l2 in bg_tint:
 		(l2 as Control).modulate = land
 	bg_windows.modulate.a = clampf(1.0 - light / 0.55, 0.0, 1.0)
+	# тени от солнца: солнце слева — тени вправо, справа — влево; ночью от луны еле видны
+	if bg_shadows.size() == 3:
+		var sx: float = clampf((cel_pos.x - 1320.0) / 640.0, -1.0, 1.0)
+		var sa: float = (0.25 if cel_moon else 1.0) * clampf(e * 1.6, 0.0, 1.0)
+		(bg_shadows[0] as TextureRect).modulate.a = maxf(0.0, sx) * sa
+		(bg_shadows[1] as TextureRect).modulate.a = (1.0 - absf(sx)) * sa
+		(bg_shadows[2] as TextureRect).modulate.a = maxf(0.0, -sx) * sa
 	leaves.modulate = land
 	for c in bg_clouds:
 		var r: TextureRect = c[0]
 		r.position.x += float(c[1]) * delta
 		if r.position.x > 2000.0:
+			# облако уплыло — выплывает слева; редко (1 из 12) это облако-рай, но рай на небе только один
+			var has_heaven: bool = false
+			for c2 in bg_clouds:
+				if bool(c2[4]) and c2 != c:
+					has_heaven = true
+			if not has_heaven and randf() < HEAVEN_CHANCE:
+				_make_heaven(c)
+			elif bool(c[4]):
+				r.texture = c[2]
+				r.size = Vector2.ZERO
+				r.position.y = float(c[3])
+				c[4] = false
 			r.position.x = -r.size.x * 2.0 - 40.0
-	for b in bg_birds:
-		var s: Sprite2D = b[0]
-		s.visible = light > 0.3
-		s.position.x += float(b[1]) * delta
-		if s.position.x > 2040.0:
-			s.position.x = 560.0
-			b[3] = 300.0 + randf() * 200.0
-		s.position.y = float(b[3]) + sin(t * 1.3 + float(b[2])) * 12.0
-		var fr: int = int((t + float(b[2])) * 5.0) % 2
-		s.texture = load("res://art/menu32_bird_%d.png" % fr)
+	_animate_birds(delta, light)
 	sub_dim.visible = not main_panel.visible
 	# курсор-рука над солнцем/луной
 	var hov: bool = cel_drag or (main_panel.visible and (mp - cel_layer.position).distance_to(cel_pos) < CEL_GRAB)

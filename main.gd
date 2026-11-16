@@ -539,6 +539,10 @@ func _place_window() -> void:
 	if bool(Saves.opt.get("fullscreen", false)):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		return
+	# v27: если окно уже во весь экран (любым способом) или развёрнуто — не трогаем при новой игре
+	var cm: int = DisplayServer.window_get_mode()
+	if cm == DisplayServer.WINDOW_MODE_FULLSCREEN or cm == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN or cm == DisplayServer.WINDOW_MODE_MAXIMIZED:
+		return
 	var scr: int = DisplayServer.get_primary_screen()
 	var area: Rect2i = DisplayServer.screen_get_usable_rect(scr)
 	var w: int = mini(1600, int(area.size.x * 0.9))
@@ -4871,7 +4875,7 @@ func _test_v18(fails: Array) -> void:
 	for mk in preload("res://mats_db.gd").ORDER:
 		expect[String(mk)] = true     # v20: материалы и перья
 	var V23E = preload("res://v23_data.gd")
-	for wk in V23E.WEAPON_ORDER:      # v23: оружие, мебель, книги, приколы, поделки
+	for wk in ([] if Game.SOLO else V23E.WEAPON_ORDER):      # v23: оружие, мебель, книги, приколы, поделки
 		expect[String(wk)] = true
 	for fuk in V23E.FURN.keys():
 		expect["furn:" + String(fuk)] = true

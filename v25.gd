@@ -1434,7 +1434,7 @@ func relocate(key: String) -> bool:
 		return true
 	Saves.pending_world = w
 	Saves.loaded = true
-	get_tree().reload_current_scene()
+	Loader.reload()
 	return true
 
 

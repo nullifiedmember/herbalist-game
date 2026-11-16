@@ -44,7 +44,7 @@ static func by_category() -> Dictionary:
 	var V23 = preload("res://v23_data.gd")
 	for vid in preload("res://v24_data.gd").ITEMS.keys():   # v24: длинная ветка и др.
 		add.call("Материалы", String(vid))
-	for wid in V23.WEAPON_ORDER:
+	for wid in ([] if Game.SOLO else V23.WEAPON_ORDER):
 		add.call("Оружие", String(wid))
 	for fid in V23.FURN.keys():
 		add.call("Мебель", "furn:" + String(fid))

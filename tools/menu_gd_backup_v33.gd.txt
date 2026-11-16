@@ -1,0 +1,1236 @@
+extends CanvasLayer
+## Главное меню: название, «Играть» / «Настройки» / «Выход». Esc в игре — пауза с тем же меню.
+## Пока меню открыто, время стоит. Громкость музыки и звуков — ползунками.
+
+const INK: Color = Color("3a2718")
+var hud: CanvasLayer
+var root: Control
+var title: Label
+var box: VBoxContainer
+var settings: Control          # v24: окно настроек settings24.gd
+var open: bool = false
+var started: bool = false
+var t: float = 0.0
+var leaves: CPUParticles2D
+var main_panel: Control
+var god_btn: Button
+var wonder_btn: Button
+var give_btn: Button
+var ng_root: Control            # новая игра: выбор сценария и места
+var ng_title: Label
+var ng_grid: GridContainer
+var ng_info: Label
+var ng_step: int = 0
+var ng_scen: String = "herbalist"
+var ng_spawn: String = "home"
+var giver: Control              # режим бога: выдать предметы
+var giver_grid: GridContainer
+var giver_cat: String = "Всё"
+var tp_btn: Button
+var sp_btn: Button
+var sp_root: Control            # v21: режим бога — призвать зверя или птицу
+var tp_root: Control            # режим бога: телепорт
+var cont_btn: Button            # «Продолжить» — есть сохранение или игра уже идёт
+var save_btn: Button            # «Сохранить» — только во время игры
+var sl_root: Control            # ячейки сохранений
+var sl_title: Label
+var sl_box: VBoxContainer
+var sl_mode: String = "load"    # load / new / save
+var cf_root: Control            # подтверждение
+var cf_label: Label
+var cf_yes: Callable
+const GOD = preload("res://god.gd")
+const SCN = preload("res://scenarios_db.gd")
+const IT = preload("res://items_db.gd")
+
+
+func setup(h: CanvasLayer) -> void:
+	hud = h
+	layer = 40
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	root = Control.new()
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(root)
+	# v32: живой фон-пейзаж справа (слои tools/menu32.py), меню — колонкой слева
+	_build_bg()
+	# падающие листья поверх
+	leaves = CPUParticles2D.new()
+	leaves.texture = load("res://art/fx_leaf.png")
+	leaves.amount = 40
+	leaves.lifetime = 9.0
+	leaves.preprocess = 9.0
+	leaves.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
+	leaves.emission_rect_extents = Vector2(1100, 10)
+	leaves.position = Vector2(960, -20)
+	leaves.direction = Vector2(0.3, 1)
+	leaves.gravity = Vector2(10, 30)
+	leaves.initial_velocity_min = 20.0
+	leaves.initial_velocity_max = 50.0
+	leaves.angular_velocity_min = -90.0
+	leaves.angular_velocity_max = 90.0
+	leaves.scale_amount_min = 3.0
+	leaves.scale_amount_max = 4.0
+	root.add_child(leaves)
+	var p: Control = Control.new()
+	p.position = Vector2.ZERO
+	root.add_child(p)
+	main_panel = p
+	var pan: TextureRect = TextureRect.new()
+	pan.texture = load("res://art/menu32_panel.png")
+	pan.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	pan.scale = Vector2(2, 2)
+	pan.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	p.add_child(pan)
+	title = Label.new()
+	title.text = "Лесной\nтравник"
+	title.add_theme_font_override("font", hud.get("font_title"))
+	title.add_theme_font_size_override("font_size", 86)
+	title.add_theme_color_override("font_color", INK)
+	title.add_theme_constant_override("line_spacing", -26)
+	title.scale = Vector2(2, 2)   # шрифт в игре один размера — логотип крупнее масштабом
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.position = Vector2(0, 14)
+	title.size = Vector2(280, 115)
+	p.add_child(title)
+	var sub: Label = Label.new()
+	sub.text = "уютная история о травах и лесе"
+	sub.add_theme_font_override("font", hud.get("font_body"))
+	sub.add_theme_font_size_override("font_size", 24)
+	sub.add_theme_color_override("font_color", Color("8a6a48"))
+	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	sub.position = Vector2(0, 268)
+	sub.size = Vector2(560, 34)
+	p.add_child(sub)
+	var foot: Label = Label.new()
+	foot.text = "ранний доступ"
+	foot.add_theme_font_override("font", hud.get("font_body"))
+	foot.add_theme_font_size_override("font_size", 20)
+	foot.add_theme_color_override("font_color", Color("a88a66"))
+	foot.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	foot.position = Vector2(0, 1030)
+	foot.size = Vector2(560, 30)
+	p.add_child(foot)
+	menu_mark = TextureRect.new()
+	menu_mark.texture = load("res://art/fx_leaf.png")
+	menu_mark.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	menu_mark.scale = Vector2(4, 4)
+	menu_mark.visible = false
+	menu_mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	p.add_child(menu_mark)
+	# кнопок много (особенно в режиме бога) — список листается колесом мыши
+	var box_scroll: ScrollContainer = ScrollContainer.new()
+	box_scroll.position = Vector2(80, 330)
+	box_scroll.size = Vector2(440, 680)
+	box_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	p.add_child(box_scroll)
+	box = VBoxContainer.new()
+	box.custom_minimum_size = Vector2(420, 0)
+	box.add_theme_constant_override("separation", 10)
+	box_scroll.add_child(box)
+	cont_btn = _button(box, "Продолжить", _continue)
+	_button(box, "Новая игра", func() -> void: _open_slots("new"))
+	save_btn = _button(box, "Сохранить", func() -> void: _open_slots("save"))
+	_button(box, "Сохранения", func() -> void: _open_slots("load"))
+	god_btn = _button(box, "Режим бога: выкл", _toggle_god)
+	give_btn = _button(box, "Выдать предметы", _open_giver)
+	tp_btn = _button(box, "Телепорт", _open_tp)
+	sp_btn = _button(box, "Призвать зверя", _open_spawn)
+	wonder_btn = _button(box, "Чудеса бога", func() -> void:
+		var v23: Node = get_tree().get_first_node_in_group("v23")
+		if v23 != null:
+			_continue()
+			v23.call("open_god"))
+	_button(box, "Настройки", _toggle_settings)
+	_button(box, "Выход", func() -> void: Saves.quit_game())
+	for ch in box.get_children():
+		_menu_hover(ch as Button)
+	sub_dim = ColorRect.new()
+	sub_dim.color = Color(0.16, 0.12, 0.22, 0.45)
+	sub_dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	sub_dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(sub_dim)
+	_build_newgame()
+	_build_slots()
+	_build_confirm()
+	_build_giver()
+	_build_teleport()
+	_build_spawn()
+	_update_god()
+	# v24: полноценные настройки (settings24.gd) — своё большое окно
+	add_to_group("menu")
+	settings = preload("res://settings24.gd").new()
+	settings.call("setup", hud, func() -> void: main_panel.visible = true)
+	root.add_child(settings)
+
+
+func _button(parent: Control, text: String, cb: Callable) -> Button:
+	var b: Button = Button.new()
+	b.text = text
+	b.flat = true
+	b.focus_mode = Control.FOCUS_NONE
+	b.add_theme_font_override("font", hud.get("font_title"))
+	b.add_theme_font_size_override("font_size", 44)
+	b.add_theme_color_override("font_color", Color("7a5a3a"))
+	b.add_theme_color_override("font_hover_color", INK)
+	b.mouse_entered.connect(func() -> void: Sound.play("ui_click", -8.0))
+	b.pressed.connect(func() -> void:
+		Sound.play("ui_select")
+		cb.call())
+	parent.add_child(b)
+	return b
+
+
+func _slider(parent: Control, text: String, val: float, cb: Callable) -> void:
+	var l: Label = Label.new()
+	l.text = text
+	l.add_theme_font_override("font", hud.get("font_body"))
+	l.add_theme_font_size_override("font_size", 30)
+	l.add_theme_color_override("font_color", INK)
+	parent.add_child(l)
+	var s: HSlider = HSlider.new()
+	s.min_value = 0.0
+	s.max_value = 1.0
+	s.step = 0.05
+	s.value = val
+	s.custom_minimum_size = Vector2(380, 30)
+	s.value_changed.connect(cb)
+	parent.add_child(s)
+
+
+func _toggle_settings() -> void:
+	main_panel.visible = false
+	settings.call("open")
+
+
+# ------------------------------------------------------------------ режим бога
+
+func _toggle_god() -> void:
+	Game.god_mode = not Game.god_mode
+	if Game.god_mode:
+		Game.hunger = 0.0
+		Game.thirst = 0.0
+	_update_god()
+	Game.inventory_changed.emit()
+
+
+func _update_god() -> void:
+	god_btn.text = "Режим бога: " + ("вкл" if Game.god_mode else "выкл")
+	god_btn.add_theme_color_override("font_color", Color("b8860b") if Game.god_mode else Color("7a5a3a"))
+	give_btn.visible = Game.god_mode
+	tp_btn.visible = Game.god_mode
+	sp_btn.visible = Game.god_mode
+	wonder_btn.visible = Game.god_mode
+
+
+## Все предметы игры (god.gd): снаряжение, инструменты, травы, зелья, еда, грибы, рыба, руды, постройки, саженцы, листья, насекомые
+func _all_items() -> Array:
+	return GOD.all_items()
+
+
+func _build_giver() -> void:
+	giver = Control.new()
+	giver.position = Vector2(260, 90)
+	giver.visible = false
+	root.add_child(giver)
+	hud.call("panel", giver, Vector2.ZERO, Vector2(1400, 900))
+	var tl: Label = Label.new()
+	tl.text = "Выдать предметы"
+	tl.add_theme_font_override("font", hud.get("font_title"))
+	tl.add_theme_font_size_override("font_size", 56)
+	tl.add_theme_color_override("font_color", INK)
+	tl.position = Vector2(40, 16)
+	giver.add_child(tl)
+	var hint: Label = Label.new()
+	hint.text = "Клик — 1 шт.,  Shift+клик — 10 шт."
+	hint.add_theme_font_override("font", hud.get("font_body"))
+	hint.add_theme_font_size_override("font_size", 24)
+	hint.add_theme_color_override("font_color", Color("7a5a3a"))
+	hint.position = Vector2(460, 40)
+	giver.add_child(hint)
+	var coins_b: Button = Button.new()
+	coins_b.text = "+100 монет"
+	coins_b.flat = true
+	coins_b.focus_mode = Control.FOCUS_NONE
+	coins_b.add_theme_font_override("font", hud.get("font_bold"))
+	coins_b.add_theme_font_size_override("font_size", 28)
+	coins_b.add_theme_color_override("font_color", Color("b8860b"))
+	coins_b.position = Vector2(1000, 22)
+	coins_b.pressed.connect(func() -> void:
+		Game.coins += 100
+		Sound.play("coin", -4.0)
+		Game.inventory_changed.emit())
+	giver.add_child(coins_b)
+	# v19: открыть всё в книге
+	var book_b: Button = Button.new()
+	book_b.text = "Открыть всё в книге"
+	book_b.flat = true
+	book_b.focus_mode = Control.FOCUS_NONE
+	book_b.add_theme_font_override("font", hud.get("font_bold"))
+	book_b.add_theme_font_size_override("font_size", 26)
+	book_b.add_theme_color_override("font_color", Color("4a7a2a"))
+	book_b.position = Vector2(1000, 66)
+	book_b.pressed.connect(func() -> void:
+		var n: int = GOD.unlock_book()
+		Sound.play("page", -4.0)
+		book_b.text = "В книге открыто: %d" % n)
+	giver.add_child(book_b)
+	# вкладки-категории
+	var cx: float = 40.0
+	var cy: float = 96.0
+	for cat in GOD.CATEGORIES:
+		var cname: String = String(cat)
+		var cb: Button = Button.new()
+		cb.text = cname
+		cb.flat = true
+		cb.focus_mode = Control.FOCUS_NONE
+		cb.add_theme_font_override("font", hud.get("font_bold"))
+		cb.add_theme_font_size_override("font_size", 24)
+		cb.add_theme_color_override("font_color", Color("7a5a3a"))
+		cb.add_theme_color_override("font_hover_color", INK)
+		cb.position = Vector2(cx, cy)
+		cb.pressed.connect(func() -> void:
+			giver_cat = cname
+			_fill_giver())
+		giver.add_child(cb)
+		cx += 30.0 + float(cname.length()) * 15.0
+	var sc: ScrollContainer = ScrollContainer.new()
+	sc.position = Vector2(40, 140)
+	sc.size = Vector2(1320, 660)
+	sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	giver.add_child(sc)
+	giver_grid = GridContainer.new()
+	giver_grid.columns = 16
+	giver_grid.add_theme_constant_override("h_separation", 8)
+	giver_grid.add_theme_constant_override("v_separation", 8)
+	sc.add_child(giver_grid)
+	_fill_giver()
+	var back: Button = _button(giver, "Назад", func() -> void:
+		giver.visible = false
+		main_panel.visible = true)
+	back.position = Vector2(620, 810)
+
+
+## Заполнить сетку предметами выбранной категории
+func _fill_giver() -> void:
+	for ch in giver_grid.get_children():
+		giver_grid.remove_child(ch)
+		ch.queue_free()
+	var ids: Array = (GOD.by_category() as Dictionary).get(giver_cat, [])
+	for id in ids:
+		var sid: String = String(id)
+		var b: Button = Button.new()
+		b.custom_minimum_size = Vector2(72, 72)
+		b.focus_mode = Control.FOCUS_NONE
+		b.tooltip_text = IT.name(sid)
+		b.icon = IT.icon(sid)
+		b.expand_icon = true
+		b.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		b.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		b.pressed.connect(func() -> void:
+			Game.add_item(sid, 10 if Input.is_key_pressed(KEY_SHIFT) else 1))
+		giver_grid.add_child(b)
+
+
+func _open_giver() -> void:
+	main_panel.visible = false
+	giver.visible = true
+
+
+# ------------------------------------------------------------------ режим бога: телепорт
+
+func _build_teleport() -> void:
+	tp_root = Control.new()
+	tp_root.position = Vector2(260, 90)
+	tp_root.visible = false
+	root.add_child(tp_root)
+	hud.call("panel", tp_root, Vector2.ZERO, Vector2(1400, 900))
+	var tl: Label = Label.new()
+	tl.text = "Телепорт"
+	tl.add_theme_font_override("font", hud.get("font_title"))
+	tl.add_theme_font_size_override("font_size", 56)
+	tl.add_theme_color_override("font_color", INK)
+	tl.position = Vector2(40, 16)
+	tp_root.add_child(tl)
+	var hint: Label = Label.new()
+	hint.text = "Город, место, тюрьма или лес — клик, и ты там"
+	hint.add_theme_font_override("font", hud.get("font_body"))
+	hint.add_theme_font_size_override("font_size", 24)
+	hint.add_theme_color_override("font_color", Color("7a5a3a"))
+	hint.position = Vector2(360, 40)
+	tp_root.add_child(hint)
+	var sc: ScrollContainer = ScrollContainer.new()
+	sc.position = Vector2(40, 100)
+	sc.size = Vector2(1320, 700)
+	sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	tp_root.add_child(sc)
+	var col: VBoxContainer = VBoxContainer.new()
+	col.add_theme_constant_override("separation", 6)
+	sc.add_child(col)
+	var groups: Array = []
+	var by_group: Dictionary = {}
+	for tg in GOD.targets():
+		var gname: String = String((tg as Dictionary)["group"])
+		if not by_group.has(gname):
+			by_group[gname] = []
+			groups.append(gname)
+		(by_group[gname] as Array).append(tg)
+	for gname2 in groups:
+		var gl: Label = Label.new()
+		gl.text = String(gname2)
+		gl.add_theme_font_override("font", hud.get("font_title"))
+		gl.add_theme_font_size_override("font_size", 34)
+		gl.add_theme_color_override("font_color", INK)
+		col.add_child(gl)
+		var gc: GridContainer = GridContainer.new()
+		gc.columns = 4
+		gc.add_theme_constant_override("h_separation", 10)
+		gc.add_theme_constant_override("v_separation", 6)
+		col.add_child(gc)
+		for tg2 in (by_group[gname2] as Array):
+			var td: Dictionary = tg2
+			var b: Button = Button.new()
+			b.text = String(td["name"])
+			b.custom_minimum_size = Vector2(318, 46)
+			b.focus_mode = Control.FOCUS_NONE
+			b.add_theme_font_override("font", hud.get("font_body"))
+			b.add_theme_font_size_override("font_size", 22)
+			b.add_theme_color_override("font_color", Color("5a4028"))
+			b.pressed.connect(func() -> void: _teleport(td))
+			gc.add_child(b)
+	var back: Button = _button(tp_root, "Назад", func() -> void:
+		tp_root.visible = false
+		main_panel.visible = true)
+	back.position = Vector2(620, 810)
+
+
+## v21: режим бога — любой зверь или птица появляется рядом с героиней
+func _build_spawn() -> void:
+	sp_root = Control.new()
+	sp_root.position = Vector2(260, 90)
+	sp_root.visible = false
+	root.add_child(sp_root)
+	hud.call("panel", sp_root, Vector2.ZERO, Vector2(1400, 900))
+	var tl: Label = Label.new()
+	tl.text = "Призвать зверя"
+	tl.add_theme_font_override("font", hud.get("font_title"))
+	tl.add_theme_font_size_override("font_size", 56)
+	tl.add_theme_color_override("font_color", INK)
+	tl.position = Vector2(40, 16)
+	sp_root.add_child(tl)
+	var hint: Label = Label.new()
+	hint.text = "Клик — зверь появится рядом с тобой"
+	hint.add_theme_font_override("font", hud.get("font_body"))
+	hint.add_theme_font_size_override("font_size", 24)
+	hint.add_theme_color_override("font_color", Color("7a5a3a"))
+	hint.position = Vector2(420, 40)
+	sp_root.add_child(hint)
+	var sc: ScrollContainer = ScrollContainer.new()
+	sc.position = Vector2(40, 100)
+	sc.size = Vector2(1320, 700)
+	sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	sp_root.add_child(sc)
+	var col: VBoxContainer = VBoxContainer.new()
+	col.add_theme_constant_override("separation", 6)
+	sc.add_child(col)
+	var wdb = preload("res://wild_db.gd")
+	var bdb = preload("res://birds_db.gd")
+	var groups: Array = [["Звери", [], false], ["Птицы", [], true]]
+	for k in (wdb.ANIMALS as Dictionary).keys():
+		(groups[0][1] as Array).append([String(k), String((wdb.ANIMALS[k] as Dictionary).get("name", k))])
+	for bid in bdb.ORDER:
+		if bdb.DATA.has(bid):
+			(groups[1][1] as Array).append([String(bid), String((bdb.DATA[bid] as Dictionary).get("name", bid))])
+	for g in groups:
+		var gl: Label = Label.new()
+		gl.text = String(g[0])
+		gl.add_theme_font_override("font", hud.get("font_title"))
+		gl.add_theme_font_size_override("font_size", 34)
+		gl.add_theme_color_override("font_color", INK)
+		col.add_child(gl)
+		var gc: GridContainer = GridContainer.new()
+		gc.columns = 4
+		gc.add_theme_constant_override("h_separation", 10)
+		gc.add_theme_constant_override("v_separation", 6)
+		col.add_child(gc)
+		var is_bird: bool = bool(g[2])
+		for e in (g[1] as Array):
+			var kid: String = String(e[0])
+			var b: Button = Button.new()
+			b.text = String(e[1])
+			b.custom_minimum_size = Vector2(318, 46)
+			b.focus_mode = Control.FOCUS_NONE
+			b.add_theme_font_override("font", hud.get("font_body"))
+			b.add_theme_font_size_override("font_size", 22)
+			b.add_theme_color_override("font_color", Color("5a4028"))
+			b.pressed.connect(func() -> void: _spawn_pick(kid, is_bird))
+			gc.add_child(b)
+	var back: Button = _button(sp_root, "Назад", func() -> void:
+		sp_root.visible = false
+		main_panel.visible = true)
+	back.position = Vector2(620, 810)
+
+
+func _open_spawn() -> void:
+	main_panel.visible = false
+	sp_root.visible = true
+
+
+func _spawn_pick(kid: String, is_bird: bool) -> void:
+	sp_root.visible = false
+	_play()
+	var m: Node = get_tree().current_scene
+	if m != null:
+		m.call("god_spawn", kid, is_bird)
+
+
+func _open_tp() -> void:
+	main_panel.visible = false
+	tp_root.visible = true
+
+
+## Лечу туда: для лесов место дома ищется так же, как при старте (далеко от городов)
+func _teleport(td: Dictionary) -> void:
+	var p: Vector2 = td["pos"]
+	if p == Vector2.INF:
+		p = SCN.find_home(String(td["key"]))
+	tp_root.visible = false
+	if started:
+		_play()
+	else:
+		_play()
+	var m: Node = get_tree().current_scene
+	if m != null:
+		m.call("teleport_to", p)
+
+# ------------------------------------------------------------------ новая игра: сценарий и место дома
+
+func _build_newgame() -> void:
+	ng_root = Control.new()
+	ng_root.position = Vector2(160, 70)
+	ng_root.visible = false
+	root.add_child(ng_root)
+	hud.call("panel", ng_root, Vector2.ZERO, Vector2(1600, 940))
+	ng_title = Label.new()
+	ng_title.add_theme_font_override("font", hud.get("font_title"))
+	ng_title.add_theme_font_size_override("font_size", 64)
+	ng_title.add_theme_color_override("font_color", INK)
+	ng_title.position = Vector2(0, 14)
+	ng_title.size = Vector2(1600, 80)
+	ng_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	ng_root.add_child(ng_title)
+	ng_grid = GridContainer.new()
+	ng_grid.position = Vector2(60, 120)
+	ng_grid.add_theme_constant_override("h_separation", 18)
+	ng_grid.add_theme_constant_override("v_separation", 18)
+	ng_root.add_child(ng_grid)
+	ng_info = Label.new()
+	ng_info.add_theme_font_override("font", hud.get("font_body"))
+	ng_info.add_theme_font_size_override("font_size", 26)
+	ng_info.add_theme_color_override("font_color", INK)
+	ng_info.position = Vector2(80, 752)
+	ng_info.size = Vector2(1440, 80)
+	ng_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	ng_root.add_child(ng_info)
+	var back: Button = _button(ng_root, "Назад", func() -> void:
+		if ng_step == 0:
+			ng_root.visible = false
+			main_panel.visible = true
+		else:
+			ng_step = 0
+			_fill_newgame())
+	back.position = Vector2(120, 840)
+	var go: Button = _button(ng_root, "Дальше", func() -> void:
+		if ng_step == 0:
+			ng_step = 1
+			_fill_newgame()
+		else:
+			_start_new_game())
+	go.name = "go"
+	go.position = Vector2(1300, 840)
+
+
+func _open_newgame() -> void:
+	main_panel.visible = false
+	ng_step = 0
+	ng_root.visible = true
+	_fill_newgame()
+
+
+## Карточка выбора: картинка (или цвет биома), название, короткий текст; выбранная — золотая рамка
+func _ng_card(sel: bool, tex: Texture2D, col: Color, title_t: String, text: String, size: Vector2, cb: Callable) -> Button:
+	var b: Button = Button.new()
+	b.flat = true
+	b.focus_mode = Control.FOCUS_NONE
+	b.custom_minimum_size = size
+	var fr: NinePatchRect = NinePatchRect.new()
+	fr.texture = load("res://art/ui_slot_sel.png" if sel else "res://art/ui_slot.png")
+	fr.patch_margin_left = 5
+	fr.patch_margin_top = 5
+	fr.patch_margin_right = 5
+	fr.patch_margin_bottom = 5
+	fr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	fr.size = size / 3.0
+	fr.scale = Vector2(3, 3)
+	fr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	b.add_child(fr)
+	if tex != null:
+		var ic: TextureRect = TextureRect.new()
+		ic.texture = tex
+		ic.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		ic.position = Vector2((size.x - 120) / 2.0, 20)
+		ic.size = Vector2(120, 120)
+		ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.add_child(ic)
+	else:
+		var sw: ColorRect = ColorRect.new()
+		sw.color = col
+		sw.position = Vector2(24, 22)
+		sw.size = Vector2(size.x - 48, 70 if size.y > 230.0 else 44)
+		sw.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.add_child(sw)
+	var tl: Label = Label.new()
+	tl.text = title_t
+	tl.add_theme_font_override("font", hud.get("font_bold"))
+	tl.add_theme_font_size_override("font_size", 24 if size.y > 230.0 else 20)
+	tl.add_theme_color_override("font_color", INK)
+	tl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	tl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var ty: float = 148.0 if tex != null else (100.0 if size.y > 230.0 else 72.0)
+	tl.position = Vector2(10, ty)
+	tl.size = Vector2(size.x - 20, 60)
+	tl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	b.add_child(tl)
+	var dl: Label = Label.new()
+	dl.text = text
+	dl.add_theme_font_override("font", hud.get("font_body"))
+	dl.add_theme_font_size_override("font_size", 19)
+	dl.add_theme_color_override("font_color", Color("6a5038"))
+	dl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	dl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	dl.position = Vector2(14, ty + (62.0 if size.y > 230.0 else 28.0))
+	dl.size = Vector2(size.x - 28, 200)
+	dl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	b.add_child(dl)
+	b.mouse_entered.connect(func() -> void: Sound.play("ui_click", -10.0))
+	b.pressed.connect(cb)
+	return b
+
+
+func _fill_newgame() -> void:
+	for c in ng_grid.get_children():
+		ng_grid.remove_child(c)
+		c.queue_free()
+	var go: Button = ng_root.get_node("go")
+	if ng_step == 0:
+		ng_title.text = "Кем ты начнёшь?"
+		go.text = "Дальше"
+		ng_grid.columns = 5
+		ng_grid.add_theme_constant_override("h_separation", 18)
+		ng_grid.add_theme_constant_override("v_separation", 18)
+		for id in SCN.SCEN_ORDER:
+			var s: Dictionary = SCN.SCEN[id]
+			var sid: String = String(id)
+			var pluses: String = ""
+			for pl in s["plus"]:
+				pluses += "\n\n✦ " + String(pl)
+			ng_grid.add_child(_ng_card(sid == ng_scen, IT.icon(String(s["icon"]).substr(5)), Color.WHITE, String(s["name"]), String(s["text"]) + pluses, Vector2(278, 540), func() -> void:
+				ng_scen = sid
+				Sound.play("ui_select", -6.0)
+				_fill_newgame()))
+		ng_info.text = "Выбрано: %s. Дальше — где будет твой дом." % String(SCN.get_s(ng_scen)["name"])
+	else:
+		ng_title.text = "Где стоит твой дом?"
+		go.text = "Начать"
+		ng_grid.columns = 7
+		ng_grid.add_theme_constant_override("h_separation", 12)
+		ng_grid.add_theme_constant_override("v_separation", 12)
+		for key in SCN.SPAWN_ORDER:
+			var sp: Dictionary = SCN.SPAWNS[key]
+			var k: String = String(key)
+			ng_grid.add_child(_ng_card(k == ng_spawn, null, sp["col"], String(sp["name"]), String(sp["text"]), Vector2(204, 196), func() -> void:
+				ng_spawn = k
+				Sound.play("ui_select", -6.0)
+				_fill_newgame()))
+		ng_info.text = "%s · дом появится здесь: %s." % [String(SCN.get_s(ng_scen)["name"]), String(SCN.SPAWNS[ng_spawn]["name"])]
+
+
+## Начать: место дома ищется в выбранном биоме, сцена собирается заново уже с домом там
+func _start_new_game() -> void:
+	# всё прошлое — забыть (иначе рецепты, деньги и задания старой игры перешли бы в новую)
+	Saves.reset_game()
+	if Saves.has_save(Saves.slot):
+		Saves.delete_slot(Saves.slot)   # старое сохранение не стирается, а уходит в .bak
+	Game.scenario = ng_scen
+	Game.home_biome = ng_spawn
+	Game.home_pos = SCN.find_home(ng_spawn)
+	Game.new_game_ready = true
+	Game.ui_open = false
+	get_tree().paused = false
+	Sound.mode = "game"
+	Sound.cur_track = ""
+	get_tree().reload_current_scene()
+
+
+func show_menu() -> void:
+	open = true
+	root.visible = true
+	settings.visible = false
+	main_panel.visible = true
+	ng_root.visible = false
+	giver.visible = false
+	tp_root.visible = false
+	sp_root.visible = false
+	sl_root.visible = false
+	cf_root.visible = false
+	_update_god()
+	Game.ui_open = true
+	get_tree().paused = true
+	Sound.mode = "menu"
+	Sound.music("music_menu")
+	cont_btn.visible = started or Saves.any_save()
+	save_btn.visible = started
+
+
+func _play() -> void:
+	started = true
+	cel_drag = false
+	cel_hover = false
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+	var m: Node = get_tree().current_scene
+	if m != null and m.has_method("save_world"):
+		m.set("playing", true)
+	open = false
+	root.visible = false
+	Game.ui_open = false
+	get_tree().paused = false
+	Sound.mode = "game"
+	Sound.cur_track = ""
+
+
+## v24: бег «нажать один раз» — переключаем здесь (меню живёт всегда)
+func _input(event: InputEvent) -> void:
+	_cel_input(event)
+	if KB.pressed("run", event) and bool(Saves.opt.get("run_toggle", false)) and not open:
+		KB.run_latched = not KB.run_latched
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and (event as InputEventKey).physical_keycode == KEY_ESCAPE:
+		if open and (giver.visible or ng_root.visible or tp_root.visible or sp_root.visible or sl_root.visible or cf_root.visible):
+			giver.visible = false
+			tp_root.visible = false
+			sp_root.visible = false
+			ng_root.visible = false
+			sl_root.visible = false
+			cf_root.visible = false
+			main_panel.visible = true
+			get_viewport().set_input_as_handled()
+		elif open and started:
+			_play()
+			get_viewport().set_input_as_handled()
+		elif not open and not Game.ui_open and not Game.busy:
+			show_menu()
+			get_viewport().set_input_as_handled()
+
+
+func _process(delta: float) -> void:
+	if open:
+		t += delta
+		title.position.y = 14.0 + sin(t * 1.4) * 4.0
+		_animate_bg(delta)
+		_animate_fish(delta)
+
+
+# ------------------------------------------------------------------ v32: фон меню — день и ночь, солнце и луну можно таскать
+
+const BG_BASE: Vector2 = Vector2(-40, -20)     # холст 1000x560 ×2 = 2000x1120, по центру экрана 1920x1080
+const BG_CHIMNEY: Vector2 = Vector2(488, 270)  # труба дома (вывод tools/menu32.py)
+const CEL_X0: float = 640.0                    # дуга солнца/луны: восход слева, закат справа (экран)
+const CEL_X1: float = 2000.0
+const CEL_PEAK: float = 150.0
+const CEL_HORIZON: float = 860.0
+const CEL_GRAB: float = 84.0
+var bg: Control
+var bg_layers: Array = []      # [Control, глубина параллакса]
+var bg_tint: Array = []        # слои, которые темнеют ночью и теплеют на закате
+var bg_clouds: Array = []      # [TextureRect, скорость]
+var bg_birds: Array = []       # [Sprite2D, скорость, фаза, высота]
+var bg_par: Vector2 = Vector2.ZERO
+var bg_sky_day: TextureRect
+var bg_sky_dusk: TextureRect
+var bg_stars: TextureRect
+var bg_sun: TextureRect
+var bg_sun_glow: TextureRect
+var bg_rays: TextureRect
+var bg_moon: TextureRect
+var bg_moon_glow: TextureRect
+var bg_windows: TextureRect
+var cel_layer: Control
+var cel_moon: bool = false     # сейчас на небе луна
+var cel_p: float = 0.3         # где на дуге: 0 — восход, 1 — закат
+var cel_pos: Vector2 = Vector2.ZERO
+var cel_drag: bool = false
+var cel_hover: bool = false
+var menu_mark: TextureRect
+var pond_layer: Control
+var fish_fx: Array = []        # прыгающие рыбы, круги и капли пруда
+var fish_wait: float = 1.5
+var sub_dim: ColorRect
+
+
+func _bg_layer(depth: float, tint: bool = false) -> Control:
+	var c: Control = Control.new()
+	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bg.add_child(c)
+	bg_layers.append([c, depth])
+	if tint:
+		bg_tint.append(c)
+	return c
+
+
+func _bg_tex(parent: Control, file: String, canvas_pos: Vector2 = Vector2.ZERO) -> TextureRect:
+	var r: TextureRect = TextureRect.new()
+	r.texture = load("res://art/" + file + ".png")
+	r.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	r.scale = Vector2(2, 2)
+	r.position = BG_BASE + canvas_pos * 2.0
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(r)
+	return r
+
+
+## Поставить картинку (масштаб ×2) центром в точку
+func _bg_center(r: TextureRect, c: Vector2) -> void:
+	r.position = (c - r.size).round()
+
+
+func _build_bg() -> void:
+	bg = Control.new()
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bg.clip_contents = true
+	root.add_child(bg)
+	var sky: Control = _bg_layer(0.05)
+	_bg_tex(sky, "menu32_sky_night")
+	bg_stars = _bg_tex(sky, "menu32_stars")
+	bg_sky_dusk = _bg_tex(sky, "menu32_sky_dusk")
+	bg_sky_day = _bg_tex(sky, "menu32_sky")
+	cel_layer = _bg_layer(0.10)
+	bg_sun_glow = _bg_tex(cel_layer, "menu32_sun_glow")
+	bg_moon_glow = _bg_tex(cel_layer, "menu32_moon_glow")
+	bg_rays = _bg_tex(cel_layer, "menu32_rays")
+	bg_rays.pivot_offset = bg_rays.size * 0.5
+	bg_sun = _bg_tex(cel_layer, "menu32_sun")
+	bg_moon = _bg_tex(cel_layer, "menu32_moon")
+	cel_pos = _cel_arc(cel_p)
+	var cl: Control = _bg_layer(0.16, true)
+	var cpos: Array = [Vector2(380, 60), Vector2(760, 170), Vector2(640, 40), Vector2(880, 90), Vector2(160, 130)]
+	for i in range(cpos.size()):
+		var c: TextureRect = _bg_tex(cl, "menu32_cloud_%d" % (i % 4), cpos[i])
+		bg_clouds.append([c, 7.0 + float(i % 3) * 4.0])
+	var birds: Control = _bg_layer(0.22, true)
+	for i in range(4):
+		var s: Sprite2D = Sprite2D.new()
+		s.texture = load("res://art/menu32_bird_0.png")
+		s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		s.scale = Vector2(2, 2) if i < 3 else Vector2(3, 3)
+		s.position = Vector2(700.0 + float(i) * 70.0 - (300.0 if i == 3 else 0.0), 360.0 + float(i % 2) * 34.0)
+		birds.add_child(s)
+		bg_birds.append([s, 46.0 + float(i) * 6.0, float(i) * 1.7, s.position.y])
+	_bg_tex(_bg_layer(0.28, true), "menu32_far")
+	_bg_tex(_bg_layer(0.45, true), "menu32_mid")
+	var nearl: Control = _bg_layer(0.75, true)
+	_bg_tex(nearl, "menu32_near")
+	pond_layer = nearl
+	var sm: CPUParticles2D = CPUParticles2D.new()
+	sm.texture = load("res://art/menu32_smoke.png")
+	sm.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	sm.position = BG_BASE + BG_CHIMNEY * 2.0
+	sm.amount = 14
+	sm.lifetime = 4.5
+	sm.preprocess = 5.0
+	sm.direction = Vector2(0.15, -1)
+	sm.spread = 8.0
+	sm.gravity = Vector2(7, -3)
+	sm.initial_velocity_min = 16.0
+	sm.initial_velocity_max = 24.0
+	sm.scale_amount_min = 1.4
+	sm.scale_amount_max = 2.2
+	var sc: Curve = Curve.new()
+	sc.add_point(Vector2(0, 0.6))
+	sc.add_point(Vector2(1, 1.6))
+	sm.scale_amount_curve = sc
+	var gr: Gradient = Gradient.new()
+	gr.set_color(0, Color(1, 1, 1, 0.85))
+	gr.set_color(1, Color(1, 1, 1, 0.0))
+	sm.color_ramp = gr
+	nearl.add_child(sm)
+	_bg_tex(_bg_layer(1.0, true), "menu32_front")
+	# свет в окнах — поверх затемнения, светится сам (сложение цветов)
+	var winl: Control = _bg_layer(0.75)
+	bg_windows = _bg_tex(winl, "menu32_windows")
+	var add_m: CanvasItemMaterial = CanvasItemMaterial.new()
+	add_m.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	bg_windows.material = add_m
+	# слой окон должен быть сразу над поляной, а не над передним деревом
+	bg.move_child(winl, nearl.get_index() + 1)
+	# для скриншотов: --menunight (луна), --menudusk (закат)
+	var ua: PackedStringArray = OS.get_cmdline_user_args()
+	if ua.has("--menunight"):
+		cel_moon = true
+		cel_p = 0.4
+	elif ua.has("--menudusk"):
+		cel_p = 0.9
+	cel_pos = _cel_arc(cel_p)
+
+
+# ------------------------------------------------------------------ v33: рыба плещется в пруду
+
+const POND_SCREEN: Vector2 = Vector2(1324, 950)   # центр воды пруда (экран; пруд — из ground.png игры)
+const POND_HALF: Vector2 = Vector2(120, 46)       # где можно выпрыгнуть (экранные пиксели)
+const FISH_TEX: Array = ["fish_crucian", "fish_golden", "fish_minnow", "fish_perch"]
+
+
+func _fish_node(tex_name: String, at: Vector2) -> Sprite2D:
+	var s: Sprite2D = Sprite2D.new()
+	s.texture = load("res://art/" + tex_name + ".png")
+	s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	s.scale = Vector2(2, 2)
+	s.position = at
+	pond_layer.add_child(s)
+	return s
+
+
+func _ring_at(at: Vector2) -> void:
+	var r: Sprite2D = _fish_node("menu32_ring_0", at)
+	fish_fx.append({"kind": "ring", "n": r, "age": 0.0})
+
+
+func _drops_at(at: Vector2, count: int) -> void:
+	for i in range(count):
+		var d: Sprite2D = _fish_node("menu32_drop", at)
+		var a: float = randf_range(-PI * 0.85, -PI * 0.15)
+		var v: Vector2 = Vector2(cos(a), sin(a)) * randf_range(60.0, 120.0)
+		fish_fx.append({"kind": "drop", "n": d, "age": 0.0, "v": v})
+
+
+func _fish_jump() -> void:
+	var p: Vector2 = POND_SCREEN + Vector2(randf_range(-1.0, 1.0) * POND_HALF.x, randf_range(-1.0, 1.0) * POND_HALF.y)
+	var dir: float = 1.0 if randf() < 0.5 else -1.0
+	var f: Sprite2D = _fish_node(String(FISH_TEX[randi() % FISH_TEX.size()]), p)
+	f.visible = false
+	var span: float = randf_range(70.0, 110.0) * dir
+	fish_fx.append({"kind": "fish", "n": f, "age": 0.0, "dur": randf_range(0.8, 1.05), "p": p, "span": span, "h": randf_range(60.0, 96.0), "dir": dir, "land": false})
+	_ring_at(p)
+	_drops_at(p, 5)
+
+
+func _animate_fish(delta: float) -> void:
+	if pond_layer == null:
+		return
+	fish_wait -= delta
+	if fish_wait <= 0.0:
+		fish_wait = randf_range(1.8, 4.2)
+		_fish_jump()
+		if randf() < 0.3:
+			_ring_at(POND_SCREEN + Vector2(randf_range(-1.0, 1.0) * POND_HALF.x, randf_range(-1.0, 1.0) * POND_HALF.y))
+	var dead: Array = []
+	for e in fish_fx:
+		var n: Sprite2D = e["n"]
+		e["age"] = float(e["age"]) + delta
+		var age: float = float(e["age"])
+		match String(e["kind"]):
+			"ring":
+				var fr: int = int(age / 0.13)
+				if fr > 3:
+					dead.append(e)
+					continue
+				n.texture = load("res://art/menu32_ring_%d.png" % fr)
+				n.offset = Vector2(-23, -9)
+			"drop":
+				var v: Vector2 = e["v"]
+				v.y += 340.0 * delta
+				e["v"] = v
+				n.position += v * delta
+				n.modulate.a = clampf(1.0 - age / 0.7, 0.0, 1.0)
+				if age > 0.7:
+					dead.append(e)
+			"fish":
+				var dur: float = float(e["dur"])
+				var s: float = age / dur
+				if s >= 1.0:
+					_ring_at(n.position + Vector2(0, 2))
+					_drops_at(n.position + Vector2(0, 2), 4)
+					dead.append(e)
+					continue
+				var p0: Vector2 = e["p"]
+				var x: float = float(e["span"]) * s
+				var y: float = -float(e["h"]) * 4.0 * s * (1.0 - s)
+				n.position = p0 + Vector2(x, y)
+				# нос по движению: вверх — смотрит вверх, вниз — в воду
+				var vy: float = -float(e["h"]) * 4.0 * (1.0 - 2.0 * s)
+				var vx: float = float(e["span"])
+				n.flip_h = float(e["dir"]) < 0.0
+				var ang: float = atan2(vy, absf(vx))
+				n.rotation = ang * float(e["dir"])
+				n.visible = s > 0.04 and s < 0.97
+
+	for d in dead:
+		(d["n"] as Node).queue_free()
+		fish_fx.erase(d)
+
+
+## Точка дуги: p 0..1 слева направо, выше всего посередине
+func _cel_arc(p: float) -> Vector2:
+	return Vector2(lerpf(CEL_X0, CEL_X1, p), CEL_HORIZON - (CEL_HORIZON - CEL_PEAK) * sin(clampf(p, 0.0, 1.0) * PI))
+
+
+func _animate_bg(delta: float) -> void:
+	if bg == null:
+		return
+	# v33: всё в одной плоскости — слои не смещаются друг относительно друга (параллакс убран, деревья не «летают»)
+	var vp: Vector2 = Vector2(1920, 1080)
+	var mp: Vector2 = get_viewport().get_mouse_position()
+	var want: Vector2 = ((mp - vp * 0.5) / (vp * 0.5)).clamp(Vector2(-1, -1), Vector2(1, 1)) * Vector2(0, 0)
+	if cel_drag:
+		want = bg_par
+	bg_par = bg_par.lerp(want, 1.0 - exp(-3.0 * delta))
+	for l in bg_layers:
+		(l[0] as Control).position = (bg_par * float(l[1])).round()
+	# солнце и луна идут по дуге; за горизонтом одно сменяет другое (как в Террарии)
+	if cel_drag:
+		cel_p = clampf((cel_pos.x - CEL_X0) / (CEL_X1 - CEL_X0), 0.0, 1.0)
+	else:
+		cel_p += delta / (34.0 if cel_moon else 46.0)
+		if cel_p >= 1.0:
+			cel_p = 0.0
+			cel_moon = not cel_moon
+			cel_pos = _cel_arc(0.0)
+		cel_pos = cel_pos.lerp(_cel_arc(cel_p), 1.0 - exp(-4.0 * delta))
+	var body: TextureRect = bg_moon if cel_moon else bg_sun
+	bg_sun.visible = not cel_moon
+	bg_rays.visible = not cel_moon
+	bg_sun_glow.visible = not cel_moon
+	bg_moon.visible = cel_moon
+	bg_moon_glow.visible = cel_moon
+	_bg_center(body, cel_pos)
+	_bg_center(bg_moon_glow if cel_moon else bg_sun_glow, cel_pos)
+	bg_rays.position = (cel_pos - bg_rays.pivot_offset).round()
+	bg_rays.rotation += delta * 0.08
+	bg_rays.modulate.a = 0.8 + sin(t * 0.9) * 0.2
+	# свет: чем выше солнце — тем светлее; у горизонта закат; луна — ночь
+	var e: float = clampf((CEL_HORIZON - cel_pos.y) / (CEL_HORIZON - CEL_PEAK), 0.0, 1.0)
+	var light: float
+	if cel_moon:
+		light = 0.35 * (1.0 - smoothstep(0.0, 0.3, e))
+	else:
+		light = 0.35 + 0.65 * smoothstep(0.12, 0.5, e)
+	var day_a: float = smoothstep(0.45, 0.9, light)
+	var dusk_a: float = clampf(light / 0.35, 0.0, 1.0)
+	bg_sky_day.modulate.a = day_a
+	bg_sky_dusk.modulate.a = dusk_a
+	bg_stars.modulate.a = (1.0 - clampf(light / 0.3, 0.0, 1.0)) * (0.85 + 0.15 * sin(t * 2.3))
+	var land: Color = Color(0.40, 0.45, 0.72).lerp(Color(1.0, 0.80, 0.72), dusk_a).lerp(Color.WHITE, day_a)
+	for l2 in bg_tint:
+		(l2 as Control).modulate = land
+	bg_windows.modulate.a = clampf(1.0 - light / 0.55, 0.0, 1.0)
+	leaves.modulate = land
+	for c in bg_clouds:
+		var r: TextureRect = c[0]
+		r.position.x += float(c[1]) * delta
+		if r.position.x > 2000.0:
+			r.position.x = -r.size.x * 2.0 - 40.0
+	for b in bg_birds:
+		var s: Sprite2D = b[0]
+		s.visible = light > 0.3
+		s.position.x += float(b[1]) * delta
+		if s.position.x > 2040.0:
+			s.position.x = 560.0
+			b[3] = 300.0 + randf() * 200.0
+		s.position.y = float(b[3]) + sin(t * 1.3 + float(b[2])) * 12.0
+		var fr: int = int((t + float(b[2])) * 5.0) % 2
+		s.texture = load("res://art/menu32_bird_%d.png" % fr)
+	sub_dim.visible = not main_panel.visible
+	# курсор-рука над солнцем/луной
+	var hov: bool = cel_drag or (main_panel.visible and (mp - cel_layer.position).distance_to(cel_pos) < CEL_GRAB)
+	if hov != cel_hover:
+		cel_hover = hov
+		Input.set_default_cursor_shape(Input.CURSOR_DRAG if hov else Input.CURSOR_ARROW)
+
+
+## Солнце/луну хватают мышкой и тащат; отпустил за горизонтом — на небо выходит другое светило
+func _cel_input(event: InputEvent) -> void:
+	if bg == null or not open or not main_panel.visible:
+		return
+	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+		var mb: InputEventMouseButton = event
+		var lp: Vector2 = mb.position - cel_layer.position
+		if mb.pressed and lp.distance_to(cel_pos) < CEL_GRAB:
+			cel_drag = true
+			Sound.play("ui_click", -6.0)
+			get_viewport().set_input_as_handled()
+		elif not mb.pressed and cel_drag:
+			cel_drag = false
+			if cel_pos.y > CEL_HORIZON - 70.0:
+				cel_moon = not cel_moon
+				cel_p = 0.0
+				cel_pos = Vector2(CEL_X0, CEL_HORIZON + 120.0)
+			get_viewport().set_input_as_handled()
+	elif event is InputEventMouseMotion and cel_drag:
+		cel_pos = ((event as InputEventMouseMotion).position - cel_layer.position).clamp(Vector2(560, 40), Vector2(2000, 1000))
+		get_viewport().set_input_as_handled()
+
+
+## Пункт главного меню: текст слева, при наведении — листик-указатель и сдвиг вправо
+func _menu_hover(b: Button) -> void:
+	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	b.mouse_entered.connect(func() -> void:
+		menu_mark.visible = true
+		menu_mark.global_position = b.global_position + Vector2(-42, b.size.y * 0.5 - 14)
+		b.position.x = 10.0)
+	b.mouse_exited.connect(func() -> void:
+		menu_mark.visible = false
+		b.position.x = 0.0)
+
+
+# ------------------------------------------------------------------ ранний доступ: продолжить, ячейки, подтверждение
+
+func _continue() -> void:
+	if started:
+		_play()
+		return
+	var s: int = Saves.latest_slot()
+	if s >= 0:
+		Saves.load_game(s)
+
+
+func _build_slots() -> void:
+	sl_root = Control.new()
+	sl_root.position = Vector2(460, 170)
+	sl_root.visible = false
+	root.add_child(sl_root)
+	hud.call("panel", sl_root, Vector2.ZERO, Vector2(1000, 700))
+	sl_title = Label.new()
+	sl_title.add_theme_font_override("font", hud.get("font_title"))
+	sl_title.add_theme_font_size_override("font_size", 60)
+	sl_title.add_theme_color_override("font_color", INK)
+	sl_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	sl_title.position = Vector2(0, 24)
+	sl_title.size = Vector2(1000, 80)
+	sl_root.add_child(sl_title)
+	sl_box = VBoxContainer.new()
+	sl_box.position = Vector2(80, 140)
+	sl_box.size = Vector2(840, 400)
+	sl_box.add_theme_constant_override("separation", 14)
+	sl_root.add_child(sl_box)
+	var back: Button = _button(sl_root, "Назад", func() -> void:
+		sl_root.visible = false
+		main_panel.visible = true)
+	back.position = Vector2(420, 590)
+
+
+func _slot_text(i: int) -> String:
+	var inf: Dictionary = Saves.info(i)
+	if inf.is_empty():
+		return "Ячейка %d — пусто" % (i + 1)
+	var sc: String = String(SCN.get_s(String(inf.get("scenario", "herbalist"))).get("name", ""))
+	return "Ячейка %d — день %d, %d монет, %s · %s" % [i + 1, int(inf.get("day", 1)), int(inf.get("coins", 0)), sc, String(inf.get("time", "")).replace("T", " ").substr(0, 16)]
+
+
+func _open_slots(mode: String) -> void:
+	sl_mode = mode
+	sl_title.text = {"new": "Где начать новую историю?", "load": "Загрузить", "save": "Сохранить"}[mode]
+	for c in sl_box.get_children():
+		sl_box.remove_child(c)
+		c.queue_free()
+	for i in range(Saves.SLOTS):
+		var b: Button = Button.new()
+		b.text = _slot_text(i)
+		b.flat = true
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.focus_mode = Control.FOCUS_NONE
+		b.add_theme_font_override("font", hud.get("font_body"))
+		b.add_theme_font_size_override("font_size", 30)
+		b.add_theme_color_override("font_color", Color("7a5a3a") if Saves.has_save(i) or mode != "load" else Color("b0a080"))
+		b.add_theme_color_override("font_hover_color", INK)
+		b.custom_minimum_size = Vector2(840, 60)
+		var si: int = i
+		b.pressed.connect(func() -> void:
+			Sound.play("ui_select")
+			_slot_chosen(si))
+		sl_box.add_child(b)
+	main_panel.visible = false
+	sl_root.visible = true
+
+
+func _slot_chosen(i: int) -> void:
+	match sl_mode:
+		"load":
+			if not Saves.has_save(i):
+				return
+			if started:
+				_confirm("Загрузить ячейку %d? Несохранённое пропадёт." % (i + 1), func() -> void: Saves.load_game(i))
+			else:
+				Saves.load_game(i)
+		"save":
+			var do_save: Callable = func() -> void:
+				var ok: bool = _save_now(i)
+				Sound.play("page" if ok else "hiss", -4.0)
+				_open_slots("save")
+			if Saves.has_save(i) and i != Saves.slot:
+				_confirm("Записать поверх ячейки %d?" % (i + 1), do_save)
+			else:
+				do_save.call()
+		"new":
+			var go: Callable = func() -> void:
+				Saves.slot = i
+				sl_root.visible = false
+				cf_root.visible = false
+				_open_newgame()
+			if Saves.has_save(i):
+				_confirm("В ячейке %d уже есть история. Начать заново? (старая уйдёт в запасной файл)" % (i + 1), go)
+			else:
+				go.call()
+
+
+## Сохранить из меню паузы: на миг «снимаем» паузу для проверки, можно ли (не в тюрьме, не под водой)
+func _save_now(i: int) -> bool:
+	Game.ui_open = false
+	var ok: bool = Saves.can_save() and Saves.save_game(i)
+	Game.ui_open = true
+	return ok
+
+
+func _build_confirm() -> void:
+	cf_root = Control.new()
+	cf_root.position = Vector2(560, 360)
+	cf_root.visible = false
+	root.add_child(cf_root)
+	hud.call("panel", cf_root, Vector2.ZERO, Vector2(800, 340))
+	cf_label = Label.new()
+	cf_label.add_theme_font_override("font", hud.get("font_body"))
+	cf_label.add_theme_font_size_override("font_size", 32)
+	cf_label.add_theme_color_override("font_color", INK)
+	cf_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	cf_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	cf_label.position = Vector2(50, 40)
+	cf_label.size = Vector2(700, 160)
+	cf_root.add_child(cf_label)
+	var yes: Button = _button(cf_root, "Да", func() -> void:
+		cf_root.visible = false
+		if cf_yes.is_valid():
+			cf_yes.call())
+	yes.position = Vector2(200, 220)
+	var no: Button = _button(cf_root, "Нет", func() -> void:
+		cf_root.visible = false
+		sl_root.visible = true)
+	no.position = Vector2(500, 220)
+
+
+func _confirm(text: String, yes_cb: Callable) -> void:
+	cf_label.text = text
+	cf_yes = yes_cb
+	sl_root.visible = false
+	cf_root.visible = true

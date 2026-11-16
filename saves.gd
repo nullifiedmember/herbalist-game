@@ -228,7 +228,7 @@ func load_game(s: int) -> bool:
 	get_tree().paused = false
 	Sound.mode = "game"
 	Sound.cur_track = ""
-	get_tree().reload_current_scene()
+	Loader.reload()
 	return true
 
 

@@ -16,14 +16,15 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 config/version="0.26"
 config/icon="res://icon.png"
 boot_splash/bg_color=Color(0.09, 0.15, 0.11, 1)
-boot_splash/image="res://icon.png"
-boot_splash/fullsize=false
+boot_splash/image="res://art/load37_splash.png"
+boot_splash/fullsize=true
 
 [autoload]
 
 Game="*res://game_state.gd"
 Sound="*res://sound.gd"
 Saves="*res://saves.gd"
+Loader="*res://loader.gd"
 
 [display]
 

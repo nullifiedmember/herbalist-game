@@ -66,7 +66,13 @@ func run(main: Node2D, f: Array) -> void:
 	var tq: Node = tree.get_first_node_in_group("tutq28")
 	tq.call("_update")
 	var st: Array = tq.call("_steps")
-	ck(st.size() == 3 and not bool(st[0][1]), "обучение: сначала нужен топор")
+	ck(st.size() == 2 and not bool(st[0][1]), "обучение: топор уже был — шаги про палки пропущены")
+	Game.counters["tut_noaxe"] = 1
+	st = tq.call("_steps")
+	ck(st.size() == 4 and not bool(st[0][1]), "обучение без топора: сначала палки и камушки")
+	tq.call("_ensure_materials")
+	ck(int(tq.call("_lying", "stick")) >= 2 and int(tq.call("_lying", "stone_s")) >= 2, "палки и камушки лежат на земле")
+	Game.counters["tut_noaxe"] = 0
 	Game.add_item("axe")
 	Game.hotbar[0] = "axe"
 	Game.hot_sel = 0
@@ -76,9 +82,18 @@ func run(main: Node2D, f: Array) -> void:
 	Game.add_item("kit:workbench")
 	hs.call("build", "workbench", p)
 	tq.call("_update")
+	ck(Game.tut_step == 3, "обучение: верстак стоит — дальше травы")
 	var coins0: int = Game.coins
+	Game.counters["herbs"] = int(Game.counters.get("herbs", 0)) + 3
+	tq.call("_update")
+	ck(Game.tut_step == 4, "обучение: травы собраны — дальше зелье")
+	Game.known_recipes["test_potion"] = {}
+	tq.call("_update")
+	ck(Game.tut_step == 5, "обучение: зелье сварено — дальше продажа")
+	Game.counters["sold"] = int(Game.counters.get("sold", 0)) + 1
 	tq.call("_update")
 	ck(Game.tut_step == 99, "обучение пройдено")
+	Game.known_recipes.erase("test_potion")
 	hs.call("demolish", int(hs.call("placed_at", p + Vector2(0, -8))))
 	ck(Game.coins >= coins0, "награда получена")
 	# ---- подгрузка областей
