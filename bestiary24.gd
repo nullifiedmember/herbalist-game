@@ -42,6 +42,10 @@ const HOME_RU: Dictionary = {
 }
 
 
+# нельзя получить в игре — не показываем
+const NO_ITEMS: Array = ["goose_down", "yarn_down"]
+
+
 func dump(dir: String) -> int:
 	out = dir
 	DirAccess.make_dir_recursive_absolute(out + "/img")
@@ -430,17 +434,21 @@ func _people() -> Dictionary:
 			["«" + String(p[1]) + "»"]))
 	var groups: Array = []
 	for ld in NPC.LANDS:
+		if Game.SOLO and ld in ["hell", "heaven"]:     # врат нет
+			continue
 		var l: Dictionary = NPC.LANDS[ld]
 		var ents: Array = by_land.get(ld, [])
 		groups.append({"title": String(l["name"]), "about": "%s %s — %s." % [String(l.get("about", "")), String(l.get("leader", "")), String(l.get("title", ""))], "entries": ents})
 	return {"id": "people", "title": "Земли и жители", "icon": _img("npc_catgirl_choco", _frame("res://art/catgirl_choco.png", 8, 8)),
-		"intro": "Земли далеко друг от друга, у каждой свой край и свои жители. Ад (Пеклоград) и Рай (Облакоград) — отдельные миры за вратами: не дружат, но и не воюют.",
+		"intro": "Земли далеко друг от друга, у каждой свой край и свои жители.",
 		"groups": groups}
 
 
 func _mats() -> Dictionary:
 	var by_kind: Dictionary = {}
 	for id in MT.ORDER:
+		if id in NO_ITEMS:
+			continue
 		var m: Array = MT.MATS[id]
 		var k: String = String(m[4])
 		if not by_kind.has(k):
@@ -452,6 +460,8 @@ func _mats() -> Dictionary:
 	var rec: Array = []
 	for st in MT.RECIPES:
 		for r in (MT.RECIPES[st] as Array):
+			if String(r[0]) in NO_ITEMS or (r[2] as Dictionary).keys().any(func(x): return String(x) in NO_ITEMS):
+				continue
 			var ins: Array = []
 			for x in (r[2] as Dictionary):
 				ins.append("%s ×%d" % [_nm(String(x)), int(r[2][x])])

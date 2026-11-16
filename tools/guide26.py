@@ -82,6 +82,14 @@ try:
 except Exception:
     pass
 
+# нельзя получить в игре — не показываем
+NO_ITEMS = {"goose_down", "yarn_down"}
+M_ORDER = [i for i in M_ORDER if i not in NO_ITEMS]
+for _i in NO_ITEMS:
+    MATS.pop(_i, None)
+for _st in list(SREC):
+    SREC[_st] = [r for r in SREC[_st] if r[0] not in NO_ITEMS and not (set(r[2]) & NO_ITEMS)]
+
 BIOMES = {0: "усадьба и окрестности", 1: "луга", 2: "паутинный лес", 3: "готика (Сумеречье)", 4: "земли рыцарей",
           5: "эльфийский лес", 6: "земли магов", 7: "степь орков", 8: "горы дворфов", 9: "деревня кошек",
           10: "розовый лес единорогов", 11: "гроты", 12: "берёзовая роща", 13: "тайга", 14: "осенний лес",
