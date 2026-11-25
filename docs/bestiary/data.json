@@ -11102,27 +11102,6 @@
 							]
 						},
 						{
-							"id": "plank_tree_a",
-							"img": "img/mat_plank_tree_a.png",
-							"name": "Дубовая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
-							]
-						},
-						{
-							"id": "bark_tree_a",
-							"img": "img/mat_bark_tree_a.png",
-							"name": "Дубовая кора",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Сила 1",
-								"Цена: 2 мон."
-							]
-						},
-						{
 							"id": "wood_tree_b",
 							"img": "img/mat_wood_tree_b.png",
 							"name": "Липовая чурка",
@@ -11133,6 +11112,132 @@
 							]
 						},
 						{
+							"id": "wood_tree_c",
+							"img": "img/mat_wood_tree_c.png",
+							"name": "Вязовая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_tree_d",
+							"img": "img/mat_wood_tree_d.png",
+							"name": "Ясеневая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_pine_a",
+							"img": "img/mat_wood_pine_a.png",
+							"name": "Сосновая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_pine_b",
+							"img": "img/mat_wood_pine_b.png",
+							"name": "Еловая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_tree_blossom",
+							"img": "img/mat_wood_tree_blossom.png",
+							"name": "Сакуровая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_tree_autumn",
+							"img": "img/mat_wood_tree_autumn.png",
+							"name": "Кленовая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_tree_autumn2",
+							"img": "img/mat_wood_tree_autumn2.png",
+							"name": "Рябиновая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_tree_apple",
+							"img": "img/mat_wood_tree_apple.png",
+							"name": "Яблоневая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_tree_birch",
+							"img": "img/mat_wood_tree_birch.png",
+							"name": "Берёзовая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_tree_unicorn",
+							"img": "img/mat_wood_tree_unicorn.png",
+							"name": "Розовая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						},
+						{
+							"id": "wood_dead",
+							"img": "img/mat_wood_dead.png",
+							"name": "Сухая чурка",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 3 мон."
+							]
+						}
+					],
+					"small": true,
+					"title": "Дерево — чурки"
+				},
+				{
+					"entries": [
+						{
+							"id": "plank_tree_a",
+							"img": "img/mat_plank_tree_a.png",
+							"name": "Дубовая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
 							"id": "plank_tree_b",
 							"img": "img/mat_plank_tree_b.png",
 							"name": "Липовая доска",
@@ -11140,6 +11245,133 @@
 							"tags": [],
 							"text": [
 								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_tree_c",
+							"img": "img/mat_plank_tree_c.png",
+							"name": "Вязовая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_tree_d",
+							"img": "img/mat_plank_tree_d.png",
+							"name": "Ясеневая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_pine_a",
+							"img": "img/mat_plank_pine_a.png",
+							"name": "Сосновая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_pine_b",
+							"img": "img/mat_plank_pine_b.png",
+							"name": "Еловая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_tree_blossom",
+							"img": "img/mat_plank_tree_blossom.png",
+							"name": "Сакуровая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_tree_autumn",
+							"img": "img/mat_plank_tree_autumn.png",
+							"name": "Кленовая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_tree_autumn2",
+							"img": "img/mat_plank_tree_autumn2.png",
+							"name": "Рябиновая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_tree_apple",
+							"img": "img/mat_plank_tree_apple.png",
+							"name": "Яблоневая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_tree_birch",
+							"img": "img/mat_plank_tree_birch.png",
+							"name": "Берёзовая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_tree_unicorn",
+							"img": "img/mat_plank_tree_unicorn.png",
+							"name": "Розовая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "plank_dead",
+							"img": "img/mat_plank_dead.png",
+							"name": "Сухая доска",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						}
+					],
+					"small": true,
+					"title": "Дерево — доски"
+				},
+				{
+					"entries": [
+						{
+							"id": "bark_tree_a",
+							"img": "img/mat_bark_tree_a.png",
+							"name": "Дубовая кора",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Сила 1",
+								"Цена: 2 мон."
 							]
 						},
 						{
@@ -11154,26 +11386,6 @@
 							]
 						},
 						{
-							"id": "wood_tree_c",
-							"img": "img/mat_wood_tree_c.png",
-							"name": "Вязовая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_tree_c",
-							"img": "img/mat_plank_tree_c.png",
-							"name": "Вязовая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
-							]
-						},
-						{
 							"id": "bark_tree_c",
 							"img": "img/mat_bark_tree_c.png",
 							"name": "Вязовая кора",
@@ -11182,26 +11394,6 @@
 							"text": [
 								"Свойства: Исцеление 1",
 								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "wood_tree_d",
-							"img": "img/mat_wood_tree_d.png",
-							"name": "Ясеневая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_tree_d",
-							"img": "img/mat_plank_tree_d.png",
-							"name": "Ясеневая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
 							]
 						},
 						{
@@ -11216,26 +11408,6 @@
 							]
 						},
 						{
-							"id": "wood_pine_a",
-							"img": "img/mat_wood_pine_a.png",
-							"name": "Сосновая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_pine_a",
-							"img": "img/mat_plank_pine_a.png",
-							"name": "Сосновая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
-							]
-						},
-						{
 							"id": "bark_pine_a",
 							"img": "img/mat_bark_pine_a.png",
 							"name": "Сосновая кора",
@@ -11244,26 +11416,6 @@
 							"text": [
 								"Свойства: Свежесть 1, Тепло 1",
 								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "wood_pine_b",
-							"img": "img/mat_wood_pine_b.png",
-							"name": "Еловая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_pine_b",
-							"img": "img/mat_plank_pine_b.png",
-							"name": "Еловая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
 							]
 						},
 						{
@@ -11278,26 +11430,6 @@
 							]
 						},
 						{
-							"id": "wood_tree_blossom",
-							"img": "img/mat_wood_tree_blossom.png",
-							"name": "Сакуровая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_tree_blossom",
-							"img": "img/mat_plank_tree_blossom.png",
-							"name": "Сакуровая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
-							]
-						},
-						{
 							"id": "bark_tree_blossom",
 							"img": "img/mat_bark_tree_blossom.png",
 							"name": "Сакуровая кора",
@@ -11306,26 +11438,6 @@
 							"text": [
 								"Свойства: Чары 1",
 								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "wood_tree_autumn",
-							"img": "img/mat_wood_tree_autumn.png",
-							"name": "Кленовая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_tree_autumn",
-							"img": "img/mat_plank_tree_autumn.png",
-							"name": "Кленовая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
 							]
 						},
 						{
@@ -11340,26 +11452,6 @@
 							]
 						},
 						{
-							"id": "wood_tree_autumn2",
-							"img": "img/mat_wood_tree_autumn2.png",
-							"name": "Рябиновая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_tree_autumn2",
-							"img": "img/mat_plank_tree_autumn2.png",
-							"name": "Рябиновая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
-							]
-						},
-						{
 							"id": "bark_tree_autumn2",
 							"img": "img/mat_bark_tree_autumn2.png",
 							"name": "Рябиновая кора",
@@ -11368,26 +11460,6 @@
 							"text": [
 								"Свойства: Жгучесть 1",
 								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "wood_tree_apple",
-							"img": "img/mat_wood_tree_apple.png",
-							"name": "Яблоневая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_tree_apple",
-							"img": "img/mat_plank_tree_apple.png",
-							"name": "Яблоневая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
 							]
 						},
 						{
@@ -11402,26 +11474,6 @@
 							]
 						},
 						{
-							"id": "wood_tree_birch",
-							"img": "img/mat_wood_tree_birch.png",
-							"name": "Берёзовая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_tree_birch",
-							"img": "img/mat_plank_tree_birch.png",
-							"name": "Берёзовая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
-							]
-						},
-						{
 							"id": "bark_tree_birch",
 							"img": "img/mat_bark_tree_birch.png",
 							"name": "Берёзовая кора",
@@ -11430,26 +11482,6 @@
 							"text": [
 								"Свойства: Свежесть 1, Исцеление 1",
 								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "wood_tree_unicorn",
-							"img": "img/mat_wood_tree_unicorn.png",
-							"name": "Розовая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_tree_unicorn",
-							"img": "img/mat_plank_tree_unicorn.png",
-							"name": "Розовая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
 							]
 						},
 						{
@@ -11464,26 +11496,6 @@
 							]
 						},
 						{
-							"id": "wood_dead",
-							"img": "img/mat_wood_dead.png",
-							"name": "Сухая чурка",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "plank_dead",
-							"img": "img/mat_plank_dead.png",
-							"name": "Сухая доска",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
-							]
-						},
-						{
 							"id": "bark_dead",
 							"img": "img/mat_bark_dead.png",
 							"name": "Сухая кора",
@@ -11493,7 +11505,13 @@
 								"Свойства: Тьма 1",
 								"Цена: 2 мон."
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Дерево — кора"
+				},
+				{
+					"entries": [
 						{
 							"id": "stick",
 							"img": "img/mat_stick.png",
@@ -11640,7 +11658,7 @@
 						}
 					],
 					"small": true,
-					"title": "Дерево"
+					"title": "Дерево — прочее (палки, уголь, смола, детали)"
 				},
 				{
 					"entries": [
@@ -12167,26 +12185,6 @@
 							]
 						},
 						{
-							"id": "nugget_copper",
-							"img": "img/mat_nugget_copper.png",
-							"name": "Медный самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "bar_copper",
-							"img": "img/mat_bar_copper.png",
-							"name": "Медный слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 10 мон."
-							]
-						},
-						{
 							"id": "ore_tin",
 							"img": "img/mat_ore_tin.png",
 							"name": "Оловянная руда",
@@ -12195,26 +12193,6 @@
 							"text": [
 								"Свойства: Сила 1",
 								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "nugget_tin",
-							"img": "img/mat_nugget_tin.png",
-							"name": "Оловянный самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "bar_tin",
-							"img": "img/mat_bar_tin.png",
-							"name": "Оловянный слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 9 мон."
 							]
 						},
 						{
@@ -12229,16 +12207,6 @@
 							]
 						},
 						{
-							"id": "nugget_iron",
-							"img": "img/mat_nugget_iron.png",
-							"name": "Железный самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 2 мон."
-							]
-						},
-						{
 							"id": "ore_silver",
 							"img": "img/mat_ore_silver.png",
 							"name": "Серебряная руда",
@@ -12247,26 +12215,6 @@
 							"text": [
 								"Свойства: Сила 1",
 								"Цена: 8 мон."
-							]
-						},
-						{
-							"id": "nugget_silver",
-							"img": "img/mat_nugget_silver.png",
-							"name": "Серебряный самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 4 мон."
-							]
-						},
-						{
-							"id": "bar_silver",
-							"img": "img/mat_bar_silver.png",
-							"name": "Серебряный слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 24 мон."
 							]
 						},
 						{
@@ -12281,26 +12229,6 @@
 							]
 						},
 						{
-							"id": "nugget_gold",
-							"img": "img/mat_nugget_gold.png",
-							"name": "Золотый самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 7 мон."
-							]
-						},
-						{
-							"id": "bar_gold",
-							"img": "img/mat_bar_gold.png",
-							"name": "Золотой слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 36 мон."
-							]
-						},
-						{
 							"id": "ore_zinc",
 							"img": "img/mat_ore_zinc.png",
 							"name": "Цинковая руда",
@@ -12309,26 +12237,6 @@
 							"text": [
 								"Свойства: Сила 1",
 								"Цена: 3 мон."
-							]
-						},
-						{
-							"id": "nugget_zinc",
-							"img": "img/mat_nugget_zinc.png",
-							"name": "Цинковый самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "bar_zinc",
-							"img": "img/mat_bar_zinc.png",
-							"name": "Цинковый слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 10 мон."
 							]
 						},
 						{
@@ -12343,26 +12251,6 @@
 							]
 						},
 						{
-							"id": "nugget_lead",
-							"img": "img/mat_nugget_lead.png",
-							"name": "Свинцовый самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "bar_lead",
-							"img": "img/mat_bar_lead.png",
-							"name": "Свинцовый слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 9 мон."
-							]
-						},
-						{
 							"id": "ore_nickel",
 							"img": "img/mat_ore_nickel.png",
 							"name": "Никелевая руда",
@@ -12371,26 +12259,6 @@
 							"text": [
 								"Свойства: Сила 1",
 								"Цена: 4 мон."
-							]
-						},
-						{
-							"id": "nugget_nickel",
-							"img": "img/mat_nugget_nickel.png",
-							"name": "Никелевый самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 2 мон."
-							]
-						},
-						{
-							"id": "bar_nickel",
-							"img": "img/mat_bar_nickel.png",
-							"name": "Никелевый слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 14 мон."
 							]
 						},
 						{
@@ -12405,26 +12273,6 @@
 							]
 						},
 						{
-							"id": "nugget_cobalt",
-							"img": "img/mat_nugget_cobalt.png",
-							"name": "Кобальтовый самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 5 мон."
-							]
-						},
-						{
-							"id": "bar_cobalt",
-							"img": "img/mat_bar_cobalt.png",
-							"name": "Кобальтовый слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 28 мон."
-							]
-						},
-						{
 							"id": "ore_mithril",
 							"img": "img/mat_ore_mithril.png",
 							"name": "Мифриловая руда",
@@ -12433,26 +12281,6 @@
 							"text": [
 								"Свойства: Сила 1",
 								"Цена: 20 мон."
-							]
-						},
-						{
-							"id": "nugget_mithril",
-							"img": "img/mat_nugget_mithril.png",
-							"name": "Мифриловый самородок",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 12 мон."
-							]
-						},
-						{
-							"id": "bar_mithril",
-							"img": "img/mat_bar_mithril.png",
-							"name": "Мифриловый слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 60 мон."
 							]
 						},
 						{
@@ -12467,6 +12295,123 @@
 							]
 						},
 						{
+							"id": "ore_orichalcum",
+							"img": "img/mat_ore_orichalcum.png",
+							"name": "Орихалковая руда",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Сила 1",
+								"Цена: 22 мон."
+							]
+						}
+					],
+					"small": true,
+					"title": "Руды и металлы — руды"
+				},
+				{
+					"entries": [
+						{
+							"id": "nugget_copper",
+							"img": "img/mat_nugget_copper.png",
+							"name": "Медный самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 2 мон."
+							]
+						},
+						{
+							"id": "nugget_tin",
+							"img": "img/mat_nugget_tin.png",
+							"name": "Оловянный самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 2 мон."
+							]
+						},
+						{
+							"id": "nugget_iron",
+							"img": "img/mat_nugget_iron.png",
+							"name": "Железный самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 2 мон."
+							]
+						},
+						{
+							"id": "nugget_silver",
+							"img": "img/mat_nugget_silver.png",
+							"name": "Серебряный самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 4 мон."
+							]
+						},
+						{
+							"id": "nugget_gold",
+							"img": "img/mat_nugget_gold.png",
+							"name": "Золотый самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 7 мон."
+							]
+						},
+						{
+							"id": "nugget_zinc",
+							"img": "img/mat_nugget_zinc.png",
+							"name": "Цинковый самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 2 мон."
+							]
+						},
+						{
+							"id": "nugget_lead",
+							"img": "img/mat_nugget_lead.png",
+							"name": "Свинцовый самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 2 мон."
+							]
+						},
+						{
+							"id": "nugget_nickel",
+							"img": "img/mat_nugget_nickel.png",
+							"name": "Никелевый самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 2 мон."
+							]
+						},
+						{
+							"id": "nugget_cobalt",
+							"img": "img/mat_nugget_cobalt.png",
+							"name": "Кобальтовый самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 5 мон."
+							]
+						},
+						{
+							"id": "nugget_mithril",
+							"img": "img/mat_nugget_mithril.png",
+							"name": "Мифриловый самородок",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 12 мон."
+							]
+						},
+						{
 							"id": "nugget_adamant",
 							"img": "img/mat_nugget_adamant.png",
 							"name": "Адамантовый самородок",
@@ -12477,27 +12422,6 @@
 							]
 						},
 						{
-							"id": "bar_adamant",
-							"img": "img/mat_bar_adamant.png",
-							"name": "Адамантовый слиток",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 70 мон."
-							]
-						},
-						{
-							"id": "ore_orichalcum",
-							"img": "img/mat_ore_orichalcum.png",
-							"name": "Орихалковая руда",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Сила 1",
-								"Цена: 22 мон."
-							]
-						},
-						{
 							"id": "nugget_orichalcum",
 							"img": "img/mat_nugget_orichalcum.png",
 							"name": "Орихалковый самородок",
@@ -12505,6 +12429,112 @@
 							"tags": [],
 							"text": [
 								"Цена: 13 мон."
+							]
+						}
+					],
+					"small": true,
+					"title": "Руды и металлы — самородки"
+				},
+				{
+					"entries": [
+						{
+							"id": "bar_copper",
+							"img": "img/mat_bar_copper.png",
+							"name": "Медный слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 10 мон."
+							]
+						},
+						{
+							"id": "bar_tin",
+							"img": "img/mat_bar_tin.png",
+							"name": "Оловянный слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 9 мон."
+							]
+						},
+						{
+							"id": "bar_silver",
+							"img": "img/mat_bar_silver.png",
+							"name": "Серебряный слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 24 мон."
+							]
+						},
+						{
+							"id": "bar_gold",
+							"img": "img/mat_bar_gold.png",
+							"name": "Золотой слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 36 мон."
+							]
+						},
+						{
+							"id": "bar_zinc",
+							"img": "img/mat_bar_zinc.png",
+							"name": "Цинковый слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 10 мон."
+							]
+						},
+						{
+							"id": "bar_lead",
+							"img": "img/mat_bar_lead.png",
+							"name": "Свинцовый слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 9 мон."
+							]
+						},
+						{
+							"id": "bar_nickel",
+							"img": "img/mat_bar_nickel.png",
+							"name": "Никелевый слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 14 мон."
+							]
+						},
+						{
+							"id": "bar_cobalt",
+							"img": "img/mat_bar_cobalt.png",
+							"name": "Кобальтовый слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 28 мон."
+							]
+						},
+						{
+							"id": "bar_mithril",
+							"img": "img/mat_bar_mithril.png",
+							"name": "Мифриловый слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 60 мон."
+							]
+						},
+						{
+							"id": "bar_adamant",
+							"img": "img/mat_bar_adamant.png",
+							"name": "Адамантовый слиток",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 70 мон."
 							]
 						},
 						{
@@ -12663,7 +12693,13 @@
 								"Свойства: Свет 2",
 								"Цена: 120 мон."
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Руды и металлы — слитки"
+				},
+				{
+					"entries": [
 						{
 							"id": "nail",
 							"img": "img/mat_nail.png",
@@ -12806,7 +12842,7 @@
 						}
 					],
 					"small": true,
-					"title": "Руды и металлы"
+					"title": "Руды и металлы — детали (гвозди, проволока, листы)"
 				},
 				{
 					"entries": [
@@ -12822,17 +12858,6 @@
 							]
 						},
 						{
-							"id": "gem_amethyst",
-							"img": "img/mat_gem_amethyst.png",
-							"name": "Аметист",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Чары 1, Покой 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
 							"id": "gem_raw_topaz",
 							"img": "img/mat_gem_raw_topaz.png",
 							"name": "Топаз (необработанный)",
@@ -12841,17 +12866,6 @@
 							"text": [
 								"Свойства: Тепло 1, Свет 1",
 								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "gem_topaz",
-							"img": "img/mat_gem_topaz.png",
-							"name": "Топаз",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Тепло 1, Свет 1",
-								"Цена: 18 мон."
 							]
 						},
 						{
@@ -12866,17 +12880,6 @@
 							]
 						},
 						{
-							"id": "gem_garnet",
-							"img": "img/mat_gem_garnet.png",
-							"name": "Гранат",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Огонь 1, Сила 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
 							"id": "gem_raw_opal",
 							"img": "img/mat_gem_raw_opal.png",
 							"name": "Опал (необработанный)",
@@ -12885,17 +12888,6 @@
 							"text": [
 								"Свойства: Чары 2",
 								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "gem_opal",
-							"img": "img/mat_gem_opal.png",
-							"name": "Опал",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Чары 2",
-								"Цена: 18 мон."
 							]
 						},
 						{
@@ -12910,17 +12902,6 @@
 							]
 						},
 						{
-							"id": "gem_jade",
-							"img": "img/mat_gem_jade.png",
-							"name": "Нефрит",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Исцеление 1, Покой 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
 							"id": "gem_raw_peridot",
 							"img": "img/mat_gem_raw_peridot.png",
 							"name": "Перидот (необработанный)",
@@ -12929,17 +12910,6 @@
 							"text": [
 								"Свойства: Свежесть 1, Исцеление 1",
 								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "gem_peridot",
-							"img": "img/mat_gem_peridot.png",
-							"name": "Перидот",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Свежесть 1, Исцеление 1",
-								"Цена: 18 мон."
 							]
 						},
 						{
@@ -12954,17 +12924,6 @@
 							]
 						},
 						{
-							"id": "gem_citrine",
-							"img": "img/mat_gem_citrine.png",
-							"name": "Цитрин",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Свет 1, Тепло 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
 							"id": "gem_raw_aquamarine",
 							"img": "img/mat_gem_raw_aquamarine.png",
 							"name": "Аквамарин (необработанный)",
@@ -12973,17 +12932,6 @@
 							"text": [
 								"Свойства: Холод 1, Свежесть 1",
 								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "gem_aquamarine",
-							"img": "img/mat_gem_aquamarine.png",
-							"name": "Аквамарин",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Холод 1, Свежесть 1",
-								"Цена: 18 мон."
 							]
 						},
 						{
@@ -12998,17 +12946,6 @@
 							]
 						},
 						{
-							"id": "gem_moonstone",
-							"img": "img/mat_gem_moonstone.png",
-							"name": "Лунный камень",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Сон 1, Свет 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
 							"id": "gem_raw_onyx",
 							"img": "img/mat_gem_raw_onyx.png",
 							"name": "Оникс (необработанный)",
@@ -13017,17 +12954,6 @@
 							"text": [
 								"Свойства: Тьма 1, Сила 1",
 								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "gem_onyx",
-							"img": "img/mat_gem_onyx.png",
-							"name": "Оникс",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Тьма 1, Сила 1",
-								"Цена: 18 мон."
 							]
 						},
 						{
@@ -13042,17 +12968,6 @@
 							]
 						},
 						{
-							"id": "gem_lapis",
-							"img": "img/mat_gem_lapis.png",
-							"name": "Лазурит",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Чары 1, Холод 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
 							"id": "gem_raw_diamond",
 							"img": "img/mat_gem_raw_diamond.png",
 							"name": "Алмаз (необработанный)",
@@ -13061,17 +12976,6 @@
 							"text": [
 								"Свойства: Свет 2, Сила 1",
 								"Цена: 20 мон."
-							]
-						},
-						{
-							"id": "gem_diamond",
-							"img": "img/mat_gem_diamond.png",
-							"name": "Алмаз",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Свет 2, Сила 1",
-								"Цена: 40 мон."
 							]
 						},
 						{
@@ -13086,17 +12990,6 @@
 							]
 						},
 						{
-							"id": "gem_tourmaline",
-							"img": "img/mat_gem_tourmaline.png",
-							"name": "Турмалин",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Чары 1, Жгучесть 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
 							"id": "gem_raw_rose_quartz",
 							"img": "img/mat_gem_raw_rose_quartz.png",
 							"name": "Розовый кварц (необработанный)",
@@ -13105,17 +12998,6 @@
 							"text": [
 								"Свойства: Покой 1, Исцеление 1",
 								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "gem_rose_quartz",
-							"img": "img/mat_gem_rose_quartz.png",
-							"name": "Розовый кварц",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Покой 1, Исцеление 1",
-								"Цена: 18 мон."
 							]
 						},
 						{
@@ -13130,17 +13012,6 @@
 							]
 						},
 						{
-							"id": "gem_smoky_quartz",
-							"img": "img/mat_gem_smoky_quartz.png",
-							"name": "Дымчатый кварц",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Тьма 1, Покой 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
 							"id": "gem_raw_jet",
 							"img": "img/mat_gem_raw_jet.png",
 							"name": "Гагат (необработанный)",
@@ -13149,17 +13020,6 @@
 							"text": [
 								"Свойства: Тьма 2",
 								"Цена: 9 мон."
-							]
-						},
-						{
-							"id": "gem_jet",
-							"img": "img/mat_gem_jet.png",
-							"name": "Гагат",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Тьма 2",
-								"Цена: 18 мон."
 							]
 						},
 						{
@@ -13174,17 +13034,6 @@
 							]
 						},
 						{
-							"id": "gem_amber",
-							"img": "img/mat_gem_amber.png",
-							"name": "Янтарь",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Свойства: Тепло 1, Исцеление 1",
-								"Цена: 18 мон."
-							]
-						},
-						{
 							"id": "gem_raw_malachite",
 							"img": "img/mat_gem_raw_malachite.png",
 							"name": "Малахит (необработанный)",
@@ -13193,6 +13042,199 @@
 							"text": [
 								"Свойства: Исцеление 1, Сила 1",
 								"Цена: 9 мон."
+							]
+						}
+					],
+					"small": true,
+					"title": "Самоцветы — необработанные"
+				},
+				{
+					"entries": [
+						{
+							"id": "gem_amethyst",
+							"img": "img/mat_gem_amethyst.png",
+							"name": "Аметист",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Чары 1, Покой 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_topaz",
+							"img": "img/mat_gem_topaz.png",
+							"name": "Топаз",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Тепло 1, Свет 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_garnet",
+							"img": "img/mat_gem_garnet.png",
+							"name": "Гранат",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Огонь 1, Сила 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_opal",
+							"img": "img/mat_gem_opal.png",
+							"name": "Опал",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Чары 2",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_jade",
+							"img": "img/mat_gem_jade.png",
+							"name": "Нефрит",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Исцеление 1, Покой 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_peridot",
+							"img": "img/mat_gem_peridot.png",
+							"name": "Перидот",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Свежесть 1, Исцеление 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_citrine",
+							"img": "img/mat_gem_citrine.png",
+							"name": "Цитрин",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Свет 1, Тепло 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_aquamarine",
+							"img": "img/mat_gem_aquamarine.png",
+							"name": "Аквамарин",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Холод 1, Свежесть 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_moonstone",
+							"img": "img/mat_gem_moonstone.png",
+							"name": "Лунный камень",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Сон 1, Свет 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_onyx",
+							"img": "img/mat_gem_onyx.png",
+							"name": "Оникс",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Тьма 1, Сила 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_lapis",
+							"img": "img/mat_gem_lapis.png",
+							"name": "Лазурит",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Чары 1, Холод 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_diamond",
+							"img": "img/mat_gem_diamond.png",
+							"name": "Алмаз",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Свет 2, Сила 1",
+								"Цена: 40 мон."
+							]
+						},
+						{
+							"id": "gem_tourmaline",
+							"img": "img/mat_gem_tourmaline.png",
+							"name": "Турмалин",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Чары 1, Жгучесть 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_rose_quartz",
+							"img": "img/mat_gem_rose_quartz.png",
+							"name": "Розовый кварц",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Покой 1, Исцеление 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_smoky_quartz",
+							"img": "img/mat_gem_smoky_quartz.png",
+							"name": "Дымчатый кварц",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Тьма 1, Покой 1",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_jet",
+							"img": "img/mat_gem_jet.png",
+							"name": "Гагат",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Тьма 2",
+								"Цена: 18 мон."
+							]
+						},
+						{
+							"id": "gem_amber",
+							"img": "img/mat_gem_amber.png",
+							"name": "Янтарь",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Свойства: Тепло 1, Исцеление 1",
+								"Цена: 18 мон."
 							]
 						},
 						{
@@ -13208,7 +13250,7 @@
 						}
 					],
 					"small": true,
-					"title": "Самоцветы"
+					"title": "Самоцветы — огранённые"
 				},
 				{
 					"entries": [
@@ -13370,7 +13412,13 @@
 							"text": [
 								"Цена: 4 мон."
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Ткани — нитки"
+				},
+				{
+					"entries": [
 						{
 							"id": "linen",
 							"img": "img/mat_linen.png",
@@ -13500,90 +13548,10 @@
 							"text": [
 								"Цена: 6 мон."
 							]
-						},
-						{
-							"id": "yarn_rabbit",
-							"img": "img/mat_yarn_rabbit.png",
-							"name": "Пуховая пряжа",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 8 мон."
-							]
-						},
-						{
-							"id": "yarn_fox",
-							"img": "img/mat_yarn_fox.png",
-							"name": "Рыжая пряжа",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 8 мон."
-							]
-						},
-						{
-							"id": "yarn_deer",
-							"img": "img/mat_yarn_deer.png",
-							"name": "Оленья пряжа",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 8 мон."
-							]
-						},
-						{
-							"id": "yarn_cat",
-							"img": "img/mat_yarn_cat.png",
-							"name": "Кошачья пряжа",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 8 мон."
-							]
-						},
-						{
-							"id": "yarn_sapphire",
-							"img": "img/mat_yarn_sapphire.png",
-							"name": "Сапфировая пряжа",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 45 мон."
-							]
-						},
-						{
-							"id": "yarn_unicorn",
-							"img": "img/mat_yarn_unicorn.png",
-							"name": "Единорожья пряжа",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 45 мон."
-							]
-						},
-						{
-							"id": "yarn_golden",
-							"img": "img/mat_yarn_golden.png",
-							"name": "Золотая пряжа",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 45 мон."
-							]
-						},
-						{
-							"id": "yarn_ember",
-							"img": "img/mat_yarn_ember.png",
-							"name": "Тлеющая пряжа",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 45 мон."
-							]
 						}
 					],
 					"small": true,
-					"title": "Ткани"
+					"title": "Ткани — готовые ткани"
 				},
 				{
 					"entries": [
@@ -13825,6 +13793,92 @@
 				{
 					"entries": [
 						{
+							"id": "yarn_rabbit",
+							"img": "img/mat_yarn_rabbit.png",
+							"name": "Пуховая пряжа",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 8 мон."
+							]
+						},
+						{
+							"id": "yarn_fox",
+							"img": "img/mat_yarn_fox.png",
+							"name": "Рыжая пряжа",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 8 мон."
+							]
+						},
+						{
+							"id": "yarn_deer",
+							"img": "img/mat_yarn_deer.png",
+							"name": "Оленья пряжа",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 8 мон."
+							]
+						},
+						{
+							"id": "yarn_cat",
+							"img": "img/mat_yarn_cat.png",
+							"name": "Кошачья пряжа",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 8 мон."
+							]
+						},
+						{
+							"id": "yarn_sapphire",
+							"img": "img/mat_yarn_sapphire.png",
+							"name": "Сапфировая пряжа",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 45 мон."
+							]
+						},
+						{
+							"id": "yarn_unicorn",
+							"img": "img/mat_yarn_unicorn.png",
+							"name": "Единорожья пряжа",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 45 мон."
+							]
+						},
+						{
+							"id": "yarn_golden",
+							"img": "img/mat_yarn_golden.png",
+							"name": "Золотая пряжа",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 45 мон."
+							]
+						},
+						{
+							"id": "yarn_ember",
+							"img": "img/mat_yarn_ember.png",
+							"name": "Тлеющая пряжа",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 45 мон."
+							]
+						}
+					],
+					"small": true,
+					"title": "Ткани — пряжа"
+				},
+				{
+					"entries": [
+						{
 							"id": "shell",
 							"img": "img/mat_shell.png",
 							"name": "Ракушка",
@@ -13929,16 +13983,6 @@
 							]
 						},
 						{
-							"id": "cloth_red",
-							"img": "img/mat_cloth_red.png",
-							"name": "Красная ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
-							]
-						},
-						{
 							"id": "dye_orange",
 							"img": "img/mat_dye_orange.png",
 							"name": "Оранжевая краска",
@@ -13946,16 +13990,6 @@
 							"tags": [],
 							"text": [
 								"Цена: 6 мон."
-							]
-						},
-						{
-							"id": "cloth_orange",
-							"img": "img/mat_cloth_orange.png",
-							"name": "Оранжевая ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
 							]
 						},
 						{
@@ -13969,16 +14003,6 @@
 							]
 						},
 						{
-							"id": "cloth_yellow",
-							"img": "img/mat_cloth_yellow.png",
-							"name": "Жёлтая ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
-							]
-						},
-						{
 							"id": "dye_green",
 							"img": "img/mat_dye_green.png",
 							"name": "Зелёная краска",
@@ -13986,16 +14010,6 @@
 							"tags": [],
 							"text": [
 								"Цена: 6 мон."
-							]
-						},
-						{
-							"id": "cloth_green",
-							"img": "img/mat_cloth_green.png",
-							"name": "Зелёная ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
 							]
 						},
 						{
@@ -14009,16 +14023,6 @@
 							]
 						},
 						{
-							"id": "cloth_cyan",
-							"img": "img/mat_cloth_cyan.png",
-							"name": "Бирюзовая ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
-							]
-						},
-						{
 							"id": "dye_blue",
 							"img": "img/mat_dye_blue.png",
 							"name": "Синяя краска",
@@ -14026,16 +14030,6 @@
 							"tags": [],
 							"text": [
 								"Цена: 6 мон."
-							]
-						},
-						{
-							"id": "cloth_blue",
-							"img": "img/mat_cloth_blue.png",
-							"name": "Синяя ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
 							]
 						},
 						{
@@ -14049,16 +14043,6 @@
 							]
 						},
 						{
-							"id": "cloth_purple",
-							"img": "img/mat_cloth_purple.png",
-							"name": "Фиолетовая ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
-							]
-						},
-						{
 							"id": "dye_pink",
 							"img": "img/mat_dye_pink.png",
 							"name": "Розовая краска",
@@ -14066,16 +14050,6 @@
 							"tags": [],
 							"text": [
 								"Цена: 6 мон."
-							]
-						},
-						{
-							"id": "cloth_pink",
-							"img": "img/mat_cloth_pink.png",
-							"name": "Розовая ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
 							]
 						},
 						{
@@ -14089,16 +14063,6 @@
 							]
 						},
 						{
-							"id": "cloth_brown",
-							"img": "img/mat_cloth_brown.png",
-							"name": "Коричневая ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
-							]
-						},
-						{
 							"id": "dye_black",
 							"img": "img/mat_dye_black.png",
 							"name": "Чёрная краска",
@@ -14106,16 +14070,6 @@
 							"tags": [],
 							"text": [
 								"Цена: 6 мон."
-							]
-						},
-						{
-							"id": "cloth_black",
-							"img": "img/mat_cloth_black.png",
-							"name": "Чёрная ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
 							]
 						},
 						{
@@ -14129,16 +14083,6 @@
 							]
 						},
 						{
-							"id": "cloth_white",
-							"img": "img/mat_cloth_white.png",
-							"name": "Белая ткань",
-							"sub": "",
-							"tags": [],
-							"text": [
-								"Цена: 16 мон."
-							]
-						},
-						{
 							"id": "dye_gold",
 							"img": "img/mat_dye_gold.png",
 							"name": "Золотая краска",
@@ -14146,6 +14090,122 @@
 							"tags": [],
 							"text": [
 								"Цена: 30 мон."
+							]
+						}
+					],
+					"small": true,
+					"title": "Краски — красители"
+				},
+				{
+					"entries": [
+						{
+							"id": "cloth_red",
+							"img": "img/mat_cloth_red.png",
+							"name": "Красная ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_orange",
+							"img": "img/mat_cloth_orange.png",
+							"name": "Оранжевая ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_yellow",
+							"img": "img/mat_cloth_yellow.png",
+							"name": "Жёлтая ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_green",
+							"img": "img/mat_cloth_green.png",
+							"name": "Зелёная ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_cyan",
+							"img": "img/mat_cloth_cyan.png",
+							"name": "Бирюзовая ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_blue",
+							"img": "img/mat_cloth_blue.png",
+							"name": "Синяя ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_purple",
+							"img": "img/mat_cloth_purple.png",
+							"name": "Фиолетовая ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_pink",
+							"img": "img/mat_cloth_pink.png",
+							"name": "Розовая ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_brown",
+							"img": "img/mat_cloth_brown.png",
+							"name": "Коричневая ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_black",
+							"img": "img/mat_cloth_black.png",
+							"name": "Чёрная ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
+							]
+						},
+						{
+							"id": "cloth_white",
+							"img": "img/mat_cloth_white.png",
+							"name": "Белая ткань",
+							"sub": "",
+							"tags": [],
+							"text": [
+								"Цена: 16 мон."
 							]
 						},
 						{
@@ -14160,7 +14220,7 @@
 						}
 					],
 					"small": true,
-					"title": "Краски"
+					"title": "Краски — крашеные ткани"
 				},
 				{
 					"entries": [
@@ -15207,7 +15267,13 @@
 							"text": [
 								"Плавник ×1"
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Мастерская: Пилорама"
+				},
+				{
+					"entries": [
 						{
 							"id": "rec_brick22",
 							"img": "img/mat_brick.png",
@@ -15367,7 +15433,13 @@
 							"text": [
 								"Холодная вода ×1 + Соль ×1"
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Мастерская: Печь для обжига"
+				},
+				{
+					"entries": [
 						{
 							"id": "rec_bar_copper38",
 							"img": "img/mat_bar_copper.png",
@@ -15757,7 +15829,13 @@
 							"text": [
 								"Песок ×3 + Каменный уголь ×1"
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Мастерская: Плавильня"
+				},
+				{
+					"entries": [
 						{
 							"id": "rec_nail77",
 							"img": "img/mat_nail.png",
@@ -15927,7 +16005,13 @@
 							"text": [
 								"Железный брусок ×1"
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Мастерская: Наковальня"
+				},
+				{
+					"entries": [
 						{
 							"id": "rec_twine94",
 							"img": "img/mat_twine.png",
@@ -16089,7 +16173,7 @@
 							]
 						},
 						{
-							"id": "rec_yarn_rabbit111",
+							"id": "rec_yarn_rabbit110",
 							"img": "img/mat_yarn_rabbit.png",
 							"name": "Пуховая пряжа ×1",
 							"sub": "Прялка",
@@ -16097,9 +16181,15 @@
 							"text": [
 								"Беличий пух ×3"
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Мастерская: Прялка"
+				},
+				{
+					"entries": [
 						{
-							"id": "rec_linen112",
+							"id": "rec_linen111",
 							"img": "img/mat_linen.png",
 							"name": "Льняное полотно ×1",
 							"sub": "Ткацкий станок",
@@ -16109,7 +16199,7 @@
 							]
 						},
 						{
-							"id": "rec_canvas113",
+							"id": "rec_canvas112",
 							"img": "img/mat_canvas.png",
 							"name": "Парусина ×1",
 							"sub": "Ткацкий станок",
@@ -16119,7 +16209,7 @@
 							]
 						},
 						{
-							"id": "rec_cotton_cloth114",
+							"id": "rec_cotton_cloth113",
 							"img": "img/mat_cotton_cloth.png",
 							"name": "Хлопковая ткань ×1",
 							"sub": "Ткацкий станок",
@@ -16129,7 +16219,7 @@
 							]
 						},
 						{
-							"id": "rec_silk_cloth115",
+							"id": "rec_silk_cloth114",
 							"img": "img/mat_silk_cloth.png",
 							"name": "Шёлк ×1",
 							"sub": "Ткацкий станок",
@@ -16139,7 +16229,7 @@
 							]
 						},
 						{
-							"id": "rec_spider_cloth116",
+							"id": "rec_spider_cloth115",
 							"img": "img/mat_spider_cloth.png",
 							"name": "Паутинная ткань ×1",
 							"sub": "Ткацкий станок",
@@ -16149,7 +16239,7 @@
 							]
 						},
 						{
-							"id": "rec_nettle_cloth117",
+							"id": "rec_nettle_cloth116",
 							"img": "img/mat_nettle_cloth.png",
 							"name": "Крапивное полотно ×1",
 							"sub": "Ткацкий станок",
@@ -16159,7 +16249,7 @@
 							]
 						},
 						{
-							"id": "rec_wool_cloth118",
+							"id": "rec_wool_cloth117",
 							"img": "img/mat_wool_cloth.png",
 							"name": "Шерстяная ткань ×1",
 							"sub": "Ткацкий станок",
@@ -16169,7 +16259,7 @@
 							]
 						},
 						{
-							"id": "rec_felt119",
+							"id": "rec_felt118",
 							"img": "img/mat_felt.png",
 							"name": "Войлок ×1",
 							"sub": "Ткацкий станок",
@@ -16179,7 +16269,7 @@
 							]
 						},
 						{
-							"id": "rec_rope120",
+							"id": "rec_rope119",
 							"img": "img/mat_rope.png",
 							"name": "Верёвка ×1",
 							"sub": "Ткацкий станок",
@@ -16189,7 +16279,7 @@
 							]
 						},
 						{
-							"id": "rec_net_mesh121",
+							"id": "rec_net_mesh120",
 							"img": "img/mat_net_mesh.png",
 							"name": "Сеть ×1",
 							"sub": "Ткацкий станок",
@@ -16199,7 +16289,7 @@
 							]
 						},
 						{
-							"id": "rec_straw_mat122",
+							"id": "rec_straw_mat121",
 							"img": "img/mat_straw_mat.png",
 							"name": "Соломенный мат ×1",
 							"sub": "Ткацкий станок",
@@ -16209,7 +16299,7 @@
 							]
 						},
 						{
-							"id": "rec_basket123",
+							"id": "rec_basket122",
 							"img": "img/mat_basket.png",
 							"name": "Плетёная корзинка ×1",
 							"sub": "Ткацкий станок",
@@ -16219,7 +16309,7 @@
 							]
 						},
 						{
-							"id": "rec_basket124",
+							"id": "rec_basket123",
 							"img": "img/mat_basket.png",
 							"name": "Плетёная корзинка ×1",
 							"sub": "Ткацкий станок",
@@ -16227,9 +16317,15 @@
 							"text": [
 								"Тростник ×6"
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Мастерская: Ткацкий станок"
+				},
+				{
+					"entries": [
 						{
-							"id": "rec_dye_red125",
+							"id": "rec_dye_red124",
 							"img": "img/mat_dye_red.png",
 							"name": "Красная краска ×2",
 							"sub": "Красильный чан",
@@ -16239,7 +16335,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_orange126",
+							"id": "rec_dye_orange125",
 							"img": "img/mat_dye_orange.png",
 							"name": "Оранжевая краска ×2",
 							"sub": "Красильный чан",
@@ -16249,7 +16345,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_yellow127",
+							"id": "rec_dye_yellow126",
 							"img": "img/mat_dye_yellow.png",
 							"name": "Жёлтая краска ×2",
 							"sub": "Красильный чан",
@@ -16259,7 +16355,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_green128",
+							"id": "rec_dye_green127",
 							"img": "img/mat_dye_green.png",
 							"name": "Зелёная краска ×2",
 							"sub": "Красильный чан",
@@ -16269,7 +16365,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_cyan129",
+							"id": "rec_dye_cyan128",
 							"img": "img/mat_dye_cyan.png",
 							"name": "Бирюзовая краска ×2",
 							"sub": "Красильный чан",
@@ -16279,7 +16375,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_blue130",
+							"id": "rec_dye_blue129",
 							"img": "img/mat_dye_blue.png",
 							"name": "Синяя краска ×2",
 							"sub": "Красильный чан",
@@ -16289,7 +16385,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_purple131",
+							"id": "rec_dye_purple130",
 							"img": "img/mat_dye_purple.png",
 							"name": "Фиолетовая краска ×2",
 							"sub": "Красильный чан",
@@ -16299,7 +16395,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_pink132",
+							"id": "rec_dye_pink131",
 							"img": "img/mat_dye_pink.png",
 							"name": "Розовая краска ×2",
 							"sub": "Красильный чан",
@@ -16309,7 +16405,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_brown133",
+							"id": "rec_dye_brown132",
 							"img": "img/mat_dye_brown.png",
 							"name": "Коричневая краска ×2",
 							"sub": "Красильный чан",
@@ -16319,7 +16415,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_black134",
+							"id": "rec_dye_black133",
 							"img": "img/mat_dye_black.png",
 							"name": "Чёрная краска ×2",
 							"sub": "Красильный чан",
@@ -16329,7 +16425,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_white135",
+							"id": "rec_dye_white134",
 							"img": "img/mat_dye_white.png",
 							"name": "Белая краска ×2",
 							"sub": "Красильный чан",
@@ -16339,7 +16435,7 @@
 							]
 						},
 						{
-							"id": "rec_dye_gold136",
+							"id": "rec_dye_gold135",
 							"img": "img/mat_dye_gold.png",
 							"name": "Золотая краска ×2",
 							"sub": "Красильный чан",
@@ -16349,7 +16445,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_red137",
+							"id": "rec_cloth_red136",
 							"img": "img/mat_cloth_red.png",
 							"name": "Красная ткань ×1",
 							"sub": "Красильный чан",
@@ -16359,7 +16455,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_orange138",
+							"id": "rec_cloth_orange137",
 							"img": "img/mat_cloth_orange.png",
 							"name": "Оранжевая ткань ×1",
 							"sub": "Красильный чан",
@@ -16369,7 +16465,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_yellow139",
+							"id": "rec_cloth_yellow138",
 							"img": "img/mat_cloth_yellow.png",
 							"name": "Жёлтая ткань ×1",
 							"sub": "Красильный чан",
@@ -16379,7 +16475,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_green140",
+							"id": "rec_cloth_green139",
 							"img": "img/mat_cloth_green.png",
 							"name": "Зелёная ткань ×1",
 							"sub": "Красильный чан",
@@ -16389,7 +16485,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_cyan141",
+							"id": "rec_cloth_cyan140",
 							"img": "img/mat_cloth_cyan.png",
 							"name": "Бирюзовая ткань ×1",
 							"sub": "Красильный чан",
@@ -16399,7 +16495,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_blue142",
+							"id": "rec_cloth_blue141",
 							"img": "img/mat_cloth_blue.png",
 							"name": "Синяя ткань ×1",
 							"sub": "Красильный чан",
@@ -16409,7 +16505,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_purple143",
+							"id": "rec_cloth_purple142",
 							"img": "img/mat_cloth_purple.png",
 							"name": "Фиолетовая ткань ×1",
 							"sub": "Красильный чан",
@@ -16419,7 +16515,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_pink144",
+							"id": "rec_cloth_pink143",
 							"img": "img/mat_cloth_pink.png",
 							"name": "Розовая ткань ×1",
 							"sub": "Красильный чан",
@@ -16429,7 +16525,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_brown145",
+							"id": "rec_cloth_brown144",
 							"img": "img/mat_cloth_brown.png",
 							"name": "Коричневая ткань ×1",
 							"sub": "Красильный чан",
@@ -16439,7 +16535,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_black146",
+							"id": "rec_cloth_black145",
 							"img": "img/mat_cloth_black.png",
 							"name": "Чёрная ткань ×1",
 							"sub": "Красильный чан",
@@ -16449,7 +16545,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_white147",
+							"id": "rec_cloth_white146",
 							"img": "img/mat_cloth_white.png",
 							"name": "Белая ткань ×1",
 							"sub": "Красильный чан",
@@ -16459,7 +16555,7 @@
 							]
 						},
 						{
-							"id": "rec_cloth_gold148",
+							"id": "rec_cloth_gold147",
 							"img": "img/mat_cloth_gold.png",
 							"name": "Золотая ткань ×1",
 							"sub": "Красильный чан",
@@ -16469,7 +16565,7 @@
 							]
 						},
 						{
-							"id": "rec_glass_red149",
+							"id": "rec_glass_red148",
 							"img": "img/mat_glass_red.png",
 							"name": "Красное стекло ×1",
 							"sub": "Красильный чан",
@@ -16479,7 +16575,7 @@
 							]
 						},
 						{
-							"id": "rec_glass_yellow150",
+							"id": "rec_glass_yellow149",
 							"img": "img/mat_glass_yellow.png",
 							"name": "Жёлтое стекло ×1",
 							"sub": "Красильный чан",
@@ -16489,7 +16585,7 @@
 							]
 						},
 						{
-							"id": "rec_glass_green151",
+							"id": "rec_glass_green150",
 							"img": "img/mat_glass_green.png",
 							"name": "Зелёное стекло ×1",
 							"sub": "Красильный чан",
@@ -16499,7 +16595,7 @@
 							]
 						},
 						{
-							"id": "rec_glass_blue152",
+							"id": "rec_glass_blue151",
 							"img": "img/mat_glass_blue.png",
 							"name": "Синяя стекло ×1",
 							"sub": "Красильный чан",
@@ -16509,7 +16605,7 @@
 							]
 						},
 						{
-							"id": "rec_glass_purple153",
+							"id": "rec_glass_purple152",
 							"img": "img/mat_glass_purple.png",
 							"name": "Фиолетовое стекло ×1",
 							"sub": "Красильный чан",
@@ -16519,7 +16615,7 @@
 							]
 						},
 						{
-							"id": "rec_glass_pink154",
+							"id": "rec_glass_pink153",
 							"img": "img/mat_glass_pink.png",
 							"name": "Розовое стекло ×1",
 							"sub": "Красильный чан",
@@ -16527,9 +16623,15 @@
 							"text": [
 								"Стекло ×1 + Розовая краска ×1"
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Мастерская: Красильный чан"
+				},
+				{
+					"entries": [
 						{
-							"id": "rec_stone_block155",
+							"id": "rec_stone_block154",
 							"img": "img/mat_stone_block.png",
 							"name": "Тёсаный камень ×1",
 							"sub": "Каменотёсный стол",
@@ -16539,7 +16641,7 @@
 							]
 						},
 						{
-							"id": "rec_stone_block156",
+							"id": "rec_stone_block155",
 							"img": "img/mat_stone_block.png",
 							"name": "Тёсаный камень ×3",
 							"sub": "Каменотёсный стол",
@@ -16549,7 +16651,7 @@
 							]
 						},
 						{
-							"id": "rec_marble_block157",
+							"id": "rec_marble_block156",
 							"img": "img/mat_marble_block.png",
 							"name": "Мраморный блок ×1",
 							"sub": "Каменотёсный стол",
@@ -16559,7 +16661,7 @@
 							]
 						},
 						{
-							"id": "rec_granite_block158",
+							"id": "rec_granite_block157",
 							"img": "img/mat_granite_block.png",
 							"name": "Гранитный блок ×1",
 							"sub": "Каменотёсный стол",
@@ -16569,7 +16671,7 @@
 							]
 						},
 						{
-							"id": "rec_sandstone_block159",
+							"id": "rec_sandstone_block158",
 							"img": "img/mat_sandstone_block.png",
 							"name": "Блок песчаника ×1",
 							"sub": "Каменотёсный стол",
@@ -16579,7 +16681,7 @@
 							]
 						},
 						{
-							"id": "rec_basalt_block160",
+							"id": "rec_basalt_block159",
 							"img": "img/mat_basalt_block.png",
 							"name": "Базальтовый блок ×1",
 							"sub": "Каменотёсный стол",
@@ -16589,7 +16691,7 @@
 							]
 						},
 						{
-							"id": "rec_slate_tile161",
+							"id": "rec_slate_tile160",
 							"img": "img/mat_slate_tile.png",
 							"name": "Сланцевая плитка ×3",
 							"sub": "Каменотёсный стол",
@@ -16599,7 +16701,7 @@
 							]
 						},
 						{
-							"id": "rec_gravel162",
+							"id": "rec_gravel161",
 							"img": "img/mat_gravel.png",
 							"name": "Гравий ×2",
 							"sub": "Каменотёсный стол",
@@ -16609,7 +16711,7 @@
 							]
 						},
 						{
-							"id": "rec_cobble163",
+							"id": "rec_cobble162",
 							"img": "img/mat_cobble.png",
 							"name": "Булыжник ×2",
 							"sub": "Каменотёсный стол",
@@ -16619,7 +16721,7 @@
 							]
 						},
 						{
-							"id": "rec_mortar164",
+							"id": "rec_mortar163",
 							"img": "img/mat_mortar.png",
 							"name": "Строительный раствор ×2",
 							"sub": "Каменотёсный стол",
@@ -16629,7 +16731,7 @@
 							]
 						},
 						{
-							"id": "rec_rune_blank165",
+							"id": "rec_rune_blank164",
 							"img": "img/mat_rune_blank.png",
 							"name": "Чистая руна ×1",
 							"sub": "Каменотёсный стол",
@@ -16639,7 +16741,7 @@
 							]
 						},
 						{
-							"id": "rec_sand166",
+							"id": "rec_sand165",
 							"img": "img/mat_sand.png",
 							"name": "Песок ×2",
 							"sub": "Каменотёсный стол",
@@ -16647,9 +16749,15 @@
 							"text": [
 								"Песчаник ×1"
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Мастерская: Каменотёсный стол"
+				},
+				{
+					"entries": [
 						{
-							"id": "rec_gem_amethyst167",
+							"id": "rec_gem_amethyst166",
 							"img": "img/mat_gem_amethyst.png",
 							"name": "Аметист ×1",
 							"sub": "Стол ювелира",
@@ -16659,7 +16767,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_topaz168",
+							"id": "rec_gem_topaz167",
 							"img": "img/mat_gem_topaz.png",
 							"name": "Топаз ×1",
 							"sub": "Стол ювелира",
@@ -16669,7 +16777,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_garnet169",
+							"id": "rec_gem_garnet168",
 							"img": "img/mat_gem_garnet.png",
 							"name": "Гранат ×1",
 							"sub": "Стол ювелира",
@@ -16679,7 +16787,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_opal170",
+							"id": "rec_gem_opal169",
 							"img": "img/mat_gem_opal.png",
 							"name": "Опал ×1",
 							"sub": "Стол ювелира",
@@ -16689,7 +16797,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_jade171",
+							"id": "rec_gem_jade170",
 							"img": "img/mat_gem_jade.png",
 							"name": "Нефрит ×1",
 							"sub": "Стол ювелира",
@@ -16699,7 +16807,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_peridot172",
+							"id": "rec_gem_peridot171",
 							"img": "img/mat_gem_peridot.png",
 							"name": "Перидот ×1",
 							"sub": "Стол ювелира",
@@ -16709,7 +16817,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_citrine173",
+							"id": "rec_gem_citrine172",
 							"img": "img/mat_gem_citrine.png",
 							"name": "Цитрин ×1",
 							"sub": "Стол ювелира",
@@ -16719,7 +16827,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_aquamarine174",
+							"id": "rec_gem_aquamarine173",
 							"img": "img/mat_gem_aquamarine.png",
 							"name": "Аквамарин ×1",
 							"sub": "Стол ювелира",
@@ -16729,7 +16837,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_moonstone175",
+							"id": "rec_gem_moonstone174",
 							"img": "img/mat_gem_moonstone.png",
 							"name": "Лунный камень ×1",
 							"sub": "Стол ювелира",
@@ -16739,7 +16847,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_onyx176",
+							"id": "rec_gem_onyx175",
 							"img": "img/mat_gem_onyx.png",
 							"name": "Оникс ×1",
 							"sub": "Стол ювелира",
@@ -16749,7 +16857,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_lapis177",
+							"id": "rec_gem_lapis176",
 							"img": "img/mat_gem_lapis.png",
 							"name": "Лазурит ×1",
 							"sub": "Стол ювелира",
@@ -16759,7 +16867,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_diamond178",
+							"id": "rec_gem_diamond177",
 							"img": "img/mat_gem_diamond.png",
 							"name": "Алмаз ×1",
 							"sub": "Стол ювелира",
@@ -16769,7 +16877,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_tourmaline179",
+							"id": "rec_gem_tourmaline178",
 							"img": "img/mat_gem_tourmaline.png",
 							"name": "Турмалин ×1",
 							"sub": "Стол ювелира",
@@ -16779,7 +16887,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_rose_quartz180",
+							"id": "rec_gem_rose_quartz179",
 							"img": "img/mat_gem_rose_quartz.png",
 							"name": "Розовый кварц ×1",
 							"sub": "Стол ювелира",
@@ -16789,7 +16897,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_smoky_quartz181",
+							"id": "rec_gem_smoky_quartz180",
 							"img": "img/mat_gem_smoky_quartz.png",
 							"name": "Дымчатый кварц ×1",
 							"sub": "Стол ювелира",
@@ -16799,7 +16907,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_jet182",
+							"id": "rec_gem_jet181",
 							"img": "img/mat_gem_jet.png",
 							"name": "Гагат ×1",
 							"sub": "Стол ювелира",
@@ -16809,7 +16917,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_amber183",
+							"id": "rec_gem_amber182",
 							"img": "img/mat_gem_amber.png",
 							"name": "Янтарь ×1",
 							"sub": "Стол ювелира",
@@ -16819,7 +16927,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_malachite184",
+							"id": "rec_gem_malachite183",
 							"img": "img/mat_gem_malachite.png",
 							"name": "Малахит ×1",
 							"sub": "Стол ювелира",
@@ -16829,7 +16937,7 @@
 							]
 						},
 						{
-							"id": "rec_mana_dust185",
+							"id": "rec_mana_dust184",
 							"img": "img/mat_mana_dust.png",
 							"name": "Мана-пыль ×2",
 							"sub": "Стол ювелира",
@@ -16839,7 +16947,7 @@
 							]
 						},
 						{
-							"id": "rec_star_dust186",
+							"id": "rec_star_dust185",
 							"img": "img/mat_star_dust.png",
 							"name": "Звёздная пыль ×2",
 							"sub": "Стол ювелира",
@@ -16849,7 +16957,7 @@
 							]
 						},
 						{
-							"id": "rec_void_dust187",
+							"id": "rec_void_dust186",
 							"img": "img/mat_void_dust.png",
 							"name": "Пыль бездны ×2",
 							"sub": "Стол ювелира",
@@ -16859,7 +16967,7 @@
 							]
 						},
 						{
-							"id": "rec_ember_dust188",
+							"id": "rec_ember_dust187",
 							"img": "img/mat_ember_dust.png",
 							"name": "Тлеющая пыль ×2",
 							"sub": "Стол ювелира",
@@ -16869,7 +16977,7 @@
 							]
 						},
 						{
-							"id": "rec_frost_dust189",
+							"id": "rec_frost_dust188",
 							"img": "img/mat_frost_dust.png",
 							"name": "Иней в склянке ×2",
 							"sub": "Стол ювелира",
@@ -16879,7 +16987,7 @@
 							]
 						},
 						{
-							"id": "rec_fairy_dust190",
+							"id": "rec_fairy_dust189",
 							"img": "img/mat_fairy_dust.png",
 							"name": "Пыльца фей ×1",
 							"sub": "Стол ювелира",
@@ -16889,7 +16997,7 @@
 							]
 						},
 						{
-							"id": "rec_moon_essence191",
+							"id": "rec_moon_essence190",
 							"img": "img/mat_moon_essence.png",
 							"name": "Лунная эссенция ×1",
 							"sub": "Стол ювелира",
@@ -16899,7 +17007,7 @@
 							]
 						},
 						{
-							"id": "rec_rune_lit192",
+							"id": "rec_rune_lit191",
 							"img": "img/mat_rune_lit.png",
 							"name": "Светящаяся руна ×1",
 							"sub": "Стол ювелира",
@@ -16909,7 +17017,7 @@
 							]
 						},
 						{
-							"id": "rec_gem_raw_amber193",
+							"id": "rec_gem_raw_amber192",
 							"img": "img/mat_gem_raw_amber.png",
 							"name": "Янтарь (необработанный) ×1",
 							"sub": "Стол ювелира",
@@ -16919,7 +17027,7 @@
 							]
 						},
 						{
-							"id": "rec_pearl194",
+							"id": "rec_pearl193",
 							"img": "img/mat_pearl.png",
 							"name": "Жемчужина ×1",
 							"sub": "Стол ювелира",
@@ -16927,9 +17035,15 @@
 							"text": [
 								"Рапана ×2"
 							]
-						},
+						}
+					],
+					"small": true,
+					"title": "Мастерская: Стол ювелира"
+				},
+				{
+					"entries": [
 						{
-							"id": "rec_plant_oil195",
+							"id": "rec_plant_oil194",
 							"img": "img/mat_plant_oil.png",
 							"name": "Растительное масло ×1",
 							"sub": "Пресс и котелок",
@@ -16939,7 +17053,7 @@
 							]
 						},
 						{
-							"id": "rec_plant_oil196",
+							"id": "rec_plant_oil195",
 							"img": "img/mat_plant_oil.png",
 							"name": "Растительное масло ×1",
 							"sub": "Пресс и котелок",
@@ -16949,7 +17063,7 @@
 							]
 						},
 						{
-							"id": "rec_plant_oil197",
+							"id": "rec_plant_oil196",
 							"img": "img/mat_plant_oil.png",
 							"name": "Растительное масло ×1",
 							"sub": "Пресс и котелок",
@@ -16959,7 +17073,7 @@
 							]
 						},
 						{
-							"id": "rec_plant_oil198",
+							"id": "rec_plant_oil197",
 							"img": "img/mat_plant_oil.png",
 							"name": "Растительное масло ×1",
 							"sub": "Пресс и котелок",
@@ -16969,7 +17083,7 @@
 							]
 						},
 						{
-							"id": "rec_paper199",
+							"id": "rec_paper198",
 							"img": "img/mat_paper.png",
 							"name": "Бумага ×3",
 							"sub": "Пресс и котелок",
@@ -16979,7 +17093,7 @@
 							]
 						},
 						{
-							"id": "rec_paper200",
+							"id": "rec_paper199",
 							"img": "img/mat_paper.png",
 							"name": "Бумага ×2",
 							"sub": "Пресс и котелок",
@@ -16989,7 +17103,7 @@
 							]
 						},
 						{
-							"id": "rec_book_blank201",
+							"id": "rec_book_blank200",
 							"img": "img/mat_book_blank.png",
 							"name": "Чистая книга ×1",
 							"sub": "Пресс и котелок",
@@ -16999,7 +17113,7 @@
 							]
 						},
 						{
-							"id": "rec_candle202",
+							"id": "rec_candle201",
 							"img": "img/mat_candle.png",
 							"name": "Свеча ×2",
 							"sub": "Пресс и котелок",
@@ -17009,7 +17123,7 @@
 							]
 						},
 						{
-							"id": "rec_candle_scented203",
+							"id": "rec_candle_scented202",
 							"img": "img/mat_candle_scented.png",
 							"name": "Душистая свеча ×1",
 							"sub": "Пресс и котелок",
@@ -17019,7 +17133,7 @@
 							]
 						},
 						{
-							"id": "rec_soap204",
+							"id": "rec_soap203",
 							"img": "img/mat_soap.png",
 							"name": "Мыло ×2",
 							"sub": "Пресс и котелок",
@@ -17029,7 +17143,7 @@
 							]
 						},
 						{
-							"id": "rec_varnish205",
+							"id": "rec_varnish204",
 							"img": "img/mat_varnish.png",
 							"name": "Лак ×1",
 							"sub": "Пресс и котелок",
@@ -17039,7 +17153,7 @@
 							]
 						},
 						{
-							"id": "rec_glue206",
+							"id": "rec_glue205",
 							"img": "img/mat_glue.png",
 							"name": "Клей ×1",
 							"sub": "Пресс и котелок",
@@ -17049,7 +17163,7 @@
 							]
 						},
 						{
-							"id": "rec_wood_glue207",
+							"id": "rec_wood_glue206",
 							"img": "img/mat_wood_glue.png",
 							"name": "Столярный клей ×1",
 							"sub": "Пресс и котелок",
@@ -17059,7 +17173,7 @@
 							]
 						},
 						{
-							"id": "rec_lamp_oil208",
+							"id": "rec_lamp_oil207",
 							"img": "img/mat_lamp_oil.png",
 							"name": "Лампадное масло ×1",
 							"sub": "Пресс и котелок",
@@ -17069,7 +17183,7 @@
 							]
 						},
 						{
-							"id": "rec_ink209",
+							"id": "rec_ink208",
 							"img": "img/mat_ink.png",
 							"name": "Чернила ×2",
 							"sub": "Пресс и котелок",
@@ -17079,7 +17193,7 @@
 							]
 						},
 						{
-							"id": "rec_honey210",
+							"id": "rec_honey209",
 							"img": "img/mat_honey.png",
 							"name": "Горшочек мёда ×1",
 							"sub": "Пресс и котелок",
@@ -17089,7 +17203,7 @@
 							]
 						},
 						{
-							"id": "rec_wax211",
+							"id": "rec_wax210",
 							"img": "img/mat_wax.png",
 							"name": "Пчелиный воск ×1",
 							"sub": "Пресс и котелок",
@@ -17099,7 +17213,7 @@
 							]
 						},
 						{
-							"id": "rec_flour212",
+							"id": "rec_flour211",
 							"img": "img/mat_flour.png",
 							"name": "Мука ×1",
 							"sub": "Пресс и котелок",
@@ -17109,7 +17223,7 @@
 							]
 						},
 						{
-							"id": "rec_seed_mix213",
+							"id": "rec_seed_mix212",
 							"img": "img/mat_seed_mix.png",
 							"name": "Семена для птиц ×4",
 							"sub": "Пресс и котелок",
@@ -17119,7 +17233,7 @@
 							]
 						},
 						{
-							"id": "rec_tar214",
+							"id": "rec_tar213",
 							"img": "img/mat_tar.png",
 							"name": "Дёготь ×1",
 							"sub": "Пресс и котелок",
@@ -17130,754 +17244,13 @@
 						}
 					],
 					"small": true,
-					"title": "Что делают в мастерских"
+					"title": "Мастерская: Пресс и котелок"
 				}
 			],
 			"icon": "img/mat_plank_tree_a.png",
 			"id": "mats",
 			"intro": "Дерево, камень, руды, ткани, шерсть, перья, краски и магическая пыль — из них строят и мастерят.",
 			"title": "Материалы и мастерские"
-		},
-		{
-			"groups": [
-				{
-					"entries": [
-						{
-							"id": "el_water",
-							"img": "img/orb_water.png",
-							"name": "Вода",
-							"sub": "сфера",
-							"tags": [],
-							"text": [
-								"Где взять: колодцы и пруды знают её с детства",
-								"Гасит: Молния"
-							]
-						},
-						{
-							"id": "el_life",
-							"img": "img/orb_life.png",
-							"name": "Жизнь",
-							"sub": "сфера",
-							"tags": [],
-							"text": [
-								"Где взять: открыта с самого начала",
-								"Гасит: Тайна"
-							]
-						},
-						{
-							"id": "el_shield",
-							"img": "img/orb_shield.png",
-							"name": "Щит",
-							"sub": "сфера",
-							"tags": [],
-							"text": [
-								"Где взять: алтарь у стен Кронхольма"
-							]
-						},
-						{
-							"id": "el_cold",
-							"img": "img/orb_cold.png",
-							"name": "Холод",
-							"sub": "сфера",
-							"tags": [],
-							"text": [
-								"Где взять: алтарь в северной тайге, далеко на западе",
-								"Гасит: Огонь"
-							]
-						},
-						{
-							"id": "el_lightning",
-							"img": "img/orb_lightning.png",
-							"name": "Молния",
-							"sub": "сфера",
-							"tags": [],
-							"text": [
-								"Где взять: алтарь в долине магов",
-								"Гасит: Вода"
-							]
-						},
-						{
-							"id": "el_arcane",
-							"img": "img/orb_arcane.png",
-							"name": "Тайна",
-							"sub": "сфера",
-							"tags": [],
-							"text": [
-								"Где взять: подарок принцессы Селестии — подружись со всей шестёркой из Понивилля",
-								"Гасит: Жизнь"
-							]
-						},
-						{
-							"id": "el_earth",
-							"img": "img/orb_earth.png",
-							"name": "Земля",
-							"sub": "сфера",
-							"tags": [],
-							"text": [
-								"Где взять: открыта с самого начала"
-							]
-						},
-						{
-							"id": "el_fire",
-							"img": "img/orb_fire.png",
-							"name": "Огонь",
-							"sub": "сфера",
-							"tags": [],
-							"text": [
-								"Где взять: открыт с самого начала",
-								"Гасит: Холод"
-							]
-						}
-					],
-					"title": "Стихии"
-				},
-				{
-					"entries": [
-						{
-							"id": "spell_splash",
-							"img": "img/orb_water.png",
-							"name": "Брызги",
-							"sub": "Вода",
-							"tags": [],
-							"text": [
-								"Веер воды: поливает грядки впереди и отталкивает монстров.",
-								"Мана: 8"
-							]
-						},
-						{
-							"id": "spell_heal",
-							"img": "img/orb_life.png",
-							"name": "Исцеление",
-							"sub": "Жизнь",
-							"tags": [],
-							"text": [
-								"Возвращает силы и снимает усталость.",
-								"Мана: 12"
-							]
-						},
-						{
-							"id": "spell_shield",
-							"img": "img/orb_shield.png",
-							"name": "Щит",
-							"sub": "Щит",
-							"tags": [],
-							"text": [
-								"Светлый купол на 8 секунд: монстры не могут навредить.",
-								"Мана: 10"
-							]
-						},
-						{
-							"id": "spell_frost",
-							"img": "img/orb_cold.png",
-							"name": "Иней",
-							"sub": "Холод",
-							"tags": [],
-							"text": [
-								"Холодный веер: монстры замедляются.",
-								"Мана: 8"
-							]
-						},
-						{
-							"id": "spell_spark",
-							"img": "img/orb_lightning.png",
-							"name": "Искра",
-							"sub": "Молния",
-							"tags": [],
-							"text": [
-								"Быстрая искорка в сторону курсора.",
-								"Мана: 8"
-							]
-						},
-						{
-							"id": "spell_beam",
-							"img": "img/orb_arcane.png",
-							"name": "Луч тайны",
-							"sub": "Тайна",
-							"tags": [],
-							"text": [
-								"Розовый луч, бьёт сильно и далеко.",
-								"Мана: 10"
-							]
-						},
-						{
-							"id": "spell_rock",
-							"img": "img/orb_earth.png",
-							"name": "Камень",
-							"sub": "Земля",
-							"tags": [],
-							"text": [
-								"Тяжёлый камень летит в сторону курсора.",
-								"Мана: 8"
-							]
-						},
-						{
-							"id": "spell_flame",
-							"img": "img/orb_fire.png",
-							"name": "Пламя",
-							"sub": "Огонь",
-							"tags": [],
-							"text": [
-								"Огненный веер прямо перед собой.",
-								"Мана: 8"
-							]
-						}
-					],
-					"title": "Заклинания из одной сферы"
-				},
-				{
-					"entries": [
-						{
-							"id": "spell_rain",
-							"img": "img/orb_water.png",
-							"name": "Ливень",
-							"sub": "Вода + Вода",
-							"tags": [],
-							"text": [
-								"Тучка поливает все грядки вокруг, травы растут охотнее.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_great_heal",
-							"img": "img/orb_life.png",
-							"name": "Великое исцеление",
-							"sub": "Жизнь + Жизнь",
-							"tags": [],
-							"text": [
-								"Полностью возвращает силы.",
-								"Мана: 24"
-							]
-						},
-						{
-							"id": "spell_dome",
-							"img": "img/orb_shield.png",
-							"name": "Купол",
-							"sub": "Щит + Щит",
-							"tags": [],
-							"text": [
-								"Защита на 20 секунд.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_blizzard",
-							"img": "img/orb_cold.png",
-							"name": "Метель",
-							"sub": "Холод + Холод",
-							"tags": [],
-							"text": [
-								"Снежный вихрь вокруг: все монстры рядом мёрзнут.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_chain",
-							"img": "img/orb_lightning.png",
-							"name": "Цепная молния",
-							"sub": "Молния + Молния",
-							"tags": [],
-							"text": [
-								"Молния перепрыгивает между четырьмя монстрами.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_blast",
-							"img": "img/orb_arcane.png",
-							"name": "Взрыв тайны",
-							"sub": "Тайна + Тайна",
-							"tags": [],
-							"text": [
-								"Волна тайны отбрасывает всех вокруг.",
-								"Мана: 22"
-							]
-						},
-						{
-							"id": "spell_quake",
-							"img": "img/orb_earth.png",
-							"name": "Землетрясение",
-							"sub": "Земля + Земля",
-							"tags": [],
-							"text": [
-								"Монстры падают с ног, с деревьев сыплются веточки.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_fireball",
-							"img": "img/orb_fire.png",
-							"name": "Огненный шар",
-							"sub": "Огонь + Огонь",
-							"tags": [],
-							"text": [
-								"Шар взрывается там, куда долетит.",
-								"Мана: 22"
-							]
-						},
-						{
-							"id": "spell_living_water",
-							"img": "img/orb_water.png",
-							"name": "Живая вода",
-							"sub": "Вода + Жизнь",
-							"tags": [],
-							"text": [
-								"Грядки вокруг вырастают на ступень, травы снова растут.",
-								"Мана: 30"
-							]
-						},
-						{
-							"id": "spell_bubble",
-							"img": "img/orb_water.png",
-							"name": "Пузырь",
-							"sub": "Вода + Щит",
-							"tags": [],
-							"text": [
-								"Водяной купол на 10 секунд и лёгкое лечение.",
-								"Мана: 18"
-							]
-						},
-						{
-							"id": "spell_ice_shards",
-							"img": "img/orb_water.png",
-							"name": "Ледяные иглы",
-							"sub": "Вода + Холод",
-							"tags": [],
-							"text": [
-								"Три ледяные иглы веером.",
-								"Мана: 18"
-							]
-						},
-						{
-							"id": "spell_mud",
-							"img": "img/orb_water.png",
-							"name": "Грязь",
-							"sub": "Вода + Земля",
-							"tags": [],
-							"text": [
-								"Лужа грязи вокруг: монстры вязнут.",
-								"Мана: 16"
-							]
-						},
-						{
-							"id": "spell_pull",
-							"img": "img/orb_water.png",
-							"name": "Притяжение",
-							"sub": "Вода + Тайна",
-							"tags": [],
-							"text": [
-								"Всё, что лежит на земле рядом, само летит в сумку.",
-								"Мана: 16"
-							]
-						},
-						{
-							"id": "spell_steam",
-							"img": "img/orb_water.png",
-							"name": "Пар",
-							"sub": "Вода + Огонь",
-							"tags": [],
-							"text": [
-								"Холодная вода в бутылочках становится горячей.",
-								"Мана: 14"
-							]
-						},
-						{
-							"id": "spell_ward",
-							"img": "img/orb_life.png",
-							"name": "Оберег",
-							"sub": "Жизнь + Щит",
-							"tags": [],
-							"text": [
-								"Полминуты силы прибывают сами.",
-								"Мана: 18"
-							]
-						},
-						{
-							"id": "spell_fresh",
-							"img": "img/orb_life.png",
-							"name": "Свежесть",
-							"sub": "Жизнь + Холод",
-							"tags": [],
-							"text": [
-								"Как умыться росой: усталость уходит.",
-								"Мана: 14"
-							]
-						},
-						{
-							"id": "spell_haste",
-							"img": "img/orb_life.png",
-							"name": "Бодрость",
-							"sub": "Жизнь + Молния",
-							"tags": [],
-							"text": [
-								"Полминуты ходишь быстрее.",
-								"Мана: 16"
-							]
-						},
-						{
-							"id": "spell_bloom",
-							"img": "img/orb_life.png",
-							"name": "Цветение",
-							"sub": "Жизнь + Земля",
-							"tags": [],
-							"text": [
-								"Вокруг расцветают цветы и снова растут травы.",
-								"Мана: 22"
-							]
-						},
-						{
-							"id": "spell_warm_light",
-							"img": "img/orb_life.png",
-							"name": "Тёплый свет",
-							"sub": "Жизнь + Огонь",
-							"tags": [],
-							"text": [
-								"Полторы минуты вокруг светло, как днём.",
-								"Мана: 16"
-							]
-						},
-						{
-							"id": "spell_ice_armor",
-							"img": "img/orb_shield.png",
-							"name": "Ледяная броня",
-							"sub": "Щит + Холод",
-							"tags": [],
-							"text": [
-								"Защита и холод вокруг.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_storm_shield",
-							"img": "img/orb_shield.png",
-							"name": "Грозовой щит",
-							"sub": "Щит + Молния",
-							"tags": [],
-							"text": [
-								"Защита, и кто подойдёт — получит искрой.",
-								"Мана: 22"
-							]
-						},
-						{
-							"id": "spell_mirror",
-							"img": "img/orb_shield.png",
-							"name": "Зеркальный щит",
-							"sub": "Щит + Тайна",
-							"tags": [],
-							"text": [
-								"Защита на 15 секунд.",
-								"Мана: 18"
-							]
-						},
-						{
-							"id": "spell_stone_skin",
-							"img": "img/orb_shield.png",
-							"name": "Каменная кожа",
-							"sub": "Щит + Земля",
-							"tags": [],
-							"text": [
-								"Долгая защита, но идёшь медленнее.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_fire_aura",
-							"img": "img/orb_shield.png",
-							"name": "Огненная аура",
-							"sub": "Щит + Огонь",
-							"tags": [],
-							"text": [
-								"8 секунд вокруг пылает огонь.",
-								"Мана: 22"
-							]
-						},
-						{
-							"id": "spell_ice_bolt",
-							"img": "img/orb_cold.png",
-							"name": "Ледяной разряд",
-							"sub": "Холод + Молния",
-							"tags": [],
-							"text": [
-								"Холодная молния, монстр замедляется.",
-								"Мана: 18"
-							]
-						},
-						{
-							"id": "spell_star_frost",
-							"img": "img/orb_cold.png",
-							"name": "Звёздный холод",
-							"sub": "Холод + Тайна",
-							"tags": [],
-							"text": [
-								"Ледяные звёзды вокруг.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_boulder",
-							"img": "img/orb_cold.png",
-							"name": "Ледяной валун",
-							"sub": "Холод + Земля",
-							"tags": [],
-							"text": [
-								"Тяжёлая ледяная глыба.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_blink",
-							"img": "img/orb_lightning.png",
-							"name": "Скачок",
-							"sub": "Молния + Тайна",
-							"tags": [],
-							"text": [
-								"Мгновенно переносит туда, куда смотришь.",
-								"Мана: 16"
-							]
-						},
-						{
-							"id": "spell_thunder",
-							"img": "img/orb_lightning.png",
-							"name": "Громовой удар",
-							"sub": "Молния + Земля",
-							"tags": [],
-							"text": [
-								"Земля дрожит, монстры оглушены.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_ball_lightning",
-							"img": "img/orb_lightning.png",
-							"name": "Шаровая молния",
-							"sub": "Молния + Огонь",
-							"tags": [],
-							"text": [
-								"Сама находит ближайшего монстра.",
-								"Мана: 22"
-							]
-						},
-						{
-							"id": "spell_rune_stones",
-							"img": "img/orb_arcane.png",
-							"name": "Тайные камни",
-							"sub": "Тайна + Земля",
-							"tags": [],
-							"text": [
-								"Три камня с рунами веером.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_arcane_flame",
-							"img": "img/orb_arcane.png",
-							"name": "Пламя тайны",
-							"sub": "Тайна + Огонь",
-							"tags": [],
-							"text": [
-								"Длинный розовый огонь.",
-								"Мана: 22"
-							]
-						},
-						{
-							"id": "spell_meteor",
-							"img": "img/orb_earth.png",
-							"name": "Метеор",
-							"sub": "Земля + Огонь",
-							"tags": [],
-							"text": [
-								"Огненный камень падает туда, где курсор.",
-								"Мана: 26"
-							]
-						}
-					],
-					"title": "Из двух сфер"
-				},
-				{
-					"entries": [
-						{
-							"id": "spell_storm",
-							"img": "img/orb_water.png",
-							"name": "Гроза",
-							"sub": "Вода + Вода + Вода",
-							"tags": [],
-							"text": [
-								"Ливень и молнии: все грядки и травы вокруг напоены, монстрам достаётся.",
-								"Мана: 45"
-							]
-						},
-						{
-							"id": "spell_garden",
-							"img": "img/orb_water.png",
-							"name": "Сад травницы",
-							"sub": "Вода + Жизнь + Земля",
-							"tags": [],
-							"text": [
-								"Все грядки вокруг сразу созревают, травы вырастают.",
-								"Мана: 60"
-							]
-						},
-						{
-							"id": "spell_call_mount",
-							"img": "img/orb_life.png",
-							"name": "Зов скакуна",
-							"sub": "Жизнь + Жизнь + Земля",
-							"tags": [],
-							"text": [
-								"Прирученный скакун прибегает к тебе.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_beast_form",
-							"img": "img/orb_life.png",
-							"name": "Облик зверя",
-							"sub": "Жизнь + Земля + Земля",
-							"tags": [],
-							"text": [
-								"Превращаешься в зверя (выбери облик в гримуаре). Звери тебя понимают. Ещё раз — обратно.",
-								"Мана: 30"
-							]
-						},
-						{
-							"id": "spell_home",
-							"img": "img/orb_arcane.png",
-							"name": "Тропа домой",
-							"sub": "Тайна + Земля + Земля",
-							"tags": [],
-							"text": [
-								"Переносит к дому.",
-								"Мана: 40"
-							]
-						},
-						{
-							"id": "spell_far_blink",
-							"img": "img/orb_lightning.png",
-							"name": "Дальний скачок",
-							"sub": "Молния + Молния + Тайна",
-							"tags": [],
-							"text": [
-								"Скачок втрое дальше.",
-								"Мана: 30"
-							]
-						},
-						{
-							"id": "spell_fortress",
-							"img": "img/orb_shield.png",
-							"name": "Неприступность",
-							"sub": "Щит + Щит + Щит",
-							"tags": [],
-							"text": [
-								"Защита на 40 секунд.",
-								"Мана: 40"
-							]
-						},
-						{
-							"id": "spell_starfall",
-							"img": "img/orb_fire.png",
-							"name": "Звездопад",
-							"sub": "Огонь + Огонь + Огонь",
-							"tags": [],
-							"text": [
-								"Огненные звёзды падают вокруг курсора.",
-								"Мана: 50"
-							]
-						},
-						{
-							"id": "spell_winter",
-							"img": "img/orb_cold.png",
-							"name": "Вечная зима",
-							"sub": "Холод + Холод + Холод",
-							"tags": [],
-							"text": [
-								"Все монстры вокруг замерзают.",
-								"Мана: 45"
-							]
-						},
-						{
-							"id": "spell_rebirth",
-							"img": "img/orb_life.png",
-							"name": "Возрождение",
-							"sub": "Жизнь + Жизнь + Жизнь",
-							"tags": [],
-							"text": [
-								"Полные силы и оберег на минуту.",
-								"Мана: 45"
-							]
-						},
-						{
-							"id": "spell_animal_call",
-							"img": "img/orb_life.png",
-							"name": "Зов зверей",
-							"sub": "Жизнь + Щит + Земля",
-							"tags": [],
-							"text": [
-								"Звери вокруг сбегаются к тебе и начинают доверять.",
-								"Мана: 30"
-							]
-						},
-						{
-							"id": "spell_hot_spring",
-							"img": "img/orb_water.png",
-							"name": "Горячий источник",
-							"sub": "Вода + Земля + Огонь",
-							"tags": [],
-							"text": [
-								"Как после бани: усталость уходит вся.",
-								"Мана: 30"
-							]
-						},
-						{
-							"id": "spell_dew",
-							"img": "img/orb_water.png",
-							"name": "Роса",
-							"sub": "Вода + Жизнь + Холод",
-							"tags": [],
-							"text": [
-								"Пустые бутылочки наполняются холодной водой.",
-								"Мана: 20"
-							]
-						},
-						{
-							"id": "spell_healing_bubble",
-							"img": "img/orb_water.png",
-							"name": "Целебный пузырь",
-							"sub": "Вода + Жизнь + Щит",
-							"tags": [],
-							"text": [
-								"Защита и оберег.",
-								"Мана: 35"
-							]
-						},
-						{
-							"id": "spell_firestorm",
-							"img": "img/orb_lightning.png",
-							"name": "Огненная буря",
-							"sub": "Молния + Огонь + Огонь",
-							"tags": [],
-							"text": [
-								"Пламя вокруг тебя.",
-								"Мана: 40"
-							]
-						},
-						{
-							"id": "spell_big_meteor",
-							"img": "img/orb_arcane.png",
-							"name": "Великий метеор",
-							"sub": "Тайна + Земля + Огонь",
-							"tags": [],
-							"text": [
-								"Огромный огненный камень.",
-								"Мана: 50"
-							]
-						}
-					],
-					"title": "Из трёх сфер"
-				}
-			],
-			"icon": "img/orb_arcane.png",
-			"id": "spells",
-			"intro": "Режим заклинаний — клавиша C. Клавиши 1-8 кладут сферы стихий в очередь (до трёх), R — произнести. Противоположные стихии гасят друг друга: огонь—холод, вода—молния, жизнь—тайна.",
-			"title": "Книга сфер"
 		},
 		{
 			"groups": [

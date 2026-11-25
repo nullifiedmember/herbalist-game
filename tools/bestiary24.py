@@ -52,6 +52,28 @@ h3 { font-size:26px; margin:26px 0 4px; border-bottom:1px solid var(--faint); pa
 .snd:hover { background:#f8e2a8; }
 footer { color:#b8a07a; text-align:center; padding:20px; font-style:italic; }
 .top { position:fixed; right:18px; bottom:18px; background:var(--paper); border:2px solid #8a6a3a; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; text-decoration:none; color:var(--ink); font-size:24px; }
+/* v34: витрина мебели — крупные чёткие картинки на фоне стенки и пола */
+.fgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:16px; margin-top:12px; }
+.fcard.card { display:block; padding:0; background:rgba(255,250,235,.75); border:1px solid #c9ad7a; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(80,50,20,.18); transition:transform .15s, box-shadow .15s; }
+.fcard.card:hover { transform:translateY(-3px); box-shadow:0 8px 18px rgba(80,50,20,.3); }
+.fcard .show { height:168px; display:flex; align-items:flex-end; justify-content:center; padding-bottom:14px; position:relative;
+  background:linear-gradient(#f6e7c6 0 70%, #a87848 70% 71.5%, #c99a62 71.5% 100%); }
+.fcard .show::before { content:""; position:absolute; left:0; right:0; top:0; height:70%;
+  background:repeating-linear-gradient(90deg, transparent 0 26px, rgba(170,130,80,.22) 26px 27px); }
+.fcard .show::after { content:""; position:absolute; left:0; right:0; bottom:0; height:28.5%;
+  background:repeating-linear-gradient(90deg, transparent 0 46px, rgba(110,70,35,.35) 46px 47px); }
+.fcard .show.flat { align-items:center; padding-bottom:0; background:#c99a62; }
+.fcard .show.flat::before { display:none; }
+.fcard .show.flat::after { height:100%; }
+.fcard .show img { position:relative; z-index:1; image-rendering:pixelated; max-width:none; max-height:none; filter:drop-shadow(0 4px 0 rgba(70,40,30,.25)); }
+.fcard .info { padding:10px 12px 12px; }
+.fcard h4 { margin:0 0 6px; font-size:19px; display:flex; justify-content:space-between; gap:8px; }
+.fcard .price { font-weight:bold; color:#8a5a1a; white-space:nowrap; font-size:16px; }
+.fcard .chips { display:flex; flex-wrap:wrap; gap:4px; margin:0 0 6px; }
+.fcard .chip { font-size:12px; padding:1px 8px; border-radius:9px; background:#efe0bd; border:1px solid #d3b98a; color:var(--soft); }
+.fcard .chip.st { color:#fff; border-color:transparent; }
+.fcard .chip.use { background:#5a7a4a; color:#fff; border-color:transparent; }
+.fcard p { margin:3px 0 0; font-size:14px; line-height:1.3; }
 """
 
 JS = """
@@ -109,12 +131,90 @@ def card(e):
             f'<div><h4>{esc(e["name"])}{tag_html}</h4>{sub}{lines}</div></div>')
 
 
+# ------------------------------------------------------------------ v34: витрина мебели
+GAME = Path(__file__).resolve().parent.parent
+STYLE_RU = {"straw": ("соломенный", "#b0925a"), "rough": ("грубый", "#8a6a4a"), "simple": ("простой", "#b27c4c"),
+            "cozy": ("уютный", "#d0607a"), "cat": ("кошачий", "#e08aa4"), "japan": ("японский", "#b04a3a"),
+            "dwarf": ("гномий", "#76563a"), "elven": ("эльфийский", "#5a9050"), "sea": ("морской", "#3c7ab4"),
+            "gothic": ("готический", "#5a2a4a"), "mage": ("магический", "#5a4cb0"), "royal": ("королевский", "#b02236"),
+            "village": ("деревенский", "#c08a50"), "special": ("особый", "#7a6a9a")}
+USE_RU = {"sleep": "можно спать", "chest": "хранит вещи", "book": "открывает книгу", "light": "светит",
+          "flat": "лежит на полу", "wall": "вешается на стену", "food": "можно перекусить", "water": "можно попить",
+          "stove": "греет холодную воду", "music": "играет музыку"}
+PLANKS = {"bed": 8, "table": 6, "chair": 3, "wardrobe": 8, "bookcase": 8, "lamp": 2, "rug": 0, "dresser": 6, "plant": 1, "cabinet": 3}
+STYLE_NEED = {"straw": {"straw": 6}, "rough": {}, "simple": {"nail": 2}, "cozy": {"linen": 1, "nail": 2}, "cat": {"cat_fur": 1, "cotton_cloth": 1},
+              "japan": {"paper": 2}, "dwarf": {"bar_copper": 1, "stone_block": 1}, "elven": {"fairy_dust": 1, "linen": 1}, "sea": {"shell": 2, "driftwood": 1},
+              "gothic": {"cloth_black": 1, "sheet_iron": 1}, "mage": {"mana_dust": 2, "crystal_shard": 1}, "royal": {"bar_gold": 2, "cloth_red": 2},
+              "village": {"nail": 1}, "special": {"nail": 4, "glass": 1}}
+
+
+def furn_table():
+    import re
+    try:
+        src = (GAME / "v23_data.gd").read_text(encoding="utf-8")
+        return json.loads(re.search(r"const FURN: Dictionary = (\{.*?\})\n", src).group(1))
+    except Exception:
+        return {}
+
+
+def furn_need(d):
+    """Как v23.gd furn_need: доски по категории + пряжа/глина + материалы стиля."""
+    out = {}
+    cat, st = d.get("cat", ""), d.get("style", "")
+    pl = PLANKS.get(cat, 4)
+    if st != "straw" and pl > 0:
+        out["@plank"] = pl
+    if cat == "rug":
+        out["@yarn"] = 3
+    if cat == "plant":
+        out["clay"] = 2
+    out.update(STYLE_NEED.get(st, {}))
+    return out
+
+
+def fcard(e, d, names, folder):
+    st_ru, st_col = STYLE_RU.get(d.get("style", ""), ("", "#8a6a3a"))
+    use = d.get("use", "")
+    img = folder / e.get("img", "")
+    w, h = 32, 32
+    try:
+        from PIL import Image
+        w, h = Image.open(img).size
+    except Exception:
+        pass
+    # масштаб — целый, чтобы пиксели были чёткие
+    lw, lh = w, h
+    k = max(1, min(4, int(min(200 / lw, 140 / lh))))
+    dw, dh = int(lw * k), int(lh * k)
+    need = furn_need(d)
+    mats = ", ".join(f'{names.get(m, m)} ×{n}' for m, n in need.items())
+    chips = (f'<span class="chip st" style="background:{st_col}">{esc(st_ru)}</span>' if st_ru else "")
+    if use in USE_RU:
+        chips += f'<span class="chip use">{esc(USE_RU[use])}</span>'
+    chips += f'<span class="chip">ступень {int(d.get("tier", 0))}</span>'
+    flat = " flat" if use == "flat" else ""
+    search = " ".join([e.get("name", ""), st_ru, USE_RU.get(use, ""), mats]).lower()
+    return (f'<div class="fcard card" data-s="{esc(search)}"><div class="show{flat}">'
+            f'<img src="{esc(e["img"])}" alt="" loading="lazy" style="width:{dw}px;height:{dh}px"></div>'
+            f'<div class="info"><h4>{esc(e["name"])}<span class="price">{int(d.get("price", 0))} мон.</span></h4>'
+            f'<div class="chips">{chips}</div>'
+            f'<p><b>Сделать:</b> {esc(mats) if mats else "—"}</p>'
+            f'<p><b>Где:</b> делается на верстаке (вкладка «Мебель»), ставится в доме клавишей B.</p></div></div>')
+
+
 def build(folder: Path):
     data = json.loads((folder / "data.json").read_text(encoding="utf-8"))
     secs = data["sections"]
     total = sum(len(g["entries"]) for s in secs for g in s["groups"])
     nav = []
     body = []
+    FURN = furn_table()
+    NAMES = {"@plank": "доски", "@yarn": "пряжа"}
+    for s_ in secs:
+        for g_ in s_["groups"]:
+            for e_ in g_["entries"]:
+                if e_.get("id") and e_.get("name"):
+                    NAMES.setdefault(e_["id"], e_["name"])
     for s in secs:
         n = sum(len(g["entries"]) for g in s["groups"])
         icon = f'<img src="{esc(s.get("icon", ""))}" alt="">' if s.get("icon") else ""
@@ -129,7 +229,10 @@ def build(folder: Path):
             parts.append(f'<div class="grp"><h3>{esc(g["title"])} <small>({len(g["entries"])})</small></h3>')
             if g.get("about"):
                 parts.append(f'<p class="about">{esc(g["about"])}</p>')
-            parts.append(f'<div class="grid{small}">' + "".join(card(e) for e in g["entries"]) + "</div></div>")
+            if s["id"] == "furniture" and FURN:
+                parts.append('<div class="fgrid">' + "".join(fcard(e, FURN.get(e.get("id", ""), {}), NAMES, folder) if e.get("id") in FURN else card(e) for e in g["entries"]) + "</div></div>")
+            else:
+                parts.append(f'<div class="grid{small}">' + "".join(card(e) for e in g["entries"]) + "</div></div>")
         parts.append("</section>")
         body.append("".join(parts))
     page = f"""<!DOCTYPE html>
